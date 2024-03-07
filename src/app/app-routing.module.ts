@@ -5,9 +5,9 @@ import { NavbarComponent } from './Component/navbar/navbar.component';
 import { LargeImageProductComponent } from './Component/large-image-product/large-image-product.component';
 
 const routes: Routes = [
-  {path : "footer" , component : FooterComponent},
-  {path : "navbar" , component : NavbarComponent},
-  {path : "large-image-product" , component : LargeImageProductComponent},
+  // {path : "footer" , component : FooterComponent},
+  // {path : "navbar" , component : NavbarComponent},
+  //{path : "large-image-product" , component : LargeImageProductComponent},
 ];
 
 @NgModule({
