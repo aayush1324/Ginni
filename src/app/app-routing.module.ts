@@ -7,7 +7,7 @@ import { LargeImageProductComponent } from './Component/large-image-product/larg
 const routes: Routes = [
   // {path : "footer" , component : FooterComponent},
   // {path : "navbar" , component : NavbarComponent},
-  {path : "large-image-product" , component : LargeImageProductComponent},
+  //{path : "large-image-product" , component : LargeImageProductComponent},
 ];
 
 @NgModule({
