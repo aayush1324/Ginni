@@ -33,6 +33,11 @@ import { LargeImageProductComponent } from './Component/large-image-product/larg
 import { CheckoutOrderComponent } from './Component/checkout-order/checkout-order.component';
 import { OneLineFilterComponent } from './Component/one-line-filter/one-line-filter.component';
 import { OrderDetailsComponent } from './Component/order-details/order-details.component';
+import { SlideproductsComponent } from './Component/slideproducts/slideproducts.component';
+import { SlidecategoriesComponent } from './Component/slidecategories/slidecategories.component';
+import { SliderComponent } from './Component/slider/slider.component';
+import { GriditemsComponent } from './Component/griditems/griditems.component';
+
 
 @NgModule({
   declarations: [
@@ -66,11 +71,16 @@ import { OrderDetailsComponent } from './Component/order-details/order-details.c
     LargeImageProductComponent,
     CheckoutOrderComponent,
     OneLineFilterComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    SlideproductsComponent,
+    SlidecategoriesComponent,
+    SliderComponent,
+    GriditemsComponent,
+  
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     provideClientHydration()
