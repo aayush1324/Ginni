@@ -1,0 +1,80 @@
+.containerbox {
+    background-color: rgb(219, 100, 235);
+    width:  100%;
+    height: 50vh;
+    /* padding: 0%;
+    border: 1px solid;
+    margin: 0%; */
+
+
+}
+
+.couponstick {
+    background-color: rgb(250, 203, 75);
+    width:  100%;
+    height: fit-content;
+    padding: 0%;
+    border: none;
+    margin: 0%;
+    position: fixed;
+}
+
+#coupon {
+    color: rgb(72, 74, 230);
+    width:  100%;
+    padding: 0%;
+    border: none;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.navbar {
+    background-color: rgb(124, 124, 146);
+    width:  100%;
+    padding: 0%;
+    border: 1px solid;
+    margin: 0%;
+    display: flex;
+    flex-direction: row; 
+}
+
+.navbarimage {
+    background-color: rgb(124, 124, 146);
+    width:  100%;
+    height: fit-content;
+    padding: 0%;
+    border: 1px solid;
+    margin: 0%;
+    display: flex;
+    flex-direction: row; 
+}
+
+.navbardata {
+    background-color: rgb(124, 124, 146);
+    width:  100%;
+    height: fit-content;
+    padding: 0%;
+    border: 1px solid;
+    margin: 0%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.navbarupper {
+    background-color: rgb(124, 124, 146);
+    width:  100%;
+    height: fit-content;
+    padding: 0%;
+    border: 1px solid;
+    margin: 0%;
+}
+
+.navbarlower {
+    background-color: rgb(124, 124, 146);
+    width:  100%;
+    height: fit-content;
+    padding: 0%;
+    border: 1px solid;
+    margin: 0%;
+}
