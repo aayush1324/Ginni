@@ -41,6 +41,8 @@ import { TextandimageComponent } from './Component/textandimage/textandimage.com
 import { AccordionComponent } from './Component/accordion/accordion.component';
 import { BadgeComponent } from './Component/badge/badge.component';
 import { PaginationComponent } from './Component/pagination/pagination.component';
+import { HeaderComponent } from './Component/header/header.component';
+import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component';
 
 
 @NgModule({
@@ -84,6 +86,8 @@ import { PaginationComponent } from './Component/pagination/pagination.component
     AccordionComponent,
     BadgeComponent,
     PaginationComponent,
+    HeaderComponent,
+    GinniofferComponent,
   
   ],
   imports: [
