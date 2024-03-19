@@ -43,6 +43,8 @@ import { BadgeComponent } from './Component/badge/badge.component';
 import { PaginationComponent } from './Component/pagination/pagination.component';
 import { HeaderComponent } from './Component/header/header.component';
 import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component';
+import { GinnifooterComponent } from './Component/ginnifooter/ginnifooter.component';
+import { GinniimagesliderComponent } from './Component/ginniimageslider/ginniimageslider.component';
 
 
 @NgModule({
@@ -88,6 +90,8 @@ import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component
     PaginationComponent,
     HeaderComponent,
     GinniofferComponent,
+    GinnifooterComponent,
+    GinniimagesliderComponent,
   
   ],
   imports: [
