@@ -9,6 +9,7 @@ import { GinniimagesliderComponent } from './Component/ginniimageslider/ginniima
 import { GinniproductsComponent } from './Component/ginniproducts/ginniproducts.component';
 import { GinnitextandimageComponent } from './Component/ginnitextandimage/ginnitextandimage.component';
 import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupperfooter.component';
+import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupp
     GinniproductsComponent,
     GinnitextandimageComponent,
     GinniupperfooterComponent,
+    GinnifaqComponent,
   ],
   imports: [
     BrowserModule,

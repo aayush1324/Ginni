@@ -1,0 +1,19 @@
+<p>ginnifaq works!</p>
+<div class="containerbox">
+    <div class="heading">
+        <h1>Frequently Ask Questions</h1>
+    </div>
+
+    <div class="dropdownmenu">
+        <div class="faq" *ngFor="let faq of faqs">
+            <div class="question" (click)="toggleAnswer(faq)">
+                <h6>{{ faq.question }}</h6>
+                <i class="fas" [ngClass]="{'fa-chevron-down': !faq.showAnswer, 'fa-chevron-up': faq.showAnswer}"></i>
+            </div>
+
+            <div class="answer" *ngIf="faq.showAnswer">
+                <p>{{ faq.answer }}</p>
+            </div>
+        </div>
+    </div>
+</div>
