@@ -1,0 +1,24 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+    margin: 0%;
+    border: 1px solid;
+}
+
+.shipping, .refund, .nutrition, .payment {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    margin: 0%;
+    /* border: 1px solid; */
+}
+
+.text {
+    margin-left: 5%;    
+    /* border: 1px solid; */
+}

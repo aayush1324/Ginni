@@ -1,9 +1,0 @@
-.carousel-item {
-    transition: transform 0s ease; /* Immediate transition */
-}
-
-.carousel-item img {
-    max-height: 100vh; /* Adjust the height as needed */
-    width: 100%;
-    object-fit: cover;
-}
