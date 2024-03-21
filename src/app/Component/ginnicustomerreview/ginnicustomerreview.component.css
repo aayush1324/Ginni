@@ -1,0 +1,99 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+
+}
+
+
+.header {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.header i {
+    padding: 2%;
+    font-size: xx-large;
+}
+
+.footer {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: left 2s ease;
+}
+
+.feedback-container {
+    width: 40%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedback {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 2% 0%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.name {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 1%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+}
+
+.name h6 {
+    color: blue;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    animation: slide-left 10s infinite;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}

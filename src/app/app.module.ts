@@ -13,6 +13,7 @@ import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
 import { GinnisignupComponent } from './Component/ginnisignup/ginnisignup.component';
 import { GinnisigninComponent } from './Component/ginnisignin/ginnisignin.component';
 import { GinniforgotpasswordComponent } from './Component/ginniforgotpassword/ginniforgotpassword.component';
+import { GinnicustomerreviewComponent } from './Component/ginnicustomerreview/ginnicustomerreview.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { GinniforgotpasswordComponent } from './Component/ginniforgotpassword/gi
     GinnisignupComponent,
     GinnisigninComponent,
     GinniforgotpasswordComponent,
+    GinnicustomerreviewComponent,
   ],
   imports: [
     BrowserModule,
