@@ -1,0 +1,41 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paragraph {
+    width: 50%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.paragraph h2{
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
