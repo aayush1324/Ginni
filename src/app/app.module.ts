@@ -10,6 +10,9 @@ import { GinniproductsComponent } from './Component/ginniproducts/ginniproducts.
 import { GinnitextandimageComponent } from './Component/ginnitextandimage/ginnitextandimage.component';
 import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupperfooter.component';
 import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
+import { GinnisignupComponent } from './Component/ginnisignup/ginnisignup.component';
+import { GinnisigninComponent } from './Component/ginnisignin/ginnisignin.component';
+import { GinniforgotpasswordComponent } from './Component/ginniforgotpassword/ginniforgotpassword.component';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
     GinnitextandimageComponent,
     GinniupperfooterComponent,
     GinnifaqComponent,
+    GinnisignupComponent,
+    GinnisigninComponent,
+    GinniforgotpasswordComponent,
   ],
   imports: [
     BrowserModule,
