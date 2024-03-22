@@ -19,6 +19,7 @@ import { GinnitermserviceComponent } from './Component/ginnitermservice/ginniter
 import { GinniprivacypolicyComponent } from './Component/ginniprivacypolicy/ginniprivacypolicy.component';
 import { GinnishippingpolicyComponent } from './Component/ginnishippingpolicy/ginnishippingpolicy.component';
 import { GinnireturnpolicyComponent } from './Component/ginnireturnpolicy/ginnireturnpolicy.component';
+import { GinnicontactusComponent } from './Component/ginnicontactus/ginnicontactus.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { GinnireturnpolicyComponent } from './Component/ginnireturnpolicy/ginnir
     GinniprivacypolicyComponent,
     GinnishippingpolicyComponent,
     GinnireturnpolicyComponent,
+    GinnicontactusComponent,
   ],
   imports: [
     BrowserModule,

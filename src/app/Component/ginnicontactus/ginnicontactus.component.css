@@ -1,0 +1,47 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.heading p {
+    color: rgb(94, 94, 240);
+}
+
+.paragraph {
+    width: 50%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+
+.contact {
+    display: flex;
+    align-items: baseline;
+}
+
+.contact h6 {
+    margin-right: 10px; /* Add some spacing between h6 and p */
+    color: rgb(94, 94, 240);
+}
