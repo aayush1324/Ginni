@@ -20,6 +20,9 @@ import { GinniprivacypolicyComponent } from './Component/ginniprivacypolicy/ginn
 import { GinnishippingpolicyComponent } from './Component/ginnishippingpolicy/ginnishippingpolicy.component';
 import { GinnireturnpolicyComponent } from './Component/ginnireturnpolicy/ginnireturnpolicy.component';
 import { GinnicontactusComponent } from './Component/ginnicontactus/ginnicontactus.component';
+import { GinnifilterComponent } from './Component/ginnifilter/ginnifilter.component';
+import { GinniallproductsComponent } from './Component/ginniallproducts/ginniallproducts.component';
+import { GinnicartComponent } from './Component/ginnicart/ginnicart.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { GinnicontactusComponent } from './Component/ginnicontactus/ginnicontact
     GinnishippingpolicyComponent,
     GinnireturnpolicyComponent,
     GinnicontactusComponent,
+    GinnifilterComponent,
+    GinniallproductsComponent,
+    GinnicartComponent,
   ],
   imports: [
     BrowserModule,

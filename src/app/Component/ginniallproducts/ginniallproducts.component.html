@@ -1,17 +1,39 @@
-<p>ginniproducts works!</p>
-
 <div class="containerbox">
-    <div class="upper">
-        <div class="upperleft">
-            <h3>Our Best Seller</h3>
+    <div class="header">
+        <div class="headertop">
+            <h4>All Products</h4>
         </div>
 
-        <div class="upperright">
-            <button type="submit">View All</button>
+        <div class="headerbottom">
+            <p>Showing : {{1}} - {{36}} of 47 products</p>
+            <p>Display : {{24}} per page</p>
+            <p>Sort by : {{1}}</p>
         </div>
     </div>
 
-    <div class="lower">
+    <!-- <div class="middle">
+        <div class="almond">
+            <div class="image">
+                <div class="saving">
+                    <h6 id="save">Save Rs 2</h6>
+                </div>
+                <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
+            </div>
+
+            <div class="naming">
+                <a href="#">Almond </a>
+            </div>
+
+            <div class="pricing">
+                <h6>From Rs 1000</h6>
+            </div>
+
+            <div class="carting">
+                <button type="submit">Add to Cart</button>
+            </div>
+        </div>
+
+
         <div class="almond">
             <div class="image">
                 <div class="saving">
@@ -34,7 +56,7 @@
             </div>
         </div>
 
-        <div class="cashew">
+        <div class="almond">
             <div class="image">
                 <div class="saving">
                     <h6 id="save">Save Rs 2</h6>
@@ -56,7 +78,8 @@
             </div>
         </div>
 
-        <div class="walnut">
+
+        <div class="almond">
             <div class="image">
                 <div class="saving">
                     <h6 id="save">Save Rs 2</h6>
@@ -78,7 +101,8 @@
             </div>
         </div>
 
-        <div class="raisin">
+
+        <div class="almond">
             <div class="image">
                 <div class="saving">
                     <h6 id="save">Save Rs 2</h6>
@@ -100,7 +124,7 @@
             </div>
         </div>
 
-        <div class="dates">
+        <div class="almond">
             <div class="image">
                 <div class="saving">
                     <h6 id="save">Save Rs 2</h6>
@@ -110,7 +134,7 @@
             </div>
 
             <div class="naming">
-                <a href="#">Dates</a>
+                <a href="#">Almond </a>
             </div>
 
             <div class="pricing">
@@ -121,27 +145,41 @@
                 <button type="submit">Add to Cart</button>
             </div>
         </div>
+    </div> -->
 
-        <div class="pista">
-            <div class="image">
+    <div class="middle">
+        <ng-container *ngFor="let row of almondRows">
+          <div class="row">
+            <div class="almond" *ngFor="let almond of row">
+              <div class="image">
                 <div class="saving">
-                    <h6 id="save">Save Rs 2</h6>
-                    <h6 id="variety">Best seller</h6>
+                  <h6 id="save">Save Rs 2</h6>
+                  <h6 *ngIf="almond.isBestSeller" id="variety">Best seller</h6>
                 </div>
-                <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-            </div>
-
-            <div class="naming">
-                <a href="#">Pista </a>
-            </div>
-
-            <div class="pricing">
-                <h6>From Rs 1000</h6>
-            </div>
-
-            <div class="carting">
+                <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="GINNI DryFruits">
+              </div>
+      
+              <div class="naming">
+                <a href="#">{{ almond.name }}</a>
+              </div>
+      
+              <div class="pricing">
+                <h6>From Rs {{ almond.price }}</h6>
+              </div>
+      
+              <div class="carting">
                 <button type="submit">Add to Cart</button>
+              </div>
             </div>
+          </div>
+        </ng-container>
+      </div>
+      
+    
+
+    <div class="footer">
+        <div class="pagination">
+            <p>pagination</p>
         </div>
     </div>
 </div>

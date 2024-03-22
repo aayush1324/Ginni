@@ -1,0 +1,63 @@
+<p>ginnifilter works!</p>
+<div class="containerbox">
+    <div class="heading">
+        <h3>Filter</h3>
+        <a href="#">Remove All</a>
+    </div>
+
+    <div class="availability">
+        <div class="header">
+            <h6>AVAILABILITY</h6>
+        </div>
+
+        <div class="footer">
+            <form action="">
+                <div class="intstock">
+                    <input type="checkbox" id="instock" name="instock" value="in">
+                    <label for="instock"> In Stock</label>
+                    <p>{{(3)}}</p>
+                </div>            
+                <br>
+                <div class="outstock">
+                    <input type="checkbox" id="outstock" name="outstock" value="out">
+                    <label for="outstock"> Out stock</label>
+                    <p>{{(5)}}</p>
+                </div>       
+            </form>
+        </div>
+    </div>
+
+
+    <div class="pricing">
+        <div class="header">
+            <h6>PRICE</h6>
+        </div>
+
+        <div class="footer">                
+            <div class="price-input-container">                        
+                <div class="price-input"> 
+                    <div class="price-field"> 
+                        <!-- <span>Min Price</span>  -->
+                        <input type="number" class="min-input" value="2500"> 
+                    </div> 
+
+                    <div class="price-field"> 
+                        <!-- <span>Max Price</span>  -->
+                        <input type="number" class="max-input" value="8500"> 
+                    </div> 
+                </div> 
+                
+                <div class="slider-container"> 
+                    <div class="price-slider"> 
+                    </div> 
+                </div> 
+            </div> 
+    
+            <!-- Slider -->
+            <div class="range-input"> 
+                <input type="range" class="min-range" min="0" max="10000" value="2500" step="1"> 
+                <input type="range" class="max-range" min="0" max="10000" value="8500" step="1"> 
+            </div>  
+        </div>
+    </div>
+</div>
