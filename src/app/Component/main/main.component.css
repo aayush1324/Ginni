@@ -1,9 +1,21 @@
-.containerbox {
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
+    height: fit-content; /* Adjusts the height based on content */
+    z-index: 1000; /* Ensure the header is above other content */
+    /* Add other styling as needed */
 }
 
+.main {
+    margin-top: calc(15%);
+}
+
+.footer {
+    /* Additional styling for the footer */
+    background-color: #f4f4f4; /* Example background color */
+    padding: 0%;
+}
 
 

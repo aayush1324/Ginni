@@ -26,6 +26,7 @@ import { GinnicartComponent } from './Component/ginnicart/ginnicart.component';
 import { GinnimainproductComponent } from './Component/ginnimainproduct/ginnimainproduct.component';
 import { MainComponent } from './Component/main/main.component';
 import { HomeComponent } from './Component/home/home.component';
+import { GinnisliderComponent } from './Component/ginnislider/ginnislider.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { HomeComponent } from './Component/home/home.component';
     GinnimainproductComponent,
     MainComponent,
     HomeComponent,
+    GinnisliderComponent,
   ],
   imports: [
     BrowserModule,

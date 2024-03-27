@@ -1,10 +1,9 @@
 .containerbox {
     width: 100%;
     height: fit-content;
-    border: 1px solid;
-    display: flex;
+     display: flex;
     flex-direction: column;
-    background-color: rgb(201, 241, 162);
+    background-color: rgb(215, 241, 188);
     padding: 2%;
 }
 

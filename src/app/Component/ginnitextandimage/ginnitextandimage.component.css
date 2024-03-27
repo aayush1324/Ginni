@@ -1,7 +1,9 @@
 .containerbox {
     width: 100%;
     height: fit-content;
-    border: 1px solid;
+    padding: 0%;
+    margin: 5% 0%;
+    /* border: 1px solid; */
     background-color: antiquewhite;
     display: flex;
     flex-direction: row;
@@ -19,7 +21,7 @@
 .image {
     width: 50%;
     /* height: 100%; */
-    border: 3px solid;
+    /* border: 3px solid; */
     background-color: rgb(45, 112, 133);
 }
 

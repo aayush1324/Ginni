@@ -47,13 +47,12 @@ const routes: Routes = [{
       {path: "ginnitextandimage", component : GinnitextandimageComponent},
       {path: "ginniupperfooter", component : GinniupperfooterComponent},
       {path: "home", component : HomeComponent},
+      {path: "ginnisignin" , component : GinnisigninComponent},
+      {path: "ginnisignup", component : GinnisignupComponent},
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },
-    // {path:"ginnisignin" , component : GinnisigninComponent},
      {path:'' ,redirectTo:"main", pathMatch:"full"},
-    // {path:"ginnisignup",component : GinnisignupComponent},
-    // {path:"**" ,redirectTo:"ginnisignup", pathMatch:"full"}
 ];
 
 @NgModule({

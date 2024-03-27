@@ -5,7 +5,7 @@
     flex-direction: row;
     padding: 1%;
     margin: 0%;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 .shipping, .refund, .nutrition, .payment {
