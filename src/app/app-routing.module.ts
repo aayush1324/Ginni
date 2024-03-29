@@ -23,6 +23,23 @@ import { GinnitermserviceComponent } from './Component/ginnitermservice/ginniter
 import { GinnitextandimageComponent } from './Component/ginnitextandimage/ginnitextandimage.component';
 import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupperfooter.component';
 import { HomeComponent } from './Component/home/home.component';
+import { SellersignupComponent } from './Component/sellersignup/sellersignup.component';
+import { SellersigninComponent } from './Component/sellersignin/sellersignin.component';
+import { SellerhomeComponent } from './Component/sellerhome/sellerhome.component';
+import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component';
+import { GinniwishlistComponent } from './Component/ginniwishlist/ginniwishlist.component';
+import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
+import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
+import { GinnigiftingsComponent } from './Component/ginnigiftings/ginnigiftings.component';
+import { GinnicombosComponent } from './Component/ginnicombos/ginnicombos.component';
+import { GinnibestsellersComponent } from './Component/ginnibestsellers/ginnibestsellers.component';
+import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
+import { GinnidryfruitComponent } from './Component/ginnidryfruit/ginnidryfruit.component';
+import { GinnidryfruitalmondComponent } from './Component/ginnidryfruitalmond/ginnidryfruitalmond.component';
+import { GinnidryfruitcashewComponent } from './Component/ginnidryfruitcashew/ginnidryfruitcashew.component';
+import { GinnidryfruitpistaComponent } from './Component/ginnidryfruitpista/ginnidryfruitpista.component';
+import { GinnidryfruitraisinComponent } from './Component/ginnidryfruitraisin/ginnidryfruitraisin.component';
+import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/ginnidryfruitwalnut.component';
 
 
 const routes: Routes = [{
@@ -46,9 +63,27 @@ const routes: Routes = [{
       {path: "ginnitermservice",  component : GinnitermserviceComponent},
       {path: "ginnitextandimage", component : GinnitextandimageComponent},
       {path: "ginniupperfooter", component : GinniupperfooterComponent},
+      {path: "ginnitrack" , component : GinnitrackComponent},
+      {path: "ginniwishlist" , component : GinniwishlistComponent},
+      {path: "ginniprofile" , component : GinniprofileComponent},
+      {path: "ginniorder", component : GinniorderComponent},
+      {path: "ginnigiftings", component : GinnigiftingsComponent},
+      {path: "ginnicombos",  component : GinnicombosComponent},
+      {path: "ginnibestsellers", component : GinnibestsellersComponent},
+      {path: "ginniaddress", component : GinniaddressComponent},
+      {path: "ginnidryfruit" , component : GinnidryfruitComponent},
+      {path: "ginnidryfruitalmond", component : GinnidryfruitalmondComponent},
+      {path: "ginnidryfruitcashew", component : GinnidryfruitcashewComponent},
+      {path: "ginnidryfruitpista",  component : GinnidryfruitpistaComponent},
+      {path: "ginnidryfruitraisin", component : GinnidryfruitraisinComponent},
+      {path: "ginnidryfruitwalnut", component : GinnidryfruitwalnutComponent},
       {path: "home", component : HomeComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
+      {path: "sellersignup", component : SellersignupComponent},
+      {path: "sellersignin", component : SellersigninComponent},
+      {path: "sellerhome", component : SellerhomeComponent},
+
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },

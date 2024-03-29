@@ -27,6 +27,27 @@ import { GinnimainproductComponent } from './Component/ginnimainproduct/ginnimai
 import { MainComponent } from './Component/main/main.component';
 import { HomeComponent } from './Component/home/home.component';
 import { GinnisliderComponent } from './Component/ginnislider/ginnislider.component';
+import { SellersignupComponent } from './Component/sellersignup/sellersignup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { SellerhomeComponent } from './Component/sellerhome/sellerhome.component';
+import { SellersigninComponent } from './Component/sellersignin/sellersignin.component';
+import { GinnicombosComponent } from './Component/ginnicombos/ginnicombos.component';
+import { GinnigiftingsComponent } from './Component/ginnigiftings/ginnigiftings.component';
+import { GinnibestsellersComponent } from './Component/ginnibestsellers/ginnibestsellers.component';
+import { GinnidryfruitalmondComponent } from './Component/ginnidryfruitalmond/ginnidryfruitalmond.component';
+import { GinnidryfruitcashewComponent } from './Component/ginnidryfruitcashew/ginnidryfruitcashew.component';
+import { GinnidryfruitraisinComponent } from './Component/ginnidryfruitraisin/ginnidryfruitraisin.component';
+import { GinnidryfruitpistaComponent } from './Component/ginnidryfruitpista/ginnidryfruitpista.component';
+import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/ginnidryfruitwalnut.component';
+import { GinnidryfruitComponent } from './Component/ginnidryfruit/ginnidryfruit.component';
+import { GinniwishlistComponent } from './Component/ginniwishlist/ginniwishlist.component';
+import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component';
+import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
+import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
+import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
+
 
 
 @NgModule({
@@ -56,14 +77,38 @@ import { GinnisliderComponent } from './Component/ginnislider/ginnislider.compon
     MainComponent,
     HomeComponent,
     GinnisliderComponent,
+    SellersignupComponent,
+    SellerhomeComponent,
+    SellersigninComponent,
+    GinnicombosComponent,
+    GinnigiftingsComponent,
+    GinnibestsellersComponent,
+    GinnidryfruitalmondComponent,
+    GinnidryfruitcashewComponent,
+    GinnidryfruitraisinComponent,
+    GinnidryfruitpistaComponent,
+    GinnidryfruitwalnutComponent,
+    GinnidryfruitComponent,
+    GinniwishlistComponent,
+    GinnitrackComponent,
+    GinniprofileComponent,
+    GinniaddressComponent,
+    GinniorderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor() {
+    provideHttpClient();
+  }
+}
