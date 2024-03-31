@@ -1,123 +1,176 @@
-/* Styles for the price input container */
-.price-input-container { 
-	width: 100%; 
-    height: fit-content;
-    padding: 1%;
-    margin: 0%;
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-} 
-
-.price-input  { 
-    width: 10%; 
-    height: fit-content;
-    padding: 0%;
-    margin: 0%;
-    border: 2px solid;
-    border-color: black;
-	display: flex; 
-    flex-direction: row;
-    justify-content: space-between;
-} 
-
-.price-field {
-    width: 50%; 
-    height: fit-content;
-    padding: 0%;
-    margin: 0%;
-    border: 1px solid;
-    border-color: black;
-    display: flex; 
+.containerbox {
+	width: 25%;
+	height: fit-content;
+	padding: 2%;
+	margin: 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-items: center; */
+	border: 1px solid;
 }
 
-.price-field input { 
-    width: 100%; 
-    height: fit-content;
+.heading {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* border: 2px solid; */
+}
+
+.availability {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.availabilityfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.intstock input[type="radio"] , .outstock input[type="radio"] {
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+
+.categories {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.categoryfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.almonds input[type="radio"], 
+.cashews input[type="radio"],
+.raisins input[type="radio"], 
+.walnuts input[type="radio"],
+.pistas input[type="radio"], 
+.combos input[type="radio"],
+.giftings input[type="radio"], 
+.bestsellers input[type="radio"]
+{
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+.sortby {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.sortbyfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.price {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.pricefooter {
+    width: 100%;
+	height: fit-content;
     padding: 0%;
-    margin: 0%;
+    margin: 5% 0%;
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid; */
+}
+
+.pricefooter form {
+    width: 100%;
+	height: fit-content;
+	padding: 0%;
+	margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+	/* border: 1px solid; */
+}
+
+.pricefooter .minprice,
+.pricefooter .maxprice {
+    width: 40%; /* Adjust width as needed */
+	height: fit-content;
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
     border: 1px solid;
-    border-color: black;
-    display: flex; 
-} 
+	border-radius: 10px;
+}
+
+.pricefooter input[type="text"] {
+    width: 80%;
+	height: fit-content;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 3%;
+    margin: 0% 5%; /* Remove margin to avoid extra spacing */
+    /* border: 2px solid; */
+	border: none; /* Remove border */
+    outline: none; /* Remove outline */
+}
 
 
-/* Remove Arrows/Spinners */
-input::-webkit-outer-spin-button, 
-input::-webkit-inner-spin-button { 
-	-webkit-appearance: none; 
-	margin: 0; 
-} 
+.currency-icon {
+    padding: 0%;
+	margin: 0% 5%;
+    font-size: 20px;
+}
 
-.slider-container { 
-	width: 100%; 
-} 
-
-.slider-container { 
-	height: 6px; 
-	position: relative; 
-	background: #e4e4e4; 
-	border-radius: 5px; 
-} 
-
-.slider-container .price-slider { 
-	height: 100%; 
-	left: 25%; 
-	right: 15%; 
-	position: absolute; 
-	border-radius: 5px; 
-	background: #01940b; 
-} 
-
-.range-input { 
-	position: relative; 
-} 
-
-.range-input input { 
-	position: absolute; 
-	width: 100%; 
-	height: 5px; 
-	background: none; 
-	top: -5px; 
-	pointer-events: none; 
-	cursor: pointer; 
-	/* -webkit-appearance: none;  */
-} 
-
-/* Styles for the range thumb in WebKit browsers */
-input[type="range"]::-webkit-slider-thumb { 
-	height: 18px; 
-	width: 18px; 
-	border-radius: 70%; 
-	background: #555; 
-	pointer-events: auto; 
-	-webkit-appearance: none; 
-} 
-
-@media screen and (max-width: 768px) { 
-	.main { 
-		width: 80%; 
-		margin-right: 5px; 
-	} 
-
-	.custom-wrapper { 
-		width: 100%; 
-		left: 0; 
-		padding: 0 10px; 
-	} 
-
-	.projtitle { 
-		width: 100%; 
-		position: relative; 
-		right: 26px; 
-	} 
-
-	.price-input { 
-		flex-direction: column; 
-		align-items: center; 
-	} 
-
-	.price-field { 
-		margin-bottom: 10px; 
-	} 
+.fa-caret-down {
+    cursor: pointer;
 }

@@ -1,0 +1,206 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.upper {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid; */
+}
+
+.upper button {
+    width: 11%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    border-radius: 5px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure it's above other content */
+}
+
+
+.addresspopup {
+    position: fixed;
+    width: 40%;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(235, 227, 227);
+    padding: 1%;
+    border-radius: 8px;
+    border: 1px solid;
+    z-index: 1000; /* Ensure it's above the overlay */
+    max-height: 75%; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.popup {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+}
+
+.popuphead {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    /* border: 1px solid; */
+}
+
+.popupheadleft {
+    width: 95%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+}
+
+.popupheadright {
+    width: 5%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    /* border: 1px solid; */
+}
+
+.close-icon {
+    cursor: pointer;
+    font-size: 30px;
+    color: #000000;
+    /* border: 1px solid; */
+}
+
+
+
+
+
+
+.popupdown {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 6px solid; */
+}
+
+.popup form {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    /* border: 5px solid; */
+}
+
+.form-group input[type="text"] {
+    width: 100%; /* Adjust width as needed */
+    padding: 2%; /* Adjust padding as needed */
+    border-radius: 10px;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+.popupdown button {
+    width: 100%; /* Adjust width as needed */
+    padding: 2%; /* Adjust padding as needed */
+    border-radius: 10px;
+    background-color: aquamarine;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lower {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid;
+}
+
+
+
+.loweraddress, .loweraddress1 {
+    width: 25%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.loweraddressbottom {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid; */
+}
+
+.loweraddressbottom button {
+    width: 100%;
+    height: fit-content;
+    padding: 2%;
+    margin: 1%;
+    border-radius: 10px;
+}

@@ -47,6 +47,7 @@ import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component
 import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
 import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
 import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
+import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.component';
 
 
 
@@ -94,6 +95,7 @@ import { GinniorderComponent } from './Component/ginniorder/ginniorder.component
     GinniprofileComponent,
     GinniaddressComponent,
     GinniorderComponent,
+    GinnideliveryComponent,
   ],
   imports: [
     BrowserModule,

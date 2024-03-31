@@ -28,47 +28,43 @@
                 <div class="navbarupperright">   
                     <div class="items">
                         <div class="wishlist" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()">
-                            <div style="position: relative; display: inline-block;">
-                                <i class="fa fa-heart" style="font-size: xx-large;"></i>
-                                <i class="wishlist-count">{{ wishlistCount }}</i>
-                            </div>
-                            <h6 *ngIf="showWishlist">Wishlist</h6>
+                            <a routerLink="/main/ginniwishlist">
+                                <div style="position: relative; display: inline-block;">
+                                    <i class="fa fa-heart" style="font-size: xx-large;"></i>
+                                    <i class="wishlist-count">{{ wishlistCount }}</i>
+                                </div>
+                                <h6 *ngIf="showWishlist">Wishlist</h6>
+                            </a>
                         </div>
                     
 
                         <div class="cart" (mouseover)="showCartText()" (mouseleave)="hideCartText()">
-                            <div style="position: relative; display: inline-block;">
-                                <i class="fa fa-shopping-cart" style="font-size: xx-large;"></i>
-                                <i class="cart-count">{{ cartCount }}</i>
-                            </div>
-                            <h6 *ngIf="showCart">Cart</h6>
+                            <a routerLink="/main/ginnicart">
+                                <div style="position: relative; display: inline-block;">
+                                    <i class="fa fa-shopping-cart" style="font-size: xx-large;"></i>
+                                    <i class="cart-count">{{ cartCount }}</i>
+                                </div>
+                                <h6 *ngIf="showCart">Cart</h6>
+                            </a>
                         </div>
 
                         <div class="cart" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()">
-                            <i class="fa fa-truck" style="font-size: xx-large;"></i>
-                            <h6 *ngIf="showOrder">Track Order</h6>
+                            <a routerLink="/main/ginnitrack">
+                                <i class="fa fa-truck" style="font-size: xx-large;"></i>
+                                <h6 *ngIf="showOrder">Track Order</h6>
+                            </a>
                         </div>
                     </div>  
 
-                    <!-- <div class="account">
-                        <p>Login / Signup</p>
-                        <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()" >
-                            <h6>My Account <i class="fa fa-angle-down" style="font-size: large;"></i></h6>
-                            <div class="dropdown-contents" *ngIf="isAccountDropdown">
-                                <a routerLink="/main/ginnisignin">Login</a>
-                                <a routerLink="/main/ginnisignup">Signup</a>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="account">
                         <p>{{ loggedIn ? 'Hello, Aayush' + userName : 'Login / Signup' }}</p>
                         <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()" >
                             <h6>My Account <i class="fa fa-angle-down" style="font-size: large;"></i></h6>
                             <div class="dropdown-contents" *ngIf="isAccountDropdown">
                                 <a *ngIf="loggedIn && isAdmin" routerLink="/admin/dashboard">Admin Dashboard</a>
-                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/myprofile">My Profile</a>
-                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/myorders">My Order</a>
-                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/myorders">My Address</a>
+                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniprofile">My Profile</a>
+                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniorder">My Order</a>
+                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniaddress">My Address</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/home">Logout</a>
                                 <a *ngIf="!loggedIn" routerLink="/main/ginnisignin">Login</a>
                                 <a *ngIf="!loggedIn" routerLink="/main/ginnisignup">Signup</a>

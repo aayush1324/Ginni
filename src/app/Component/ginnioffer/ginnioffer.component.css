@@ -93,6 +93,10 @@
     justify-content: space-around;
 }
 
+.cart a, .wishlist a, .track a {
+    text-decoration: none;
+}
+
 /* Styling for the wishlist count */
 .wishlist-count {
     position: absolute;
