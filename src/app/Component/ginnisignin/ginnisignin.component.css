@@ -21,8 +21,8 @@
     align-items: center;
 }
 
-.form {
-    width: 100%;
+form {
+    width: 25%;
     height: fit-content;
     padding: 0%;
     margin: 0%;
@@ -33,28 +33,29 @@
     align-items: center;
 }
 
-.email, .password, .buttons {
-    width: 25%;
+.form-group {
+    width: 100%;
     height: fit-content;
     padding: 0%;
     margin: 0%;
     /* border: 1px solid; */
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    /* text-align: center; */
 }
 
-.form input {
+.form-group input {
     width: 100%;
     height: fit-content;
     padding: 2%;
-    margin: 2%;
+    margin: 0%;
     display: flex;
     border-radius: 10px;
     border-color: rgb(92, 88, 88);
 }
 
-.form button {
-    width: 100%;
+button {
+    width: 75%;
     height: fit-content;
     padding: 2%;
     margin: 5%;

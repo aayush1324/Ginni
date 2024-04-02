@@ -27,12 +27,9 @@ import { GinnimainproductComponent } from './Component/ginnimainproduct/ginnimai
 import { MainComponent } from './Component/main/main.component';
 import { HomeComponent } from './Component/home/home.component';
 import { GinnisliderComponent } from './Component/ginnislider/ginnislider.component';
-import { SellersignupComponent } from './Component/sellersignup/sellersignup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { provideHttpClient } from '@angular/common/http';
-import { SellerhomeComponent } from './Component/sellerhome/sellerhome.component';
-import { SellersigninComponent } from './Component/sellersignin/sellersignin.component';
 import { GinnicombosComponent } from './Component/ginnicombos/ginnicombos.component';
 import { GinnigiftingsComponent } from './Component/ginnigiftings/ginnigiftings.component';
 import { GinnibestsellersComponent } from './Component/ginnibestsellers/ginnibestsellers.component';
@@ -78,9 +75,6 @@ import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.
     MainComponent,
     HomeComponent,
     GinnisliderComponent,
-    SellersignupComponent,
-    SellerhomeComponent,
-    SellersigninComponent,
     GinnicombosComponent,
     GinnigiftingsComponent,
     GinnibestsellersComponent,

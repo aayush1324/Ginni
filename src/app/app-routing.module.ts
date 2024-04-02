@@ -23,9 +23,6 @@ import { GinnitermserviceComponent } from './Component/ginnitermservice/ginniter
 import { GinnitextandimageComponent } from './Component/ginnitextandimage/ginnitextandimage.component';
 import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupperfooter.component';
 import { HomeComponent } from './Component/home/home.component';
-import { SellersignupComponent } from './Component/sellersignup/sellersignup.component';
-import { SellersigninComponent } from './Component/sellersignin/sellersignin.component';
-import { SellerhomeComponent } from './Component/sellerhome/sellerhome.component';
 import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component';
 import { GinniwishlistComponent } from './Component/ginniwishlist/ginniwishlist.component';
 import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
@@ -80,9 +77,6 @@ const routes: Routes = [{
       {path: "home", component : HomeComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
-      {path: "sellersignup", component : SellersignupComponent},
-      {path: "sellersignin", component : SellersigninComponent},
-      {path: "sellerhome", component : SellerhomeComponent},
 
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]

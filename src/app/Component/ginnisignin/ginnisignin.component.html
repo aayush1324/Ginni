@@ -4,19 +4,30 @@
         <p>Enter your e-mail and password:</p>
     </div>
 
-    <div class="form">
-        <div class="email">
-            <input type="email" placeholder="Email" id="email">
+    <form [formGroup]="signInForm" (ngSubmit)="SigninForm()">
+        <p class="error-p">{{authError}}</p>
+    
+        <div class="form-group">
+            <!-- <label for="email">Email:</label> -->
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+            <div *ngIf="signInForm.get('email')?.errors?.['required'] && signInForm.get('email')?.touched" class="text-danger">
+                Email is required.
+            </div>
+            <div *ngIf="signInForm.get('email')?.errors?.['email'] && signInForm.get('email')?.touched" class="text-danger">
+                Invalid email format.
+            </div>
         </div>
-
-        <div class="password">
-            <input type="password" placeholder="Password" id="password">
+        <br>
+        <div class="form-group">
+            <!-- <label for="password">Password:</label> -->
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password">
+            <div *ngIf="signInForm.get('password')?.errors?.['required'] && signInForm.get('password')?.touched" class="text-danger">
+                Password is required.
+            </div>
         </div>
-
-        <div class="buttons">
-            <button type="submit"><h3>Sign In</h3></button>
-        </div>
-    </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">Sign In</button>
+    </form>
 
     <div class="footer">
         <p>New Customer? <a routerLink="/main/ginnisignup">Create your Account</a></p>

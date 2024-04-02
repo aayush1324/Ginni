@@ -13,7 +13,7 @@ export class GinniofferComponent {
   showWishlist: boolean = false;
   showCart: boolean = false;
   showOrder: boolean = false;
-  loggedIn: boolean = true;
+  loggedIn: boolean = false;
   isAdmin: boolean = false;
   isUser: boolean = true;
   cartCount: number = 0; // Initialize cart count
