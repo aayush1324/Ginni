@@ -49,6 +49,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
+import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
 
 
 
@@ -96,6 +97,7 @@ import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginn
     GinnideliveryComponent,
     SelleraddproductComponent,
     GinniresetpasswordComponent,
+    GinniconfirmemailComponent,
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,7 @@ export class GinnisignupComponent {
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (res) => {
           alert(res.message);
+          alert("Please Confirm you email ");
           this.signupForm.reset();
           this.router.navigate(['/main/ginnisignin']);
           alert(res.message)
