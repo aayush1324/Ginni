@@ -57,7 +57,7 @@
                     </div>  
 
                     <div class="account">
-                        <p>{{ loggedIn ? 'Hello, Aayush' + userName : 'Login / Signup' }}</p>
+                        <p>{{ loggedIn ? 'Hello, ' + userName : 'Login / Signup' }}</p>
                         <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()" >
                             <h6>My Account <i class="fa fa-angle-down" style="font-size: large;"></i></h6>
                             <div class="dropdown-contents" *ngIf="isAccountDropdown">
@@ -65,7 +65,7 @@
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniprofile">My Profile</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniorder">My Order</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniaddress">My Address</a>
-                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/home">Logout</a>
+                                <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/home" (click)="logout()">Logout</a>
                                 <a *ngIf="!loggedIn" routerLink="/main/ginnisignin">Login</a>
                                 <a *ngIf="!loggedIn" routerLink="/main/ginnisignup">Signup</a>
                             </div>

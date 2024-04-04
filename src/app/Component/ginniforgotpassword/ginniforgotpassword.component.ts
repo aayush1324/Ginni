@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../Services/auth.service';
+import { NgToastService } from 'ng-angular-popup';
+import { ResetPasswordService } from '../../Services/reset-password.service';
+import { UserstoreService } from '../../Services/userstore.service';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-ginniforgotpassword',
@@ -7,4 +13,36 @@ import { Component } from '@angular/core';
 })
 export class GinniforgotpasswordComponent {
 
+  resetPasswordEmail: string = '';
+
+  constructor(private router: Router, private toast: NgToastService, private resetPasswordService: ResetPasswordService) {}
+
+  public isValidEmail!: boolean;
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+  
+  confirmToReset() {
+    if (this.resetPasswordEmail) {
+      console.log(this.resetPasswordEmail)
+      this.resetPasswordService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
+        next: () => {
+          alert("Email Sent Successfully");
+          console.log("Email Sent Successfully");
+          // Optionally, navigate to a different route after sending the email
+          this.router.navigate(['/main/ginnisignin']);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'ERROR',
+            summary: 'Something went wrong!',
+            duration: 5000,
+          });
+        }
+      });
+    }
+  }
 }

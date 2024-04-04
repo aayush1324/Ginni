@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,7 @@ import { MainComponent } from './Component/main/main.component';
 import { HomeComponent } from './Component/home/home.component';
 import { GinnisliderComponent } from './Component/ginnislider/ginnislider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { provideHttpClient } from '@angular/common/http';
 import { GinnicombosComponent } from './Component/ginnicombos/ginnicombos.component';
 import { GinnigiftingsComponent } from './Component/ginnigiftings/ginnigiftings.component';
@@ -45,6 +45,10 @@ import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.com
 import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
 import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
 import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
+import { TokenInterceptor } from './Interceptors/token.interceptor';
+import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 
 
 
@@ -90,6 +94,8 @@ import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.
     GinniaddressComponent,
     GinniorderComponent,
     GinnideliveryComponent,
+    SelleraddproductComponent,
+    GinniresetpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,8 +103,13 @@ import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgToastModule,
   ],
-  providers: [
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi:true
+  },
     provideClientHydration(),
   ],
   bootstrap: [AppComponent]

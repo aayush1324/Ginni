@@ -37,6 +37,9 @@ import { GinnidryfruitcashewComponent } from './Component/ginnidryfruitcashew/gi
 import { GinnidryfruitpistaComponent } from './Component/ginnidryfruitpista/ginnidryfruitpista.component';
 import { GinnidryfruitraisinComponent } from './Component/ginnidryfruitraisin/ginnidryfruitraisin.component';
 import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/ginnidryfruitwalnut.component';
+import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
+import { authGuard } from './Guard/auth.guard';
+import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 
 
 const routes: Routes = [{
@@ -77,6 +80,8 @@ const routes: Routes = [{
       {path: "home", component : HomeComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
+      {path: "ginniresetpassword", component : GinniresetpasswordComponent},
+      {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
 
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]

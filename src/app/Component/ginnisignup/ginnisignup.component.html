@@ -39,6 +39,20 @@
         </div>
         <br>
         <div class="form-group">
+            <!-- <label for="confirmPassword">Confirm Password:</label> -->
+            <input type="password" id="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+            <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched" class="text-danger">
+                Confirm Password is required.
+            </div>
+            <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength'] && signupForm.get('confirmPassword')?.touched" class="text-danger">
+                Password must be at least 6 characters long.
+            </div>
+            <div *ngIf="signupForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
+                *Password didn't matched*
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
             <!-- <label for="mobile">Mobile Number:</label> -->
             <input type="tel" id="mobile" formControlName="mobile" class="form-control" placeholder="Mobile">
             <div *ngIf="signupForm.get('mobile')?.errors?.['required'] && signupForm.get('mobile')?.touched" class="text-danger">

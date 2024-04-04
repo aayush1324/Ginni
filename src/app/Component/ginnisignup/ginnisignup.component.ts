@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SellerService } from '../../Services/seller.service';
 import { AuthService } from '../../Services/auth.service';
+import { ConfirmPasswordValidator } from '../../Helpers/confirmpassword.validator';
 
 @Component({
   selector: 'app-ginnisignup',
@@ -20,8 +21,10 @@ export class GinnisignupComponent {
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]]
-    });
+    },
+    { validator: ConfirmPasswordValidator("password", "confirmPassword") });
 
   }
 

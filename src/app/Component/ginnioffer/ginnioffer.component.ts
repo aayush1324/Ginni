@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
+import { AuthService } from '../../Services/auth.service';
+import { UserstoreService } from '../../Services/userstore.service';
 
 
 @Component({
@@ -13,28 +15,51 @@ export class GinniofferComponent {
   showWishlist: boolean = false;
   showCart: boolean = false;
   showOrder: boolean = false;
-  loggedIn: boolean = false;
   isAdmin: boolean = false;
   isUser: boolean = true;
-  cartCount: number = 0; // Initialize cart count
+  cartCount: number = 0; // Initialize cart count`
   wishlistCount: number = 2; // Initialize wishlist count
-  userName: string = '';
   selectedLink: string = ''; // Initialize selected link
 
+  loggedIn: boolean = false;
+  userName: string = '';
+  role: string = '';
 
-  constructor(private elementRef: ElementRef, private router:Router) {  // Assuming authService provides methods like isLoggedIn(), getUserName(), and logout()
-    // this.loggedIn = this.authService.isLoggedIn();
-    // if (this.loggedIn) {
-    //   this.userName = this.authService.getUserName();
-    // }
-
+  constructor(private elementRef: ElementRef, private router:Router, private auth :AuthService, private userstore : UserstoreService) {  
     // Subscribe to router events to update selectedLink
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.selectedLink = event.url;
       }
     });
+
+  // Check if a token exists
+  const token = this.auth.getToken();
+
+  // Set loggedIn to true if a token exists
+  this.loggedIn = !!token;
   }
+
+  ngOnInit() {
+    this.userstore.getFullNameFromStore()
+    .subscribe(val=>{
+      const fullNameFromToken = this.auth.getfullNameFromToken();
+      this.userName = val || fullNameFromToken
+    });
+
+    this.userstore.getRoleFromStore()
+    .subscribe(val=>{
+      const roleFromToken = this.auth.getRoleFromToken();
+      this.role = val || roleFromToken;
+
+      this.isAdmin = this.role === 'Admin';
+      this.isUser = this.role === 'User';
+    })
+  }
+
+
+  
+
 
   isLinkActive(route: string): boolean {
     return this.router.isActive(route, true);
@@ -57,10 +82,12 @@ export class GinniofferComponent {
     this.isAccountDropdown = false;
   }
 
-  // logout(): void {
-  //   this.authService.logout();
-  //   this.loggedIn = false;
-  // }
+  logout(){
+    this.auth.signOut();
+    this.loggedIn = false;
+
+    this.router.navigate(['/main/home'])
+  }
 
   // Method to update wishlist count when an item is added
   updateWishlistCount(count: number): void {
