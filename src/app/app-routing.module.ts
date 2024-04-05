@@ -40,6 +40,7 @@ import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/gi
 import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
 import { authGuard } from './Guard/auth.guard';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
+import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
 
 
 const routes: Routes = [{
@@ -86,6 +87,7 @@ const routes: Routes = [{
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },
+  {path: "ginniconfirmemail", component : GinniconfirmemailComponent},
      {path:'' ,redirectTo:"main", pathMatch:"full"},
 ];
 

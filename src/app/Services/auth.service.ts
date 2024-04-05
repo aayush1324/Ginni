@@ -17,7 +17,19 @@ export class AuthService {
   }
 
   signUp(userObj: any) {
-    return this.http.post<any>(`${this.baseUrl}register`, userObj)
+
+    const userobject =  {
+      UserName : userObj.username,
+      Email  : userObj.email,
+      Password : userObj.password,
+      ConfirmPassword : userObj.confirmPassword,
+      Phone : userObj.mobile.toString()
+    };
+    return this.http.post<any>(`${this.baseUrl}register`, userobject)
+  }
+
+  confirmSendEmail(email: string, token: string) {
+    return this.http.get(`${this.baseUrl}confirm-email?email=${email}&token=${token}`);
   }
 
   signIn(loginObj : any){
