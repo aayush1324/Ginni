@@ -4,7 +4,7 @@
             <h1>My Addresses</h1>
         </div>
 
-        <button (click)="togglePopup()" class="upperbutton">Add New Address</button>
+        <button (click)="togglePopup()" class="upperbutton">Add Address</button>
 
         <!-- Overlay -->
         <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
@@ -19,22 +19,23 @@
                     </div>
         
                     <div class="popupheadright">
-                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span> <!-- Close icon -->            </div>
+                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span> <!-- Close icon -->            
+                    </div>
                 </div>
                 <br>
                 <div class="popupdown">
-                    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
                         <div class="form-group">
                             <!-- <label for="fname">First Name:</label> -->
-                            <input type="text" id="fname" formControlName="fname" placeholder="First Name">
-                            <div *ngIf="addressForm.get('fname')?.errors?.['required'] && addressForm.get('fname')?.touched" class="text-danger">
+                            <input type="text" id="firstname" formControlName="firstname" placeholder="First Name">
+                            <div *ngIf="addressForm.get('firstname')?.errors?.['required'] && addressForm.get('firstname')?.touched" class="text-danger">
                                 First Name is required.
                             </div>
                         </div>
                         <div class="form-group">
                             <!-- <label for="lname">Last Name:</label> -->
-                            <input type="text" id="lname" formControlName="lname" placeholder="Last Name">
-                            <div *ngIf="addressForm.get('lname')?.errors?.['required'] && addressForm.get('lname')?.touched" class="text-danger">
+                            <input type="text" id="lastname" formControlName="lastname" placeholder="Last Name">
+                            <div *ngIf="addressForm.get('lastname')?.errors?.['required'] && addressForm.get('lastname')?.touched" class="text-danger">
                                 Last Name is required.
                             </div>
                         </div>
@@ -58,8 +59,8 @@
                         </div>
                         <div class="form-group">
                             <!-- <label for="pin">Pin Code:</label> -->
-                            <input type="text" id="pin" formControlName="pin" placeholder="Pin Code">
-                            <div *ngIf="addressForm.get('pin')?.errors?.['required'] && addressForm.get('pin')?.touched" class="text-danger">
+                            <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
+                            <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
                                 Pin Code is required.
                             </div>
                         </div>
@@ -78,7 +79,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" id="default" formControlName="default">
+                            <input type="checkbox" id="default" formControlName="default" >
                             <label for="default"> Set as Default Address </label>
                         </div>
                         <button type="submit" [disabled]="addressForm.invalid">Add a New Address</button>
@@ -88,28 +89,29 @@
         </div>              
     </div>
 
-    <div class="lower">
-        <div class="loweraddress">
-            <div class="loweraddresshead">
-                <h6>Default Address</h6>
-                <br>
+    <div class="grid">
+        <ng-container *ngFor="let address of addresses; let i = index">
+            <div class="loweraddress">
+                <div class="loweraddresshead">
+                    <h6>{{ address.default ? 'Default Address' : 'Address ' + (i + 1) }}</h6>
+                    <br>
+                </div>
+        
+                <div class="loweraddressmiddle">
+                    <p>Name: {{ address.firstname + ' ' + address.lastname }}</p>
+                    <p>Mobile: {{ address.phone }}</p>
+                    <p>Address: {{ address.address1 + ' ' + address.address2 }}</p>
+                    <p>Pin code: {{ address.pincode }}</p>
+                    <p>City: {{ address.city }}</p>
+                    <p>State: {{ address.state }}</p>
+                    <br>
+                </div>
+        
+                <div class="loweraddressbottom">
+                    <button type="submit">Edit</button>
+                    <button (click)="deleteAddress(address.id)">Delete </button>
+                </div>
             </div>
-    
-            <div class="loweraddressmiddle">
-                <p>Name</p>
-                <p>Mobile</p>
-                <p>Address</p>
-                <p>pin code</p>
-                <p>City</p>
-                <p>State</p>
-                <p>Country</p>
-                <br>
-            </div>
-    
-            <div class="loweraddressbottom">
-                <button type="submit">Edit</button>
-                <button type="submit">Delete</button>
-            </div>
-        </div>
-    </div>
+        </ng-container>
+    </div>   
 </div>

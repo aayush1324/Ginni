@@ -245,7 +245,7 @@
     flex-direction: row;
     padding: 2%;
     margin: 0%;
-    /* border: 5px solid; */
+    border: 5px solid;
     align-items: center;
 }
 
