@@ -29,16 +29,11 @@ export class GinniaddressComponent {
       state: ['', Validators.required], // State is required
       default: [false] // Default Address is optional
     });
+    console.log("AAyush");
+    console.log(this.addresses)
     this.getAddresses(); // Fetch addresses when component initializes
   }
 
-  // setDefault(event: any): void {
-  //   const isChecked = event.target.checked;
-  //   const defaultControl = this.addressForm.get('default');
-  //   if (defaultControl) {
-  //     defaultControl.setValue(isChecked);
-  //   }
-  // }
 
 
 
@@ -46,30 +41,20 @@ export class GinniaddressComponent {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  getAddresses(): void {
-    this.address.getAddress().subscribe({
-      next: (res) => {
-        this.addresses = res; // Assign fetched addresses to the component's addresses array
-      },
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
 
-  addAddress() : void  {
+
+  addAddress(): void {
     if (this.addressForm.valid) {
-      this.addresses.push(this.addressForm.value); // Add form value to the addresses array
-      console.log(this.addressForm.value);
-
+      // Add form value to the addresses array (optional for local storage)
+      this.addresses.push(this.addressForm.value); 
       this.address.addAddress(this.addressForm.value).subscribe({
         next: (res) => {
           console.log(res.message);
-          console.log(this.addressForm.value);
           this.togglePopup();
           alert(res.message);
           alert("Address Added");
           this.addressForm.reset();
+          this.getAddresses(); // Refresh addresses after adding a new one
         },
         error: (err) => {
           alert(err?.error.message);
@@ -78,7 +63,17 @@ export class GinniaddressComponent {
     }
   }
 
-
+  getAddresses(): void {
+    this.address.getAddress().subscribe({
+      next: (res) => {
+        this.addresses = res; // Assign fetched addresses to the component's addresses array
+        console.log(this.addresses)
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
 
 
   deleteAddress(addressId: string): void {
