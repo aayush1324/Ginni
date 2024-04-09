@@ -42,6 +42,9 @@ import { authGuard } from './Guard/auth.guard';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
 import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdashboard.component';
+import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
+import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
+import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
 
 
 const routes: Routes = [{
@@ -85,6 +88,10 @@ const routes: Routes = [{
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
       {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
       {path: "sellerdashboard", component : SellerdashboardComponent},
+      {path: "sellercustomerlist", component : SellercustomerlistComponent},
+      {path: "sellerorderlist", component : SellerorderlistComponent},
+      {path: "sellerproductlist", component : SellerproductlistComponent},     
+
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },

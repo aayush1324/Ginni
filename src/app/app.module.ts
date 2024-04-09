@@ -51,6 +51,9 @@ import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
 import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdashboard.component';
+import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
+import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
+import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
 
 
 
@@ -100,6 +103,9 @@ import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdash
     GinniresetpasswordComponent,
     GinniconfirmemailComponent,
     SellerdashboardComponent,
+    SellerproductlistComponent,
+    SellerorderlistComponent,
+    SellercustomerlistComponent,
   ],
   imports: [
     BrowserModule,
