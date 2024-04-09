@@ -14,65 +14,56 @@
             <div class="popup">
                 <div class="popuphead">
                     <div class="popupheadleft">
-                        <h2>Add a New Address Detail</h2>
-                        <p>Please fill in the information below:</p>
+                        <h2>{{ isEdit ? 'Edit' : 'Add' }} Address Detail</h2>
+                        <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
                     </div>
-        
                     <div class="popupheadright">
-                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span> <!-- Close icon -->            
+                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
                     </div>
                 </div>
                 <br>
                 <div class="popupdown">
-                    <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+                    <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
                         <div class="form-group">
-                            <!-- <label for="fname">First Name:</label> -->
-                            <input type="text" id="firstname" formControlName="firstname" placeholder="First Name">
-                            <div *ngIf="addressForm.get('firstname')?.errors?.['required'] && addressForm.get('firstname')?.touched" class="text-danger">
+                            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name">
+                            <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
                                 First Name is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="lname">Last Name:</label> -->
-                            <input type="text" id="lastname" formControlName="lastname" placeholder="Last Name">
-                            <div *ngIf="addressForm.get('lastname')?.errors?.['required'] && addressForm.get('lastname')?.touched" class="text-danger">
+                            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
+                            <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
                                 Last Name is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="phone">Phone:</label> -->
                             <input type="text" id="phone" formControlName="phone" placeholder="Phone">
                             <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
                                 Phone is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="address1">Address 1:</label> -->
                             <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
                             <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
                                 Address 1 is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="address2">Address 2:</label> -->
                             <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
                         </div>
                         <div class="form-group">
-                            <!-- <label for="pin">Pin Code:</label> -->
                             <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
                             <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
                                 Pin Code is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="city">City:</label> -->
                             <input type="text" id="city" formControlName="city" placeholder="City">
                             <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
                                 City is required.
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="state">State:</label> -->
                             <input type="text" id="state" formControlName="state" placeholder="State">
                             <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
                                 State is required.
@@ -82,7 +73,9 @@
                             <input type="checkbox" id="default" formControlName="default" >
                             <label for="default"> Set as Default Address </label>
                         </div>
-                        <button type="submit" [disabled]="addressForm.invalid">Add a New Address</button>
+                        <button type="submit" [disabled]="!addressForm.valid">
+                            {{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -98,17 +91,17 @@
                 </div>
         
                 <div class="loweraddressmiddle">
-                    <p>Name: {{ address.firstname + ' ' + address.lastname }}</p>
-                    <p>Mobile: {{ address.phone }}</p>
-                    <p>Address: {{ address.address1 + ' ' + address.address2 }}</p>
-                    <p>Pin code: {{ address.pincode }}</p>
+                    <p>Name: {{ address.firstName + ' ' + address.lastName }}</p>
+                    <p>Phone: {{ address.phone }}</p>
+                    <p>Address: {{ address.address1 }}{{ address.address2 ? ', ' + address.address2 : '' }}</p>
+                    <p>Pin Code: {{ address.pincode }}</p>
                     <p>City: {{ address.city }}</p>
                     <p>State: {{ address.state }}</p>
                     <br>
                 </div>
         
                 <div class="loweraddressbottom">
-                    <button type="submit">Edit</button>
+                    <button (click)="openEditPopup(address)">Edit</button>
                     <button (click)="deleteAddress(address.id)">Delete </button>
                 </div>
             </div>

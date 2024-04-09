@@ -1,73 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
-import { Router } from '@angular/router';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-ginniaddress',
   templateUrl: './ginniaddress.component.html',
-  styleUrl: './ginniaddress.component.css'
+  styleUrls: ['./ginniaddress.component.css']
 })
-export class GinniaddressComponent {
-  addressForm!: FormGroup; // Adding ! to indicate it will be initialized later
+export class GinniaddressComponent implements OnInit {
+  addressForm! : FormGroup;
   isPopupOpen: boolean = false;
-  showPlaceholder: boolean = true; // Declare showPlaceholder property
-  addresses: any[] = []; // Array to store form values
+  isEdit: boolean = false;
+  selectedAddress: any;
+  addresses: any[] = [];
 
-  constructor(private fb: FormBuilder, private address: AddressService, private router : Router) { }
+  constructor(private fb: FormBuilder, private addressService: AddressService) { }
 
   ngOnInit(): void {
+
     this.addressForm = this.fb.group({
-      firstname: ['', Validators.required], // First Name is required
-      lastname: ['', Validators.required], // Last Name is required
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Phone is required and should be 10 digits
-      address1: ['', Validators.required], // Address 1 is required
-      address2: [''], // Address 2 is optional
-      pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]], // Pin Code is required and should be 6 digits
-      city: ['', Validators.required], // City is required
-      state: ['', Validators.required], // State is required
-      default: [false] // Default Address is optional
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      address1: ['', Validators.required],
+      address2: [''],
+      pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      default: [false]
     });
-    console.log("AAyush");
-    console.log(this.addresses)
-    this.getAddresses(); // Fetch addresses when component initializes
+     // Set the default value explicitly
+    this.addressForm.get('default')?.setValue(false);
+    
+    this.getAddresses();
   }
 
-
-
-
-  togglePopup() {
+  togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
+    this.isEdit = false; // Reset edit mode when opening the popup
+    this.selectedAddress = null;
+    this.resetForm();
   }
 
-
+  resetForm(): void {
+    this.addressForm.reset();
+  }
 
   addAddress(): void {
     if (this.addressForm.valid) {
-      // Add form value to the addresses array (optional for local storage)
-      this.addresses.push(this.addressForm.value); 
-      this.address.addAddress(this.addressForm.value).subscribe({
+      console.log(this.addressForm.value);
+      this.addressService.addAddress(this.addressForm.value).subscribe({
         next: (res) => {
           console.log(res.message);
           this.togglePopup();
           alert(res.message);
-          alert("Address Added");
-          this.addressForm.reset();
-          this.getAddresses(); // Refresh addresses after adding a new one
+          this.getAddresses();
         },
         error: (err) => {
           alert(err?.error.message);
         },
-      })
+      });
     }
   }
 
   getAddresses(): void {
-    this.address.getAddress().subscribe({
+    this.addressService.getAddress().subscribe({
       next: (res) => {
-        this.addresses = res; // Assign fetched addresses to the component's addresses array
-        console.log(this.addresses)
+        this.addresses = res;
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);
@@ -75,33 +74,52 @@ export class GinniaddressComponent {
     });
   }
 
-
   deleteAddress(addressId: string): void {
-    console.log('Deleting address with ID:', addressId);
-    this.address.deleteAddress(addressId).subscribe(
-      response => {
-        console.log('Address deleted successfully!', response);
-        // Optionally, remove the deleted address from the addresses array
-        this.addresses = this.addresses.filter(address => address.id !== addressId);
+    this.addressService.deleteAddress(addressId).subscribe({
+      next: (res) => {
+        console.log('Address deleted successfully!', res);
+        this.getAddresses();
       },
-      error => {
-        console.error('Error deleting address:', error);
-        // Handle error response
+      error: (err) => {
+        console.error('Error deleting address:', err);
       }
-    );
+    });
   }
 
+  openEditPopup(address: any): void {
+    this.selectedAddress = address;
+    this.populateForm(address);
+    this.isPopupOpen = true;
+    this.isEdit = true;
+  }
 
-  updateAddress(addressId: string, updatedAddress: any) {
-    this.address.editAddress(addressId, updatedAddress).subscribe(
-      response => {
-        console.log('Address updated successfully!', response);
-        // Optionally, perform any additional actions upon successful update
-      },
-      error => {
-        console.error('Error updating address:', error);
-        // Handle error response
-      }
-    );
+  populateForm(address: any): void {
+    this.addressForm.patchValue({
+      firstName: address.firstName,
+      lastName: address.lastName,
+      phone: address.phone,
+      address1: address.address1,
+      address2: address.address2,
+      pincode: address.pincode,
+      city: address.city,
+      state: address.state,
+      default: address.default
+    });
+  }
+
+  submitEditedAddress(): void {
+    if (this.addressForm.valid) {
+      const updatedAddress = this.addressForm.value;
+      this.addressService.editAddress(this.selectedAddress.id, updatedAddress).subscribe({
+        next: (res) => {
+          console.log('Address updated successfully!', res);
+          this.togglePopup();
+          this.getAddresses();
+        },
+        error: (err) => {
+          console.error('Error updating address:', err);
+        }
+      });
+    }
   }
 }
