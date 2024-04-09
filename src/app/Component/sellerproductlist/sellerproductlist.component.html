@@ -4,9 +4,146 @@
     <div class="header">
       <h1>Product List</h1>
     </div>
+
     <div class="button">
-      <button><b>Add New Product</b></button>
+      <button (click)="togglePopup()" class="upperbutton"><b>Add New Product</b></button>
     </div> 
+
+    <!-- Overlay -->
+    <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
+
+    <div class="productpopup" *ngIf="isPopupOpen">
+      <div class="popup">
+          <div class="popuphead">
+              <div class="popupheadleft">
+                  <h2>{{ isEdit ? 'Edit' : 'Add' }} Product Detail</h2>
+                  <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
+              </div>
+              <div class="popupheadright">
+                  <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
+              </div>
+          </div>
+          <br>
+          <div class="popupdown">
+              <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedproduct() : addproduct()">
+                <div class="form-group">
+                    <input type="text" id="productName" formControlName="productName" placeholder="Product Name">
+                    <div *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.touched" class="text-danger">
+                        Product Name is required.
+                    </div>
+                </div>
+
+                <!-- URL input field -->
+                <div class="form-group">
+                  <input type="text" id="url" formControlName="url" placeholder="URL">
+                  <div *ngIf="productForm.get('url')?.errors?.['required'] && productForm.get('url')?.touched" class="text-danger">
+                    URL is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="number" id="price" formControlName="price" placeholder="Price" min="0">
+                  <div *ngIf="productForm.get('price')?.errors?.['required'] && productForm.get('price')?.touched" class="text-danger">
+                      Price is required.
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <input type="number" id="discount" formControlName="discount" placeholder="Discount in %" min="0" max="100">
+                  <div *ngIf="productForm.get('discount')?.errors?.['required'] && productForm.get('discount')?.touched" class="text-danger">
+                      Discount is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="number" id="deliveryPrice" formControlName="deliveryPrice" placeholder="Delivery Price" min="0">
+                  <div *ngIf="productForm.get('deliveryPrice')?.errors?.['required'] && productForm.get('deliveryPrice')?.touched" class="text-danger">
+                      Delivery Price is required.
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <input type="number" id="quantity" formControlName="quantity" placeholder="Quantity">
+                  <div *ngIf="productForm.get('quantity')?.errors?.['required'] && productForm.get('quantity')?.touched" class="text-danger">
+                      Quantity is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <textarea id="description" formControlName="description" placeholder="Description"></textarea>
+                </div>
+
+                <!-- Category selection dropdown -->
+                <div class="form-group">
+                  <select formControlName="category">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="almond">Almond</option>
+                    <option value="raisin">Raisin</option>
+                    <option value="walnut">Walnut</option>
+                  </select>
+                  <div *ngIf="productForm.get('category')?.errors?.['required'] && productForm.get('category')?.touched" class="text-danger">
+                    Category is required.
+                  </div>
+                </div>
+
+                <!-- Subcategory selection dropdown -->
+                <div class="form-group">
+                  <select formControlName="subcategory">
+                    <option value="" disabled selected>Select Subcategory</option>
+                    <option value="combo">Combo</option>
+                    <option value="bestseller">Bestseller</option>
+                    <option value="gifting">Gifting</option>
+                    <option value="products">Products</option>
+                  </select>
+                  <div *ngIf="productForm.get('subcategory')?.errors?.['required'] && productForm.get('subcategory')?.touched" class="text-danger">
+                    Subcategory is required.
+                  </div>
+                </div>
+            
+                <!-- Weight selection dropdown -->
+                <div class="form-group">
+                  <select formControlName="weight">
+                    <option value="" disabled selected>Select Weight</option>
+                    <option value="100gm">100gm</option>
+                    <option value="200gm">200gm</option>
+                    <option value="250gm">250gm</option>
+                    <option value="500gm">500gm</option>
+                    <option value="750gm">750gm</option>
+                    <option value="1000gm">1000gm</option>
+                  </select>
+                  <div *ngIf="productForm.get('weight')?.errors?.['required'] && productForm.get('weight')?.touched" class="text-danger">
+                    Weight is required.
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <select formControlName="status">
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="instock">In Stock</option>
+                    <option value="outofstock">Out of Stock</option>
+                  </select>
+                  <div *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status')?.touched" class="text-danger">
+                    Status is required.
+                  </div>
+                </div>
+                
+                
+                <!-- Image upload input field -->
+                <div class="form-group">
+                  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                  <!-- <div *ngIf="productForm.get('image').errors?.['required'] && productForm.get('image').touched" class="text-danger">
+                    Image is required.
+                  </div> -->
+                </div>
+                  
+                <button type="submit" [disabled]="!productForm.valid">
+                    {{ isEdit ? 'Submit Edit product' : 'Add a New product' }}
+                </button>
+              </form>
+          </div>
+      </div>
+  </div> 
   </div>
       
   <div class="lower">
