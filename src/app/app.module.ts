@@ -50,6 +50,7 @@ import { SelleraddproductComponent } from './Component/selleraddproduct/sellerad
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
+import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdashboard.component';
 
 
 
@@ -98,6 +99,7 @@ import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginnic
     SelleraddproductComponent,
     GinniresetpasswordComponent,
     GinniconfirmemailComponent,
+    SellerdashboardComponent,
   ],
   imports: [
     BrowserModule,

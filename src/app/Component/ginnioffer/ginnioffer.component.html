@@ -61,7 +61,7 @@
                         <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()" >
                             <h6>My Account <i class="fa fa-angle-down" style="font-size: large;"></i></h6>
                             <div class="dropdown-contents" *ngIf="isAccountDropdown">
-                                <a *ngIf="loggedIn && isAdmin" routerLink="/admin/dashboard">Admin Dashboard</a>
+                                <a *ngIf="loggedIn && isAdmin" routerLink="/main/sellerdashboard">Admin Dashboard</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniprofile">My Profile</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniorder">My Order</a>
                                 <a *ngIf="loggedIn && isUser || isAdmin" routerLink="/main/ginniaddress">My Address</a>

@@ -14,24 +14,25 @@
         <div class="almond">
             <div class="image">
                 <div class="saving">
-                    <h6 id="save">Save Rs 2</h6>
-                    <h6 id="variety">Best seller</h6>
+                    <h6>{{ item.save }}</h6>
+                    <h6>{{ item.variety }}</h6>
                 </div>
-                <img src="../../assets/images/logo/almond.jpeg"  alt="Almond">               
+                <img src="../../assets/images/logo/almond.jpeg" alt="Almond">               
             </div>
-
+        
             <div class="naming">
-                <a href="#">Almond </a>
+                <a href="#">{{ item.name }}</a>
             </div>
-
+        
             <div class="pricing">
-                <h6>From Rs 1000</h6>
+                <h6>{{ item.price }}</h6>
             </div>
-
+        
             <div class="carting">
-                <button type="submit">Add to Cart</button>
+                <button (click)="addtocart(item)">Add to Cart</button>
             </div>
         </div>
+        
 
         <div class="cashew">
             <div class="image">

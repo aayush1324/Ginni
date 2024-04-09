@@ -41,6 +41,7 @@ import { SelleraddproductComponent } from './Component/selleraddproduct/sellerad
 import { authGuard } from './Guard/auth.guard';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
+import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdashboard.component';
 
 
 const routes: Routes = [{
@@ -83,7 +84,7 @@ const routes: Routes = [{
       {path: "ginnisignup", component : GinnisignupComponent},
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
       {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
-
+      {path: "sellerdashboard", component : SellerdashboardComponent},
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },

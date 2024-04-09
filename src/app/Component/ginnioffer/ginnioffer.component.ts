@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { UserstoreService } from '../../Services/userstore.service';
+import { CartService } from '../../Services/cart.service';
 
 
 @Component({
@@ -20,12 +21,13 @@ export class GinniofferComponent {
   cartCount: number = 0; // Initialize cart count`
   wishlistCount: number = 2; // Initialize wishlist count
   selectedLink: string = ''; // Initialize selected link
+  public totalItem : number = 0;
 
   loggedIn: boolean = false;
   userName: string = '';
   role: string = '';
 
-  constructor(private elementRef: ElementRef, private router:Router, private auth :AuthService, private userstore : UserstoreService) {  
+  constructor(private elementRef: ElementRef, private router:Router, private auth :AuthService, private userstore : UserstoreService, private cartService : CartService) {  
     // Subscribe to router events to update selectedLink
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -54,6 +56,11 @@ export class GinniofferComponent {
 
       this.isAdmin = this.role === 'Admin';
       this.isUser = this.role === 'User';
+    })
+
+    this.cartService.getProducts()
+    .subscribe(res=>{
+      this.totalItem = res.length;
     })
   }
 
