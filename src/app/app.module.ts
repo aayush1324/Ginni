@@ -56,7 +56,6 @@ import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorde
 import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

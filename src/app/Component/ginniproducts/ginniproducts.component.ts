@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
+import { ProductService } from '../../Services/product.service';
 
 // Define your item object structure
 interface Item {
@@ -16,18 +17,32 @@ interface Item {
 })
 export class GinniproductsComponent {
 
-  // Initialize an example item object
-  item: Item = {
-    save: 'Save Rs 2',
-    variety: 'Best seller',
-    name: 'Almond',
-    price: 'From Rs 1000'
-  };
-  
-  constructor( private cartService : CartService) { }
+  productlist: any[] = [];
+
+  constructor( private cartService : CartService, private productService : ProductService) { }
+
+  ngOnInit(): void {
+    this.getProduct();
+    console.log(this.productlist);
+  }
 
   addtocart(item: any){
     console.log(item);
     this.cartService.addtoCart(item);
   }
+
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.productlist = res.slice(0, 5);
+        console.log(this.productlist);
+
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
+
+
 }

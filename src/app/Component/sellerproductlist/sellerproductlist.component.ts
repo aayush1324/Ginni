@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-sellerproductlist',
@@ -13,38 +14,49 @@ export class SellerproductlistComponent {
   isPopupOpen: boolean = false;
   isEdit: boolean = false;
   selectedproduct: any;
-  productes: any[] = [];
+  productlist: any[] = [];
   selectedFile: File | undefined;
 
+    // Define your table headers
+  tableHeaders: string[] = [
+    'image', 'productName', 'description', 'url', 'price', 'discount', 
+    'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
+  ];
 
-  constructor(private fb: FormBuilder, private addressService: AddressService) { }
+
+
+  constructor(private fb: FormBuilder, private productService : ProductService) { }
 
   ngOnInit(): void {
-
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
       url: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      product1: ['', Validators.required],
-      product2: [''],
-      pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      image: [null, Validators.required], // Image is required
-      default: [false]
+      price: ['', Validators.required],
+      discount: ['', Validators.required],
+      deliveryPrice: ['', Validators.required],
+      quantity: ['', Validators.required],
+      description: [''],
+      category: ['sel', Validators.required],
+      subcategory: ['sel', Validators.required],
+      weight: ['sel', Validators.required],
+      status: ['sel', Validators.required],
+      image: [null, Validators.required] // Image is required
     });
-     // Set the default value explicitly
-    this.productForm.get('default')?.setValue(false); 
+
+    this.getProduct();
   }
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
+      console.log(file);
+      console.log(event);
       this.selectedFile = file;
       this.productForm.get('image')?.setValue(file);
     }
   }
 
+  
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
     this.isEdit = false; // Reset edit mode when opening the popup
@@ -56,15 +68,15 @@ export class SellerproductlistComponent {
     this.productForm.reset();
   }
 
-  addproduct(): void {
+  addedProduct(): void {
     if (this.productForm.valid) {
       console.log(this.productForm.value);
-      this.addressService.addAddress(this.productForm.value).subscribe({
+      this.productService.addProducts(this.productForm.value).subscribe({
         next: (res) => {
           console.log(res.message);
           this.togglePopup();
           alert(res.message);
-          this.getAddresses();
+          this.getProduct();
         },
         error: (err) => {
           alert(err?.error.message);
@@ -73,10 +85,10 @@ export class SellerproductlistComponent {
     }
   }
 
-  getAddresses(): void {
-    this.addressService.getAddress().subscribe({
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
       next: (res) => {
-        this.productes = res;
+        this.productlist = res;
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);
@@ -84,50 +96,53 @@ export class SellerproductlistComponent {
     });
   }
 
-  deleteAddress(addressId: string): void {
-    this.addressService.deleteAddress(addressId).subscribe({
+  deleteProduct(productId: string): void {
+    this.productService.deleteProducts(productId).subscribe({
       next: (res) => {
-        console.log('Address deleted successfully!', res);
-        this.getAddresses();
+        console.log('Product deleted successfully!', res);
+        this.getProduct();
       },
       error: (err) => {
-        console.error('Error deleting address:', err);
+        console.error('Error deleting product:', err);
       }
     });
   }
 
-  openEditPopup(address: any): void {
-    this.selectedproduct = address;
-    this.populateForm(address);
+  openEditPopup(product: any): void {
+    this.selectedproduct = product;
+    this.populateForm(product);
     this.isPopupOpen = true;
     this.isEdit = true;
   }
 
-  populateForm(address: any): void {
-    this.productForm.patchValue({
-      firstName: address.firstName,
-      lastName: address.lastName,
-      phone: address.phone,
-      address1: address.address1,
-      address2: address.address2,
-      pincode: address.pincode,
-      city: address.city,
-      state: address.state,
-      default: address.default
-    });
-  }
+ populateForm(product: any): void {
+  this.productForm.patchValue({
+    productName: product.productName,
+    url: product.url,
+    price: product.price,
+    discount: product.discount,
+    deliveryPrice: product.deliveryPrice,
+    quantity: product.quantity,
+    description: product.description,
+    category: product.category,
+    subcategory: product.subcategory,
+    weight: product.weight,
+    status: product.status
+  });
+}
 
-  submitEditedproduct(): void {
+
+  submitEditedProduct(): void {
     if (this.productForm.valid) {
-      const updatedAddress = this.productForm.value;
-      this.addressService.editAddress(this.selectedproduct.id, updatedAddress).subscribe({
+      const updatedProduct = this.productForm.value;
+      this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
         next: (res) => {
-          console.log('Address updated successfully!', res);
+          console.log('Product updated successfully!', res);
           this.togglePopup();
-          this.getAddresses();
+          this.getProduct();
         },
         error: (err) => {
-          console.error('Error updating address:', err);
+          console.error('Error updating Product:', err);
         }
       });
     }

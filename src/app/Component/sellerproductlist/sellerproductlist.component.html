@@ -1,4 +1,3 @@
-<p>sellerproductlist works!</p>
 <div class="containerbox">
   <div class="upper">
     <div class="header">
@@ -25,7 +24,7 @@
           </div>
           <br>
           <div class="popupdown">
-              <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedproduct() : addproduct()">
+              <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedProduct() : addedProduct()">
                 <div class="form-group">
                     <input type="text" id="productName" formControlName="productName" placeholder="Product Name">
                     <div *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.touched" class="text-danger">
@@ -48,11 +47,10 @@
                   </div>
                 </div>
 
-
                 <div class="form-group">
                   <input type="number" id="discount" formControlName="discount" placeholder="Discount in %" min="0" max="100">
                   <div *ngIf="productForm.get('discount')?.errors?.['required'] && productForm.get('discount')?.touched" class="text-danger">
-                      Discount is required.
+                      Discount % is required.
                   </div>
                 </div>
 
@@ -64,7 +62,7 @@
                 </div>
               
                 <div class="form-group">
-                  <input type="number" id="quantity" formControlName="quantity" placeholder="Quantity">
+                  <input type="number" id="quantity" formControlName="quantity" placeholder="Quantity" min="0">
                   <div *ngIf="productForm.get('quantity')?.errors?.['required'] && productForm.get('quantity')?.touched" class="text-danger">
                       Quantity is required.
                   </div>
@@ -76,8 +74,8 @@
 
                 <!-- Category selection dropdown -->
                 <div class="form-group">
-                  <select formControlName="category">
-                    <option value="" disabled selected>Select Category</option>
+                  <select formControlName="category" required>
+                    <option value="sel" disabled selected>Select Category</option>
                     <option value="almond">Almond</option>
                     <option value="raisin">Raisin</option>
                     <option value="walnut">Walnut</option>
@@ -89,8 +87,8 @@
 
                 <!-- Subcategory selection dropdown -->
                 <div class="form-group">
-                  <select formControlName="subcategory">
-                    <option value="" disabled selected>Select Subcategory</option>
+                  <select formControlName="subcategory" required>
+                    <option value="sel" disabled selected>Select Subcategory</option>
                     <option value="combo">Combo</option>
                     <option value="bestseller">Bestseller</option>
                     <option value="gifting">Gifting</option>
@@ -103,8 +101,8 @@
             
                 <!-- Weight selection dropdown -->
                 <div class="form-group">
-                  <select formControlName="weight">
-                    <option value="" disabled selected>Select Weight</option>
+                  <select id="weight" formControlName="weight" required>
+                    <option value="sel" disabled selected>Select Weight</option>
                     <option value="100gm">100gm</option>
                     <option value="200gm">200gm</option>
                     <option value="250gm">250gm</option>
@@ -118,8 +116,8 @@
                 </div>
             
                 <div class="form-group">
-                  <select formControlName="status">
-                    <option value="" disabled selected>Select Status</option>
+                  <select formControlName="status" required>
+                    <option value="sel" disabled selected>Select Status</option>
                     <option value="instock">In Stock</option>
                     <option value="outofstock">Out of Stock</option>
                   </select>
@@ -150,28 +148,33 @@
     <table>
       <thead>
         <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Action</th>
+          <th style="width:7%">Image</th>
+          <th style="width:7%">Name</th>
+          <th style="width:10%">Description</th>
+          <th style="width: 7%;">URL</th>
+          <th style="width:7%">Price</th>
+          <th style="width:7%">Discount</th>
+          <th style="width:7%">Delivery</th>
+          <th style="width:7%">Quantity</th>
+          <th style="width:7%">Category</th>
+          <th style="width:10%">Sub-Category</th>
+          <th style="width:7%">Weight</th>
+          <th style="width:7%">Status</th>              
+          <th style="width:7%">Action</th>
         </tr>
       </thead>
+
       <tbody>
-        <!-- <tr *ngFor="let item of productList">
-          <td><img src="{{ item.image }}" /></td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.color }}</td>
-          <td>{{ item.category }}</td>
-          <td>{{ item.description }}</td>
+        <tr *ngFor="let item of productlist">
+          <ng-container *ngFor="let key of tableHeaders">
+            <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}</td>
+          </ng-container>
           <td>
-            <fa-icon (click)="deleteProduct(item.id)" [icon]="icon"></fa-icon>
-            <a class="adjust-update-link" routerLink="/seller-update-product/{{item.id}}"> <fa-icon  [icon]="iconEdit"></fa-icon></a>
-            
+            <button (click)="openEditPopup(item)"><b>Edit</b></button>
+            <br>
+            <button (click)="deleteProduct(item.id)"><b>Delete </b></button>
           </td>
-        </tr> -->
+        </tr>
       </tbody>
     </table>
   </div>   

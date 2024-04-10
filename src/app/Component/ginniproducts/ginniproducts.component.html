@@ -11,21 +11,21 @@
     </div>
 
     <div class="lower">
-        <div class="almond">
+        <div class="almond" *ngFor = "let item of productlist">
             <div class="image">
                 <div class="saving">
-                    <h6>{{ item.save }}</h6>
-                    <h6>{{ item.variety }}</h6>
+                    <h6>{{ item.discount }}</h6>
+                    <h6>{{ item.subcategory }}</h6>
                 </div>
                 <img src="../../assets/images/logo/almond.jpeg" alt="Almond">               
             </div>
         
             <div class="naming">
-                <a href="#">{{ item.name }}</a>
+                <a href=""><h5>{{ item.productName }}</h5></a>
             </div>
         
             <div class="pricing">
-                <h6>{{ item.price }}</h6>
+                <h5>Rs {{ item.price }}</h5>
             </div>
         
             <div class="carting">
@@ -33,7 +33,7 @@
             </div>
         </div>
         
-
+<!-- 
         <div class="cashew">
             <div class="image">
                 <div class="saving">
@@ -121,6 +121,6 @@
             <div class="carting">
                 <button type="submit">Add to Cart</button>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
