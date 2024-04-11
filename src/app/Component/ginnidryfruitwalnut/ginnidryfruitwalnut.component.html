@@ -1,1 +1,146 @@
-<p>ginnidryfruitwalnut works!</p>
+<div class="containerbox">
+    <div class="left">
+        <div class="heading">
+            <h3>Filter</h3>
+            <a href="">Remove All</a>
+        </div>
+    
+        <div class="availability"  >
+            <div class="availabilityheader">
+                <h6>AVAILABILITY  <i class="fa fa-caret-down" (click)="toggleDropdownAvailability()"></i></h6>
+            </div>
+    
+            <div class="availabilityfooter"  *ngIf="isDropdownOpenAvailability">
+                <form action="">
+                    <div class="intstock" id="dropdown-link">
+                        <input type="radio" id="instock" name="instock" >
+                        <label for="instock"> In Stocks ({{3}})</label>
+                    </div>            
+                    <div class="outstock" id="dropdown-link">
+                        <input type="radio" id="outstock" name="outstock" >
+                        <label for="outstock"> Out of Stock ({{4}})</label>
+                    </div>       
+                </form>
+            </div>
+        </div>
+    
+        <div class="categories" >
+            <div class="categoryheader">
+                <h6>CATEGORIES <i class="fa fa-caret-down" (click)="toggleDropdownCategory()"></i></h6>
+            </div>
+    
+            <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
+                <form action="">
+                    <div class="almonds">
+                        <input type="radio" id="dropdown-link" name="almond" value="almond">
+                        <label for="almond"> ALMONDS ({{3}})</label>
+                    </div>            
+                    <div class="cashews">
+                        <input type="radio" id="dropdown-link" name="cashew" value="cashew">
+                        <label for="cashew"> CASHEWS ({{3}})</label>
+                    </div>      
+                    <div class="pistas">
+                        <input type="radio" id="dropdown-link" name="pista" value="pista">
+                        <label for="pista"> PISTACHIOS ({{3}})</label>
+                    </div>
+                    <div class="walnuts">
+                        <input type="radio" id="dropdown-link" name="walnut" value="walnut">
+                        <label for="walnut"> WALNUTS ({{3}})</label>
+                    </div>
+                    <div class="raisins">
+                        <input type="radio" id="dropdown-link" name="raisin" value="raisin">
+                        <label for="raisin"> RAISINS ({{3}})</label>
+                    </div>
+                    <div class="combos">
+                        <input type="radio" id="dropdown-link" name="combo" value="combo">
+                        <label for="combo"> ALMONDS ({{3}})</label>
+                    </div>
+                    <div class="giftings">
+                        <input type="radio" id="dropdown-link" name="gifting" value="gifting">
+                        <label for="gifting"> GIFTINGS ({{3}})</label>
+                    </div>
+                    <div class="bestsellers">
+                        <input type="radio" id="dropdown-link" name="bestseller" value="bestseller">
+                        <label for="bestseller"> BESTSELLERS ({{3}})</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="price" >
+            <div class="priceheader">
+                <h6>PRICING <i class="fa fa-caret-down" (click)="toggleDropdownPricing()"></i></h6>
+            </div>
+    
+            <div class="pricefooter" *ngIf="isDropdownOpenPricing">                
+                <form action="">
+                    <div class="minprice">
+                        <input type="text" id="minprice" name="minprice" value="{{0}}">
+                        <span class="currency-icon">&#x20B9;</span>
+                    </div> 
+                    <div class="minussign">
+                        <h5>-</h5>           
+                    </div>
+                    <div class="maxprice">
+                        <input type="text" id="maxprice" name="maxprice" value="{{2000}}">
+                        <span class="currency-icon">&#x20B9;</span>
+                    </div>       
+                </form>
+            </div>
+        </div>
+    
+        <div class="sortby" >
+            <div class="sortbyheader" >
+                <h6>SORT BY <i class="fa fa-caret-down" (click)="toggleDropdownSortby()"></i></h6>
+            </div>
+    
+            <div class="sortbyfooter" *ngIf="isDropdownOpenSortby">
+                <p>Featured</p>
+                <p>Alphabetically, A-Z</p>
+                <p>Alphabetically, Z-A</p>
+                <p>Price, low to high</p>
+                <p>Price, high to low</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="right">
+        <div class="header">
+            <div class="headertop">
+                <h1>Walnut</h1>
+            </div>
+        </div>
+    
+        <div class="middle">
+            <div class="almond-grid">
+                <ng-container *ngFor= "let item of productlist">
+                    <div class="dryfruit">
+                        <!-- Almond content here -->
+                        <div class="image">
+                            <div class="saving">
+                                <h6>{{ item.discount }}</h6>
+                                <!-- <h6>{{ item.subcategory }}</h6> -->
+                            </div>
+                            <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="GINNI DryFruits">
+                        </div>
+                
+                        <div class="naming">
+                            <a href=""><h5>{{ item.productName }}</h5></a>
+                        </div>
+                    
+                        <div class="pricing">
+                            <h5>Rs {{ item.price }}</h5>
+                        </div>
+                    
+                        <div class="carting">
+                            <button (click)="addtocart(item)">Add to Cart</button>
+                        </div>          
+                    </div>
+                </ng-container>
+            </div>
+        </div>    
+
+    </div>
+
+</div>

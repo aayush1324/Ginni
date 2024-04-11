@@ -4,7 +4,6 @@
             <h3>Filter</h3>
             <a href="">Remove All</a>
         </div>
-    
         <div class="availability"  >
             <div class="availabilityheader">
                 <h6>AVAILABILITY  <i class="fa fa-caret-down" (click)="toggleDropdownAvailability()"></i></h6>
@@ -13,12 +12,12 @@
             <div class="availabilityfooter"  *ngIf="isDropdownOpenAvailability">
                 <form action="">
                     <div class="intstock" id="dropdown-link">
-                        <input type="radio" id="instock" name="instock" >
-                        <label for="instock"> In Stocks ({{3}})</label>
+                        <input type="checkbox" id="instock" name="instock" >
+                        <label for="instock">  In Stocks ({{ inStockProducts.length }})</label>
                     </div>            
                     <div class="outstock" id="dropdown-link">
-                        <input type="radio" id="outstock" name="outstock" >
-                        <label for="outstock"> Out of Stock ({{4}})</label>
+                        <input type="checkbox" id="outstock" name="outstock" >
+                        <label for="outstock"> Out of Stock ({{ outOfStockProducts.length }})</label>
                     </div>       
                 </form>
             </div>
@@ -33,27 +32,27 @@
                 <form action="">
                     <div class="almonds">
                         <input type="radio" id="dropdown-link" name="almond" value="almond">
-                        <label for="almond"> ALMONDS ({{3}})</label>
+                        <label for="almond"> ALMONDS ({{ almonds.length }})</label>
                     </div>            
                     <div class="cashews">
                         <input type="radio" id="dropdown-link" name="cashew" value="cashew">
-                        <label for="cashew"> CASHEWS ({{3}})</label>
+                        <label for="cashew"> CASHEWS ({{ cashews.length }})</label>
                     </div>      
                     <div class="pistas">
                         <input type="radio" id="dropdown-link" name="pista" value="pista">
-                        <label for="pista"> PISTACHIOS ({{3}})</label>
+                        <label for="pista"> PISTACHIOS ({{ pistas.length }})</label>
                     </div>
                     <div class="walnuts">
                         <input type="radio" id="dropdown-link" name="walnut" value="walnut">
-                        <label for="walnut"> WALNUTS ({{3}})</label>
+                        <label for="walnut"> WALNUTS ({{ walnuts.length }})</label>
                     </div>
                     <div class="raisins">
                         <input type="radio" id="dropdown-link" name="raisin" value="raisin">
-                        <label for="raisin"> RAISINS ({{3}})</label>
+                        <label for="raisin"> RAISINS ({{ raisins.length }})</label>
                     </div>
-                    <div class="combos">
+                    <!-- <div class="combos">
                         <input type="radio" id="dropdown-link" name="combo" value="combo">
-                        <label for="combo"> ALMONDS ({{3}})</label>
+                        <label for="combo"> COMBOS ({{3}})</label>
                     </div>
                     <div class="giftings">
                         <input type="radio" id="dropdown-link" name="gifting" value="gifting">
@@ -62,7 +61,7 @@
                     <div class="bestsellers">
                         <input type="radio" id="dropdown-link" name="bestseller" value="bestseller">
                         <label for="bestseller"> BESTSELLERS ({{3}})</label>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -114,28 +113,28 @@
     
         <div class="middle">
             <div class="almond-grid">
-                <ng-container *ngFor="let almond of almonds">
+                <ng-container *ngFor= "let item of productlist">
                     <div class="dryfruit">
                         <!-- Almond content here -->
                         <div class="image">
                             <div class="saving">
-                            <h6 id="save">Save Rs 2</h6>
-                            <h6 *ngIf="almond.isBestSeller" id="variety">Best seller</h6>
+                                <h6>{{ item.discount }}</h6>
+                                <!-- <h6>{{ item.subcategory }}</h6> -->
                             </div>
                             <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="GINNI DryFruits">
                         </div>
                 
                         <div class="naming">
-                            <a href="#">{{ almond.name }}</a>
+                            <a href=""><h5>{{ item.productName }}</h5></a>
                         </div>
-                
+                    
                         <div class="pricing">
-                            <h6>From Rs {{ almond.price }}</h6>
+                            <h5>Rs {{ item.price }}</h5>
                         </div>
-                
+                    
                         <div class="carting">
-                            <button type="submit">Add to Cart</button>
-                        </div>           
+                            <button (click)="addtocart(item)">Add to Cart</button>
+                        </div>          
                     </div>
                 </ng-container>
             </div>

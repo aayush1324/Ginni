@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 
-// Define your item object structure
-interface Item {
-  save: string;
-  variety: string;
-  name: string;
-  price: string;
-}
+
 
 @Component({
   selector: 'app-ginniproducts',

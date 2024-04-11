@@ -114,45 +114,33 @@
     
         <div class="middle">
             <div class="almond-grid">
-                <ng-container *ngFor="let almond of almonds">
+                <ng-container *ngFor= "let item of productlist">
                     <div class="dryfruit">
                         <!-- Almond content here -->
                         <div class="image">
                             <div class="saving">
-                            <h6 id="save">Save Rs 2</h6>
-                            <h6 *ngIf="almond.isBestSeller" id="variety">Best seller</h6>
+                                <h6>{{ item.discount }}</h6>
+                                <!-- <h6>{{ item.subcategory }}</h6> -->
                             </div>
                             <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="GINNI DryFruits">
                         </div>
                 
                         <div class="naming">
-                            <a href="#">{{ almond.name }}</a>
+                            <a href=""><h5>{{ item.productName }}</h5></a>
                         </div>
-                
+                    
                         <div class="pricing">
-                            <h6>From Rs {{ almond.price }}</h6>
+                            <h5>Rs {{ item.price }}</h5>
                         </div>
-                
+                    
                         <div class="carting">
-                            <button type="submit">Add to Cart</button>
-                        </div>           
+                            <button (click)="addtocart(item)">Add to Cart</button>
+                        </div>          
                     </div>
                 </ng-container>
             </div>
-       
-    
-            <!-- Pagination -->
-            <!-- <div *ngIf="almonds.length > 20" class="pagination">
-                <button type="button" (click)="prevPage()">Previous</button>
-                <button type="button" (click)="nextPage()">Next</button>
-            </div> -->
         </div>    
-    
-        <!-- <div class="footer">
-            <div class="pagination">
-                <p>paginationss</p>
-            </div>
-        </div> -->
+
     </div>
 
 </div>

@@ -54,7 +54,7 @@
 	/* border: 2px solid; */
 }
 
-.intstock input[type="radio"] , .outstock input[type="radio"] {
+.intstock input[type="checkbox"] , .outstock input[type="checkbox"] {
     margin-right: 15px; /* Adjust the right margin as needed */
 	transform: scale(1.5); /* Adjust the scale factor as needed */
 }
@@ -268,7 +268,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 items per row */
     gap: 30px; /* Adjust the gap between items as needed */
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 1%;
   }
   

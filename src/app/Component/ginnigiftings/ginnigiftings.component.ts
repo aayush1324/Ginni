@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CartService } from '../../Services/cart.service';
+import { ProductService } from '../../Services/product.service';
 
 interface Almond {
   name: string;
@@ -12,6 +14,55 @@ interface Almond {
   styleUrl: './ginnigiftings.component.css'
 })
 export class GinnigiftingsComponent {
+
+  productlist: any[] = [];
+  inStockProducts!: any[];
+  outOfStockProducts!: any[];
+  almonds!: any[];
+  walnuts!: any[];
+  cashews!: any[];
+  raisins!: any[];
+  pistas!: any[];
+  dates!: any[];
+
+  constructor( private cartService : CartService, private productService : ProductService) { }
+
+  ngOnInit(): void {
+    this.getProduct();
+    console.log(this.productlist);
+  }
+
+  addtocart(item: any){
+    console.log(item);
+    this.cartService.addtoCart(item);
+  }
+
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.productlist = res.filter((product) => product.subcategory === 'bestseller');
+
+        // Filter products based on status
+        this.inStockProducts = this.productlist.filter(product => product.status === 'instock');
+        this.outOfStockProducts = this.productlist.filter(product => product.status === 'outofstock');
+
+        // Filter products based on category
+        this.almonds = this.productlist.filter(product => product.category === 'almond');
+        this.raisins = this.productlist.filter(product => product.category === 'raisin');
+        this.walnuts = this.productlist.filter(product => product.category === 'walnut');
+        this.cashews = this.productlist.filter(product => product.category === 'cashew');
+        this.pistas = this.productlist.filter(product => product.category === 'pista');
+        this.dates = this.productlist.filter(product => product.category === 'date');
+
+         
+        console.log(this.productlist);
+
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
 
   isDropdownOpenAvailability: boolean = false;
   isDropdownOpenCategory: boolean = false;
@@ -35,89 +86,4 @@ export class GinnigiftingsComponent {
     this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
   }
   
-  almonds: Almond[] =  [
-    { name: 'Almond', price: 1000, isBestSeller: true },
-    { name: 'cashew', price: 1000, isBestSeller: false },
-    { name: 'date', price: 1000, isBestSeller: false },
-    { name: 'raisin', price: 1000, isBestSeller: false },
-    { name: 'pista', price: 1000, isBestSeller: false },
-    { name: 'walnut', price: 1000, isBestSeller: false },
-    // Add more almond items here
-    { name: 'Almond', price: 1000, isBestSeller: true },
-    { name: 'cashew', price: 1000, isBestSeller: false },
-    { name: 'date', price: 1000, isBestSeller: false },
-    { name: 'raisin', price: 1000, isBestSeller: false },
-    { name: 'pista', price: 1000, isBestSeller: false },
-    { name: 'walnut', price: 1000, isBestSeller: false },
-    { name: 'Almond', price: 1000, isBestSeller: true },
-    { name: 'cashew', price: 1000, isBestSeller: false },
-    { name: 'date', price: 1000, isBestSeller: false },
-    { name: 'raisin', price: 1000, isBestSeller: false },
-    { name: 'pista', price: 1000, isBestSeller: false },
-    { name: 'walnut', price: 1000, isBestSeller: false },
-    { name: 'Almond', price: 1000, isBestSeller: true },
-    { name: 'cashew', price: 1000, isBestSeller: false },
-    { name: 'date', price: 1000, isBestSeller: false },
-    { name: 'raisin', price: 1000, isBestSeller: false },
-    { name: 'pista', price: 1000, isBestSeller: false },
-    { name: 'walnut', price: 1000, isBestSeller: false },
-  ];
-
-  currentPage = 1;
-
-  // get almondRows(): Almond[][] {
-  //   const rows: Almond[][] = [];
-  //   for (let i = (this.currentPage - 1) * 20; i < this.almonds.length && i < this.currentPage * 20; i += 4) {
-  //     rows.push(this.almonds.slice(i, i + 4));
-  //   }
-  //   return rows;
-  // } 
-  // get almondRows(): Almond[][] {
-  //   const rows: Almond[][] = [];
-  //   const itemsPerPage = 20;
-  //   const itemsPerRow = 4;
-  //   const startIndex = (this.currentPage - 1) * itemsPerPage;
-  //   const endIndex = Math.min(startIndex + itemsPerPage, this.almonds.length);
-  
-  //   for (let i = startIndex; i < endIndex; i += itemsPerRow) {
-  //     const row: Almond[] = [];
-  //     for (let j = i; j < Math.min(i + itemsPerRow, endIndex); j++) {
-  //       row.push(this.almonds[j]);
-  //     }
-  //     rows.push(row);
-  //   }
-  
-  //   return rows;
-  // }
-
-  // get almondRows(): Almond[][] {
-  //   const rows: Almond[][] = [];
-  //   const itemsPerPage = 20;
-  //   const itemsPerRow = 4;
-  //   const startIndex = (this.currentPage - 1) * itemsPerPage;
-  //   const endIndex = Math.min(startIndex + itemsPerPage, this.almonds.length);
-  
-  //   for (let i = startIndex; i < endIndex; i += itemsPerRow) {
-  //     const row: Almond[] = [];
-  //     for (let j = i; j < Math.min(i + itemsPerRow, endIndex); j++) {
-  //       row.push(this.almonds[j]);
-  //     }
-  //     rows.push(row);
-  //   }
-  
-  //   return rows;
-  // }
-
-
-  // nextPage(): void {
-  //   if ((this.currentPage + 1) * 20 <= this.almonds.length) {
-  //     this.currentPage++;
-  //   }
-  // }
-
-  // prevPage(): void {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //   }
-  // }
 }

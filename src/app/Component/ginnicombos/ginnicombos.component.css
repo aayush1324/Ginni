@@ -31,6 +31,15 @@
 	/* border: 2px solid; */
 }
 
+button{
+    width: fit-content;
+    height: fit-content;
+    padding: 2%;
+    margin: 0%;
+    border-radius: 10px;
+    background-color: aquamarine;
+}
+
 .availability {
 	width: 100%;
 	height: fit-content;
@@ -54,7 +63,7 @@
 	/* border: 2px solid; */
 }
 
-.intstock input[type="radio"] , .outstock input[type="radio"] {
+.intstock input[type="checkbox"] , .outstock input[type="checkbox"] {
     margin-right: 15px; /* Adjust the right margin as needed */
 	transform: scale(1.5); /* Adjust the scale factor as needed */
 }
@@ -83,14 +92,14 @@
 	/* border: 2px solid; */
 }
 
-.almonds input[type="radio"], 
-.cashews input[type="radio"],
-.raisins input[type="radio"], 
-.walnuts input[type="radio"],
-.pistas input[type="radio"], 
-.combos input[type="radio"],
-.giftings input[type="radio"], 
-.bestsellers input[type="radio"]
+.almonds input[type="checkbox"], 
+.cashews input[type="checkbox"],
+.raisins input[type="checkbox"], 
+.walnuts input[type="checkbox"],
+.pistas input[type="checkbox"], 
+.combos input[type="checkbox"],
+.giftings input[type="checkbox"], 
+.bestsellers input[type="checkbox"]
 {
     margin-right: 15px; /* Adjust the right margin as needed */
 	transform: scale(1.5); /* Adjust the scale factor as needed */
@@ -185,6 +194,15 @@
     cursor: pointer;
 }
 
+.PriceDown input[type="radio"], 
+.PriceUp input[type="radio"],
+.AlphabetDown input[type="radio"], 
+.AlphabetUp input[type="radio"],
+.Featured input[type="radio"]
+{
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
 
 
 
@@ -268,7 +286,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 items per row */
     gap: 30px; /* Adjust the gap between items as needed */
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 1%;
   }
   
