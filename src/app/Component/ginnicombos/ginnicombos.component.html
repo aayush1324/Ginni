@@ -13,11 +13,11 @@
             <div class="availabilityfooter"  *ngIf="isDropdownOpenAvailability">
                 <form action="">
                     <div class="intstock" id="dropdown-link">
-                        <input type="checkbox" id="instock" name="instock" >
+                        <input type="checkbox" id="instock" name="instock" (change)="showInStockProducts($event)">
                         <label for="instock">  In Stocks ({{ inStockProducts.length }})</label>
                     </div>            
                     <div class="outstock" id="dropdown-link">
-                        <input type="checkbox" id="outstock" name="outstock" >
+                        <input type="checkbox" id="outstock" name="outstock"  (change)="showOutStockProducts($event)">
                         <label for="outstock"> Out of Stock ({{ outOfStockProducts.length }})</label>
                     </div>       
                 </form>
@@ -32,37 +32,25 @@
             <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
                 <form action="">
                     <div class="almonds">
-                        <input type="checkbox" id="dropdown-link" name="almond" value="almond">
+                        <input type="checkbox" id="dropdown-link" name="almond" value="almond" (change)="filterAlmond($event)" >
                         <label for="almond"> ALMONDS ({{ almonds.length }})</label>
                     </div>            
                     <div class="cashews">
-                        <input type="checkbox" id="dropdown-link" name="cashew" value="cashew">
+                        <input type="checkbox" id="dropdown-link" name="cashew" value="cashew" (change)="filterCashew($event)" >
                         <label for="cashew"> CASHEWS ({{ cashews.length }})</label>
                     </div>      
                     <div class="pistas">
-                        <input type="checkbox" id="dropdown-link" name="pista" value="pista">
+                        <input type="checkbox" id="dropdown-link" name="pista" value="pista" (change)="filterPista($event)" >
                         <label for="pista"> PISTACHIOS ({{ pistas.length }})</label>
                     </div>
                     <div class="walnuts">
-                        <input type="checkbox" id="dropdown-link" name="walnut" value="walnut">
+                        <input type="checkbox" id="dropdown-link" name="walnut" value="walnut" (change)="filterWalnut($event)" >
                         <label for="walnut"> WALNUTS ({{ walnuts.length }})</label>
                     </div>
                     <div class="raisins">
-                        <input type="checkbox" id="dropdown-link" name="raisin" value="raisin">
+                        <input type="checkbox" id="dropdown-link" name="raisin" value="raisin" (change)="filterRaisin($event)" >
                         <label for="raisin"> RAISINS ({{ raisins.length }})</label>
                     </div>
-                    <!-- <div class="combos">
-                        <input type="radio" id="dropdown-link" name="combo" value="combo">
-                        <label for="combo"> COMBOS ({{3}})</label>
-                    </div>
-                    <div class="giftings">
-                        <input type="radio" id="dropdown-link" name="gifting" value="gifting">
-                        <label for="gifting"> GIFTINGS ({{3}})</label>
-                    </div>
-                    <div class="bestsellers">
-                        <input type="radio" id="dropdown-link" name="bestseller" value="bestseller">
-                        <label for="bestseller"> BESTSELLERS ({{3}})</label>
-                    </div> -->
                 </form>
             </div>
         </div>

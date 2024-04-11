@@ -27,6 +27,14 @@ export class GinnicombosComponent {
   dates!: any[];
   minPrice!: any[];
   maxPrice!: any[];
+  displayedOutStockProducts!: any[];
+  displayedInStockProducts!: any[];
+  displayedWalnuts!: any[];
+  displayedCashews!: any[];
+  displayedRaisins!: any[];
+  displayedAlmonds!: any[];
+  displayedPistas!: any[];
+  sortingCriteria!: string;
 
 
   constructor( private cartService : CartService, private productService : ProductService) { }
@@ -74,6 +82,86 @@ export class GinnicombosComponent {
     });
   }
 
+  showInStockProducts(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.displayedInStockProducts = this.productlist.filter(product => product.status === 'instock');
+      console.log(this.displayedInStockProducts);
+    } else {
+      this.displayedInStockProducts = []; // Reset the displayed in-stock products
+      console.log(this.displayedInStockProducts);
+
+    }
+  }
+  
+  showOutStockProducts(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.displayedOutStockProducts = this.productlist.filter(product => product.status === 'outofstock');
+      console.log(this.displayedOutStockProducts);
+
+    } else {
+      this.displayedOutStockProducts = []; // Reset the displayed out-of-stock products
+      console.log(this.displayedOutStockProducts);
+    }
+  }
+
+  filterWalnut(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.displayedWalnuts = this.productlist.filter(product => product.category === 'walnut');
+      console.log(this.displayedWalnuts);
+    } else {
+      this.displayedWalnuts = []; // Reset the displayed walnuts
+      console.log(this.displayedWalnuts);
+    }
+  } 
+
+  filterCashew(event: any): void {
+      const isChecked = event.target.checked;
+      if (isChecked) {
+        this.displayedCashews = this.productlist.filter(product => product.category === 'cashew');
+        console.log(this.displayedCashews);
+      } else {
+        this.displayedCashews = []; // Reset the displayed cashews
+        console.log(this.displayedCashews);
+      }
+  }
+
+  filterRaisin(event: any): void {
+      const isChecked = event.target.checked;
+      if (isChecked) {
+        this.displayedRaisins = this.productlist.filter(product => product.category === 'raisin');
+        console.log(this.displayedRaisins);
+      } else {
+        this.displayedRaisins = []; // Reset the displayed raisins
+        console.log(this.displayedRaisins);
+      }
+  }
+
+  filterAlmond(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.displayedAlmonds = this.productlist.filter(product => product.category === 'almond');
+      console.log(this.displayedAlmonds);
+    } else {
+      this.displayedAlmonds = []; // Reset the displayed almonds
+      console.log(this.displayedAlmonds);
+    }
+  }
+
+  filterPista(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.displayedPistas = this.productlist.filter(product => product.category === 'pista');
+      console.log(this.displayedPistas);
+    } else {
+      this.displayedPistas = []; // Reset the displayed pistas
+      console.log(this.displayedPistas);
+    }
+  }
+
+  
   isDropdownOpenAvailability: boolean = false;
   isDropdownOpenCategory: boolean = false;
   isDropdownOpenPricing: boolean = false;
