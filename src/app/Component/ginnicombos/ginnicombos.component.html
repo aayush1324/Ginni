@@ -13,13 +13,14 @@
             <div class="availabilityfooter"  *ngIf="isDropdownOpenAvailability">
                 <form action="">
                     <div class="intstock" id="dropdown-link">
-                        <input type="checkbox" id="instock" name="instock" (change)="showInStockProducts($event)">
+                        <input type="radio" id="instock" name="stock" [checked]="isInStockChecked" (change)="showInStockProducts($event)">
                         <label for="instock">  In Stocks ({{ inStockProducts.length }})</label>
                     </div>            
                     <div class="outstock" id="dropdown-link">
-                        <input type="checkbox" id="outstock" name="outstock"  (change)="showOutStockProducts($event)">
+                        <input type="radio" id="outstock" name="stock" [checked]="isOutOfStockChecked" (change)="showOutStockProducts($event)">
                         <label for="outstock"> Out of Stock ({{ outOfStockProducts.length }})</label>
-                    </div>       
+                    </div>    
+                   <h6 (click)="resetAvailabilityFilters()" style="text-decoration: underline; cursor: pointer; width: fit-content;">Remove Filter</h6>  
                 </form>
             </div>
         </div>
@@ -32,26 +33,27 @@
             <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
                 <form action="">
                     <div class="almonds">
-                        <input type="checkbox" id="dropdown-link" name="almond" value="almond" (change)="filterAlmond($event)" >
-                        <label for="almond"> ALMONDS ({{ almonds.length }})</label>
+                        <input type="radio" id="almond" name="category" value="almond" [checked]="isAlmondChecked" (change)="filterAlmond($event)">
+                        <label for="almond">ALMONDS ({{ almonds.length }})</label>
                     </div>            
                     <div class="cashews">
-                        <input type="checkbox" id="dropdown-link" name="cashew" value="cashew" (change)="filterCashew($event)" >
-                        <label for="cashew"> CASHEWS ({{ cashews.length }})</label>
+                        <input type="radio" id="cashew" name="category" value="cashew" [checked]="isCashewChecked" (change)="filterCashew($event)">
+                        <label for="cashew">CASHEWS ({{ cashews.length }})</label>
                     </div>      
                     <div class="pistas">
-                        <input type="checkbox" id="dropdown-link" name="pista" value="pista" (change)="filterPista($event)" >
-                        <label for="pista"> PISTACHIOS ({{ pistas.length }})</label>
+                        <input type="radio" id="pista" name="category" value="pista" [checked]="isPistaChecked" (change)="filterPista($event)">
+                        <label for="pista">PISTACHIOS ({{ pistas.length }})</label>
                     </div>
                     <div class="walnuts">
-                        <input type="checkbox" id="dropdown-link" name="walnut" value="walnut" (change)="filterWalnut($event)" >
-                        <label for="walnut"> WALNUTS ({{ walnuts.length }})</label>
+                        <input type="radio" id="walnut" name="category" value="walnut" [checked]="isWalnutChecked" (change)="filterWalnut($event)">
+                        <label for="walnut">WALNUTS ({{ walnuts.length }})</label>
                     </div>
                     <div class="raisins">
-                        <input type="checkbox" id="dropdown-link" name="raisin" value="raisin" (change)="filterRaisin($event)" >
-                        <label for="raisin"> RAISINS ({{ raisins.length }})</label>
+                        <input type="radio" id="raisin" name="category" value="raisin" [checked]="isRaisinChecked" (change)="filterRaisin($event)">
+                        <label for="raisin">RAISINS ({{ raisins.length }})</label>
                     </div>
-                </form>
+                    <h6 (click)="resetCategoryFilters()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>  
+                </form>                  
             </div>
         </div>
     
@@ -63,16 +65,17 @@
             <div class="pricefooter" *ngIf="isDropdownOpenPricing">                
                 <form action="">
                     <div class="minprice">
-                        <input type="text" id="minprice" name="minprice" [value]="minPrice">
+                        <input type="text" id="minprice" name="minprice" [value]="minPrice" (input)="applyPriceFilter()">
                         <span class="currency-icon">&#x20B9;</span>
                     </div> 
                     <div class="minussign">
                         <h5>-</h5>           
                     </div>
                     <div class="maxprice">
-                        <input type="text" id="maxprice" name="maxprice" [value]="maxPrice">
+                        <input type="text" id="maxprice" name="maxprice" [value]="maxPrice" (input)="applyPriceFilter()">
                         <span class="currency-icon">&#x20B9;</span>
-                    </div>       
+                    </div>  
+                    <!-- <h6 (click)="resetPriceFilters()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>        -->
                 </form>
             </div>
         </div>
@@ -85,26 +88,27 @@
             <div class="sortbyfooter" *ngIf="isDropdownOpenSortby">
                 <form action="">
                     <div class="Featured">
-                        <input type="radio" id="dropdown-link" name="featured" value="featured">
-                        <label for="featured"> Featured </label>
+                      <input type="radio" id="featured" name="sorting" [checked]="isFeaturedChecked" (change)="toggleFeaturedSorting($event)">
+                      <label for="featured">Featured</label>
                     </div>            
                     <div class="AlphabetUp">
-                        <input type="radio" id="dropdown-link" name="alphabetUp" value="alphabetUp">
-                        <label for="alphabetUp"> Alphabetically, A-Z</label>
+                      <input type="radio" id="alphabetUp" name="sorting" [checked]="isAlphabetUpChecked" (change)="toggleAlphabetUpSorting($event)">
+                      <label for="alphabetUp">Alphabetically, A-Z</label>
                     </div>      
                     <div class="AlphabetDown">
-                        <input type="radio" id="dropdown-link" name="alphabetDown" value="alphabetDown">
-                        <label for="alphabetDown"> Alphabetically, Z-A </label>
+                      <input type="radio" id="alphabetDown" name="sorting" [checked]="isAlphabetDownChecked" (change)="toggleAlphabetDownSorting($event)">
+                      <label for="alphabetDown">Alphabetically, Z-A</label>
                     </div>
                     <div class="PriceUp">
-                        <input type="radio" id="dropdown-link" name="priceUp" value="priceUp">
-                        <label for="priceUp"> Price, low to high </label>
+                      <input type="radio" id="priceUp" name="sorting" [checked]="isPriceUpChecked" (change)="togglePriceUpSorting($event)">
+                      <label for="priceUp">Price, low to high</label>
                     </div>
                     <div class="PriceDown">
-                        <input type="radio" id="dropdown-link" name="priceDown" value="priceDown">
-                        <label for="priceDown"> Price, high to low </label>
+                      <input type="radio" id="priceDown" name="sorting" [checked]="isPriceDownChecked" (change)="togglePriceDownSorting($event)">
+                      <label for="priceDown">Price, high to low</label>
                     </div>
-                </form>
+                    <h6 (click)="resetSortbyFilter()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>  
+                  </form>                              
             </div>
         </div>
     </div>

@@ -63,7 +63,7 @@ button{
 	/* border: 2px solid; */
 }
 
-.intstock input[type="checkbox"] , .outstock input[type="checkbox"] {
+.intstock input[type="radio"] , .outstock input[type="radio"] {
     margin-right: 15px; /* Adjust the right margin as needed */
 	transform: scale(1.5); /* Adjust the scale factor as needed */
 }
@@ -92,14 +92,14 @@ button{
 	/* border: 2px solid; */
 }
 
-.almonds input[type="checkbox"], 
-.cashews input[type="checkbox"],
-.raisins input[type="checkbox"], 
-.walnuts input[type="checkbox"],
-.pistas input[type="checkbox"], 
-.combos input[type="checkbox"],
-.giftings input[type="checkbox"], 
-.bestsellers input[type="checkbox"]
+.almonds input[type="radio"], 
+.cashews input[type="radio"],
+.raisins input[type="radio"], 
+.walnuts input[type="radio"],
+.pistas input[type="radio"], 
+.combos input[type="radio"],
+.giftings input[type="radio"], 
+.bestsellers input[type="radio"]
 {
     margin-right: 15px; /* Adjust the right margin as needed */
 	transform: scale(1.5); /* Adjust the scale factor as needed */
