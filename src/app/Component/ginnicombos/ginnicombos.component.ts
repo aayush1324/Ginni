@@ -166,10 +166,10 @@ export class GinnicombosComponent {
     } else if (this.isRaisinChecked) {
       this.filterRaisin(null);
     } 
-    // else {
-    //     // Reset the product list to show all products
-    //   this.getProduct();
-    // }
+    else {
+        // Reset the product list to show all products
+      this.getProduct();
+    }
     // Repeat for other categories if needed
   
   
