@@ -1,55 +1,40 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  public cartItemList : any =[]
-  public productList = new BehaviorSubject<any>([]);
-  public search = new BehaviorSubject<string>("");
+  private baseUrl: string = 'https://localhost:7132/api/Cart/';
 
-  constructor() { }
-  getProducts(){
-    return this.productList.asObservable();
+  constructor(private http: HttpClient, private router: Router) { }
+
+  addtoCart(product : any) {
+    return this.http.post<any>(`${this.baseUrl}addCart`, product)
   }
 
-  setProduct(product : any){
-    this.cartItemList.push(...product);
-    this.productList.next(product);
+  getToCart(){
+    return this.http.get<any[]>(`${this.baseUrl}getCart`); 
   }
 
-  addtoCart(product : any){
-    this.cartItemList.push(product);
-    this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-    console.log(this.cartItemList)
-    console.log(this.productList)
+  updateCartItem(item: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}updateCartQuantity/${item.id}`, item);
   }
 
+  removeItem(itemId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteItem/${itemId}`);
+  }
 
+  emptyCart(): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteAllItem`);
+  }
 
-
-  getTotalPrice() : number{
-    let grandTotal = 0;
-    this.cartItemList.map((a:any)=>{
-      grandTotal += a.total;
-    })
-    return grandTotal;
+  addToWishlist(item: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}addToWishlist`, item);
   }
 
 
-  removeCartItem(product: any){
-    this.cartItemList.map((a:any, index:any)=>{
-      if(product.id=== a.id){
-        this.cartItemList.splice(index,1);
-      }
-    })
-    this.productList.next(this.cartItemList);
-  }
-
-  removeAllCart(){
-    this.cartItemList = []
-    this.productList.next(this.cartItemList);
-  }
+  
 }

@@ -12,9 +12,9 @@
 .header {
     width: 100%;
     height: fit-content;
-    justify-content: space-between;
+    justify-content: space-evenly;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 2%;
     margin: 0%;
     /* border: 1px solid; */

@@ -59,10 +59,24 @@ export class GinnicombosComponent {
     this.toggleFeaturedSorting(null);
   }
 
-  addtocart(item: any){
-    console.log(item);
-    this.cartService.addtoCart(item);
+  addToCart(product: any): void {
+    this.cartService.addtoCart(product)
+      .subscribe(
+        () => {
+          console.log(product);
+          alert('Item added to cart successfuly');
+          // Optionally, you can perform additional actions after adding to cart
+        },
+        error => {
+          console.error('Error adding item to cart:', error);
+          alert("Error")
+          // Handle error
+        }
+      );
   }
+
+
+ 
 
   
   getProduct(): void {

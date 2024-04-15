@@ -58,9 +58,10 @@ export class GinniofferComponent {
       this.isUser = this.role === 'User';
     })
 
-    this.cartService.getProducts()
+    this.cartService.getToCart()
     .subscribe(res=>{
       this.totalItem = res.length;
+      console.log(res);
     })
   }
 
