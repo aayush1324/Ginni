@@ -139,16 +139,16 @@ export class GinnicombosComponent {
     
 
          // Filter products based on status
-        this.inStockProducts = this.productlist.filter(product => product.status === 'instock');
-        this.outOfStockProducts = this.productlist.filter(product => product.status === 'outofstock');
+        this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
+        this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
 
         // Filter products based on category
-        this.almonds = this.productlist.filter(product => product.category === 'almond');
-        this.raisins = this.productlist.filter(product => product.category === 'raisin');
-        this.walnuts = this.productlist.filter(product => product.category === 'walnut');
-        this.cashews = this.productlist.filter(product => product.category === 'cashew');
-        this.pistas = this.productlist.filter(product => product.category === 'pista');
-        this.dates = this.productlist.filter(product => product.category === 'date');
+        this.almonds = this.filteredData.filter(product => product.category === 'almond');
+        this.raisins = this.filteredData.filter(product => product.category === 'raisin');
+        this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
+        this.cashews = this.filteredData.filter(product => product.category === 'cashew');
+        this.pistas = this.filteredData.filter(product => product.category === 'pista');
+        this.dates = this.filteredData.filter(product => product.category === 'date');
 
         // Get minimum price
         this.minPrice = this.productlist.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
@@ -172,14 +172,14 @@ export class GinnicombosComponent {
   showInStockProducts(event: any): void {
     this.isInStockChecked = true;
     this.isOutOfStockChecked = false;
-    this.filteredData = this.filteredData.filter(product => product.status === 'instock');
+    this.filteredData = this.inStockProducts 
   }
   
 
   showOutStockProducts(event: any): void {
     this.isInStockChecked = false;
     this.isOutOfStockChecked = true;
-    this.filteredData = this.filteredData.filter(product => product.status === 'outofstock');
+    this.filteredData = this.outOfStockProducts
   }
   
 
@@ -187,26 +187,7 @@ export class GinnicombosComponent {
     // Reset the availability filters
     this.isInStockChecked = false;
     this.isOutOfStockChecked = false;
-  
-    // Apply category filters if any were previously selected
-    if (this.isAlmondChecked) {
-      this.filterAlmond(null);
-    } else if (this.isCashewChecked) {
-      this.filterCashew(null);
-    } else if (this.isPistaChecked) {
-      this.filterPista(null);
-    } else if (this.isWalnutChecked) {
-      this.filterWalnut(null);
-    } else if (this.isRaisinChecked) {
-      this.filterRaisin(null);
-    } 
-    else {
-        // Reset the product list to show all products
-      this.getProduct();
-    }
-    // Repeat for other categories if needed
-  
-  
+    this.getProduct(); 
   }
   
   
@@ -215,72 +196,32 @@ export class GinnicombosComponent {
   filterAlmond(event: any): void {
     this.isAlmondChecked = true;
     this.uncheckOtherCategories('almond');
-    this.filteredData = this.filteredData.filter(product => product.category === 'almond');
-
-    // if (this.isInStockChecked) {
-    //   this.filteredData = this.filteredData.filter(product => product.category === 'almond');
-    // } else if (this.isOutOfStockChecked) {
-    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'almond');
-    // } else {
-    //   this.filteredData = this.almonds;
-    // }
+    this.filteredData = this.almonds;
   }
   
   
   filterCashew(event: any): void {
     this.isCashewChecked = true;
     this.uncheckOtherCategories('cashew');
-    this.filteredData = this.filteredData.filter(product => product.category === 'cashew');
-
-    // if (this.isInStockChecked) {
-    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'cashew');
-    // } else if (this.isOutOfStockChecked) {
-    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'cashew');
-    // } else {
-    //   this.filteredData = this.cashews;
-    // }
+    this.filteredData = this.cashews;
   }
   
   filterPista(event: any): void {
     this.isPistaChecked = true;
     this.uncheckOtherCategories('pista');
-    this.filteredData = this.filteredData.filter(product => product.category === 'pista');
-
-    // if (this.isInStockChecked) {
-    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'pista');
-    // } else if (this.isOutOfStockChecked) {
-    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'pista');
-    // } else {
-    //   this.filteredData = this.pistas;
-    // }
+    this.filteredData = this.pistas;
   }
   
   filterWalnut(event: any): void {
     this.isWalnutChecked = true;
     this.uncheckOtherCategories('walnut');
-    this.filteredData = this.filteredData.filter(product => product.category === 'walnut');
-    
-    // if (this.isInStockChecked) {
-    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'walnut');
-    // } else if (this.isOutOfStockChecked) {
-    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'walnut');
-    // } else {
-    //   this.filteredData = this.walnuts;
-    // }
+    this.filteredData = this.walnuts;
   }
   
   filterRaisin(event: any): void {
     this.isRaisinChecked = true;
     this.uncheckOtherCategories('raisin');
-    this.filteredData = this.filteredData.filter(product => product.category === 'raisin');
-
-    // if (this.isInStockChecked) {
-    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'raisin');
-    // } else if (this.isOutOfStockChecked) {
-    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'raisin');
-    // } else {
-    //   this.productlist = this.raisins;
-    // }
+    this.filteredData = this.raisins;
   }
   
   
@@ -336,15 +277,6 @@ export class GinnicombosComponent {
     const originalPrices = this.originalProductList.map(product => product.price);
     const originalMinPrice = Math.min(...originalPrices);
     const originalMaxPrice = Math.max(...originalPrices);
-  
-    // Reset minPrice and maxPrice to their original values
-    // this.minPrice = originalMinPrice.toString();
-    // this.maxPrice = originalMaxPrice.toString();
-  
-    // // If maxPrice is less than minPrice, adjust maxPrice to be equal to minPrice
-    // if (parseInt(this.maxPrice) < parseInt(this.minPrice)) {
-    //   this.maxPrice = this.minPrice;
-    // }
   
     // Reset the product list to the original list
     this.productlist = this.originalProductList.slice();
