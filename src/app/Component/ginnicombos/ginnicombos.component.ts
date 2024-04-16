@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
+import { WishlistService } from '../../Services/wishlist.service';
+import { SearchService } from '../../Services/search.service';
 
 // Define sorting options
 enum SortingOptions {
@@ -49,15 +51,26 @@ export class GinnicombosComponent {
   isPriceUpChecked: boolean = false;
   isPriceDownChecked: boolean = false;
 
+  filteredData! : any[];
+  searchTerm: string ='';
 
-  constructor( private cartService : CartService, private productService : ProductService) { }
+  constructor( private cartService : CartService, private productService : ProductService, 
+    private wishlistService : WishlistService, private searchService : SearchService) { }
 
   ngOnInit(): void {
     this.getProduct();
     console.log(this.productlist);
 
     this.toggleFeaturedSorting(null);
+
+    
   }
+
+  onSearch () {
+    this.filteredData = this.productlist.filter((item) =>
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase())
+    );
+  } 
 
   addToCart(product: any): void {
     this.cartService.addtoCart(product)
@@ -76,14 +89,54 @@ export class GinnicombosComponent {
   }
 
 
- 
-
+  addToWishlist(product: any): void {
+    product.wishlistStatus = true; // Update the wishlist status
+    this.wishlistService.addToWishlist(product)
+      .subscribe(
+        () => {
+          console.log(product);
+          // let countString = sessionStorage.getItem("TotalWishListItem");
+          // let count = countString ? parseInt(countString) + 1 : 1;
+          // sessionStorage.setItem("TotalWishListItem", JSON.stringify(count));
+          alert('Item added to wishlist');
+        },
+        error => {
+          console.error('Error adding item to wishlist:', error);
+          alert('Error adding item to wishlist');
+          // Rollback the wishlist status if there's an error
+          product.wishlistStatus = false;
+        }
+      );
+  }
+  
+  removeToWishlist(product: any): void {
+    product.wishlistStatus = false; // Update the wishlist status
+    this.wishlistService.removeItem(product.id)
+      .subscribe(
+        () => {
+          alert('Item removed from wishlist successfully');
+        },
+        error => {
+          console.error('Error removing item from wishlist:', error);
+          alert('Error removing item from wishlist');
+          // Rollback the wishlist status if there's an error
+          product.wishlistStatus = true;
+        }
+      );
+  }
+  
   
   getProduct(): void {
     this.productService.getProducts().subscribe({
       next: (res) => {
         this.productlist = res.filter((product) => product.subcategory === 'combo');
         this.originalProductList = [...this.productlist];
+
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
+    
 
          // Filter products based on status
         this.inStockProducts = this.productlist.filter(product => product.status === 'instock');
@@ -103,6 +156,7 @@ export class GinnicombosComponent {
         // Get maximum price
         this.maxPrice = this.productlist.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
 
+       
 
         console.log(this.productlist);
 
@@ -118,48 +172,14 @@ export class GinnicombosComponent {
   showInStockProducts(event: any): void {
     this.isInStockChecked = true;
     this.isOutOfStockChecked = false;
-    this.productlist = this.inStockProducts;
-    
-    if (this.isAlmondChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'almond');
-    } 
-    if (this.isCashewChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'cashew');
-    } 
-    if (this.isPistaChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'pista');
-    } 
-    if (this.isWalnutChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'walnut');
-    } 
-    if (this.isRaisinChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'raisin');
-    } 
-    // Repeat for other categories if needed
+    this.filteredData = this.filteredData.filter(product => product.status === 'instock');
   }
   
 
   showOutStockProducts(event: any): void {
     this.isInStockChecked = false;
     this.isOutOfStockChecked = true;
-    this.productlist = this.outOfStockProducts;
-    
-    if (this.isAlmondChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'almond');
-    } 
-    if (this.isCashewChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'cashew');
-    } 
-    if (this.isPistaChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'pista');
-    } 
-    if (this.isWalnutChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'walnut');
-    } 
-    if (this.isRaisinChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'raisin');
-    } 
-    // Repeat for other categories if needed
+    this.filteredData = this.filteredData.filter(product => product.status === 'outofstock');
   }
   
 
@@ -195,68 +215,72 @@ export class GinnicombosComponent {
   filterAlmond(event: any): void {
     this.isAlmondChecked = true;
     this.uncheckOtherCategories('almond');
-    
-    if (this.isInStockChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'almond');
-    } else if (this.isOutOfStockChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'almond');
-    } else {
-      this.productlist = this.almonds;
-    }
+    this.filteredData = this.filteredData.filter(product => product.category === 'almond');
+
+    // if (this.isInStockChecked) {
+    //   this.filteredData = this.filteredData.filter(product => product.category === 'almond');
+    // } else if (this.isOutOfStockChecked) {
+    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'almond');
+    // } else {
+    //   this.filteredData = this.almonds;
+    // }
   }
   
   
   filterCashew(event: any): void {
     this.isCashewChecked = true;
     this.uncheckOtherCategories('cashew');
-    
-    if (this.isInStockChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'cashew');
-    } else if (this.isOutOfStockChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'cashew');
-    } else {
-      this.productlist = this.cashews;
-    }
+    this.filteredData = this.filteredData.filter(product => product.category === 'cashew');
+
+    // if (this.isInStockChecked) {
+    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'cashew');
+    // } else if (this.isOutOfStockChecked) {
+    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'cashew');
+    // } else {
+    //   this.filteredData = this.cashews;
+    // }
   }
   
   filterPista(event: any): void {
     this.isPistaChecked = true;
     this.uncheckOtherCategories('pista');
-    
-    if (this.isInStockChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'pista');
-    } else if (this.isOutOfStockChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'pista');
-    } else {
-      this.productlist = this.pistas;
-    }
+    this.filteredData = this.filteredData.filter(product => product.category === 'pista');
+
+    // if (this.isInStockChecked) {
+    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'pista');
+    // } else if (this.isOutOfStockChecked) {
+    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'pista');
+    // } else {
+    //   this.filteredData = this.pistas;
+    // }
   }
   
   filterWalnut(event: any): void {
     this.isWalnutChecked = true;
     this.uncheckOtherCategories('walnut');
-    this.productlist =  this.walnuts;
+    this.filteredData = this.filteredData.filter(product => product.category === 'walnut');
     
-    if (this.isInStockChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'walnut');
-    } else if (this.isOutOfStockChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'walnut');
-    } else {
-      this.productlist = this.walnuts;
-    }
+    // if (this.isInStockChecked) {
+    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'walnut');
+    // } else if (this.isOutOfStockChecked) {
+    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'walnut');
+    // } else {
+    //   this.filteredData = this.walnuts;
+    // }
   }
   
   filterRaisin(event: any): void {
     this.isRaisinChecked = true;
     this.uncheckOtherCategories('raisin');
-    
-    if (this.isInStockChecked) {
-      this.productlist = this.inStockProducts.filter(product => product.category === 'raisin');
-    } else if (this.isOutOfStockChecked) {
-      this.productlist = this.outOfStockProducts.filter(product => product.category === 'raisin');
-    } else {
-      this.productlist = this.raisins;
-    }
+    this.filteredData = this.filteredData.filter(product => product.category === 'raisin');
+
+    // if (this.isInStockChecked) {
+    //   this.filteredData = this.inStockProducts.filter(product => product.category === 'raisin');
+    // } else if (this.isOutOfStockChecked) {
+    //   this.filteredData = this.outOfStockProducts.filter(product => product.category === 'raisin');
+    // } else {
+    //   this.productlist = this.raisins;
+    // }
   }
   
   

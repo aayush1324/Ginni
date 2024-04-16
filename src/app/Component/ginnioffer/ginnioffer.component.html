@@ -17,13 +17,15 @@
                 <div class="search-container">
                     <div class="searchbox">
                         <div class="searchbar">
-                            <input type="text" placeholder="Search for DryFruits...">
+                            <app-search></app-search>
                         </div>
                         <div class="searchbutton">
                             <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </div>  
+
+                
                 
                 <div class="navbarupperright">   
                     <div class="items">
@@ -31,7 +33,7 @@
                             <a routerLink="/main/ginniwishlist">
                                 <div style="position: relative; display: inline-block;">
                                     <i class="fa fa-heart" style="font-size: xx-large;"></i>
-                                    <i class="wishlist-count">{{ wishlistCount }}</i>
+                                    <i class="wishlist-count">{{ totalWislistItem }}</i>
                                 </div>
                                 <h6 *ngIf="showWishlist">Wishlist</h6>
                             </a>

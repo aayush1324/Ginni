@@ -54,6 +54,7 @@ import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdash
 import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
 import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
 import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
+import { SearchComponent } from './Component/search/search.component';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { SellercustomerlistComponent } from './Component/sellercustomerlist/sell
     SellerproductlistComponent,
     SellerorderlistComponent,
     SellercustomerlistComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

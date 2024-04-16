@@ -45,6 +45,7 @@ import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdash
 import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
 import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
 import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
+import { SearchComponent } from './Component/search/search.component';
 
 
 const routes: Routes = [{
@@ -91,7 +92,7 @@ const routes: Routes = [{
       {path: "sellercustomerlist", component : SellercustomerlistComponent},
       {path: "sellerorderlist", component : SellerorderlistComponent},
       {path: "sellerproductlist", component : SellerproductlistComponent},     
-
+      {path: "search", component : SearchComponent},     
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },

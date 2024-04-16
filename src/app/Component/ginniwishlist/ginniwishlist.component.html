@@ -1,6 +1,7 @@
 <div class="containerbox">
     <div class="header">
         <h2>My Wishlist</h2>
+        <button (click)="removeAllItem()">Empty Wishlist</button>
     </div>
 
     <div class="middle">
@@ -17,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="middleleftmain">
+            <div class="middleleftmain" *ngFor="let item of products; let i = index">
                 <div class="middleleftmainproduct">
                     <div class="middleleftmainproductimages">
                         <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="" style="height: 5rem; width: 5rem;">
@@ -25,12 +26,12 @@
 
                     <div class="middleleftmainproductnaming">
                         <div class="middleleftmainproductname">
-                            <a href="">DryFruit</a>
+                            <a href="">{{item.productName}}</a>
                         </div>
 
                         <div class="middleleftmainproductprice">
-                            <h6>Rs. 1000</h6>
-                            <p><del>Rs. 2000</del></p>
+                            <h6>Rs {{item.price}}</h6>
+                            <p><del>{{item.discount}}</del></p>
                         </div>
                     </div>
                 </div>
@@ -38,28 +39,28 @@
                 <div class="middleleftmaincombine">
                     <div class="middleleftmainquantity">
                         <div class="middleleftmainquantityincrement">
-                            <i class="fa fa-minus" ></i>
-                            <h6>1</h6>
-                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-minus" (click)="decrementQuantity(item)"></i>
+                            <h6>{{item.quantity}}</h6>
+                            <i class="fa fa-plus" (click)="incrementQuantity(item)"></i>
                         </div>
 
                         <div class="middleleftmainquantityremove">
-                            <a href="">Remove</a>
+                            <a (click)="removeItem(item)">Remove</a>
                         </div>
                     </div>
 
                     <div class="middleleftmaintotal">
-                        <h6>Rs. 1000</h6>
+                        <h6>Rs {{item.totalPrice}}</h6>
                     </div>
 
                     <div class="middleleftmainaction">
-                        <button type="submit">Buy Now</button>
-                        <button type="submit">Add to Cart</button>
+                        <button>Buy Now</button>
+                        <button (click)="addToCartAndRemoveFromWishlist(item)">Add to Cart</button>
                     </div>
                 </div>
             </div>
 
-            <div class="middleleftmain">
+            <!-- <div class="middleleftmain">
                 <div class="middleleftmainproduct">
                     <div class="middleleftmainproductimages">
                         <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="" style="height: 5rem; width: 5rem;">
@@ -99,7 +100,7 @@
                         <button type="submit">Add to Wishlist</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
             <div class="middleleftbottom">
                 <div class="upper">

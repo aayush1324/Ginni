@@ -14,7 +14,7 @@
     height: fit-content;
     justify-content: space-between;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 2%;
     margin: 0%;
     /* border: 1px solid; */

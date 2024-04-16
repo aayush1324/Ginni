@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
+import { WishlistService } from '../../Services/wishlist.service';
 
 @Component({
   selector: 'app-ginnicart',
@@ -10,7 +11,7 @@ export class GinnicartComponent {
   public products : any = [];
   public grandTotal !: number;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private wishlistService : WishlistService) { }
 
   ngOnInit(): void {
     this.cartService.getToCart().subscribe(res=>{
@@ -69,6 +70,29 @@ export class GinnicartComponent {
         );
   }
 
+  addToWishlist(product: any): void {
+    this.wishlistService.addToWishlist(product)
+      .subscribe(
+        () => {
+          console.log(product);
+          alert('Item added to wishlist');
+        },
+        error => {
+          console.error('Error adding item to wishlist:', error);
+          alert('Error adding item to wishlist');
+        }
+      );
+  }
+
+  addToWishlistAndRemoveFromCart(item: any): void {
+
+    // Remove the item from the wishlist
+    this.removeItem(item);
+
+    // Add the item to the cart
+    this.addToWishlist(item);
+  }
+
   removeAllItem() : void {
     this.cartService.emptyCart()
         .subscribe(
@@ -93,17 +117,5 @@ export class GinnicartComponent {
   }
 
 
-  addToWishlist(item: any): void {
-    this.cartService.addToWishlist(item)
-        .subscribe(
-            () => {
-                this.removeItem(item); // Remove item from cart after adding to wishlist
-                alert('Item added to wishlist successfully');
-            },
-            error => {
-                console.error('Error adding item to wishlist:', error);
-                alert('Error adding item to wishlist');
-            }
-        );
-}
+ 
 }
