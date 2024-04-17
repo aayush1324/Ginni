@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { WishlistService } from '../../Services/wishlist.service';
 
+declare var Razorpay: any;
+
 @Component({
   selector: 'app-ginnicart',
   templateUrl: './ginnicart.component.html',
@@ -117,5 +119,39 @@ export class GinnicartComponent {
   }
 
 
+
+  payNow() {
+    const RozarpayOptions  = {
+      description: 'Sample Razorpay demo',
+      currency: 'INR',
+      amount: 1000,
+      name: 'Ginni',
+      key: 'rzp_test_NHayhA8KgRDaCx',
+      image: 'https://i.imgur.com/FApqk3D.jpeg',
+      prefill: {
+        name: 'Anushka',
+        email: 'aayushagrawal97@gmail.com',
+        phone: '7877976611'
+      },
+      theme: {
+        color: '#6466e3'
+      },
+      modal: {
+        ondismiss:  () => {
+          console.log('dismissed')
+        }
+      }
+    }
+
+    const successCallback = (paymentid: any) => {
+      console.log(paymentid);
+    }
+
+    const failureCallback = (e: any) => {
+      console.log(e);
+    }
+
+    Razorpay.open(RozarpayOptions ,successCallback, failureCallback)
+  }
  
 }

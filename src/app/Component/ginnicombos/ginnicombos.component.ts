@@ -62,8 +62,6 @@ export class GinnicombosComponent {
     console.log(this.productlist);
 
     this.toggleFeaturedSorting(null);
-
-    
   }
 
   onSearch () {
@@ -151,13 +149,10 @@ export class GinnicombosComponent {
         this.dates = this.filteredData.filter(product => product.category === 'date');
 
         // Get minimum price
-        this.minPrice = this.productlist.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-
+        this.minPrice = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
         // Get maximum price
-        this.maxPrice = this.productlist.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
-
-       
-
+        this.maxPrice = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+ 
         console.log(this.productlist);
 
       },
@@ -173,6 +168,7 @@ export class GinnicombosComponent {
     this.isInStockChecked = true;
     this.isOutOfStockChecked = false;
     this.filteredData = this.inStockProducts 
+    console.log(this.filteredData);
   }
   
 
@@ -180,6 +176,7 @@ export class GinnicombosComponent {
     this.isInStockChecked = false;
     this.isOutOfStockChecked = true;
     this.filteredData = this.outOfStockProducts
+    console.log(this.filteredData);
   }
   
 
@@ -197,6 +194,8 @@ export class GinnicombosComponent {
     this.isAlmondChecked = true;
     this.uncheckOtherCategories('almond');
     this.filteredData = this.almonds;
+    console.log(this.filteredData);
+
   }
   
   
@@ -204,24 +203,32 @@ export class GinnicombosComponent {
     this.isCashewChecked = true;
     this.uncheckOtherCategories('cashew');
     this.filteredData = this.cashews;
+    console.log(this.filteredData);
+
   }
   
   filterPista(event: any): void {
     this.isPistaChecked = true;
     this.uncheckOtherCategories('pista');
     this.filteredData = this.pistas;
+    console.log(this.filteredData);
+
   }
   
   filterWalnut(event: any): void {
     this.isWalnutChecked = true;
     this.uncheckOtherCategories('walnut');
     this.filteredData = this.walnuts;
+    console.log(this.filteredData);
+
   }
   
   filterRaisin(event: any): void {
     this.isRaisinChecked = true;
     this.uncheckOtherCategories('raisin');
     this.filteredData = this.raisins;
+    console.log(this.filteredData);
+
   }
   
   
