@@ -3,6 +3,7 @@ import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 // Define sorting options
 enum SortingOptions {
@@ -35,16 +36,14 @@ export class GinnicombosComponent {
   minPrice!: any[];
   maxPrice!: any[];
   sortingCriteria!: string;
-  private originalProductList: any[] = [];
+  originalProductList: any[] = [];
   isInStockChecked: boolean = false;
   isOutOfStockChecked: boolean = false;
-  // Define boolean variables to track the checked state of each category
   isAlmondChecked: boolean = false;
   isCashewChecked: boolean = false;
   isPistaChecked: boolean = false;
   isWalnutChecked: boolean = false;
   isRaisinChecked: boolean = false;
-  // Define boolean variables to track the checked state of each sorting option
   isFeaturedChecked: boolean = true;
   isAlphabetUpChecked: boolean = false;
   isAlphabetDownChecked: boolean = false;
@@ -53,21 +52,37 @@ export class GinnicombosComponent {
 
   filteredData! : any[];
   searchTerm: string ='';
+  filteredData2!: any[];
+  filteredData1!: any[];
+
+  availability: FormGroup;
+  categoryForm: FormGroup;
+  priceForm: FormGroup;
 
   constructor( private cartService : CartService, private productService : ProductService, 
-    private wishlistService : WishlistService, private searchService : SearchService) { }
+                private wishlistService : WishlistService, private searchService : SearchService) 
+    { this.availability = new FormGroup({
+        stock: new FormControl(null) // Define a FormControl for the radio buttons
+      });
+
+      this.categoryForm = new FormGroup({
+        category: new FormControl(null) // Define a FormControl for the radio buttons
+      });
+
+      this.priceForm = new FormGroup({
+        minPrice: new FormControl(null), 
+        maxPrice:new FormControl(null)
+      });
+    }
 
   ngOnInit(): void {
     this.getProduct();
-    console.log(this.productlist);
-
     this.toggleFeaturedSorting(null);
   }
 
   onSearch () {
     this.filteredData = this.productlist.filter((item) =>
-      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase())
-    );
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
   addToCart(product: any): void {
@@ -85,7 +100,6 @@ export class GinnicombosComponent {
         }
       );
   }
-
 
   addToWishlist(product: any): void {
     product.wishlistStatus = true; // Update the wishlist status
@@ -135,7 +149,6 @@ export class GinnicombosComponent {
           this.onSearch();
         });
     
-
          // Filter products based on status
         this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
         this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
@@ -148,152 +161,316 @@ export class GinnicombosComponent {
         this.pistas = this.filteredData.filter(product => product.category === 'pista');
         this.dates = this.filteredData.filter(product => product.category === 'date');
 
-        // Get minimum price
+        // Filter products based on price
         this.minPrice = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-        // Get maximum price
         this.maxPrice = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
- 
-        console.log(this.productlist);
-
       },
+
       error: (err) => {
         console.error('Error fetching addresses:', err);
       }
     });
   }
 
+  // onchange in availability 
+  onAvailabilityChange(availability:string) {
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-
-  showInStockProducts(event: any): void {
-    this.isInStockChecked = true;
-    this.isOutOfStockChecked = false;
-    this.filteredData = this.inStockProducts 
-    console.log(this.filteredData);
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   }
   
+  // onchange in category 
+  onCategoryChange(category:string) {
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-  showOutStockProducts(event: any): void {
-    this.isInStockChecked = false;
-    this.isOutOfStockChecked = true;
-    this.filteredData = this.outOfStockProducts
-    console.log(this.filteredData);
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   }
-  
 
-  resetAvailabilityFilters(): void {
-    // Reset the availability filters
-    this.isInStockChecked = false;
-    this.isOutOfStockChecked = false;
-    this.getProduct(); 
+   // onchange in price
+  onPriceFilter() {
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
+
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   }
-  
-  
 
 
-  filterAlmond(event: any): void {
-    this.isAlmondChecked = true;
-    this.uncheckOtherCategories('almond');
-    this.filteredData = this.almonds;
-    console.log(this.filteredData);
-
-  }
-  
-  
-  filterCashew(event: any): void {
-    this.isCashewChecked = true;
-    this.uncheckOtherCategories('cashew');
-    this.filteredData = this.cashews;
-    console.log(this.filteredData);
-
-  }
-  
-  filterPista(event: any): void {
-    this.isPistaChecked = true;
-    this.uncheckOtherCategories('pista');
-    this.filteredData = this.pistas;
-    console.log(this.filteredData);
-
-  }
-  
-  filterWalnut(event: any): void {
-    this.isWalnutChecked = true;
-    this.uncheckOtherCategories('walnut');
-    this.filteredData = this.walnuts;
-    console.log(this.filteredData);
-
-  }
-  
-  filterRaisin(event: any): void {
-    this.isRaisinChecked = true;
-    this.uncheckOtherCategories('raisin');
-    this.filteredData = this.raisins;
-    console.log(this.filteredData);
-
-  }
-  
-  
-  // Helper function to uncheck other categories when one is selected
-  uncheckOtherCategories(category: string): void {
-    const categories = ['almond', 'cashew', 'pista', 'walnut', 'raisin'];
-    categories.forEach((cat) => {
-      if (cat !== category) {
-        document.getElementById(cat)?.removeAttribute('checked');
+  applyFilters(availabilityFilter: string, categoryFilter: string, minPrice:number, maxPrice:number) {
+    let filteredProducts =this.productlist;
+        
+    // Filter by availability if availabilityFilter is provided and not null
+    if (availabilityFilter !== null) {
+      if (availabilityFilter === 'In Stock') {
+        filteredProducts = filteredProducts.filter(product => product.status === 'instock');        
+      } 
+      else if (availabilityFilter === 'Out of Stock') {
+        filteredProducts = filteredProducts.filter(product => product.status === 'outofstock');
       }
-    });
-  }
-
-  resetCategoryFilters(): void {
-    // Reset all category filters
-    this.isAlmondChecked = false;
-    this.isCashewChecked = false;
-    this.isPistaChecked = false;
-    this.isWalnutChecked = false;
-    this.isRaisinChecked = false;
-    // Reset the product list to show all products
-    this.getProduct();
-  }
-
-
-  
-  // Method to apply price filter
-  applyPriceFilter(): void {
-    const minPriceInput = document.getElementById('minprice') as HTMLInputElement;
-    const maxPriceInput = document.getElementById('maxprice') as HTMLInputElement;
-    
-    let minPrice = parseFloat(minPriceInput.value);
-    let maxPrice = parseFloat(maxPriceInput.value);
-
-    // Ensure that minPrice is not greater than maxPrice
-    if (minPrice > maxPrice) {
-      // Swap minPrice and maxPrice if minPrice is greater
-      const temp = minPrice;
-      minPrice = maxPrice;
-      maxPrice = temp;
-
-      // Update the input field values
-      minPriceInput.value = minPrice.toString();
-      maxPriceInput.value = maxPrice.toString();
     }
 
-    // Filter products based on price range
-    this.productlist = this.productlist.filter(product => product.price >= minPrice && product.price <= maxPrice);
+    // Filter by category if categoryFilter is provided and not null
+    if (categoryFilter !== null && categoryFilter !== 'All') {
+      filteredProducts = filteredProducts.filter(product => product.category === categoryFilter);
+    }
+
+    // Filter by price if priceFilter is provided and not null
+    if(minPrice!=null && maxPrice!=null){
+      filteredProducts = filteredProducts.filter(product => {
+        const productPrice = product.price; // Assuming product has a 'price' property
+        // Filter products whose price is within the specified range
+        return productPrice >= minPrice && productPrice <= maxPrice;
+      });
+    }
+
+    return filteredProducts;
   }
 
-  resetPriceFilters(): void {
-    // Calculate the original minimum and maximum prices from the original product list
-    const originalPrices = this.originalProductList.map(product => product.price);
-    const originalMinPrice = Math.min(...originalPrices);
-    const originalMaxPrice = Math.max(...originalPrices);
+
+  // Function to reset Availability filters
+  removeAvailabilityFilters() {
+    this.availability.reset(); // Reset the form
+
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
+
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+  }
+
+  // Function to reset Category filters
+  removeCategoryFilters() {
+    this.categoryForm.reset(); // Reset the form
+
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
+
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+  }
+
+  // Function to reset Price filters
+  removePriceFilters() {
+    this.priceForm.reset(); // Reset the form
+
+    const selectedAvalability = this.availability.get('stock')?.value;
+    const selectedCategory = this.categoryForm.get('category')?.value;
+    const minPrice = this.priceForm.get('minPrice')?.value;
+    const maxPrice = this.priceForm.get('maxPrice')?.value;
+
+    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+  }
+
+
+
+
+
+  // showInStockProducts(event: any): void {
+  //   this.isInStockChecked = true;
+  //   this.isOutOfStockChecked = false;
+  //   if ((this.isAlmondChecked == true) || (this.isCashewChecked == true) || (this.isWalnutChecked == true) || (this.isRaisinChecked == true) || (this.isPistaChecked == true)) 
+  //     {
+  //       this.filteredData = this.filteredData2.filter(product => product.status === 'instock');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData1 = this.productlist.filter(product => product.status === 'instock');
+  //       this.filteredData = this.filteredData1
+  //     }
+
+  //     // this.filteredData = this.filteredData1
+  //   // this.filteredData = this.inStockProducts 
+  //   console.log(this.filteredData);
+  // }
   
-    // Reset the product list to the original list
-    this.productlist = this.originalProductList.slice();
 
-    this.minPrice = this.originalProductList.reduce((min, product) => product.price < min ? product.price : min, this.originalProductList[0].price);
+  // showOutStockProducts(event: any): void {
+  //   this.isInStockChecked = false;
+  //   this.isOutOfStockChecked = true;
+  //   if ((this.isAlmondChecked == true) || (this.isCashewChecked == true) || (this.isWalnutChecked == true) || (this.isRaisinChecked = true) || (this.isPistaChecked == true)) 
+  //     {
+  //       this.filteredData = this.filteredData2.filter(product => product.status === 'outofstock');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData1 = this.productlist.filter(product => product.status === 'outofstock');
+  //       this.filteredData = this.filteredData1
+  //     }
 
-    // Get maximum price
-    this.maxPrice = this.originalProductList.reduce((max, product) => product.price > max ? product.price : max, this.originalProductList[0].price);
+      
+  //   // this.filteredData = this.outOfStockProducts;
+  //     console.log(this.filteredData);
+  // }
+  
 
-  }
+  // resetAvailabilityFilters(): void {
+  //   // Reset the availability filters
+  //   this.isInStockChecked = false;
+  //   this.isOutOfStockChecked = false;
+  //   this.getProduct(); 
+  // }
+  
+  
+
+
+  // filterAlmond(event: any): void {
+  //   this.isAlmondChecked = true;
+  //   this.uncheckOtherCategories('almond');
+  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
+  //     {
+  //       this.filteredData = this.filteredData1.filter(product => product.category === 'almond');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData2 = this.productlist.filter(product => product.category === 'almond');
+  //       this.filteredData = this.filteredData2
+  //     }
+
+  //   // this.filteredData = this.filteredData.filter(product => product.category === 'almond');
+  //   // console.log(this.filteredData);
+
+  // }
+  
+  
+  // filterCashew(event: any): void {
+  //   this.isCashewChecked = true;
+  //   this.uncheckOtherCategories('cashew');
+  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
+  //     {
+  //       this.filteredData = this.filteredData1.filter(product => product.category === 'cashew');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData2 = this.productlist.filter(product => product.category === 'cashew');
+  //       this.filteredData = this.filteredData2
+  //     }
+  //   // this.filteredData = this.filteredData.filter(product => product.category === 'cashew');
+  //   // console.log(this.filteredData);
+
+  // }
+  
+  // filterPista(event: any): void {
+  //   this.isPistaChecked = true;
+  //   this.uncheckOtherCategories('pista');
+  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
+  //     {
+  //       this.filteredData = this.filteredData1.filter(product => product.category === 'pista');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData2 = this.productlist.filter(product => product.category === 'pista');
+  //       this.filteredData = this.filteredData2
+  //     }
+  //   // this.filteredData = this.filteredData.filter(product => product.category === 'pista');
+  //   // console.log(this.filteredData);
+
+  // }
+  
+  // filterWalnut(event: any): void {
+  //   this.isWalnutChecked = true;
+  //   this.uncheckOtherCategories('walnut');
+  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
+  //     {
+  //       this.filteredData = this.filteredData1.filter(product => product.category === 'walnut');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData2 = this.productlist.filter(product => product.category === 'walnut');
+  //       this.filteredData = this.filteredData2
+  //     }
+  //   // this.filteredData = this.filteredData.filter(product => product.category === 'walnut');
+  //   // console.log(this.filteredData);
+
+  // }
+  
+  // filterRaisin(event: any): void {
+  //   this.isRaisinChecked = true;
+  //   this.uncheckOtherCategories('raisin');
+  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
+  //     {
+  //       this.filteredData = this.filteredData1.filter(product => product.category === 'raisin');
+  //     }
+  //   else 
+  //     {
+  //       this.filteredData2 = this.productlist.filter(product => product.category === 'raisin');
+  //       this.filteredData = this.filteredData2
+  //     }
+  //   // this.filteredData = this.filteredData.filter(product => product.category === 'raisin');
+  //   // console.log(this.filteredData);
+
+  // } 
+  
+  // // Helper function to uncheck other categories when one is selected
+  // uncheckOtherCategories(category: string): void {
+  //   const categories = ['almond', 'cashew', 'pista', 'walnut', 'raisin'];
+  //   categories.forEach((cat) => {
+  //     if (cat !== category) {
+  //       document.getElementById(cat)?.removeAttribute('checked');
+  //     }
+  //   });
+  // }
+
+  // resetCategoryFilters(): void {
+  //   // Reset all category filters
+  //   this.isAlmondChecked = false;
+  //   this.isCashewChecked = false;
+  //   this.isPistaChecked = false;
+  //   this.isWalnutChecked = false;
+  //   this.isRaisinChecked = false;
+  //   // Reset the product list to show all products
+  //   this.getProduct();
+  // }
+
+
+  
+  // // Method to apply price filter
+  // applyPriceFilter(): void {
+  //   const minPriceInput = document.getElementById('minprice') as HTMLInputElement;
+  //   const maxPriceInput = document.getElementById('maxprice') as HTMLInputElement;
+    
+  //   let minPrice = parseFloat(minPriceInput.value);
+  //   let maxPrice = parseFloat(maxPriceInput.value);
+
+  //   // Ensure that minPrice is not greater than maxPrice
+  //   if (minPrice > maxPrice) {
+  //     // Swap minPrice and maxPrice if minPrice is greater
+  //     const temp = minPrice;
+  //     minPrice = maxPrice;
+  //     maxPrice = temp;
+
+  //     // Update the input field values
+  //     minPriceInput.value = minPrice.toString();
+  //     maxPriceInput.value = maxPrice.toString();
+  //   }
+
+  //   // Filter products based on price range
+  //   this.productlist = this.productlist.filter(product => product.price >= minPrice && product.price <= maxPrice);
+  // }
+
+  // resetPriceFilters(): void {
+  //   // Calculate the original minimum and maximum prices from the original product list
+  //   const originalPrices = this.originalProductList.map(product => product.price);
+  //   const originalMinPrice = Math.min(...originalPrices);
+  //   const originalMaxPrice = Math.max(...originalPrices);
+  
+  //   // Reset the product list to the original list
+  //   this.productlist = this.originalProductList.slice();
+
+  //   this.minPrice = this.originalProductList.reduce((min, product) => product.price < min ? product.price : min, this.originalProductList[0].price);
+
+  //   // Get maximum price
+  //   this.maxPrice = this.originalProductList.reduce((max, product) => product.price > max ? product.price : max, this.originalProductList[0].price);
+
+  // }
   
   
 
@@ -338,76 +515,33 @@ export class GinnicombosComponent {
 
   toggleFeaturedSorting(event: any): void {
     this.isFeaturedChecked = true;
-    this.uncheckOtherCategories('featured');
-    this.productlist = [...this.originalProductList]; // Reset to original order
-
-    // this.isFeaturedChecked = !this.isFeaturedChecked;
-    // if (this.isFeaturedChecked) {
-    //   // this.productlist = [...this.originalProductList]; // Reset to original order
-    //   this.getProduct();
-
-    // } else {
-    //   // Reset the product list to show all products
-    //   this.getProduct();
-    // }
+    this.uncheckOtherSortOptions('featured');
+    this.filteredData = this.filteredData; // Reset to original order
   }
   
   toggleAlphabetUpSorting(event: any): void {
     this.isAlphabetUpChecked = true;
-    this.uncheckOtherCategories('alphabetUp');
-    this.productlist = this.productlist.slice().sort((a, b) => a.productName.localeCompare(b.productName))
+    this.uncheckOtherSortOptions('alphabetUp');
+    this.filteredData = this.filteredData.slice().sort((a, b) => a.productName.localeCompare(b.productName))
 
-    // this.isAlphabetUpChecked = !this.isAlphabetUpChecked;
-    // if (this.isAlphabetUpChecked) {
-    //   // Apply alphabetically ascending sorting logic
-    //   // For example, sort the product list by name in ascending order
-    //   this.productlist = this.productlist.slice().sort((a, b) => a.productName.localeCompare(b.productName))
-    // } else {
-    //   // Reset the product list to show all products
-    //   this.getProduct();
-    // }
   }
   
   toggleAlphabetDownSorting(event: any): void {
     this.isAlphabetDownChecked = true;
-    this.uncheckOtherCategories('alphabetDown');
-    this.productlist = this.productlist.slice().sort((a, b) => b.productName.localeCompare(a.productName));      
-
-    // this.isAlphabetDownChecked = !this.isAlphabetDownChecked;
-    // if (this.isAlphabetDownChecked) {
-    //   this.productlist = this.productlist.slice().sort((a, b) => b.productName.localeCompare(a.productName));      
-    // } else {
-    //   // Reset the product list to show all products
-    //   this.getProduct();
-    // }
+    this.uncheckOtherSortOptions('alphabetDown');
+    this.filteredData = this.filteredData.slice().sort((a, b) => b.productName.localeCompare(a.productName));      
   }
   
   togglePriceUpSorting(event: any): void {
     this.isPriceUpChecked = true;
-    this.uncheckOtherCategories('priceUp');
-    this.productlist = this.productlist.slice().sort((a, b) => a.price - b.price);
-
-    // this.isPriceUpChecked = !this.isPriceUpChecked;
-    // if (this.isPriceUpChecked) {
-    //   this.productlist = this.productlist.slice().sort((a, b) => a.price - b.price);
-    // } else {
-    //   // Reset the product list to show all products
-    //   this.getProduct();
-    // }
+    this.uncheckOtherSortOptions('priceUp');
+    this.filteredData = this.filteredData.slice().sort((a, b) => a.price - b.price);
   }
   
   togglePriceDownSorting(event: any): void {
     this.isPriceDownChecked = true;
-    this.uncheckOtherCategories('priceDown');
-    this.productlist = this.productlist.slice().sort((a, b) => b.price - a.price);
-
-    // this.isPriceDownChecked = !this.isPriceDownChecked;
-    // if (this.isPriceDownChecked) {
-    //   this.productlist = this.productlist.slice().sort((a, b) => b.price - a.price);
-    // } else {
-    //   // Reset the product list to show all products
-    //   this.getProduct();
-    // }
+    this.uncheckOtherSortOptions('priceDown');
+    this.filteredData = this.filteredData.slice().sort((a, b) => b.price - a.price);
   }
 
   resetSortbyFilter(): void {
