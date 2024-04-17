@@ -58,6 +58,8 @@ export class GinnicombosComponent {
   availability: FormGroup;
   categoryForm: FormGroup;
   priceForm: FormGroup;
+  minPrices: any;
+  maxPrices: any;
 
   constructor( private cartService : CartService, private productService : ProductService, 
                 private wishlistService : WishlistService, private searchService : SearchService) 
@@ -162,8 +164,8 @@ export class GinnicombosComponent {
         this.dates = this.filteredData.filter(product => product.category === 'date');
 
         // Filter products based on price
-        this.minPrice = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-        this.maxPrice = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+        this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
+        this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
       },
 
       error: (err) => {
