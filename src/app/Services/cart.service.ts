@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -36,5 +36,15 @@ export class CartService {
   }
 
 
+  // CreateOrder(amount:number,user:number)
+  // {
+  //   let _headers: HttpHeaders = new HttpHeaders({
+  //     'accept': 'text/plain'
+  //   });
+    
+  //   //http call to api endpoint
+  //   return this.http.post(this.url+'security/createorder?amount='+amount+'&user='+user,null,{headers:_headers,responseType:'text'})
+  //               .pipe(map(response=>response));
+  // }
   
 }

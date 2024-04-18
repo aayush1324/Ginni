@@ -37,13 +37,13 @@ export class GinnicombosComponent {
   maxPrice!: any[];
   sortingCriteria!: string;
   originalProductList: any[] = [];
-  isInStockChecked: boolean = false;
-  isOutOfStockChecked: boolean = false;
-  isAlmondChecked: boolean = false;
-  isCashewChecked: boolean = false;
-  isPistaChecked: boolean = false;
-  isWalnutChecked: boolean = false;
-  isRaisinChecked: boolean = false;
+  // isInStockChecked: boolean = false;
+  // isOutOfStockChecked: boolean = false;
+  // isAlmondChecked: boolean = false;
+  // isCashewChecked: boolean = false;
+  // isPistaChecked: boolean = false;
+  // isWalnutChecked: boolean = false;
+  // isRaisinChecked: boolean = false;
   isFeaturedChecked: boolean = true;
   isAlphabetUpChecked: boolean = false;
   isAlphabetDownChecked: boolean = false;
@@ -52,10 +52,8 @@ export class GinnicombosComponent {
 
   filteredData! : any[];
   searchTerm: string ='';
-  filteredData2!: any[];
-  filteredData1!: any[];
 
-  availability: FormGroup;
+  availabilityForm: FormGroup;
   categoryForm: FormGroup;
   priceForm: FormGroup;
   minPrices: any;
@@ -63,7 +61,7 @@ export class GinnicombosComponent {
 
   constructor( private cartService : CartService, private productService : ProductService, 
                 private wishlistService : WishlistService, private searchService : SearchService) 
-    { this.availability = new FormGroup({
+    { this.availabilityForm = new FormGroup({
         stock: new FormControl(null) // Define a FormControl for the radio buttons
       });
 
@@ -72,8 +70,8 @@ export class GinnicombosComponent {
       });
 
       this.priceForm = new FormGroup({
-        minPrice: new FormControl(null), 
-        maxPrice:new FormControl(null)
+        minPrice: new FormControl(0), 
+        maxPrice:new FormControl(10000)
       });
     }
 
@@ -166,6 +164,8 @@ export class GinnicombosComponent {
         // Filter products based on price
         this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
         this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+        this.priceForm.get('minPrice')?.setValue(this.minPrices);
+        this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
       },
 
       error: (err) => {
@@ -174,29 +174,9 @@ export class GinnicombosComponent {
     });
   }
 
-  // onchange in availability 
-  onAvailabilityChange(availability:string) {
-    const selectedAvalability = this.availability.get('stock')?.value;
-    const selectedCategory = this.categoryForm.get('category')?.value;
-    const minPrice = this.priceForm.get('minPrice')?.value;
-    const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
-  }
-  
-  // onchange in category 
-  onCategoryChange(category:string) {
-    const selectedAvalability = this.availability.get('stock')?.value;
-    const selectedCategory = this.categoryForm.get('category')?.value;
-    const minPrice = this.priceForm.get('minPrice')?.value;
-    const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
-  }
-
-   // onchange in price
-  onPriceFilter() {
-    const selectedAvalability = this.availability.get('stock')?.value;
+  // onchange in availability , category and Price
+  onChange() {
+    const selectedAvalability = this.availabilityForm.get('stock')?.value;
     const selectedCategory = this.categoryForm.get('category')?.value;
     const minPrice = this.priceForm.get('minPrice')?.value;
     const maxPrice = this.priceForm.get('maxPrice')?.value;
@@ -232,249 +212,74 @@ export class GinnicombosComponent {
       });
     }
 
+    // this.inStockProducts = filteredProducts.filter(product => product.status === 'instock');
+    //     this.outOfStockProducts = filteredProducts.filter(product => product.status === 'outofstock');
+
+    //   this.almonds = filteredProducts.filter(product => product.category === 'almond');
+    //     this.raisins = filteredProducts.filter(product => product.category === 'raisin');
+    //     this.walnuts = filteredProducts.filter(product => product.category === 'walnut');
+    //     this.cashews = filteredProducts.filter(product => product.category === 'cashew');
+    //     this.pistas = filteredProducts.filter(product => product.category === 'pista');
+    //     this.dates = filteredProducts.filter(product => product.category === 'date');
+
+        // this.minPrices = filteredProducts.reduce((min, product) => product.price < min ? product.price : min, filteredProducts[0].price);
+        // this.maxPrices = filteredProducts.reduce((max, product) => product.price > max ? product.price : max, filteredProducts[0].price);
+        // console.log(this.maxPrices);
+        // this.priceForm.get('minPrice')?.setValue(this.minPrices);
+        // this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
+    
     return filteredProducts;
   }
 
 
   // Function to reset Availability filters
   removeAvailabilityFilters() {
-    this.availability.reset(); // Reset the form
-
-    const selectedAvalability = this.availability.get('stock')?.value;
-    const selectedCategory = this.categoryForm.get('category')?.value;
-    const minPrice = this.priceForm.get('minPrice')?.value;
-    const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+    this.availabilityForm.reset();
+    this.onChange();
   }
 
   // Function to reset Category filters
   removeCategoryFilters() {
-    this.categoryForm.reset(); // Reset the form
-
-    const selectedAvalability = this.availability.get('stock')?.value;
-    const selectedCategory = this.categoryForm.get('category')?.value;
-    const minPrice = this.priceForm.get('minPrice')?.value;
-    const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+    this.categoryForm.reset(); 
+    this.onChange();
   }
 
   // Function to reset Price filters
   removePriceFilters() {
-    this.priceForm.reset(); // Reset the form
-
-    const selectedAvalability = this.availability.get('stock')?.value;
-    const selectedCategory = this.categoryForm.get('category')?.value;
-    const minPrice = this.priceForm.get('minPrice')?.value;
-    const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-    this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
+    this.priceForm.reset(); 
+    this.onChange();
   }
 
 
+    // // onchange in availability 
+  // onAvailabilityChange(availability:string) {
+  //   const selectedAvalability = this.availability.get('stock')?.value;
+  //   const selectedCategory = this.categoryForm.get('category')?.value;
+  //   const minPrice = this.priceForm.get('minPrice')?.value;
+  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-
-
-  // showInStockProducts(event: any): void {
-  //   this.isInStockChecked = true;
-  //   this.isOutOfStockChecked = false;
-  //   if ((this.isAlmondChecked == true) || (this.isCashewChecked == true) || (this.isWalnutChecked == true) || (this.isRaisinChecked == true) || (this.isPistaChecked == true)) 
-  //     {
-  //       this.filteredData = this.filteredData2.filter(product => product.status === 'instock');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData1 = this.productlist.filter(product => product.status === 'instock');
-  //       this.filteredData = this.filteredData1
-  //     }
-
-  //     // this.filteredData = this.filteredData1
-  //   // this.filteredData = this.inStockProducts 
-  //   console.log(this.filteredData);
+  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   // }
   
+  // // onchange in category 
+  // onCategoryChange(category:string) {
+  //   const selectedAvalability = this.availability.get('stock')?.value;
+  //   const selectedCategory = this.categoryForm.get('category')?.value;
+  //   const minPrice = this.priceForm.get('minPrice')?.value;
+  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-  // showOutStockProducts(event: any): void {
-  //   this.isInStockChecked = false;
-  //   this.isOutOfStockChecked = true;
-  //   if ((this.isAlmondChecked == true) || (this.isCashewChecked == true) || (this.isWalnutChecked == true) || (this.isRaisinChecked = true) || (this.isPistaChecked == true)) 
-  //     {
-  //       this.filteredData = this.filteredData2.filter(product => product.status === 'outofstock');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData1 = this.productlist.filter(product => product.status === 'outofstock');
-  //       this.filteredData = this.filteredData1
-  //     }
-
-      
-  //   // this.filteredData = this.outOfStockProducts;
-  //     console.log(this.filteredData);
-  // }
-  
-
-  // resetAvailabilityFilters(): void {
-  //   // Reset the availability filters
-  //   this.isInStockChecked = false;
-  //   this.isOutOfStockChecked = false;
-  //   this.getProduct(); 
-  // }
-  
-  
-
-
-  // filterAlmond(event: any): void {
-  //   this.isAlmondChecked = true;
-  //   this.uncheckOtherCategories('almond');
-  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
-  //     {
-  //       this.filteredData = this.filteredData1.filter(product => product.category === 'almond');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData2 = this.productlist.filter(product => product.category === 'almond');
-  //       this.filteredData = this.filteredData2
-  //     }
-
-  //   // this.filteredData = this.filteredData.filter(product => product.category === 'almond');
-  //   // console.log(this.filteredData);
-
-  // }
-  
-  
-  // filterCashew(event: any): void {
-  //   this.isCashewChecked = true;
-  //   this.uncheckOtherCategories('cashew');
-  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
-  //     {
-  //       this.filteredData = this.filteredData1.filter(product => product.category === 'cashew');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData2 = this.productlist.filter(product => product.category === 'cashew');
-  //       this.filteredData = this.filteredData2
-  //     }
-  //   // this.filteredData = this.filteredData.filter(product => product.category === 'cashew');
-  //   // console.log(this.filteredData);
-
-  // }
-  
-  // filterPista(event: any): void {
-  //   this.isPistaChecked = true;
-  //   this.uncheckOtherCategories('pista');
-  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
-  //     {
-  //       this.filteredData = this.filteredData1.filter(product => product.category === 'pista');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData2 = this.productlist.filter(product => product.category === 'pista');
-  //       this.filteredData = this.filteredData2
-  //     }
-  //   // this.filteredData = this.filteredData.filter(product => product.category === 'pista');
-  //   // console.log(this.filteredData);
-
-  // }
-  
-  // filterWalnut(event: any): void {
-  //   this.isWalnutChecked = true;
-  //   this.uncheckOtherCategories('walnut');
-  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
-  //     {
-  //       this.filteredData = this.filteredData1.filter(product => product.category === 'walnut');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData2 = this.productlist.filter(product => product.category === 'walnut');
-  //       this.filteredData = this.filteredData2
-  //     }
-  //   // this.filteredData = this.filteredData.filter(product => product.category === 'walnut');
-  //   // console.log(this.filteredData);
-
-  // }
-  
-  // filterRaisin(event: any): void {
-  //   this.isRaisinChecked = true;
-  //   this.uncheckOtherCategories('raisin');
-  //   if ((this.isInStockChecked == true) || (this.isOutOfStockChecked == true))
-  //     {
-  //       this.filteredData = this.filteredData1.filter(product => product.category === 'raisin');
-  //     }
-  //   else 
-  //     {
-  //       this.filteredData2 = this.productlist.filter(product => product.category === 'raisin');
-  //       this.filteredData = this.filteredData2
-  //     }
-  //   // this.filteredData = this.filteredData.filter(product => product.category === 'raisin');
-  //   // console.log(this.filteredData);
-
-  // } 
-  
-  // // Helper function to uncheck other categories when one is selected
-  // uncheckOtherCategories(category: string): void {
-  //   const categories = ['almond', 'cashew', 'pista', 'walnut', 'raisin'];
-  //   categories.forEach((cat) => {
-  //     if (cat !== category) {
-  //       document.getElementById(cat)?.removeAttribute('checked');
-  //     }
-  //   });
+  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   // }
 
-  // resetCategoryFilters(): void {
-  //   // Reset all category filters
-  //   this.isAlmondChecked = false;
-  //   this.isCashewChecked = false;
-  //   this.isPistaChecked = false;
-  //   this.isWalnutChecked = false;
-  //   this.isRaisinChecked = false;
-  //   // Reset the product list to show all products
-  //   this.getProduct();
+  //  // onchange in price
+  // onPriceFilter() {
+  //   const selectedAvalability = this.availability.get('stock')?.value;
+  //   const selectedCategory = this.categoryForm.get('category')?.value;
+  //   const minPrice = this.priceForm.get('minPrice')?.value;
+  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
+
+  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
   // }
-
-
-  
-  // // Method to apply price filter
-  // applyPriceFilter(): void {
-  //   const minPriceInput = document.getElementById('minprice') as HTMLInputElement;
-  //   const maxPriceInput = document.getElementById('maxprice') as HTMLInputElement;
-    
-  //   let minPrice = parseFloat(minPriceInput.value);
-  //   let maxPrice = parseFloat(maxPriceInput.value);
-
-  //   // Ensure that minPrice is not greater than maxPrice
-  //   if (minPrice > maxPrice) {
-  //     // Swap minPrice and maxPrice if minPrice is greater
-  //     const temp = minPrice;
-  //     minPrice = maxPrice;
-  //     maxPrice = temp;
-
-  //     // Update the input field values
-  //     minPriceInput.value = minPrice.toString();
-  //     maxPriceInput.value = maxPrice.toString();
-  //   }
-
-  //   // Filter products based on price range
-  //   this.productlist = this.productlist.filter(product => product.price >= minPrice && product.price <= maxPrice);
-  // }
-
-  // resetPriceFilters(): void {
-  //   // Calculate the original minimum and maximum prices from the original product list
-  //   const originalPrices = this.originalProductList.map(product => product.price);
-  //   const originalMinPrice = Math.min(...originalPrices);
-  //   const originalMaxPrice = Math.max(...originalPrices);
-  
-  //   // Reset the product list to the original list
-  //   this.productlist = this.originalProductList.slice();
-
-  //   this.minPrice = this.originalProductList.reduce((min, product) => product.price < min ? product.price : min, this.originalProductList[0].price);
-
-  //   // Get maximum price
-  //   this.maxPrice = this.originalProductList.reduce((max, product) => product.price > max ? product.price : max, this.originalProductList[0].price);
-
-  // }
-  
-  
 
   // Method to select the sorting option
   // selectSortingOption(option: SortingOptions): void {

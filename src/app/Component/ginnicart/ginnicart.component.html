@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="middleleftmainaction">
-                        <button (click)="payNow()">Buy Now</button>
+                        <button (click)="initiatePayment()">Buy Now</button>
                         <button (click)="addToWishlistAndRemoveFromCart(item)">Add to Wishlist</button>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
             </div>
 
             <div class="middlerightbottom">
-                <button type="submit">Checkout</button>
+                <button (click)="initiatePayment()">Checkout</button>
             </div>
         </div>
     </div>

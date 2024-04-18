@@ -11,13 +11,13 @@
             </div>
     
             <div class="availabilityfooter"  *ngIf="isDropdownOpenAvailability">
-                <form [formGroup]="availability">
+                <form [formGroup]="availabilityForm">
                     <div class="intstock" id="dropdown-link">
-                      <input type="radio" id="instock" formControlName="stock" value="In Stock" (change)="onAvailabilityChange(availability.get('stock')?.value)">
+                      <input type="radio" id="instock" formControlName="stock" value="In Stock" (change)="onChange()">
                       <label for="instock"> In Stocks ({{ inStockProducts.length }})</label>
                     </div>
                     <div class="outstock" id="dropdown-link">
-                      <input type="radio" id="outstock" formControlName="stock" value="Out of Stock" (change)="onAvailabilityChange(availability.get('stock')?.value)">
+                      <input type="radio" id="outstock" formControlName="stock" value="Out of Stock" (change)="onChange()">
                       <label for="outstock"> Out of Stock ({{ outOfStockProducts.length }})</label>
                     </div>
                     <h6 (click)="removeAvailabilityFilters()" style="text-decoration: underline; cursor: pointer; width: fit-content;">Remove Filter</h6>
@@ -33,23 +33,23 @@
             <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
                 <form [formGroup]="categoryForm">
                     <div class="almonds">
-                      <input type="radio" id="almond" formControlName="category" value="almond" (change)="onCategoryChange(categoryForm.get('category')?.value)">
+                      <input type="radio" id="almond" formControlName="category" value="almond" (change)="onChange()">
                       <label for="almond">ALMONDS ({{ almonds.length }})</label>
                     </div>
                     <div class="cashews">
-                      <input type="radio" id="cashew" formControlName="category" value="cashew" (change)="onCategoryChange(categoryForm.get('category')?.value)">
+                      <input type="radio" id="cashew" formControlName="category" value="cashew" (change)="onChange()">
                       <label for="cashew">CASHEWS ({{ cashews.length }})</label>
                     </div>
                     <div class="pistas">
-                      <input type="radio" id="pista" formControlName="category" value="pista" (change)="onCategoryChange(categoryForm.get('category')?.value)">
+                      <input type="radio" id="pista" formControlName="category" value="pista" (change)="onChange()">
                       <label for="pista">PISTACHIOS ({{ pistas.length }})</label>
                     </div>
                     <div class="walnuts">
-                      <input type="radio" id="walnut" formControlName="category" value="walnut" (change)="onCategoryChange(categoryForm.get('category')?.value)">
+                      <input type="radio" id="walnut" formControlName="category" value="walnut" (change)="onChange()">
                       <label for="walnut">WALNUTS ({{ walnuts.length }})</label>
                     </div>
                     <div class="raisins">
-                      <input type="radio" id="raisin" formControlName="category" value="raisin" (change)="onCategoryChange(categoryForm.get('category')?.value)">
+                      <input type="radio" id="raisin" formControlName="category" value="raisin" (change)="onChange()">
                       <label for="raisin">RAISINS ({{ raisins.length }})</label>
                     </div>
                     <h6 (click)="removeCategoryFilters()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>
@@ -66,14 +66,14 @@
             <div class="pricefooter" *ngIf="isDropdownOpenPricing">                
                 <form [formGroup]="priceForm">
                     <div class="minprice">
-                      <input type="text" id="minprice" formControlName="minPrice"  [value]= "minPrices" (input)="onPriceFilter()">
+                      <input type="text" id="minprice" formControlName="minPrice"   (input)="onChange()">
                       <span class="currency-icon">&#x20B9;</span>
                     </div> 
                     <div class="minussign">
                       <h5>-</h5>           
                     </div>
                     <div class="maxprice">
-                      <input type="text" id="maxprice" formControlName="maxPrice"  [value]= "maxPrices" (input)="onPriceFilter()">
+                      <input type="text" id="maxprice" formControlName="maxPrice"   (input)="onChange()">
                       <span class="currency-icon">&#x20B9;</span>
                     </div>                  
                 </form>
@@ -109,7 +109,7 @@
                       <input type="radio" id="priceDown" name="sorting" [checked]="isPriceDownChecked" (change)="togglePriceDownSorting($event)">
                       <label for="priceDown">Price, high to low</label>
                     </div>
-                    <h6 (click)="resetSortbyFilter()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>  
+                    <!-- <h6 (click)="resetSortbyFilter()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>   -->
                   </form>                              
             </div>
         </div>
