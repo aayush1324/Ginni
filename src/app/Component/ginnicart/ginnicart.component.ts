@@ -244,11 +244,14 @@ export class GinnicartComponent {
   //     );
   //   }
 
-  initiatePayment() {
-    
+  razorpay_Id : string = "";
+  razororder_Id: string = "";
+
+  initiatePayment() {  
     var amount = this.getTotalPrice();
 
     this.paymentService.createOrder(amount).subscribe(response => {
+      console.log(response.id);
       const options = {
         key: 'rzp_test_NHayhA8KgRDaCx',
         amount: response.amount,
@@ -256,25 +259,57 @@ export class GinnicartComponent {
         name: 'Ginni Dry Fruits',
         description: 'Test Payment',
         order_id: response.id,
-        handler: (response: any) => {
-          this.handlePaymentSuccess(response);
-        }
+        
+        handler: (responses: any) => {
+          var razorpay_Id = responses.razorpay_payment_id;
+          var razororder_Id = responses.razorpay_order_id;
+          console.log(responses);
+          this.paymentService.confirmPayment(responses).subscribe(
+            (confirmResponse) => {
+              alert(confirmResponse.message);
+              console.log(confirmResponse);
+            },
+            (error) => {
+              console.error(error);
+              console.log("error");
+            }
+          );
+        },
       };
       const razorpay = new Razorpay(options);
       razorpay.open();
     });
   }
 
-  handlePaymentSuccess(response: any) {
-    // You can perform any actions you need after a successful payment here
-    console.log("Payment successful!");
-    console.log("Payment ID:", response.razorpay_payment_id);
-    console.log("Order ID:", response.razorpay_order_id);
-    console.log("Signature:", response.razorpay_signature);
+ // Service or Component where you handle failure payment
+handleFailurePayment() {
+  var orderId = "order_O0PrQwUhVAB0FW";
+  this.paymentService.failurePayment( orderId ).subscribe(
+    (response) => {
+      alert(response.message);
+      console.log(response);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
 
-    // For example, you can display a success message to the user
-    alert("Payment successful!");
-  }
+// Service or Component where you handle refund payment
+handleRefundPayment() {
+  var paymentId = "pay_O0ProNZmIOLgHh";
+  var orderId = "order_O0PrQwUhVAB0FW";
+  this.paymentService.refundPayment( orderId,  paymentId ).subscribe(
+    (response) => {
+      alert(response.entity);
+      console.log(response);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
     
 }
  

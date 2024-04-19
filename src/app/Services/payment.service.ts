@@ -20,4 +20,12 @@ export class PaymentService {
   confirmPayment(response: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
   }
+
+  refundPayment(orderId: string, paymentId: string) {
+    return this.http.post<any>(`${this.baseUrl}refund-payment`,  { razorpay_order_id: orderId, razorpay_payment_id: paymentId });
+  }
+
+  failurePayment(orderId: string) {
+    return this.http.post<any>(`${this.baseUrl}failure-payment`, {razorpay_order_id: orderId});
+  }
 }

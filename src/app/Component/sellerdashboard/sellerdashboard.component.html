@@ -1,15 +1,24 @@
 <div class="containerbox">
     <div class="navbar">
-        <div class="Product" [ngClass]="{'active': isLinkActive('/main/sellerproductlist')}">
-            <a routerLink="/main/sellerproductlist"><h3>Product List</h3></a>
+        <div class="Product" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellerproductlist')}">
+            <a routerLink="/main/sellerdashboard/sellerproductlist"><h3>Product List</h3></a>
         </div>
 
-        <div class="Order" [ngClass]="{'active': isLinkActive('/main/sellerorderlist')}">
-            <a routerLink="/main/sellerorderlist"><h3>Order List</h3></a>
+        <div class="Order" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellerorderlist')}">
+            <a routerLink="/main/sellerdashboard/sellerorderlist"><h3>Order List</h3></a>
         </div>
 
-        <div class="Customer" [ngClass]="{'active': isLinkActive('/main/sellercustomerlist')}">
-            <a routerLink="/main/sellercustomerlist"><h3>Customer List</h3></a>
+        <div class="Customer" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellercustomerlist')}">
+            <a routerLink="/main/sellerdashboard/sellercustomerlist"><h3>Customer List</h3></a>
         </div>
-    </div>  
+    </div> 
+
+
+    <div class="route">
+        <router-outlet></router-outlet>
+    </div>
+   
+
+
+    
 </div>

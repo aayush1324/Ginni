@@ -87,17 +87,21 @@ const routes: Routes = [{
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
-      {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
-      {path: "sellerdashboard", component : SellerdashboardComponent},
-      {path: "sellercustomerlist", component : SellercustomerlistComponent},
-      {path: "sellerorderlist", component : SellerorderlistComponent},
-      {path: "sellerproductlist", component : SellerproductlistComponent},     
+      {path: "sellerdashboard", component : SellerdashboardComponent, children : [
+        {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
+        {path: "sellercustomerlist", component : SellercustomerlistComponent},
+        {path: "sellerorderlist", component : SellerorderlistComponent},
+        {path: "sellerproductlist", component : SellerproductlistComponent},
+        { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' } // Default child route
+        ]
+      }, 
       {path: "search", component : SearchComponent},     
       {path: "" , redirectTo : "home", pathMatch : "full"},  
     ]
   },
+
   {path: "ginniconfirmemail", component : GinniconfirmemailComponent},
-     {path:'' ,redirectTo:"main", pathMatch:"full"},
+  {path:'' ,redirectTo:"main", pathMatch:"full"},
 ];
 
 @NgModule({
