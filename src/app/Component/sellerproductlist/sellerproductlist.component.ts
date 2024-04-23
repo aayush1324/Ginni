@@ -89,6 +89,7 @@ export class SellerproductlistComponent {
     this.productService.getProducts().subscribe({
       next: (res) => {
         this.productlist = res;
+        console.log(this.productlist);
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);

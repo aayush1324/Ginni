@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,20 @@ export class AuthService {
     return this.userPayload.role;
   }
 
+  addCustomers(customer : any){
+    return this.http.post<any>(`${this.baseUrl}addCustomer`, customer);
+  }
+
+  getCustomers(){
+    return this.http.get<any[]>(`${this.baseUrl}getCustomer`); 
+  }
+
+  editCustomers(customerId: string, updatedCustomer: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}editCustomer/${customerId}`, updatedCustomer);
+  }
+
+  deleteCustomers(customerId: string) {
+    return this.http.delete<any>(`${this.baseUrl}deleteCustomer/${customerId}`);
+  }
 
 }

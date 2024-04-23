@@ -27,4 +27,11 @@ export class ProductService {
   deleteProducts(productId: string) {
     return this.http.delete<any>(`${this.baseUrl}deleteProduct/${productId}`);
   }
+
+  getProductDetailsByName(productName: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getProductName/${productName}`);
+  }
+  // getProductById(productId: string): Observable<any> {
+  //   return this.http.delete<any>(`${this.baseUrl}getProduct/${productId}`);
+  // }
 }

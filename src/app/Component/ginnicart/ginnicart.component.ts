@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { PaymentService } from '../../Services/payment.service';
+import { ProductService } from '../../Services/product.service';
 
 declare var Razorpay: any;
 
@@ -13,16 +14,67 @@ declare var Razorpay: any;
 export class GinnicartComponent {
   public products : any = [];
   public grandTotal !: number;
+  productlist! : any[];
 
-  constructor(private cartService: CartService, private wishlistService : WishlistService, private paymentService : PaymentService) { }
+  constructor(private cartService: CartService, private wishlistService : WishlistService, private paymentService : PaymentService , private productService : ProductService) { }
 
   ngOnInit(): void {
+    this.getProduct();
+
     this.cartService.getToCart().subscribe(res=>{
         this.products = res;
         // this.grandTotal = this.cartService.getTotalPrice();
       })
       console.log(this.products);
   }
+
+  
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.productlist = res.slice(0, 5);
+        console.log(this.productlist);
+
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
+
+  
+  addToCart(product: any): void {
+    this.cartService.addtoCart(product)
+      .subscribe(
+        () => {
+          console.log(product);
+          alert('Item added to cart successfuly');
+          // Optionally, you can perform additional actions after adding to cart
+        },
+        error => {
+          console.error('Error adding item to cart:', error);
+          alert("Error")
+          // Handle error
+        }
+      );
+  }
+
+  removeToWishlist(product: any): void {
+    product.wishlistStatus = false; // Update the wishlist status
+    this.wishlistService.removeItem(product.id)
+      .subscribe(
+        () => {
+          alert('Item removed from wishlist successfully');
+        },
+        error => {
+          console.error('Error removing item from wishlist:', error);
+          alert('Error removing item from wishlist');
+          // Rollback the wishlist status if there's an error
+          product.wishlistStatus = true;
+        }
+      );
+  }
+
 
   incrementQuantity(item: any): void {
     console.log(item);
@@ -120,136 +172,44 @@ export class GinnicartComponent {
   }
 
 
-  // payNow() {
-  //   const grandTotalPrice = this.getTotalPrice();
-
-  //   const RozarpayOptions  = {
-  //     description: 'Sample Razorpay demo',
-  //     currency: 'INR',
-  //     amount: 1000,
-  //     name: 'Ginni',
-  //     key: 'rzp_test_NHayhA8KgRDaCx',
-  //     image: 'https://i.imgur.com/FApqk3D.jpeg',
-  //     prefill: {
-  //       name: 'Anushka',
-  //       email: 'aayushagrawal97@gmail.com',
-  //       phone: '7877976611'
-  //     },
-  //     theme: {
-  //       color: '#6466e3'
-  //     },
-  //     modal: {
-  //       ondismiss:  () => {
-  //         console.log('dismissed')
-  //       }
-  //     }
-  //   }
-
-  //   const successCallback = (paymentid: any) => {
-  //     console.log(paymentid);
-  //   }
-
-  //   const failureCallback = (e: any) => {
-  //     console.log(e);
-  //   }
-
-  //   Razorpay.open(RozarpayOptions ,successCallback, failureCallback)
-  // }
-
-  // handlePayment() {
-  //   this.paymentService.createOrder().subscribe(
-  //     (order) => {
-  //       const options = {
-  //         key: 'rzp_test_NHayhA8KgRDaCx',
-  //         amount: this.getTotalPrice(),
-  //         currency: 'INR',
-  //         name: 'Ginni',
-  //         description: 'Dry Fruits',
-  //         order_id: order.id,
-  //         handler: (response: any) => {
-  //           this.paymentService.confirmPayment(response).subscribe(
-  //             (confirmResponse) => {
-  //               alert(confirmResponse);
-  //             },
-  //             (error) => {
-  //               console.error(error);
-  //             }
-  //           );
-  //         },
-  //         prefill: {
-  //           name: 'Test User',
-  //           email: 'testuser@example.com'
-  //         },
-  //         theme: {
-  //           color: '#F37254'
-  //         },
-  //         payment_method: {
-  //           qr: true // Enable QR code scanning for UPI payments
-  //         },
-  //         notes: {
-  //           merchant_order_id: 'your_merchant_order_id' // Add any custom notes if needed
-  //         },
-  //         display: {
-  //           phonepe: true,
-  //           googlepay: true,
-  //           paytm: true
-  //         }
-  //       };
-  //       const razorpay = new Razorpay(options);
-  //       razorpay.open();
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
-
-  // handleRazorpayPayment() {
-  //     const data = {}; // Add any additional data needed for order creation
-    
-  //     this.paymentService.createOrder(data).subscribe(
-  //       (response) => {
-  //         const order_id = response.id;
-  //         const options = {
-  //           key: 'razorpay_key',
-  //           amount: 200,
-  //           name: 'Your Angular App',
-  //           description: 'Pro Membership',
-  //           image: '/your_logo.png',
-  //           order_id: order_id,
-  //           handler: (response: any) => {
-  //             this.paymentService.confirmPayment(response).subscribe(
-  //               (confirmResponse) => {
-  //                 alert(confirmResponse.data);
-  //               },
-  //               (error) => {
-  //                 console.error(error);
-  //               }
-  //             );
-  //           },
-  //           prefill: {
-  //             name: 'TESTUSER',
-  //             email: 'testuser@mail.com',
-  //           },
-  //           theme: {
-  //             color: '#F37254'
-  //           }
-  //         };
-  //         const rzp1 = new Razorpay(options);
-  //         rzp1.open();
-  //       },
-  //       (error) => {
-  //         console.error(error);
-  //       }
-  //     );
-  //   }
-
   razorpay_Id : string = "";
   razororder_Id: string = "";
 
   initiatePayment() {  
     var amount = this.getTotalPrice();
 
+    this.paymentService.createOrder(amount).subscribe(response => {
+      console.log(response.id);
+      const options = {
+        key: 'rzp_test_NHayhA8KgRDaCx',
+        amount: response.amount,
+        currency: 'INR',
+        name: 'Ginni Dry Fruits',
+        description: 'Test Payment',
+        order_id: response.id,
+        
+        handler: (responses: any) => {
+          var razorpay_Id = responses.razorpay_payment_id;
+          var razororder_Id = responses.razorpay_order_id;
+          console.log(responses);
+          this.paymentService.confirmPayment(responses).subscribe(
+            (confirmResponse) => {
+              alert(confirmResponse.message);
+              console.log(confirmResponse);
+            },
+            (error) => {
+              console.error(error);
+              console.log("error");
+            }
+          );
+        },
+      };
+      const razorpay = new Razorpay(options);
+      razorpay.open();
+    });
+  }
+
+  initiatesPayment(amount : any) {  
     this.paymentService.createOrder(amount).subscribe(response => {
       console.log(response.id);
       const options = {

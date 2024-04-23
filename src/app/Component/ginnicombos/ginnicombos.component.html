@@ -139,7 +139,9 @@
                         </div>
                 
                         <div class="naming">
-                            <a routerLink="/main/ginnimainproduct"><h5>{{ item.productName }}</h5></a>
+                          <a [routerLink]="['/main/ginnimainproduct', item.productName]"><h5>{{ item.productName }}</h5></a>
+
+
                         </div>
                     
                         <div class="pricing">

@@ -60,7 +60,7 @@ const routes: Routes = [{
       {path: "ginnifooter",  component : GinnifooterComponent},
       {path: "ginniforgotpassword", component : GinniforgotpasswordComponent},
       {path: "ginniimageslider" , component : GinniimagesliderComponent},
-      {path: "ginnimainproduct" , component : GinnimainproductComponent},
+      {path: "ginnimainproduct/:productName" , component : GinnimainproductComponent},
       {path: "ginnioffer" , component : GinniofferComponent},
       {path: "ginniprivacypolicy" , component : GinniprivacypolicyComponent},
       {path: "ginniproducts" , component : GinniproductsComponent},

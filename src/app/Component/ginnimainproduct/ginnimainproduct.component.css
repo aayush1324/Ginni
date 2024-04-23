@@ -106,7 +106,7 @@
     height: fit-content;
     padding: 5%;
     margin: 0%;
-    border: 1px solid;
+    /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -151,7 +151,7 @@
     padding: 5%;
     margin: 0%;
     margin-top: 5%;
-    border: 1px solid;
+    /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,7 +163,7 @@
     height: fit-content;
     padding: 0%;
     margin: 2%;
-    border:  1px solid;
+    /* border:  1px solid; */
     position: sticky;
     top: 0; /* Adjust as needed */
     right: 0; /* Adjust as needed */
@@ -271,7 +271,7 @@
     height: 6vh;
     padding: 0%;
     margin: 0%;
-    border:  3px solid;
+    border:  1px solid;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -284,6 +284,27 @@
     padding: 5%;
     font-size: x-large;
     /* border-left: 1px solid; */
+}
+
+.rightmiddletotal {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border:  1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.rightmiddletotal h6 {
+    width: 25%;
+    /* border: 5px solid; */
+}
+
+.rightmiddletotal p {
+    width: 75%;
+    /* border: 5px solid; */
 }
 
 .rightlower {
@@ -311,7 +332,7 @@
 .containerbox {
     width: 100%;
     height: fit-content;
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 0% 3%;
     margin: 0%;
     display: flex;

@@ -70,39 +70,44 @@
             </div>
         </div>
     
-        <div class="right">
-            <div class="rightupper">
-                <h5>Peri - Peri Party Mix (500 g) & Panchmeva (405 g)</h5>
+        <div class="right" *ngIf="productDetails"> 
+            <div class="rightupper" >
+                <h1>{{ productDetails.productName }}</h1>
                 <br>
-                <h6>Save Rs. 169.00</h6>
+                <h6>Save Rs.{{ productDetails.discount }}</h6>
             </div>
     
             <div class="rightmiddle">
                 <div class="rightmiddlemrp">
                     <h6>M.R.P</h6>
-                    <p><del>Rs. 1,068.00</del></p>
+                    <p><del>Rs. {{ productDetails.price }}</del></p>
                 </div>
-    
+                <br>
                 <div class="rightmiddleoffer">
                     <h6>Offer Price:</h6>
-                    <p><b>Rs. 899.00</b> (incl. of all taxes)</p>
+                    <p><b>Rs. {{ productDetails.price - productDetails.discount  }}</b> (incl. of all taxes)</p>
                 </div>
-    
+                <br>
                 <div class="rightmiddlequantity">
                     <h6>Quantity:</h6>
                     <div class="rightmiddlebox">
                         <div class="rightmiddlequantitybox" >                       
-                            <p>-</p>
-                            <p>1</p>
-                            <p>+</p>
+                            <i class="fa fa-minus" (click)="decrementQuantity(productDetails)"></i>
+                            <h6>{{productDetails.quantity}}</h6>
+                            <i class="fa fa-plus" (click)="incrementQuantity(productDetails)"></i>
                         </div>
                     </div>          
+                </div>
+                <br>
+                <div class="rightmiddletotal">
+                    <h6>Total Price:</h6>
+                    <p><b>Rs. {{getTotalPrice()}}</b> (incl. of all taxes)</p>
                 </div>
             </div>
     
             <div class="rightlower">
-                <button type="submit">Add to Cart</button>
-                <button type="submit">BUT IT NOW</button>
+                <button (click)="addToCart(productDetails)">Add to Cart</button>
+                <button (click)="initiatePayment()">Buy Now</button>
             </div>
         </div>
     </div>
@@ -115,147 +120,31 @@
             <div class="upperleft">
                 <h3>You May also Like</h3>
             </div>
-    
-            <!-- <div class="upperright">
-                <button type="submit">View All</button>
-            </div> -->
         </div>
     
         <div class="lower">
-            <div class="almond">
+            <div class="almond" *ngFor = "let item of productlist">
                 <div class="image">
                     <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
+                        <h6>{{ item.discount }}</h6>
+                        <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.wishlistStatus"  style="font-size:24px" ></i>
+                        <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.wishlistStatus"  style="font-size:24px"></i>
                     </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
+                    <img src="../../assets/images/logo/almond.jpeg" alt="Almond">               
                 </div>
-    
+            
                 <div class="naming">
-                    <a href="#">Almond </a>
+                    <a href=""><h5>{{ item.productName }}</h5></a>
                 </div>
-    
+            
                 <div class="pricing">
-                    <h6>From Rs 1000</h6>
+                    <h5>Rs {{ item.price }}</h5>
                 </div>
-    
+            
                 <div class="carting">
-                    <button type="submit">Add to Cart</button>
+                    <button (click)="addToCart(item)">Add to Cart</button>
                 </div>
-            </div>
-    
-            <div class="cashew">
-                <div class="image">
-                    <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
-                    </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-                </div>
-    
-                <div class="naming">
-                    <a href="#">Almond </a>
-                </div>
-    
-                <div class="pricing">
-                    <h6>From Rs 1000</h6>
-                </div>
-    
-                <div class="carting">
-                    <button type="submit">Add to Cart</button>
-                </div>
-            </div>
-    
-            <div class="walnut">
-                <div class="image">
-                    <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
-                    </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-                </div>
-    
-                <div class="naming">
-                    <a href="#">Almond </a>
-                </div>
-    
-                <div class="pricing">
-                    <h6>From Rs 1000</h6>
-                </div>
-    
-                <div class="carting">
-                    <button type="submit">Add to Cart</button>
-                </div>
-            </div>
-    
-            <div class="raisin">
-                <div class="image">
-                    <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
-                    </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-                </div>
-    
-                <div class="naming">
-                    <a href="#">Almond </a>
-                </div>
-    
-                <div class="pricing">
-                    <h6>From Rs 1000</h6>
-                </div>
-    
-                <div class="carting">
-                    <button type="submit">Add to Cart</button>
-                </div>
-            </div>
-    
-            <div class="dates">
-                <div class="image">
-                    <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
-                    </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-                </div>
-    
-                <div class="naming">
-                    <a href="#">Dates</a>
-                </div>
-    
-                <div class="pricing">
-                    <h6>From Rs 1000</h6>
-                </div>
-    
-                <div class="carting">
-                    <button type="submit">Add to Cart</button>
-                </div>
-            </div>
-    
-            <div class="pista">
-                <div class="image">
-                    <div class="saving">
-                        <h6 id="save">Save Rs 2</h6>
-                        <h6 id="variety">Best seller</h6>
-                    </div>
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  alt="GINNI DryFruits">               
-                </div>
-    
-                <div class="naming">
-                    <a href="#">Pista </a>
-                </div>
-    
-                <div class="pricing">
-                    <h6>From Rs 1000</h6>
-                </div>
-    
-                <div class="carting">
-                    <button type="submit">Add to Cart</button>
-                </div>
-            </div>
+            </div>     
         </div>
-
     </div>
-
-
 </div>
