@@ -28,4 +28,8 @@ export class PaymentService {
   failurePayment(orderId: string) {
     return this.http.post<any>(`${this.baseUrl}failure-payment`, {razorpay_order_id: orderId});
   }
+
+  getOrders(){
+    return this.http.get<any[]>(`${this.baseUrl}getOrder`);
+  }
 }

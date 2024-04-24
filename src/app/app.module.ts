@@ -55,6 +55,7 @@ import { SellerproductlistComponent } from './Component/sellerproductlist/seller
 import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
 import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
 import { SearchComponent } from './Component/search/search.component';
+import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { SearchComponent } from './Component/search/search.component';
     SellerorderlistComponent,
     SellercustomerlistComponent,
     SearchComponent,
+    GinnidetailorderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 5%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -46,6 +46,7 @@ import { SellercustomerlistComponent } from './Component/sellercustomerlist/sell
 import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
 import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
 import { SearchComponent } from './Component/search/search.component';
+import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 
 
 const routes: Routes = [{
@@ -73,6 +74,7 @@ const routes: Routes = [{
       {path: "ginniwishlist" , component : GinniwishlistComponent},
       {path: "ginniprofile" , component : GinniprofileComponent},
       {path: "ginniorder", component : GinniorderComponent},
+      {path: "ginnidetailorder", component : GinnidetailorderComponent},
       {path: "ginnigiftings", component : GinnigiftingsComponent},
       {path: "ginnicombos",  component : GinnicombosComponent},
       {path: "ginnibestsellers", component : GinnibestsellersComponent},

@@ -30,18 +30,19 @@ export class SellercustomerlistComponent {
     this.customerForm = this.fb.group({
       userName: ['', Validators.required],
       role: ['sel', Validators.required],
-      phoneVerify: ['sel', Validators.required],
-      emailVerify: ['sel', Validators.required],
-      isLoggedIn: ['sel', Validators.required],
-      address: ['', Validators.required],
+      phoneVerify: [null, Validators.required],
+      emailVerify: [null, Validators.required],
+      isLoggedIn: [null, Validators.required],
+      // address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]]
     },
       { validator: ConfirmPasswordValidator("password", "confirmPassword") }
+      
     );
-
+    
     this.getCustomer();
   }
 
@@ -65,15 +66,19 @@ export class SellercustomerlistComponent {
   }
 
   populateForm(customer: any): void {
+    // Convert boolean values to '0' or '1'
+    const phoneVerify = customer.phoneConfirmed ? '1' : '0';
+    const emailVerify = customer.emailConfirmed ? '1' : '0';
+    const isLoggedIn = customer.status ? '1' : '0';
+
     this.customerForm.patchValue({
-      Name: customer.Name,
-      Email: customer.Email,
-      Mobile: customer.Mobile,
-      Role: customer.Role,
-      PhoneVerify: customer.PhoneVerify,
-      EmailVerify: customer.EmailVerify,
-      IsLoggedIn: customer.IsLoggedIn,
-      Address: customer.Address,
+      userName: customer.userName,
+      email: customer.email,
+      phone: customer.phone,
+      role: customer.role,
+      phoneVerify: phoneVerify, // Make sure the form control name matches exactly
+      emailVerify: emailVerify, // Make sure the form control name matches exactly
+      isLoggedIn: isLoggedIn    // Make sure the form control name matches exactly
     });
   }
 
@@ -119,19 +124,19 @@ export class SellercustomerlistComponent {
   }
 
   submitEditedCustomer(): void {
-    // if (this.productForm.valid) {
-    //   const updatedProduct = this.productForm.value;
-    //   this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
-    //     next: (res) => {
-    //       console.log('Product updated successfully!', res);
-    //       this.togglePopup();
-    //       this.getProduct();
-    //     },
-    //     error: (err) => {
-    //       console.error('Error updating Product:', err);
-    //     }
-    //   });
-    // }
+    if (this.customerForm.valid) {
+      const updatedCustomer = this.customerForm.value;
+      this.authService.editCustomers(this.selectedcustomer.id, updatedCustomer).subscribe({
+        next: (res) => {
+          console.log('Product updated successfully!', res);
+          this.togglePopup();
+          this.getCustomer();
+        },
+        error: (err) => {
+          console.error('Error updating Product:', err);
+        }
+      });
+    }
   }
 
 
