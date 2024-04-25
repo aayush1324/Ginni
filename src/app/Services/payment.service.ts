@@ -32,4 +32,8 @@ export class PaymentService {
   getOrders(){
     return this.http.get<any[]>(`${this.baseUrl}getOrder`);
   }
+
+  getOrderByID(orderID : string) : Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getOrderById/${orderID}`);
+  }
 }

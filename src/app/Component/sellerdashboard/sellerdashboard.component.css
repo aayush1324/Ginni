@@ -20,7 +20,7 @@
     background-color: rgb(146, 226, 213);
 }
 
-.Product , .Order, .Customer {
+.Product , .Order, .Customer, .ZipCode{
     background-color: rgb(222, 228, 230);
     width:  15%;
     height: 100%;
@@ -32,7 +32,7 @@
      /* border: 1px solid; */
 }
 
-.Product a, .Order a, .Customer a{
+.Product a, .Order a, .Customer a, .ZipCode a{
     text-decoration: none;
     color: rgb(79, 4, 255);
 }

@@ -33,7 +33,7 @@
 
     <div class="footer" *ngFor = "let item of orderList">
         <div class="order">
-            <p>{{item.orderId}}</p>
+            <a [routerLink]="['/main/ginnidetailorder', item.orderId]"><p>{{item.orderId}}</p></a>
         </div>
 
         <div class="date">

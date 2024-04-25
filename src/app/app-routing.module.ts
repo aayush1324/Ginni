@@ -47,6 +47,7 @@ import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorde
 import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
 import { SearchComponent } from './Component/search/search.component';
 import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
+import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
 
 
 const routes: Routes = [{
@@ -74,7 +75,7 @@ const routes: Routes = [{
       {path: "ginniwishlist" , component : GinniwishlistComponent},
       {path: "ginniprofile" , component : GinniprofileComponent},
       {path: "ginniorder", component : GinniorderComponent},
-      {path: "ginnidetailorder", component : GinnidetailorderComponent},
+      {path: "ginnidetailorder/:orderId", component : GinnidetailorderComponent},
       {path: "ginnigiftings", component : GinnigiftingsComponent},
       {path: "ginnicombos",  component : GinnicombosComponent},
       {path: "ginnibestsellers", component : GinnibestsellersComponent},
@@ -94,6 +95,7 @@ const routes: Routes = [{
         {path: "sellercustomerlist", component : SellercustomerlistComponent},
         {path: "sellerorderlist", component : SellerorderlistComponent},
         {path: "sellerproductlist", component : SellerproductlistComponent},
+        {path: "sellerzipcodelist", component : SellerzipcodelistComponent},
         { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' } // Default child route
         ]
       }, 

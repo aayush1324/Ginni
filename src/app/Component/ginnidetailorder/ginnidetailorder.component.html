@@ -1,8 +1,8 @@
-<div class="containerbox">
+<div class="containerbox" *ngIf="orderDetails">
     <div class="header">
         <div class="headerdate">
-            <p><b><i class='fa fa-angle-left' style='font-size:24px; margin-right:15px;'></i>Back to Orders</b></p>
-            <h6>April 24, 2024 at 12:14pm</h6>
+            <a routerLink="/main/ginniorder"><p style="cursor: pointer; text-decoration: none;"><b><i class='fa fa-angle-left' style='font-size:24px; margin-right:15px;'></i>Back to Orders</b></p></a>
+            <h6>{{ orderDetails.createdAt | date:'MMMM d, y \'at\' h:mm a' }}</h6>
         </div>
         <br>
         <div class="headerorder">
@@ -22,14 +22,14 @@
                 <h5>Total</h5>
             </div>
         </div>
-        <div class="middledata">
+        <div class="middledata" > 
             <div class="middledataleft">
                 <div class="middledataleftimage">
                     <img src="../../assets/images/logo/cashew.jpeg" alt="Almond">
                 </div>
 
                 <div class="middledataleftname">
-                    <h5><a routerLink="/main/ginniproducts">Dried Apricots (200 g)</a></h5>               
+                    <h5><a [routerLink]="['/main/ginnimainproduct', orderDetails.productName]">{{orderDetails.productName}}</a></h5>               
                     <!-- <h5>Dried Apricots (200 g) & Dried Cranberry (200 g)</h5> -->
                     <br>
                     <h6>Rs. 549.00</h6>
@@ -37,7 +37,7 @@
             </div>
             <div class="middledataright">
                 <p><b>1</b></p>
-                <p><b>Rs. 1000</b></p>
+                <p><b>{{orderDetails.amount}}</b></p>
             </div>
         </div>
         <div class="middlefooting">
@@ -46,7 +46,7 @@
             <div class="middlefootingright">
                 <div class="middlefootingrightsubtotal">
                     <p>SubTotal</p>
-                    <p>Rs. 1000</p>
+                    <p>{{orderDetails.amount}}</p>
                 </div>
                 <hr>
                 <div class="middlefootingrightshipping">

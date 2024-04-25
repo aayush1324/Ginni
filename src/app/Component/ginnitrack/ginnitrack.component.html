@@ -6,8 +6,20 @@
     </div>
 
     <div class="footer">
-        <input type="text" name="zipcode" id="zipcode" placeholder="Enter your ZipCode">
+        <input type="text" [formControl]="zipCodeFormControl" placeholder="Enter your ZipCode">
         <br>
-        <button type="submit">Check Availability</button>
-    </div>
+        <div *ngIf="zipCodeFormControl.hasError('required') && zipCodeFormControl.touched" class="error-message">
+          ZipCode is required.
+        </div>
+        <div *ngIf="zipCodeFormControl.hasError('pattern') && zipCodeFormControl.touched" class="error-message">
+          ZipCode must be 6 digits.
+        </div>
+        <br>
+        <button type="button" (click)="checkAvailability()" [disabled]="!zipCodeFormControl.valid">Check Availability</button>
+        <br>
+        <h5 *ngIf="isAvailable !== undefined" style="text-align: center; color: rgb(39, 1, 252);">
+          {{ isAvailable ? 'Delivery at this Pin code is available.' : 'Delivery at this Pin code is not available.' }}
+        </h5>
+      </div>
+      
 </div>

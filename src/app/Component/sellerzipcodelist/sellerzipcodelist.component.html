@@ -1,0 +1,141 @@
+<div class="containerbox">
+    <div class="upper">
+      <div class="header">
+        <h1>ZipCode List</h1>
+      </div>
+  
+      <div class="button">
+        <button (click)="togglePopup()" class="upperbutton"><b>Add New ZipCode</b></button>
+      </div> 
+  
+      <!-- Overlay -->
+      <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
+  
+      <div class="productpopup" *ngIf="isPopupOpen">
+        <div class="popup">
+            <div class="popuphead">
+                <div class="popupheadleft">
+                    <h2>{{ isEdit ? 'Edit' : 'Add' }} ZipCode Detail</h2>
+                    <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
+                </div>
+                <div class="popupheadright">
+                    <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
+                </div>
+            </div>
+            <br>
+            <div class="popupdown">
+                <form [formGroup]="PincodeForm" (ngSubmit)="isEdit ? submitEditedZipCode() : addedZipCode()">
+                    <div class="form-group">
+                        <input type="text" placeholder="Pin Code" formControlName="pinCode">
+                        <div *ngIf="PincodeForm.get('pinCode')?.errors?.['required'] && PincodeForm.get('pinCode')?.touched" class="text-danger">
+                            Pin Code is required.
+                        </div>
+                        <div *ngIf="PincodeForm.get('pinCode')?.errors?.['pattern'] && PincodeForm.get('pinCode')?.touched" class="text-danger">
+                            Pin Code must be 6 digits.
+                        </div>
+                    </div>
+                      
+                    <div class="form-group">
+                        <select formControlName="delivery">
+                            <option value="">Select Delivery Type</option>
+                            <option value="Delivery">Delivery</option>
+                            <option value="Non-Delivery">Non-Delivery</option>
+                        </select>
+                        <div *ngIf="PincodeForm.get('delivery')?.touched && PincodeForm.get('delivery')?.hasError('required')" class="text-danger">
+                            Delivery Type is required.
+                        </div>
+                    </div>             
+                    
+                    
+                    <div class="form-group">
+                        <select formControlName="officeType">
+                            <option value="">Select Office Type</option>
+                            <option value="SO">SO</option>
+                            <option value="BO">BO</option>
+                            <option value="HO">HO</option>
+                        </select>
+                        <div *ngIf="PincodeForm.get('officeType')?.hasError('required') && PincodeForm.get('officeType')?.touched" class="text-danger">
+                            Office Type is required.
+                        </div>
+                    </div>
+                    
+                   <div class="form-group">
+                        <input type="text" placeholder="Office Name" formControlName="officeName">
+                        <div *ngIf="PincodeForm.get('officeName')?.hasError('required') && PincodeForm.get('officeName')?.touched" class="text-danger">
+                          Office Name is required.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" placeholder="Region Name" formControlName="regionName">
+                        <div *ngIf="PincodeForm.get('regionName')?.hasError('required') && PincodeForm.get('regionName')?.touched" class="text-danger">
+                          Region Name is required.
+                        </div>
+                    </div>
+                    
+                   <div class="form-group">
+                        <input type="text" placeholder="Division Name" formControlName="divisionName">
+                        <div *ngIf="PincodeForm.get('divisionName')?.hasError('required') && PincodeForm.get('divisionName')?.touched" class="text-danger">
+                          Division Name is required.
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                        <input type="text" placeholder="District" formControlName="district">
+                        <div *ngIf="PincodeForm.get('district')?.hasError('required') && PincodeForm.get('district')?.touched" class="text-danger">
+                          District is required.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select formControlName="state">
+                            <option value="">Select State</option>
+                            <option *ngFor="let state of statesOfIndia" [value]="state">{{ state }}</option>
+                        </select>
+                        <div *ngIf="PincodeForm.get('state')?.hasError('required') && PincodeForm.get('state')?.touched" class="text-danger">
+                          State is required.
+                        </div>
+                    </div>
+                    
+                    <button type="submit" [disabled]="!PincodeForm.valid">
+                        {{ isEdit ? 'Submit Edit ZipCode' : 'Add a New ZipCode' }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div> 
+    </div>
+        
+    <div class="lower">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:10%">PinCode</th>
+            <th style="width:10%">Delivery</th>
+            <th style="width:10%">Office Type</th>
+            <th style="width:10%">Office Name</th>
+            <th style="width:10%">Region Name</th>
+            <th style="width:10%">Division Name</th>
+            <th style="width:10%">District</th>
+            <th style="width:10%">State</th>
+            <th style="width:10%">Action</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let item of zipcodelist">
+            <ng-container *ngFor="let key of tableHeaders">
+              <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}</td>
+            </ng-container>
+            <td>
+              <button (click)="openEditPopup(item)"><b>Edit</b></button>
+              <br>
+              <button (click)="deleteProduct(item.id)"><b>Delete </b></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>   
+   
+  </div>
+  
