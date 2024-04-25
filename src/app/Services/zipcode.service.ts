@@ -21,11 +21,17 @@ export class ZipcodeService {
     return this.http.get<any[]>(`${this.baseUrl}getAllZipCode`)
   }
 
-  getZipCode(zipCode: string) : Observable<any[]> {
-    return this.http.get<any>(`${this.baseUrl}getZipCode/${zipCode}`)
+ 
+  checkZipCode(PinCode: string): Observable<{ available: boolean }> {
+    return this.http.post<{ available: boolean }>(`${this.baseUrl}checkZipCode`, { PinCode });
   }
 
-  checkZipCode(zipCode: string): Observable<{ available: boolean }> {
-    return this.http.post<{ available: boolean }>(`${this.baseUrl}checkZipcode`, { zipCode });
+  deleteZipCode(zipcodeId : string){
+    return this.http.delete<any>(`${this.baseUrl}deleteZipCode/${zipcodeId}`);
+  }
+
+  editZipCode(zipcodeId: string, updatedZipCode: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}editZipCode/${zipcodeId}`, updatedZipCode);
+
   }
 }

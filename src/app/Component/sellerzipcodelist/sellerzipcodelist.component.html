@@ -37,7 +37,7 @@
                       
                     <div class="form-group">
                         <select formControlName="delivery">
-                            <option value="">Select Delivery Type</option>
+                            <option value="sel" disabled selected>Select Delivery Type</option>
                             <option value="Delivery">Delivery</option>
                             <option value="Non-Delivery">Non-Delivery</option>
                         </select>
@@ -49,7 +49,7 @@
                     
                     <div class="form-group">
                         <select formControlName="officeType">
-                            <option value="">Select Office Type</option>
+                            <option value="sel" disabled selected>Select Office Type</option>
                             <option value="SO">SO</option>
                             <option value="BO">BO</option>
                             <option value="HO">HO</option>
@@ -89,7 +89,7 @@
                     
                     <div class="form-group">
                         <select formControlName="state">
-                            <option value="">Select State</option>
+                            <option value="sel" disabled selected>Select State</option>
                             <option *ngFor="let state of statesOfIndia" [value]="state">{{ state }}</option>
                         </select>
                         <div *ngIf="PincodeForm.get('state')?.hasError('required') && PincodeForm.get('state')?.touched" class="text-danger">
@@ -130,7 +130,7 @@
             <td>
               <button (click)="openEditPopup(item)"><b>Edit</b></button>
               <br>
-              <button (click)="deleteProduct(item.id)"><b>Delete </b></button>
+              <button (click)="deleteZipCode(item.id)"><b>Delete </b></button>
             </td>
           </tr>
         </tbody>
