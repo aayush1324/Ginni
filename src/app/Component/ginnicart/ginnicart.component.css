@@ -12,7 +12,7 @@
 .header {
     width: 100%;
     height: fit-content;
-    justify-content: space-evenly;
+    justify-content: space-between;
     display: flex;
     flex-direction: row;
     padding: 2%;
@@ -171,7 +171,8 @@
     flex-direction: row;
     padding: 2%;
     margin: 0%;
-    border: 1px solid;
+    gap: 10px;
+    /* border: 1px solid; */
     /* border-radius: 5px; */
 }
 
@@ -189,6 +190,7 @@
     margin: 0%;
     /* border: 1px solid; */
 }
+
 
 .middleleftmaintotal {
     width: 20%;
@@ -458,6 +460,39 @@
     color: aliceblue;
 }
 
+
+
+
+.empty-cart {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.empty-cart img {
+    width: 25%; /* Adjust the size as needed */
+    height: 25%;
+}
+
+
+
+.empty-cart button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 10%;
+}
+
+.empty-cart button:hover {
+    background-color: #0056b3; /* Adjust color as needed */
+}
+
+
+
+
 .footer {
     width: 100%;
     height: fit-content;
@@ -488,6 +523,7 @@
     padding: 1%;
     margin: 0%;
     /* border: 3px solid; */
+    gap: 20px;
 }
 
 .almond , .cashew, .raisin, .walnut, .pista, .dates {

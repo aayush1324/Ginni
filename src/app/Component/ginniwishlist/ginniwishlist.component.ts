@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WishlistService } from '../../Services/wishlist.service';
 import { CartService } from '../../Services/cart.service';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-ginniwishlist',
@@ -11,8 +12,10 @@ export class GinniwishlistComponent {
 
   public products : any = [];
   public grandTotal !: number;
+  productlist! : any[];
 
-  constructor (private wishlistService : WishlistService, private cartService : CartService) {}
+
+  constructor (private wishlistService : WishlistService, private cartService : CartService, private productService : ProductService) {}
 
   ngOnInit(): void {
     this.wishlistService.getToWishlist().subscribe(res=>{
@@ -20,6 +23,9 @@ export class GinniwishlistComponent {
         // this.grandTotal = this.cartService.getTotalPrice();
       })
       console.log(this.products);
+
+      this.getProduct();
+
   }
 
   addToCart(item: any): void {
@@ -108,6 +114,49 @@ export class GinniwishlistComponent {
                 alert('Error updating quantity');
             }
         );
+  }
+
+  removeToWishlist(product: any): void {
+    product.wishlistStatus = false; // Update the wishlist status
+    this.wishlistService.removeItem(product.id)
+      .subscribe(
+        () => {
+          alert('Item removed from wishlist successfully');
+        },
+        error => {
+          console.error('Error removing item from wishlist:', error);
+          alert('Error removing item from wishlist');
+          // Rollback the wishlist status if there's an error
+          product.wishlistStatus = true;
+        }
+      );
+  }
+
+  addToWishlist(product: any): void {
+    this.wishlistService.addToWishlist(product)
+      .subscribe(
+        () => {
+          console.log(product);
+          alert('Item added to wishlist');
+        },
+        error => {
+          console.error('Error adding item to wishlist:', error);
+          alert('Error adding item to wishlist');
+        }
+      );
+  }
+
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.productlist = res.slice(0, 5);
+        console.log(this.productlist);
+
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
   }
 
 }

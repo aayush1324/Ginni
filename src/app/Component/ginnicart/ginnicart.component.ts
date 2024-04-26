@@ -241,19 +241,19 @@ export class GinnicartComponent {
     });
   }
 
- // Service or Component where you handle failure payment
-handleFailurePayment() {
-  var orderId = "order_O0PrQwUhVAB0FW";
-  this.paymentService.failurePayment( orderId ).subscribe(
-    (response) => {
-      alert(response.message);
-      console.log(response);
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
-}
+  // Service or Component where you handle failure payment
+  handleFailurePayment() {
+    var orderId = "order_O0PrQwUhVAB0FW";
+    this.paymentService.failurePayment( orderId ).subscribe(
+      (response) => {
+        alert(response.message);
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
 // Service or Component where you handle refund payment
 handleRefundPayment() {

@@ -36,7 +36,8 @@
                 <h4>Description</h4>
                 <br>
                 <br>
-                <p>Farmley is a dry-fruits & nuts specialist. We have built deep back-end linkages with 5000+ farmers & producers over the years, in order to provide adulteration free products. We blend health & taste in each new product that we curate by undergoing creative innovation and R&D. We are a full-stack brand offering 150+ products, bringing forth everything one can imagine under the umbrella of dry-fruits & nuts.
+                <p>{{ productDetails.description }}</p>
+                <!-- <p>Farmley is a dry-fruits & nuts specialist. We have built deep back-end linkages with 5000+ farmers & producers over the years, in order to provide adulteration free products. We blend health & taste in each new product that we curate by undergoing creative innovation and R&D. We are a full-stack brand offering 150+ products, bringing forth everything one can imagine under the umbrella of dry-fruits & nuts.
     
                     Peri Peri Party Mix Composition: Black Raisins, Pumpkin Seeds, Peanuts, Almonds, Cashews & Sunflower Seeds
                     
@@ -66,7 +67,7 @@
                     Offer Price : 899.00
                     
                     Processed, Packed & Marketed by : Connedit Business Solutions Pvt. Ltd. Khasra No. 17/2/2 & 3, 51/1/2 Kaji Palasiya, Indore Madhya Pradesh - 452001
-                </p>
+                </p> -->
             </div>
         </div>
     
@@ -92,9 +93,11 @@
                     <h6>Quantity:</h6>
                     <div class="rightmiddlebox">
                         <div class="rightmiddlequantitybox" >                       
-                            <i class="fa fa-minus" (click)="decrementQuantity(productDetails)"></i>
-                            <h6>{{productDetails.quantity}}</h6>
-                            <i class="fa fa-plus" (click)="incrementQuantity(productDetails)"></i>
+                            <!-- <i class="fa fa-minus" (click)="decrementQuantity(item)" style="border: 1px solid; border-radius: 50%;"></i> -->
+                            <h1 (click)="decrementQuantity(productDetails)" style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178); cursor: pointer;"><b>-</b></h1>
+                            <h6 style="border: 1px solid; font-size: larger; padding: 5%; border-color: rgb(184, 181, 178);"> {{productDetails.quantity}}</h6>
+                            <h1 (click)="incrementQuantity(productDetails)" style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178); cursor: pointer;"><b>+</b></h1>
+                            <!-- <i class="fa fa-plus" (click)="incrementQuantity(item)"></i> -->  
                         </div>
                     </div>          
                 </div>

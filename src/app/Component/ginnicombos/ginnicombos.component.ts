@@ -37,27 +37,21 @@ export class GinnicombosComponent {
   maxPrice!: any[];
   sortingCriteria!: string;
   originalProductList: any[] = [];
-  // isInStockChecked: boolean = false;
-  // isOutOfStockChecked: boolean = false;
-  // isAlmondChecked: boolean = false;
-  // isCashewChecked: boolean = false;
-  // isPistaChecked: boolean = false;
-  // isWalnutChecked: boolean = false;
-  // isRaisinChecked: boolean = false;
   isFeaturedChecked: boolean = true;
   isAlphabetUpChecked: boolean = false;
   isAlphabetDownChecked: boolean = false;
   isPriceUpChecked: boolean = false;
   isPriceDownChecked: boolean = false;
-
   filteredData! : any[];
   searchTerm: string ='';
-
   availabilityForm: FormGroup;
   categoryForm: FormGroup;
   priceForm: FormGroup;
   minPrices: any;
   maxPrices: any;
+  currentAvailabilityOption: string = ''; // Initialize currentAvailabilityOption
+  currentCategoryOption: string = ''; // Initialize currentCategoryOption
+
 
   constructor( private cartService : CartService, private productService : ProductService, 
                 private wishlistService : WishlistService, private searchService : SearchService) 
@@ -185,6 +179,34 @@ export class GinnicombosComponent {
   }
 
 
+  onAvailabilityChange() {
+   // Use optional chaining to safely access the value of stock control
+    const selectedStock = this.availabilityForm?.get('stock')?.value;
+          
+    // Update currentAvailabilityOption when availability option changes
+    if (!this.availabilityForm.dirty) {
+        this.currentAvailabilityOption = '';
+    } else if (selectedStock === 'In Stock') {
+        this.currentAvailabilityOption = 'In Stock';
+    } else if (selectedStock === 'Out of Stock') {
+        this.currentAvailabilityOption = 'Out of Stock';
+    }
+  }
+
+
+  onCategoryChange() {
+    // Use optional chaining to safely access the value of category control
+    const selectedCategory = this.categoryForm?.get('category')?.value;
+    
+    // Update currentCategoryOption when category option changes
+    if (!this.categoryForm.dirty) {
+      this.currentCategoryOption = ''; // Reset currentCategoryOption if the form is reset
+  } else {
+      this.currentCategoryOption = selectedCategory;
+  }
+}
+
+
   applyFilters(availabilityFilter: string, categoryFilter: string, minPrice:number, maxPrice:number) {
     let filteredProducts =this.productlist;
         
@@ -236,12 +258,14 @@ export class GinnicombosComponent {
   removeAvailabilityFilters() {
     this.availabilityForm.reset();
     this.onChange();
+    this.onAvailabilityChange();
   }
 
   // Function to reset Category filters
   removeCategoryFilters() {
     this.categoryForm.reset(); 
     this.onChange();
+    this.onCategoryChange();
   }
 
   // Function to reset Price filters
@@ -251,35 +275,9 @@ export class GinnicombosComponent {
   }
 
 
-    // // onchange in availability 
-  // onAvailabilityChange(availability:string) {
-  //   const selectedAvalability = this.availability.get('stock')?.value;
-  //   const selectedCategory = this.categoryForm.get('category')?.value;
-  //   const minPrice = this.priceForm.get('minPrice')?.value;
-  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
-  // }
-  
-  // // onchange in category 
-  // onCategoryChange(category:string) {
-  //   const selectedAvalability = this.availability.get('stock')?.value;
-  //   const selectedCategory = this.categoryForm.get('category')?.value;
-  //   const minPrice = this.priceForm.get('minPrice')?.value;
-  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
 
-  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
-  // }
-
-  //  // onchange in price
-  // onPriceFilter() {
-  //   const selectedAvalability = this.availability.get('stock')?.value;
-  //   const selectedCategory = this.categoryForm.get('category')?.value;
-  //   const minPrice = this.priceForm.get('minPrice')?.value;
-  //   const maxPrice = this.priceForm.get('maxPrice')?.value;
-
-  //   this.filteredData=this.applyFilters(selectedAvalability,selectedCategory,minPrice,maxPrice);
-  // }
+ 
 
   // Method to select the sorting option
   // selectSortingOption(option: SortingOptions): void {
@@ -382,6 +380,7 @@ export class GinnicombosComponent {
   isDropdownOpenCategory: boolean = false;
   isDropdownOpenPricing: boolean = false;
   isDropdownOpenSortby: boolean = false;
+  currentSortingOption: string = 'Featured'; // Initialize currentSortingOption
 
 
   toggleDropdownAvailability() {
@@ -399,6 +398,12 @@ export class GinnicombosComponent {
   toggleDropdownSortby() {
     this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
   }
+
+   // Define methods to handle toggling sorting options
+   toggleSortingOption(option: string) {
+    this.currentSortingOption = option;
+    // Add your existing logic for toggling sorting options
+}
 
   resetFilters(): void {
     // Uncheck all radio buttons
