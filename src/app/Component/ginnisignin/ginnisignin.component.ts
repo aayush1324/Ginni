@@ -49,12 +49,6 @@ export class GinnisigninComponent {
           alert(err?.error.message);
         },
       })
-      // this.seller.sellerSignin(this.signInForm.value);
-      // this.seller.isLoginError.subscribe((isError)=>{
-      //   if(isError){
-      //     this.authError="Email or password is not correct";
-      //   }
-      // })
     }
   }
 }

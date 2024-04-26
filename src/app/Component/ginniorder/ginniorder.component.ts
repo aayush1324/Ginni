@@ -20,6 +20,8 @@ export class GinniorderComponent implements OnInit{
       next: (res) => {
         this.orderList = res;
         console.log(this.orderList);
+        console.log(this.orderList.length);
+
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);

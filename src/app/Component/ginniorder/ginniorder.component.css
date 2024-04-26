@@ -20,6 +20,36 @@
     justify-content: space-between;
 }
 
+.empty-cart {
+    text-align: center;
+}
+
+.empty-cart img {
+    width: 20%; /* Adjust the size as needed */
+    height: 20%;
+    /* border: 1px solid; */
+}
+
+
+
+.empty-cart button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 10%;
+}
+
+.empty-cart button:hover {
+    background-color: #0056b3; /* Adjust color as needed */
+}
+
+
+
+
 .footer {
     width: 100%;
     height: fit-content;

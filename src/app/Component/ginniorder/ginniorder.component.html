@@ -1,57 +1,65 @@
-<div class="containerbox">
-    <div class="heading">
-        <h2>My Orders ({{orderList.length}})</h2>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="header">
-        <div class="order">
-            <h4>Order ID</h4>
+<div class="containerbox" >
+    <ng-container *ngIf="orderList; else emptyOrder">
+        <div class="heading">
+            <h2>My Orders ({{orderList.length}})</h2>
         </div>
 
-        <div class="date">
-            <h4>Order Date</h4>
+        <div class="header">
+            <div class="order">
+                <h4>Order ID</h4>
+            </div>
+
+            <div class="date">
+                <h4>Order Date</h4>
+            </div>
+
+            <div class="payment">
+                <h4>Payment</h4>
+            </div>
+
+            <div class="status">
+                <h4>Status</h4>
+            </div>
+
+            <div class="total">
+                <h4>Total</h4>
+            </div>
+
+            <!-- <div class="action">
+                <h4>Action</h4>
+            </div> -->
         </div>
 
-        <div class="payment">
-            <h4>Payment</h4>
+        <div class="footer" *ngFor = "let item of orderList">
+            <div class="order">
+                <a [routerLink]="['/main/ginnidetailorder', item.orderId]"><p>{{item.orderId}}</p></a>
+            </div>
+
+            <div class="date">
+                <p>{{item.createdAt}}</p>
+            </div>
+
+            <div class="payment">
+                <p>online</p>
+            </div>
+
+            <div class="status">
+                <p>Delivered</p>
+            </div>
+
+            <div class="total">
+                <p>Rs. {{item.amount/100}}</p>
+            </div>
         </div>
+    </ng-container>
 
-        <div class="status">
-            <h4>Status</h4>
+    <ng-template #emptyOrder>
+        <div class="empty-cart">
+            <img src="../../assets/images/png/emptyorder.png" alt="Cart Icon">
+            <p>Oops! No Orders Yet!</p>
+            <p>Looks like you have not order yet.</p>
+            <button routerLink="/main/ginnidryfruit">Shop Now</button>
         </div>
+    </ng-template>
 
-        <div class="total">
-            <h4>Total</h4>
-        </div>
-
-        <!-- <div class="action">
-            <h4>Action</h4>
-        </div> -->
-    </div>
-
-    <div class="footer" *ngFor = "let item of orderList">
-        <div class="order">
-            <a [routerLink]="['/main/ginnidetailorder', item.orderId]"><p>{{item.orderId}}</p></a>
-        </div>
-
-        <div class="date">
-            <p>{{item.createdAt}}</p>
-        </div>
-
-        <div class="payment">
-            <p>online</p>
-        </div>
-
-        <div class="status">
-            <p>Delivered</p>
-        </div>
-
-        <div class="total">
-            <p>Rs. {{item.amount/100}}</p>
-        </div>
-    </div>
-
- 
 </div>
