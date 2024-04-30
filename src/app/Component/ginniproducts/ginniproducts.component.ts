@@ -17,7 +17,7 @@ export class GinniproductsComponent {
 
   ngOnInit(): void {
     this.getProduct();
-    console.log(this.productlist);
+    // console.log(this.productlist);
   }
 
   addtocart(item: any){

@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
   styleUrl: './ginniaboutus.component.css'
 })
 export class GinniaboutusComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    console.log('aboutus')
+  }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    console.log('aboutus')
   }
 }

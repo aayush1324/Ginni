@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {  RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './Component/main/main.component';
 import { GinniaboutusComponent } from './Component/ginniaboutus/ginniaboutus.component';
 import { GinniallproductsComponent } from './Component/ginniallproducts/ginniallproducts.component';
@@ -48,11 +48,12 @@ import { SellerproductlistComponent } from './Component/sellerproductlist/seller
 import { SearchComponent } from './Component/search/search.component';
 import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
+import { CustomPreloadingService } from './Services/custom-preloading.service';
 
 
 const routes: Routes = [{
     path:"main" ,component : MainComponent, children: [
-      {path: "ginniaboutus" , component : GinniaboutusComponent},
+      {path: "ginniaboutus" ,data : {preload :true}, component : GinniaboutusComponent},
       {path: "ginniallproducts" , component : GinniallproductsComponent},
       {path: "ginnicart" , component : GinnicartComponent},
       {path: "ginnicontactus" , component : GinnicontactusComponent},
@@ -109,7 +110,9 @@ const routes: Routes = [{
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingService })],
+  // imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [CustomPreloadingService]
 })
 export class AppRoutingModule { }
