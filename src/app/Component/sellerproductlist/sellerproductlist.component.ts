@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
 import { ProductService } from '../../Services/product.service';
+import { Observable } from 'rxjs';
+import { ImageService } from '../../Services/image.service';
+import { HttpResponse } from '@angular/common/http';
+import { error } from 'console';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-sellerproductlist',
@@ -25,7 +30,7 @@ export class SellerproductlistComponent {
 
 
 
-  constructor(private fb: FormBuilder, private productService : ProductService) { }
+  constructor(private fb: FormBuilder, private productService : ProductService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -46,14 +51,41 @@ export class SellerproductlistComponent {
     this.getProduct();
   }
 
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    if (file) {
-      console.log(file);
-      console.log(event);
-      this.selectedFile = file;
-      this.productForm.get('image')?.setValue(file);
+  
+  // onFileSelecteds(event: any): void {
+  //   const file: File = event.target.files[0];
+  //   if (file) {
+  //     console.log(file);
+  //     console.log(event);
+  //     this.selectedFile = file;
+  //     this.productForm.get('image')?.setValue(file);
+  //   }
+  // }
+
+
+
+  selectedImages: { file: File, url: string }[] = [];
+
+  onFilesSelected(event: any) {
+    const filess: File[] = event.target.files;
+
+    if (filess) {
+      for (const file of filess) {
+        console.log(file);
+        const url = URL.createObjectURL(file);
+        console.log(url);
+          this.selectedImages.push({ file, url });
+          console.log(this.selectedImages);
+      }
+
+      for (let i = 0; i < this.selectedImages.length; i++) {
+            console.log(this.selectedImages[i]);
+          }
     }
+  }
+
+  onDeleteImage(index: number) {
+    this.selectedImages.splice(index, 1);
   }
 
   
@@ -82,6 +114,21 @@ export class SellerproductlistComponent {
           alert(err?.error.message);
         },
       });
+
+      // Assuming this.selectedImages contains the selected images
+      const imageUrls = this.selectedImages.map(image => image.url);
+
+      console.log(imageUrls)
+      this.imageService.addImages(imageUrls).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.selectedImages = []
+        },
+        error: (errors) => {
+          alert(errors?.error.message);
+        }
+      });
+
     }
   }
 
@@ -116,7 +163,7 @@ export class SellerproductlistComponent {
     this.isEdit = true;
   }
 
- populateForm(product: any): void {
+  populateForm(product: any): void {
   this.productForm.patchValue({
     productName: product.productName,
     url: product.url,
@@ -130,7 +177,7 @@ export class SellerproductlistComponent {
     weight: product.weight,
     status: product.status
   });
-}
+  }
 
 
   submitEditedProduct(): void {

@@ -161,10 +161,10 @@ export class GinnigiftingsComponent {
         this.dates = this.filteredData.filter(product => product.category === 'date');
 
         // Filter products based on price
-        this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-        this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
-        this.priceForm.get('minPrice')?.setValue(this.minPrices);
-        this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
+        // this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
+        // this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+        // this.priceForm.get('minPrice')?.setValue(this.minPrices);
+        // this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
       },
 
       error: (err) => {

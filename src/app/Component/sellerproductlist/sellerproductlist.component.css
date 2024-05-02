@@ -243,3 +243,89 @@ td button {
     margin: 5%;
     border-radius: 10px;
 }
+
+/* Example using Font Awesome for camera icon */
+.camera-icon {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 24px; /* Adjust as needed */
+    padding: 0%;
+    border-radius: 5px;
+  }
+  
+  /* If you're using Font Awesome icons */
+  .fa-camera {
+    /* Adjust color and other styles as needed */
+    color: #333;
+  }
+  
+  /* Hide default file input button */
+  input[type="file"] {
+    display: none;
+  }
+
+
+  .selected-images {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addimages {
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .imageDetail {
+    width: 40%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* border: 1px solid; */
+
+  }
+
+  .image {
+    width: 50%;
+    padding: 0%;
+    margin: 0%;
+  }
+
+  .image img {
+    width: 5rem;
+    height: 3rem;
+  }
+
+  .imageName {
+    width: 50%;
+    padding: 0%;
+    margin: 0%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .imageDelete {
+    width: 80%;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: right;
+    align-items: right;
+  }
+
+  .imageDelete i {
+    align-items: right;
+  }
+
+
+  
