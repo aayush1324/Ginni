@@ -37,10 +37,10 @@ export class GinnisignupComponent {
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (res) => {
           alert(res.message);
-          alert("Please check OTP from your email ");
-          alert("Please check OTP from your mobile ");
+          alert("Please Confirm you email ");
           this.signupForm.reset();
-          this.router.navigate(['/main/ginniotp']);
+          this.router.navigate(['/main/ginnisignin']);
+          alert(res.message)
         },
         error: (err) => {
           alert(err?.error.message);

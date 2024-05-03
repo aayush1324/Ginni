@@ -49,7 +49,6 @@ import { SearchComponent } from './Component/search/search.component';
 import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
 import { CustomPreloadingService } from './Services/custom-preloading.service';
-import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
 
 
 const routes: Routes = [{
