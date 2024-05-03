@@ -39,7 +39,7 @@ export class GinnisignupComponent {
           alert(res.message);
           alert("Please Confirm you email ");
           this.signupForm.reset();
-          this.router.navigate(['/main/ginnisignin']);
+          this.router.navigate(['/main/ginniotp']);
           alert(res.message)
         },
         error: (err) => {

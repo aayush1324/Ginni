@@ -42,6 +42,10 @@ export class AuthService {
     this.router.navigate(['login'])
   }
 
+  verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}verifyOtps`, { emailOtp, phoneOtp });
+  }
+
   storeToken(tokenValue: string){
     localStorage.setItem('token', tokenValue)
   }
@@ -52,6 +56,7 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token')
   }
+
   getRefreshToken(){
     return localStorage.getItem('refreshToken')
   }

@@ -49,6 +49,7 @@ import { SearchComponent } from './Component/search/search.component';
 import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
 import { CustomPreloadingService } from './Services/custom-preloading.service';
+import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
 
 
 const routes: Routes = [{
@@ -90,6 +91,7 @@ const routes: Routes = [{
       {path: "home", component : HomeComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
+      {path: "ginniotp", component : GinniotpComponent},
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
       {path: "sellerdashboard", component : SellerdashboardComponent, children : [
         {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
