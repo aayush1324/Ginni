@@ -51,19 +51,22 @@ export class SellerproductlistComponent {
     this.getProduct();
   }
 
+  selectedImage: { file: File, url: string }[] = [];
   
-  // onFileSelecteds(event: any): void {
-  //   const file: File = event.target.files[0];
-  //   if (file) {
-  //     console.log(file);
-  //     console.log(event);
-  //     this.selectedFile = file;
-  //     this.productForm.get('image')?.setValue(file);
-  //   }
-  // }
+  onFileSelecteds(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file); // Generate Blob URL from the selected file
+      this.selectedImage.push({ file, url }); // Store the Blob URL in selectedImage array
+    }
+  }
 
+  onDeleteImages(): void {
+    this.selectedImage = []; // Clear the selectedImage array
+  }
 
-
+  
+  
   selectedImages: { file: File, url: string }[] = [];
 
   onFilesSelected(event: any) {
@@ -71,11 +74,8 @@ export class SellerproductlistComponent {
 
     if (filess) {
       for (const file of filess) {
-        console.log(file);
         const url = URL.createObjectURL(file);
-        console.log(url);
           this.selectedImages.push({ file, url });
-          console.log(this.selectedImages);
       }
 
       for (let i = 0; i < this.selectedImages.length; i++) {
@@ -103,7 +103,19 @@ export class SellerproductlistComponent {
   addedProduct(): void {
     if (this.productForm.valid) {
       console.log(this.productForm.value);
-      this.productService.addProducts(this.productForm.value).subscribe({
+
+      // Retrieve form values
+      const formData = this.productForm.value;
+
+      // Assuming you want to set the URL of the first selected image in the form
+      if (this.selectedImage.length > 0) {
+        const imageUrl = this.selectedImage[0].url;
+        formData.image = imageUrl; // Update the image field with the URL
+      }
+
+      console.log(formData);
+
+      this.productService.addProducts(formData).subscribe({
         next: (res) => {
           console.log(res.message);
           this.togglePopup();
@@ -116,18 +128,18 @@ export class SellerproductlistComponent {
       });
 
       // Assuming this.selectedImages contains the selected images
-      const imageUrls = this.selectedImages.map(image => image.url);
+      // const imageUrls = this.selectedImages.map(image => image.url);
 
-      console.log(imageUrls)
-      this.imageService.addImages(imageUrls).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.selectedImages = []
-        },
-        error: (errors) => {
-          alert(errors?.error.message);
-        }
-      });
+      // console.log(imageUrls)
+      // this.imageService.addImages(imageUrls).subscribe({
+      //   next: (response) => {
+      //     console.log(response);
+      //     this.selectedImages = []
+      //   },
+      //   error: (errors) => {
+      //     alert(errors?.error.message);
+      //   }
+      // });
 
     }
   }

@@ -142,13 +142,25 @@
               </div>
             </div>
 
-<!-- 
+
             <div class="form-group">
               <input type="file" (change)="onFileSelecteds($event)" accept="image/*" formControlName="image">
-              <div *ngIf="productForm.get('image').errors?.['required'] && productForm.get('image').touched" class="text-danger">
+              <div *ngIf="productForm.get('image')?.errors?.['required'] && productForm.get('image')?.touched" class="text-danger">
                 Image is required.
               </div>
-            </div> -->
+            </div>
+
+            <div class="addimages" *ngFor="let selectedImagess of selectedImage">
+              <div class="imageDetail">
+                <div class="image">
+                  <img [src]="selectedImagess.url" alt="Selected Image">
+                </div>
+              </div>
+              <div class="imageDelete">
+                <i class="fa fa-trash-o" (click)="onDeleteImages()" style="font-size:24px"></i>
+              </div>   
+            </div>
+
 
             <!-- Image upload input field -->
             <div class="form-group" >
@@ -208,7 +220,18 @@
       <tbody>
         <tr *ngFor="let item of productlist">
           <ng-container *ngFor="let key of tableHeaders">
-            <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}
+            <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              <!-- Check if the current key is 'image' -->
+              <ng-container *ngIf="key === 'image'">
+                <!-- If 'image', display the image -->
+                <img [src]="item[key]" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+                <!-- <img src="../../assets/images/logo/pista.jpeg" alt="Image" style="width: 5rem; height: 5rem;"> -->
+              </ng-container>
+
+              <!-- If not 'image', display the text value -->
+              <ng-container *ngIf="key !== 'image'">
+                {{ item[key] }}
+              </ng-container>
             </td>
           </ng-container>
           <td>

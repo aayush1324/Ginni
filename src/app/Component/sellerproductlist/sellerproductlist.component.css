@@ -260,9 +260,9 @@ td button {
   }
   
   /* Hide default file input button */
-  input[type="file"] {
+  /* input[type="file"] {
     display: none;
-  }
+  } */
 
 
   .selected-images {

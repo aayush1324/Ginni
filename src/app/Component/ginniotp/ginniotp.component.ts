@@ -44,10 +44,14 @@ export class GinniotpComponent {
         error: (error) => {
           // Handle error response
           console.error('Error verifying OTPs:', error);
-          // this.authError = 'Invalid OTP';
-          alert(this.authError)
-          alert(error)
-        }
+          if (error && error.error && error.error.message && error.error.message.includes('OTP expired')) {
+            // Display alert for OTP expiration
+            alert('OTP Expired');
+          } else {
+            // Display generic error message or handle other error cases
+            alert('An error occurred during OTP verification');
+          }
+        },
       });
     }
   }

@@ -37,9 +37,8 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}authenticate`,loginObj)
   }
 
-  signOut(){
-    localStorage.clear();
-    this.router.navigate(['login'])
+  logout(token: string) {
+    return this.http.post<any>(`${this.baseUrl}logout`, { token });
   }
 
   verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {

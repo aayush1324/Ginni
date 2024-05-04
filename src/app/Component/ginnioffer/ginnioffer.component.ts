@@ -152,11 +152,29 @@ export class GinniofferComponent {
     this.isAccountDropdown = false;
   }
 
-  logout(){
-    this.auth.signOut();
-    this.loggedIn = false;
+  // logout(){
+  //   this.auth.signOut();
+  //   this.loggedIn = false;
+  //   this.router.navigate(['/main/home'])
+  // }
 
-    this.router.navigate(['/main/home'])
+  logout() {
+    this.loggedIn = false;
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.auth.logout(token).subscribe(
+        () => {
+          console.log('Logged out successfully');
+          localStorage.clear();
+          localStorage.removeItem('token');
+
+          // Redirect or perform any additional actions after logout
+        },
+        error => {
+          console.error('Logout failed', error);
+        }
+      );
+    }
   }
 
   // Method to update wishlist count when an item is added
