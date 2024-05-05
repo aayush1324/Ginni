@@ -144,22 +144,18 @@
 
 
             <div class="form-group">
-              <input type="file" (change)="onFileSelecteds($event)" accept="image/*" formControlName="image">
+              <input type="file" (change)="onFileChanged($event)" accept="image/*" formControlName="image">
               <div *ngIf="productForm.get('image')?.errors?.['required'] && productForm.get('image')?.touched" class="text-danger">
                 Image is required.
               </div>
             </div>
 
-            <div class="addimages" *ngFor="let selectedImagess of selectedImage">
-              <div class="imageDetail">
-                <div class="image">
-                  <img [src]="selectedImagess.url" alt="Selected Image">
-                </div>
-              </div>
-              <div class="imageDelete">
-                <i class="fa fa-trash-o" (click)="onDeleteImages()" style="font-size:24px"></i>
-              </div>   
+            <div *ngIf="selectedImage" class="text-center mt-3" style="display: flex; flex-direction: row; justify-content: space-between; padding: 0% 5%;">
+              <img [src]="selectedImage" alt="Selected Image" style="max-width: 100%; max-height: 200px;">
+              <i class="fa fa-trash-o" (click)="onDeleteImage()" style="font-size:24px"></i>
             </div>
+
+            
 
 
             <!-- Image upload input field -->
@@ -167,10 +163,10 @@
               <label for="imageUpload" class="camera-icon">
                 <i class="fa fa-camera"></i>
               </label>
-              <input type="file" id="imageUpload" (change)="onFilesSelected($event)" multiple accept="image/*" style="display: none;">
+              <input type="file" id="imageUpload" (change)="onFileChanges($event)" multiple accept="image/*" style="display: none;">
             </div>
             
-            <div class="selected-images">
+            <!-- <div class="selected-images">
               <div class="addimages" *ngFor="let selectedImage of selectedImages; let i = index">
                 <div class="imageDetail">
                   <div class="image">
@@ -184,9 +180,8 @@
                   <i class="fa fa-trash-o" (click)="onDeleteImage(i)" style="font-size:24px"></i>
                 </div>   
               </div>
-            </div>
+            </div> -->
 
-            <br>
             <br>
             <button type="submit" [disabled]="!productForm.valid">
               {{ isEdit ? 'Submit Edit product' : 'Add a New product' }}
@@ -222,14 +217,14 @@
           <ng-container *ngFor="let key of tableHeaders">
             <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               <!-- Check if the current key is 'image' -->
-              <ng-container *ngIf="key === 'image'">
+              <ng-container *ngIf="key === 'profileImage'">
                 <!-- If 'image', display the image -->
-                <img [src]="item[key]" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+                <img [src]="item.imageData" alt="Product Image" style="width: 100%; height: 50%;">
                 <!-- <img src="../../assets/images/logo/pista.jpeg" alt="Image" style="width: 5rem; height: 5rem;"> -->
               </ng-container>
 
               <!-- If not 'image', display the text value -->
-              <ng-container *ngIf="key !== 'image'">
+              <ng-container *ngIf="key !== 'profileImage'">
                 {{ item[key] }}
               </ng-container>
             </td>

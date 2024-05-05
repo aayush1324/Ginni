@@ -18,4 +18,15 @@ export class ImageService {
   getImages(): Observable<any> {
     return this.http.get(`${this.baseUrl}getImage`);
   }
+
+  addMultipleImages(images: File[]): Observable<any> {
+    const formData: FormData = new FormData();
+
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images[]', images[i], images[i].name);
+    }
+
+    return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData);
+  }
+
 }

@@ -20,11 +20,12 @@ export class SellerproductlistComponent {
   isEdit: boolean = false;
   selectedproduct: any;
   productlist: any[] = [];
-  selectedFile: File | undefined;
+  selectedFile: File | null = null; // Initialize selectedFile with null
+
 
     // Define your table headers
   tableHeaders: string[] = [
-    'image', 'productName', 'description', 'url', 'price', 'discount', 
+    'profileImage', 'productName', 'description', 'url', 'price', 'discount', 
     'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
   ];
 
@@ -48,45 +49,10 @@ export class SellerproductlistComponent {
       image: [null, Validators.required] // Image is required
     });
 
-    this.getProduct();
+    // this.getProduct();
+    this.getProductsWithImages();
   }
 
-  selectedImage: { file: File, url: string }[] = [];
-  
-  onFileSelecteds(event: any): void {
-    const file: File = event.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file); // Generate Blob URL from the selected file
-      this.selectedImage.push({ file, url }); // Store the Blob URL in selectedImage array
-    }
-  }
-
-  onDeleteImages(): void {
-    this.selectedImage = []; // Clear the selectedImage array
-  }
-
-  
-  
-  selectedImages: { file: File, url: string }[] = [];
-
-  onFilesSelected(event: any) {
-    const filess: File[] = event.target.files;
-
-    if (filess) {
-      for (const file of filess) {
-        const url = URL.createObjectURL(file);
-          this.selectedImages.push({ file, url });
-      }
-
-      for (let i = 0; i < this.selectedImages.length; i++) {
-            console.log(this.selectedImages[i]);
-          }
-    }
-  }
-
-  onDeleteImage(index: number) {
-    this.selectedImages.splice(index, 1);
-  }
 
   
   togglePopup(): void {
@@ -98,69 +64,146 @@ export class SellerproductlistComponent {
 
   resetForm(): void {
     this.productForm.reset();
+    this.selectedImage = null;
   }
 
-  addedProduct(): void {
-    if (this.productForm.valid) {
-      console.log(this.productForm.value);
 
-      // Retrieve form values
-      const formData = this.productForm.value;
+  // onFileChanged(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   const files = inputElement.files;
+  //   if (files && files.length > 0) {
+  //     this.selectedFile = files[0];
+  //   }
+  // }
 
-      // Assuming you want to set the URL of the first selected image in the form
-      if (this.selectedImage.length > 0) {
-        const imageUrl = this.selectedImage[0].url;
-        formData.image = imageUrl; // Update the image field with the URL
-      }
+  selectedImage: string | ArrayBuffer | null = null; // Define a variable to hold the selected image data
 
-      console.log(formData);
-
-      this.productService.addProducts(formData).subscribe({
-        next: (res) => {
-          console.log(res.message);
-          this.togglePopup();
-          alert(res.message);
-          this.getProduct();
-        },
-        error: (err) => {
-          alert(err?.error.message);
-        },
-      });
-
-      // Assuming this.selectedImages contains the selected images
-      // const imageUrls = this.selectedImages.map(image => image.url);
-
-      // console.log(imageUrls)
-      // this.imageService.addImages(imageUrls).subscribe({
-      //   next: (response) => {
-      //     console.log(response);
-      //     this.selectedImages = []
-      //   },
-      //   error: (errors) => {
-      //     alert(errors?.error.message);
-      //   }
-      // });
-
+  onFileChanged(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedImage = reader.result;
+      };
+      reader.readAsDataURL(files[0]);
     }
   }
 
-  getProduct(): void {
-    this.productService.getProducts().subscribe({
-      next: (res) => {
+  onDeleteImage(): void {
+    this.selectedImage = null;
+  }
+
+
+  // selectedImages: (string | ArrayBuffer | null)[] = []; // Define an array to hold the selected image data
+  selectedImages: File[] = [];
+
+
+  // onFileChanges(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   const files = inputElement.files;
+  //   if (files && files.length > 0) {
+  //     // Loop through each selected file
+  //     for (let i = 0; i < files.length; i++) {
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         // Push the data URL of each selected image into the array
+  //         this.selectedImages.push(reader.result);
+  //       };
+  //       reader.readAsDataURL(files[i]);
+  //     }
+  //   }
+  // }
+
+  onFileChanges(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedImages.push(files[i]);
+      }
+    }
+  }
+
+ 
+  addedProduct() {
+    if (this.productForm && this.productForm.valid && this.selectedFile) {
+      const formData = new FormData();
+      formData.append('productName', this.productForm.get('productName')!.value);
+      formData.append('url', this.productForm.get('url')!.value);
+      formData.append('price', this.productForm.get('price')!.value);
+      formData.append('discount', this.productForm.get('discount')!.value);
+      formData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+      formData.append('quantity', this.productForm.get('quantity')!.value);
+      formData.append('description', this.productForm.get('description')!.value);
+      formData.append('category', this.productForm.get('category')!.value);
+      formData.append('subcategory', this.productForm.get('subcategory')!.value);
+      formData.append('weight', this.productForm.get('weight')!.value);
+      formData.append('status', this.productForm.get('status')!.value);
+      formData.append('image', this.selectedFile);
+  
+      this.productService.addProducts(formData).subscribe(
+        (response) => {
+          console.log(response);
+          this.togglePopup();
+          alert(response.message);
+          this.productForm!.reset();
+          this.selectedFile = null;
+          this.getProductsWithImages();
+        },
+        (error) => {
+          console.error(error);
+          alert(error?.error.message);
+        }
+      );
+
+
+      this.imageService.addMultipleImages(this.selectedImages).subscribe(
+        response => {
+          console.log('Images uploaded successfully:', response);
+          // Clear selected images after upload
+          this.selectedImages = [];
+        },
+        error => {
+          console.error('Error uploading images:', error);
+        }
+      );
+     }
+  }
+  
+
+  getProductsWithImages(): void {
+    this.productService.getProductsWithImages().subscribe({
+      next: (res: any[]) => { // Assuming the response is an array of objects containing product and image data/
+        console.log(res);
         this.productlist = res;
+   
+         // Modify the imageData field for each item in the response
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+
+        this.productlist = res;
+        
         console.log(this.productlist);
       },
       error: (err) => {
-        console.error('Error fetching addresses:', err);
+        console.error('Error fetching products with images:', err);
       }
     });
   }
 
   deleteProduct(productId: string): void {
+    console.log(productId);
     this.productService.deleteProducts(productId).subscribe({
       next: (res) => {
         console.log('Product deleted successfully!', res);
-        this.getProduct();
+        this.getProductsWithImages();
       },
       error: (err) => {
         console.error('Error deleting product:', err);
@@ -176,36 +219,73 @@ export class SellerproductlistComponent {
   }
 
   populateForm(product: any): void {
-  this.productForm.patchValue({
-    productName: product.productName,
-    url: product.url,
-    price: product.price,
-    discount: product.discount,
-    deliveryPrice: product.deliveryPrice,
-    quantity: product.quantity,
-    description: product.description,
-    category: product.category,
-    subcategory: product.subcategory,
-    weight: product.weight,
-    status: product.status
-  });
-  }
+    if (this.productForm) {
+      console.log(this.productForm);
+      this.productForm.patchValue({
+        productName: product.productName,
+        url: product.url,
+        price: product.price,
+        discount: product.discount,
+        deliveryPrice: product.deliveryPrice,
+        quantity: product.quantity,
+        description: product.description,
+        category: product.category,
+        subcategory: product.subcategory,
+        weight: product.weight,
+        status: product.status,
+        image: product.imageData
+      });
+      console.log(this.productForm);
 
+    }
+  }  
+  
+
+  // submitEditedProduct(): void {
+  //   if (this.productForm.valid) {
+  //     const updatedProduct = this.productForm.value;
+  //     this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
+  //       next: (res) => {
+  //         console.log('Product updated successfully!', res);
+  //         this.togglePopup();
+  //         this.getProductsWithImages();
+  //       },
+  //       error: (err) => {
+  //         console.error('Error updating Product:', err);
+  //       }
+  //     });
+  //   }
+  // }
 
   submitEditedProduct(): void {
-    if (this.productForm.valid) {
-      const updatedProduct = this.productForm.value;
-      this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
+    if (this.productForm.valid && this.selectedFile) {
+      const updatedProductData = new FormData();
+      updatedProductData.append('productName', this.productForm.get('productName')!.value);
+      updatedProductData.append('url', this.productForm.get('url')!.value);
+      updatedProductData.append('price', this.productForm.get('price')!.value);
+      updatedProductData.append('discount', this.productForm.get('discount')!.value);
+      updatedProductData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+      updatedProductData.append('quantity', this.productForm.get('quantity')!.value);
+      updatedProductData.append('description', this.productForm.get('description')!.value);
+      updatedProductData.append('category', this.productForm.get('category')!.value);
+      updatedProductData.append('subcategory', this.productForm.get('subcategory')!.value);
+      updatedProductData.append('weight', this.productForm.get('weight')!.value);
+      updatedProductData.append('status', this.productForm.get('status')!.value);
+      updatedProductData.append('image', this.selectedFile);
+  
+      this.productService.editProducts(this.selectedproduct.id, updatedProductData).subscribe({
         next: (res) => {
           console.log('Product updated successfully!', res);
           this.togglePopup();
-          this.getProduct();
+          this.getProductsWithImages();
         },
         error: (err) => {
           console.error('Error updating Product:', err);
         }
       });
+    } else {
+      console.log('Form invalid or image not selected');
     }
   }
-
+  
 }

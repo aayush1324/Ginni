@@ -12,8 +12,13 @@ export class ProductService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addProducts(sellProduct: any ) {
-    return this.http.post<any>(`${this.baseUrl}addProduct`, sellProduct)
+
+  addProducts(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}addProductsWithImages`, formData);
+  }
+
+  getProductsWithImages(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImages`);
   }
 
   getProducts(): Observable<any[]> {
