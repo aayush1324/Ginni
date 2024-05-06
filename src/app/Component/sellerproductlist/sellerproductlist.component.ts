@@ -21,6 +21,7 @@ export class SellerproductlistComponent {
   selectedproduct: any;
   productlist: any[] = [];
   selectedFile: File | null = null; // Initialize selectedFile with null
+  selectedFiles: File | null = null; // Initialize selectedFile with null
 
 
     // Define your table headers
@@ -28,8 +29,6 @@ export class SellerproductlistComponent {
     'profileImage', 'productName', 'description', 'url', 'price', 'discount', 
     'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
   ];
-
-
 
   constructor(private fb: FormBuilder, private productService : ProductService, private imageService: ImageService) { }
 
@@ -48,11 +47,9 @@ export class SellerproductlistComponent {
       status: ['sel', Validators.required],
       image: [null, Validators.required] // Image is required
     });
-
     // this.getProduct();
     this.getProductsWithImages();
   }
-
 
   
   togglePopup(): void {
@@ -65,16 +62,8 @@ export class SellerproductlistComponent {
   resetForm(): void {
     this.productForm.reset();
     this.selectedImage = null;
+    this.selectedImages = [];
   }
-
-
-  // onFileChanged(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   const files = inputElement.files;
-  //   if (files && files.length > 0) {
-  //     this.selectedFile = files[0];
-  //   }
-  // }
 
   selectedImage: string | ArrayBuffer | null = null; // Define a variable to hold the selected image data
 
@@ -96,35 +85,29 @@ export class SellerproductlistComponent {
   }
 
 
-  // selectedImages: (string | ArrayBuffer | null)[] = []; // Define an array to hold the selected image data
-  selectedImages: File[] = [];
-
-
-  // onFileChanges(event: Event) {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   const files = inputElement.files;
-  //   if (files && files.length > 0) {
-  //     // Loop through each selected file
-  //     for (let i = 0; i < files.length; i++) {
-  //       const reader = new FileReader();
-  //       reader.onload = () => {
-  //         // Push the data URL of each selected image into the array
-  //         this.selectedImages.push(reader.result);
-  //       };
-  //       reader.readAsDataURL(files[i]);
-  //     }
-  //   }
-  // }
+  selectedImages: { name: string, data: string | ArrayBuffer }[] = []; // Define a variable to hold the selected images and their names
 
   onFileChanges(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files;
-
     if (files && files.length > 0) {
+      // Iterate over each file and add it to selectedImages
       for (let i = 0; i < files.length; i++) {
-        this.selectedImages.push(files[i]);
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.result) { // Check if reader.result is not null
+            // Push an object containing the file name and the loaded image data into the selectedImages array
+            this.selectedImages.push({ name: files[i].name, data: reader.result });
+          }
+        };
+        // Read the file as a data URL
+        reader.readAsDataURL(files[i]);
       }
     }
+  }
+   
+  onDeleteImages(index: number) {
+    this.selectedImages.splice(index, 1); // Remove the image at the specified index
   }
 
  
@@ -147,6 +130,8 @@ export class SellerproductlistComponent {
       this.productService.addProducts(formData).subscribe(
         (response) => {
           console.log(response);
+          const productId = response.productId; // Extract the product ID from the response
+          this.uploadImages(productId); // Call function to upload images with the product ID
           this.togglePopup();
           alert(response.message);
           this.productForm!.reset();
@@ -158,19 +143,23 @@ export class SellerproductlistComponent {
           alert(error?.error.message);
         }
       );
+    }
+  }
 
-
-      this.imageService.addMultipleImages(this.selectedImages).subscribe(
-        response => {
-          console.log('Images uploaded successfully:', response);
-          // Clear selected images after upload
-          this.selectedImages = [];
-        },
-        error => {
-          console.error('Error uploading images:', error);
-        }
-      );
-     }
+  // Function to upload images with the product ID
+  uploadImages(productId: string) {
+    console.log(this.selectedImages);
+    // Assuming imageService.addMultipleImages expects an array of images
+    this.imageService.addMultipleImages(productId, this.selectedImages).subscribe(
+      response => {
+        console.log('Images uploaded successfully:', response);
+        // Clear selected images after upload
+        this.selectedImages = [];
+      },
+      error => {
+        console.error('Error uploading images:', error);
+      }
+    );
   }
   
 
@@ -198,10 +187,12 @@ export class SellerproductlistComponent {
     });
   }
 
+
   deleteProduct(productId: string): void {
     console.log(productId);
     this.productService.deleteProducts(productId).subscribe({
       next: (res) => {
+        alert(res.message)
         console.log('Product deleted successfully!', res);
         this.getProductsWithImages();
       },
@@ -233,29 +224,11 @@ export class SellerproductlistComponent {
         subcategory: product.subcategory,
         weight: product.weight,
         status: product.status,
-        image: product.imageData
       });
+      this.selectedImage = product.imageData; // Set the selected image to be displayed
       console.log(this.productForm);
-
     }
-  }  
-  
-
-  // submitEditedProduct(): void {
-  //   if (this.productForm.valid) {
-  //     const updatedProduct = this.productForm.value;
-  //     this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
-  //       next: (res) => {
-  //         console.log('Product updated successfully!', res);
-  //         this.togglePopup();
-  //         this.getProductsWithImages();
-  //       },
-  //       error: (err) => {
-  //         console.error('Error updating Product:', err);
-  //       }
-  //     });
-  //   }
-  // }
+  }
 
   submitEditedProduct(): void {
     if (this.productForm.valid && this.selectedFile) {
@@ -275,6 +248,7 @@ export class SellerproductlistComponent {
   
       this.productService.editProducts(this.selectedproduct.id, updatedProductData).subscribe({
         next: (res) => {
+          alert(res.message);
           console.log('Product updated successfully!', res);
           this.togglePopup();
           this.getProductsWithImages();
@@ -287,5 +261,6 @@ export class SellerproductlistComponent {
       console.log('Form invalid or image not selected');
     }
   }
+  
   
 }

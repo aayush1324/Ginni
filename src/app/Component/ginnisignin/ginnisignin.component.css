@@ -77,3 +77,22 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.form-group {
+    position: relative; /* Ensure the parent container is positioned */
+  }
+  
+  .password-toggle-icon {
+    position: absolute; /* Position the icon relative to the parent container */
+    top: 50%; /* Align the icon vertically */
+    right: 10px; /* Adjust the right position as needed */
+    transform: translateY(-50%); /* Center the icon vertically */
+    cursor: pointer; /* Set cursor to pointer for better UX */
+  }
+  
+  /* Adjust the icon size and styles as needed */
+  .fa {
+    font-size: 20px;
+    color: #555; /* Adjust the icon color */
+  }
+  

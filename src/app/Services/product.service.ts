@@ -25,7 +25,7 @@ export class ProductService {
     return this.http.get<any[]>(`${this.baseUrl}getProduct`); 
   }
 
-  editProducts(productId: string, updatedProduct: any): Observable<any> {
+  editProducts(productId: string, updatedProduct: FormData): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}editProduct/${productId}`, updatedProduct);
   }
 

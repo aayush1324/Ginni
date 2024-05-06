@@ -155,33 +155,23 @@
               <i class="fa fa-trash-o" (click)="onDeleteImage()" style="font-size:24px"></i>
             </div>
 
-            
 
-
+            <br>
             <!-- Image upload input field -->
-            <div class="form-group" >
+            <div class="form-group" *ngIf ="!isEdit">
               <label for="imageUpload" class="camera-icon">
                 <i class="fa fa-camera"></i>
+                Choose Multiple Images
               </label>
               <input type="file" id="imageUpload" (change)="onFileChanges($event)" multiple accept="image/*" style="display: none;">
             </div>
             
-            <!-- <div class="selected-images">
-              <div class="addimages" *ngFor="let selectedImage of selectedImages; let i = index">
-                <div class="imageDetail">
-                  <div class="image">
-                    <img [src]="selectedImage.url" alt="Selected Image">
-                  </div>
-                  <div class="imageName">
-                    <h5>{{selectedImage.file.name}}</h5>
-                  </div>
-                </div>
-                <div class="imageDelete">
-                  <i class="fa fa-trash-o" (click)="onDeleteImage(i)" style="font-size:24px"></i>
-                </div>   
-              </div>
-            </div> -->
-
+            <div *ngFor="let image of selectedImages; let i = index" class="selected-image-container" style="display: flex; justify-content: space-between;">
+              <img [src]="image.data" class="selected-image" alt="Selected Image">
+              <span>{{ image.name }}</span>
+              <i class="fa fa-trash-o" (click)="onDeleteImages(i)" style="font-size:24px"></i>
+            </div>
+            
             <br>
             <button type="submit" [disabled]="!productForm.valid">
               {{ isEdit ? 'Submit Edit product' : 'Add a New product' }}
@@ -220,7 +210,6 @@
               <ng-container *ngIf="key === 'profileImage'">
                 <!-- If 'image', display the image -->
                 <img [src]="item.imageData" alt="Product Image" style="width: 100%; height: 50%;">
-                <!-- <img src="../../assets/images/logo/pista.jpeg" alt="Image" style="width: 5rem; height: 5rem;"> -->
               </ng-container>
 
               <!-- If not 'image', display the text value -->

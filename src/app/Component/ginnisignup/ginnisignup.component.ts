@@ -29,6 +29,23 @@ export class GinnisignupComponent {
   }
 
 
+  // Add this property to your component class
+  showPassword: boolean = false;
+
+  // Add this method to your component class
+  togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+  }
+
+
+  showConfirmPassword: boolean = false;
+
+  toggleConfirmPasswordVisibility() {
+      this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+
+
   SignupForm() : void {
     if (this.signupForm.valid) 
     {

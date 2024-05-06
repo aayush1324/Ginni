@@ -27,6 +27,15 @@ export class GinnisigninComponent {
     });
   }
 
+    // Add this property to your component class
+  showPassword: boolean = false;
+
+  // Add this method to your component class
+  togglePasswordVisibility() {
+    console.log(this.showPassword);
+      this.showPassword = !this.showPassword;
+  }
+
 
   SigninForm()  {
     if (this.signInForm.valid) 

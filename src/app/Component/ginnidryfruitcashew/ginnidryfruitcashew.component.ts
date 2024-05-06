@@ -138,8 +138,15 @@ export class GinnidryfruitcashewComponent {
   
   
   getProduct(): void {
-    this.productService.getProducts().subscribe({
+    this.productService.getProductsWithImages().subscribe({
       next: (res) => {
+        console.log(res);
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         this.productlist = res.filter((product) => product.category === 'cashew');
         this.originalProductList = [...this.productlist];
 

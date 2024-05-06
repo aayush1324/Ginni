@@ -29,7 +29,11 @@
         <br>
         <div class="form-group">
             <!-- <label for="password">Password:</label> -->
-            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password">
+            <input [type]="!showPassword ? 'text' : 'password'" id="password" formControlName="password" class="form-control" placeholder="Password">
+            <span class="password-toggle-icon" (click)="togglePasswordVisibility()">
+                <i class="fa fa-eye" *ngIf="!showPassword"></i>
+                <i class="fa fa-eye-slash" *ngIf="showPassword"></i>
+            </span>            
             <div *ngIf="signupForm.get('password')?.errors?.['required'] && signupForm.get('password')?.touched" class="text-danger">
                 Password is required.
             </div>
@@ -39,16 +43,20 @@
         </div>
         <br>
         <div class="form-group">
-            <!-- <label for="confirmPassword">Confirm Password:</label> -->
-            <input type="password" id="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+            <!-- <label for="confirmPassword">Confirm Password:</label> -->            
+            <input [type]="!showConfirmPassword ? 'text' : 'password'" id="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+            <span class="password-toggle-icon" (click)="toggleConfirmPasswordVisibility()">
+                <i class="fa fa-eye" *ngIf="!showConfirmPassword"></i>
+                <i class="fa fa-eye-slash" *ngIf="showConfirmPassword"></i>
+            </span>
             <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched" class="text-danger">
                 Confirm Password is required.
             </div>
             <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength'] && signupForm.get('confirmPassword')?.touched" class="text-danger">
-                Password must be at least 6 characters long.
+                Confirm Password must be at least 6 characters long.
             </div>
             <div *ngIf="signupForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
-                *Password didn't matched*
+                *Confirm Password didn't matched*
             </div>
         </div>
         <br>
