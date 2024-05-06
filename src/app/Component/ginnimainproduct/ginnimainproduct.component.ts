@@ -5,9 +5,15 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../../Services/payment.service';
+import { ImageService } from '../../Services/image.service';
 
 declare var Razorpay: any;
-
+export interface Image {
+  id: string;
+  productId: string;
+  profileImage: string; // Assuming this is the image data in base64 format
+  // Add any other properties that are present in your Image model
+}
 
 @Component({
   selector: 'app-ginnimainproduct',
@@ -19,9 +25,10 @@ export class GinnimainproductComponent {
   productId!: string;
   productDetails: any;
   productlist!: any[];
+  images: Image[] = [];
 
   constructor(private route: ActivatedRoute,  private cartService : CartService, private productService : ProductService, 
-    private wishlistService : WishlistService, private searchService : SearchService , private paymentService : PaymentService) { }
+    private imageService: ImageService, private wishlistService : WishlistService, private searchService : SearchService , private paymentService : PaymentService) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -34,11 +41,17 @@ export class GinnimainproductComponent {
       this.getProductDetails(this.productName);
       console.log(this.productDetails);
     });
+
+    this.getImagesByProductId();
   }
 
   getProductDetails(productName: string): void {
     this.productService.getProductDetailsByName(productName).subscribe(
       (data: any) => {
+        console.log(data);
+        data.imageData = 'data:image/jpeg;base64,' + data.imageData;
+        this.productId = data.id;
+        console.log(this.productId);
         this.productDetails = data;
         console.log(this.productDetails);
       },
@@ -46,6 +59,18 @@ export class GinnimainproductComponent {
         console.error('Error fetching product details:', error);
       }
     );
+  }
+
+  getImagesByProductId(): void {
+    this.imageService.getImagesByProductId(this.productId).subscribe({
+      next: (res) => {
+        console.log(res);
+        console.log(this.productlist);
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });   
   }
 
   addToCart(product: any): void {
@@ -102,8 +127,15 @@ export class GinnimainproductComponent {
   }
 
   getProduct(): void {
-    this.productService.getProducts().subscribe({
+    this.productService.getProductsWithImages().subscribe({
       next: (res) => {
+        console.log(res);
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         this.productlist = res.slice(0, 5);
         console.log(this.productlist);
 

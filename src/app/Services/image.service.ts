@@ -29,7 +29,6 @@ export class ImageService {
     return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData);
   }
   
-  
   // Convert data URI to Blob
   dataURItoBlob(dataURI: string | ArrayBuffer): Blob {
     const byteString = atob(dataURI.toString().split(',')[1]);
@@ -42,8 +41,8 @@ export class ImageService {
     return new Blob([ab], { type: mimeString });
   }
   
-  
-  
-  
+  getImagesByProductId(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getImagesByProductId/${productId}`);
+  }
 
 }

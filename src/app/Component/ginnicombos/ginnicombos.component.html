@@ -147,7 +147,10 @@
                         </div>
                     
                         <div class="carting">
-                            <button (click)="addToCart(item)">Add to Cart</button>
+                             <!-- Use ngIf to conditionally display 'Add to Cart' or 'Sold Out' -->
+                            <button *ngIf="item.status === 'instock'" (click)="addToCart(item)">Add to Cart</button>
+                            <button *ngIf="item.status === 'outofstock'" disabled>Sold Out</button>
+                            <!-- <span *ngIf="item.status === 'outofstock'">Sold Out</span> -->
                         </div>          
                     </div>
                 </ng-container>
