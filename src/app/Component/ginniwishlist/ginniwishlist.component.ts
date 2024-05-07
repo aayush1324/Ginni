@@ -18,10 +18,15 @@ export class GinniwishlistComponent {
   constructor (private wishlistService : WishlistService, private cartService : CartService, private productService : ProductService) {}
 
   ngOnInit(): void {
-    this.wishlistService.getToWishlist().subscribe(res=>{
+    const UserID: string = localStorage.getItem('UserID')!;
+
+    this.wishlistService.getToWishlists(UserID).subscribe(res=>{
+      console.log(res);
         this.products = res;
         // this.grandTotal = this.cartService.getTotalPrice();
+        console.log(this.products);
       })
+
       console.log(this.products);
 
       this.getProduct();
@@ -149,6 +154,12 @@ export class GinniwishlistComponent {
   getProduct(): void {
     this.productService.getProducts().subscribe({
       next: (res) => {
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         this.productlist = res.slice(0, 5);
         console.log(this.productlist);
 

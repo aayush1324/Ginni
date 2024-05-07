@@ -44,10 +44,12 @@ export class GinnisigninComponent {
       
       this.auth.signIn(this.signInForm.value).subscribe({
         next: (res) => {
+          console.log(res);
           alert(res.message);
           this.signInForm.reset();
           this.auth.storeToken(res.token);
           const tokenPayload = this.auth.decodedToken();
+          localStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
           this.userstore.setFullNameForStore(tokenPayload.name);
           this.userstore.setRoleForStore(tokenPayload.role);
           this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});

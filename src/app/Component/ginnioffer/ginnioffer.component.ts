@@ -75,13 +75,15 @@ export class GinniofferComponent {
       this.isUser = this.role === 'User';
     })
 
-    this.cartService.getToCart()
+    const UserID: string = localStorage.getItem('UserID')!;
+
+    this.cartService.getToCarts(UserID)
     .subscribe(res=>{
       this.totalItem = res.length;
       console.log(res);
     })
 
-    this.wishlistService.getToWishlist()
+    this.wishlistService.getToWishlists(UserID)
     .subscribe(res=>{
       this.totalWislistItem = res.length;
       // sessionStorage.setItem("TotalWishListItem", JSON.stringify(res.length));
@@ -107,30 +109,6 @@ export class GinniofferComponent {
     });
   }
 
-
-  // performSearch(event: KeyboardEvent): void {
-  //   const inputElement = event.target as HTMLInputElement;
-  //   if (inputElement) {
-  //     const searchValue: string = inputElement.value.trim().toLowerCase();
-
-  //     if (searchValue) {
-  //       console.log(searchValue);
-  //       this.productList = this.originalProductList.filter(product =>
-  //         product.productName.toLowerCase().includes(searchValue) || 
-  //         product.category.toLowerCase().includes(searchValue)
-  //       );
-  //       console.log(this.productList);
-  //     } 
-  //     else {
-  //       // If search value is empty, reset the product list to the original list
-  //       this.productList = [...this.originalProductList];
-  //     }
-  //   }
-  // }
-
-  // Example method to fetch products from API (replace with your actual implementation)
-  
-
   isLinkActive(route: string): boolean {
     return this.router.isActive(route, true);
   }
@@ -151,12 +129,6 @@ export class GinniofferComponent {
   hideaccountDropdown() {
     this.isAccountDropdown = false;
   }
-
-  // logout(){
-  //   this.auth.signOut();
-  //   this.loggedIn = false;
-  //   this.router.navigate(['/main/home'])
-  // }
 
   logout() {
     this.loggedIn = false;

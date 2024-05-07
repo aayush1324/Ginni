@@ -14,6 +14,21 @@ enum SortingOptions {
   PRICE_DOWN = 'priceDown'
 }
 
+export interface WishlistItem {
+  userId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+  wishlistStatus: boolean;
+  profileImage: string | null; // Profile image as string or null if not available
+  imageData: string | null; // Image data as string or null if not available
+  created_at: Date;
+  modified_at: Date | null;
+  deleted_at: Date | null;
+}
+
 @Component({
   selector: 'app-ginnigiftings',
   templateUrl: './ginnigiftings.component.html',
@@ -101,28 +116,58 @@ export class GinnigiftingsComponent {
   }
 
   addToWishlist(product: any): void {
+    // Assuming UserId is stored in session storage with key 'userId'
+    const UserID = sessionStorage.getItem('UserID');
+    if (!UserID) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
     product.wishlistStatus = true; // Update the wishlist status
-    this.wishlistService.addToWishlist(product)
-      .subscribe(
-        () => {
-          console.log(product);
-          // let countString = sessionStorage.getItem("TotalWishListItem");
-          // let count = countString ? parseInt(countString) + 1 : 1;
-          // sessionStorage.setItem("TotalWishListItem", JSON.stringify(count));
-          alert('Item added to wishlist');
-        },
-        error => {
-          console.error('Error adding item to wishlist:', error);
-          alert('Error adding item to wishlist');
-          // Rollback the wishlist status if there's an error
-          product.wishlistStatus = false;
-        }
-      );
+
+      // Create a WishlistItem object to send to the service
+    const wishlistItem: WishlistItem = {
+      userId: UserID,
+      productId: product.id,
+      productName: product.productName,
+      quantity: product.quantity,
+      price: product.price,
+      totalPrice: product.quantity * product.price,
+      wishlistStatus: true, // Assuming you want to set the status to true
+      profileImage: product.profileImage, // Assuming you have the profile image available
+      imageData: product.imageData, // Assuming you have the image data available
+      created_at: new Date(), // Assuming you want to set the current date/time as creation time
+      modified_at: null, // No modification yet
+      deleted_at: null // Item not deleted
+    };
+
+    
+    this.wishlistService.addToWishlist(wishlistItem)
+    .subscribe(
+      () => {
+        console.log('Item added to wishlist:', wishlistItem);
+        alert('Item added to wishlist');
+      },
+      error => {
+        console.error('Error adding item to wishlist:', error);
+        alert('Error adding item to wishlist');
+        // Rollback the wishlist status if there's an error
+        product.wishlistStatus = false;
+      }
+    );
   }
   
   removeToWishlist(product: any): void {
-    product.wishlistStatus = false; // Update the wishlist status
-    this.wishlistService.removeItem(product.id)
+    const userId = localStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+  
+    // Update the wishlist status
+    product.wishlistStatus = false;
+  
+    this.wishlistService.removeItems(userId, product.id)
       .subscribe(
         () => {
           alert('Item removed from wishlist successfully');

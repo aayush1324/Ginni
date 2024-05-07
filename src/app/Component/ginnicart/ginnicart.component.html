@@ -25,7 +25,7 @@
                 <div class="middleleftmain" *ngFor="let item of products; let i = index">
                     <div class="middleleftmainproduct">
                         <div class="middleleftmainproductimages">
-                            <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="" style="height: 5rem; width: 5rem;">
+                            <img [src]= "item.imageData" alt="" style="height: 5rem; width: 5rem;">
                         </div>
     
                         <div class="middleleftmainproductnaming">
@@ -43,11 +43,9 @@
                     <div class="middleleftmaincombine">
                         <div class="middleleftmainquantity">
                             <div class="middleleftmainquantityincrement">
-                                <!-- <i class="fa fa-minus" (click)="decrementQuantity(item)" style="border: 1px solid; border-radius: 50%;"></i> -->
                                 <h1 (click)="decrementQuantity(item)" style="border: 1px solid; font-size: larger; padding: 5% 10%; cursor: pointer; border-color: rgb(184, 181, 178);"><b>-</b></h1>
                                 <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.quantity}}</h6>
                                 <h1 (click)="incrementQuantity(item)" style="border: 1px solid; font-size: larger; padding: 5% 10%; cursor: pointer; border-color: rgb(184, 181, 178);"><b>+</b></h1>
-                                <!-- <i class="fa fa-plus" (click)="incrementQuantity(item)"></i> -->                                
                             </div>
     
                             <div class="middleleftmainquantityremove">
@@ -114,7 +112,7 @@
                         <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.wishlistStatus"  style="font-size:24px" ></i>
                         <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.wishlistStatus"  style="font-size:24px"></i>
                     </div>
-                    <img src="../../assets/images/logo/almond.jpeg" alt="Almond">               
+                    <img [src]= "item.imageData" alt="GINNI">               
                 </div>
             
                 <div class="naming">

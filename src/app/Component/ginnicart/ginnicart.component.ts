@@ -21,10 +21,14 @@ export class GinnicartComponent {
   ngOnInit(): void {
     this.getProduct();
 
-    this.cartService.getToCart().subscribe(res=>{
+    const UserID: string = localStorage.getItem('UserID')!;
+
+    this.cartService.getToCarts(UserID).subscribe(res=>{
+      console.log(res);
         this.products = res;
         // this.grandTotal = this.cartService.getTotalPrice();
       })
+
       console.log(this.products);
   }
 
@@ -32,6 +36,12 @@ export class GinnicartComponent {
   getProduct(): void {
     this.productService.getProducts().subscribe({
       next: (res) => {
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         this.productlist = res.slice(0, 5);
         console.log(this.productlist);
 
@@ -256,19 +266,19 @@ export class GinnicartComponent {
   }
 
 // Service or Component where you handle refund payment
-handleRefundPayment() {
-  var paymentId = "pay_O0ProNZmIOLgHh";
-  var orderId = "order_O0PrQwUhVAB0FW";
-  this.paymentService.refundPayment( orderId,  paymentId ).subscribe(
-    (response) => {
-      alert(response.entity);
-      console.log(response);
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
-}
+  handleRefundPayment() {
+    var paymentId = "pay_O0ProNZmIOLgHh";
+    var orderId = "order_O0PrQwUhVAB0FW";
+    this.paymentService.refundPayment( orderId,  paymentId ).subscribe(
+      (response) => {
+        alert(response.entity);
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
     
 }

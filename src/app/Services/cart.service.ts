@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CartList } from '../Component/ginnicombos/ginnicombos.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,18 @@ export class CartService {
     return this.http.post<any>(`${this.baseUrl}addCart`, product)
   }
 
+  addToCart(cartItem: CartList): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}addToCart`, cartItem);
+  }
+
   getToCart(){
     return this.http.get<any[]>(`${this.baseUrl}getCart`); 
   }
 
+  getToCarts(userId: string): Observable<CartList[]> {
+    return this.http.get<CartList[]>(`${this.baseUrl}getCarts/${userId}`);
+  }
+  
   updateCartItem(item: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}updateCartQuantity/${item.id}`, item);
   }

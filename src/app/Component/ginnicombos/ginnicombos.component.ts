@@ -5,6 +5,37 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
+export interface WishlistItem {
+  userId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+  wishlistStatus: boolean;
+  profileImage: string | null; // Profile image as string or null if not available
+  imageData: string | null; // Image data as string or null if not available
+  created_at: Date;
+  modified_at: Date | null;
+  deleted_at: Date | null;
+}
+
+export interface CartList {
+  userId: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+  profileImage: string | null;
+  imageData: string | null;
+  created_at: Date;
+  modified_at: Date | null;
+  deleted_at: Date | null;
+}
+
+
+
 // Define sorting options
 enum SortingOptions {
   FEATURED = 'featured',
@@ -72,6 +103,7 @@ export class GinnicombosComponent {
   ngOnInit(): void {
     this.getProduct();
     this.toggleFeaturedSorting(null);
+    this.getCartItems();
   }
 
   onSearch () {
@@ -80,44 +112,93 @@ export class GinnicombosComponent {
   } 
 
   addToCart(product: any): void {
-    this.cartService.addtoCart(product)
+    const userId = localStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in local storage');
+      return;
+    }
+    
+    const cartItem: CartList = {
+      userId: userId,
+      productId: product.id,
+      productName: product.productName,
+      quantity: 1,
+      price: product.price,
+      totalPrice: 1 * product.price,
+      profileImage: product.profileImage,
+      imageData: product.imageData,
+      created_at: new Date(),
+      modified_at: null,
+      deleted_at: null
+    };
+
+    this.cartService.addToCart(cartItem)
       .subscribe(
         () => {
-          console.log(product);
-          alert('Item added to cart successfuly');
-          // Optionally, you can perform additional actions after adding to cart
+          console.log('Item added to cart:', cartItem);
+          alert('Item added to cart successfully');
         },
         error => {
           console.error('Error adding item to cart:', error);
-          alert("Error")
+          alert('Error adding item to cart');
           // Handle error
         }
       );
   }
 
   addToWishlist(product: any): void {
+    // Assuming UserId is stored in session storage with key 'userId'
+    const UserID = localStorage.getItem('UserID');
+    if (!UserID) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
     product.wishlistStatus = true; // Update the wishlist status
-    this.wishlistService.addToWishlist(product)
-      .subscribe(
-        () => {
-          console.log(product);
-          // let countString = sessionStorage.getItem("TotalWishListItem");
-          // let count = countString ? parseInt(countString) + 1 : 1;
-          // sessionStorage.setItem("TotalWishListItem", JSON.stringify(count));
-          alert('Item added to wishlist');
-        },
-        error => {
-          console.error('Error adding item to wishlist:', error);
-          alert('Error adding item to wishlist');
-          // Rollback the wishlist status if there's an error
-          product.wishlistStatus = false;
-        }
-      );
+
+      // Create a WishlistItem object to send to the service
+    const wishlistItem: WishlistItem = {
+      userId: UserID,
+      productId: product.id,
+      productName: product.productName,
+      quantity: product.quantity,
+      price: product.price,
+      totalPrice: product.quantity * product.price,
+      wishlistStatus: true, // Assuming you want to set the status to true
+      profileImage: product.profileImage, // Assuming you have the profile image available
+      imageData: product.imageData, // Assuming you have the image data available
+      created_at: new Date(), // Assuming you want to set the current date/time as creation time
+      modified_at: null, // No modification yet
+      deleted_at: null // Item not deleted
+    };
+
+    
+    this.wishlistService.addToWishlist(wishlistItem)
+    .subscribe(
+      () => {
+        console.log('Item added to wishlist:', wishlistItem);
+        alert('Item added to wishlist');
+      },
+      error => {
+        console.error('Error adding item to wishlist:', error);
+        alert('Error adding item to wishlist');
+        // Rollback the wishlist status if there's an error
+        product.wishlistStatus = false;
+      }
+    );
   }
   
   removeToWishlist(product: any): void {
-    product.wishlistStatus = false; // Update the wishlist status
-    this.wishlistService.removeItem(product.id)
+    const userId = localStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+  
+    // Update the wishlist status
+    product.wishlistStatus = false;
+  
+    this.wishlistService.removeItems(userId, product.id)
       .subscribe(
         () => {
           alert('Item removed from wishlist successfully');
@@ -131,6 +212,14 @@ export class GinnicombosComponent {
       );
   }
   
+  getCartItems(){
+    const UserID: string = localStorage.getItem('UserID')!;
+
+    this.cartService.getToCarts(UserID).subscribe(res=>{
+      console.log(res);
+        // this.grandTotal = this.cartService.getTotalPrice();
+      })
+  }
   
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({
@@ -283,9 +372,6 @@ export class GinnicombosComponent {
   }
 
 
-
-
- 
 
   // Method to select the sorting option
   // selectSortingOption(option: SortingOptions): void {

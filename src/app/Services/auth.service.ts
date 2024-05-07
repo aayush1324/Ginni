@@ -18,7 +18,6 @@ export class AuthService {
   }
 
   signUp(userObj: any) {
-
     const userobject =  {
       UserName : userObj.username,
       Email  : userObj.email,
@@ -48,9 +47,12 @@ export class AuthService {
   storeToken(tokenValue: string){
     localStorage.setItem('token', tokenValue)
   }
+
   storeRefreshToken(tokenValue: string){
     localStorage.setItem('refreshToken', tokenValue)
   }
+
+
 
   getToken(){
     return localStorage.getItem('token')
@@ -59,6 +61,7 @@ export class AuthService {
   getRefreshToken(){
     return localStorage.getItem('refreshToken')
   }
+
 
   isLoggedIn(): boolean{
     return !!localStorage.getItem('token')
