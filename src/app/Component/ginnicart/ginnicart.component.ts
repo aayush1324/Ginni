@@ -3,6 +3,7 @@ import { CartService } from '../../Services/cart.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { PaymentService } from '../../Services/payment.service';
 import { ProductService } from '../../Services/product.service';
+import { SearchService } from '../../Services/search.service';
 
 declare var Razorpay: any;
 
@@ -12,26 +13,38 @@ declare var Razorpay: any;
   styleUrl: './ginnicart.component.css'
 })
 export class GinnicartComponent {
-  public products : any = [];
+  public productss : any = [];
   public grandTotal !: number;
   productlist! : any[];
+  searchTerm: string ='';
+  products: any;
 
-  constructor(private cartService: CartService, private wishlistService : WishlistService, private paymentService : PaymentService , private productService : ProductService) { }
+
+  constructor(private cartService: CartService, private wishlistService : WishlistService, 
+    private paymentService : PaymentService , private productService : ProductService,  private searchService : SearchService) { }
 
   ngOnInit(): void {
     this.getProduct();
-
     const UserID: string = localStorage.getItem('UserID')!;
 
     this.cartService.getToCarts(UserID).subscribe(res=>{
       console.log(res);
-        this.products = res;
+        this.productss = res;
         // this.grandTotal = this.cartService.getTotalPrice();
+
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
       })
 
-      console.log(this.products);
+      console.log(this.productss);
   }
 
+  onSearch () {
+    this.products = this.productss.filter((item: { productName: string; }) =>
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  } 
   
   getProduct(): void {
     this.productService.getProducts().subscribe({

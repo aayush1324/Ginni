@@ -21,11 +21,15 @@ export class ProductService {
     return this.http.get<any[]>(`${this.baseUrl}getProductsWithImages`);
   }
 
+  getProductsWithImage(UserID : string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`);
+  }
+
   getProducts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}getProduct`); 
   }
 
-  editProducts(productId: string, updatedProduct: FormData): Observable<any> {
+  editProducts(productId: string, updatedProduct: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}editProduct/${productId}`, updatedProduct);
   }
 
@@ -35,6 +39,10 @@ export class ProductService {
 
   getProductDetailsByName(productName: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}getProductName/${productName}`);
+  }
+
+  searchProducts(term: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}?term=${term}`);
   }
 
 }

@@ -82,6 +82,7 @@ export class GinnicombosComponent {
   maxPrices: any;
   currentAvailabilityOption: string = ''; // Initialize currentAvailabilityOption
   currentCategoryOption: string = ''; // Initialize currentCategoryOption
+  inWishlist!: boolean;
 
 
   constructor( private cartService : CartService, private productService : ProductService, 
@@ -154,8 +155,6 @@ export class GinnicombosComponent {
       return;
     }
 
-    product.wishlistStatus = true; // Update the wishlist status
-
       // Create a WishlistItem object to send to the service
     const wishlistItem: WishlistItem = {
       userId: UserID,
@@ -178,12 +177,12 @@ export class GinnicombosComponent {
       () => {
         console.log('Item added to wishlist:', wishlistItem);
         alert('Item added to wishlist');
+        this.getProduct();
       },
       error => {
         console.error('Error adding item to wishlist:', error);
         alert('Error adding item to wishlist');
         // Rollback the wishlist status if there's an error
-        product.wishlistStatus = false;
       }
     );
   }
@@ -195,13 +194,11 @@ export class GinnicombosComponent {
       return;
     }
   
-    // Update the wishlist status
-    product.wishlistStatus = false;
-  
     this.wishlistService.removeItems(userId, product.id)
       .subscribe(
         () => {
           alert('Item removed from wishlist successfully');
+          this.getProduct();
         },
         error => {
           console.error('Error removing item from wishlist:', error);
@@ -222,7 +219,13 @@ export class GinnicombosComponent {
   }
   
   getProduct(): void {
-    this.productService.getProductsWithImages().subscribe({
+    const UserID = localStorage.getItem('UserID');
+    if (!UserID) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
+    this.productService.getProductsWithImage(UserID).subscribe({
       next: (res) => {
         console.log(res);
         res.forEach(item => {

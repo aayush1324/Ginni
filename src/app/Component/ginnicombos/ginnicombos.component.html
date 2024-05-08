@@ -132,8 +132,8 @@
                         <div class="image">
                             <div class="saving">
                                 <h6>Save Rs. {{ item.discount }}</h6>
-                                <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.wishlistStatus"  style="font-size:24px" ></i>
-                                <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.wishlistStatus"  style="font-size:24px"></i>
+                                <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist "  style="font-size:24px" ></i>
+                                <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist "  style="font-size:24px"></i>
                             </div>
                             <img [src]= "item.imageData" alt="GINNI">
                         </div>

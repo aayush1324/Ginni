@@ -5,6 +5,7 @@ import { UserstoreService } from '../../Services/userstore.service';
 import { CartService } from '../../Services/cart.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { ProductService } from '../../Services/product.service';
+import { SearchService } from '../../Services/search.service';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class GinniofferComponent {
 
   constructor(private elementRef: ElementRef, private router:Router, 
     private auth :AuthService, private userstore : UserstoreService, 
-    private cartService : CartService, private wishlistService: WishlistService, private productService : ProductService) 
+    private cartService : CartService, private wishlistService: WishlistService, private productService : ProductService, private searchService : SearchService) 
   { 
     // Subscribe to router events to update selectedLink
     this.router.events.subscribe((event) => {
@@ -57,8 +58,18 @@ export class GinniofferComponent {
     // this.productList = this.getProduct();
     // Make a copy of the original product list for filtering
     this.originalProductList = [...this.productList];
-  }
 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Call your function here
+        this.updateSearchTerm("");
+      }
+    });
+  }
+  updateSearchTerm(newSearchTerm: string) {
+    this.searchService.setSearchTerm(newSearchTerm);
+  }
+  
   ngOnInit() {
     this.userstore.getFullNameFromStore()
     .subscribe(val=>{

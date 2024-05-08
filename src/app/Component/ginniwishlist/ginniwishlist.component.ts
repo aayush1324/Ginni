@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { WishlistService } from '../../Services/wishlist.service';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
+import { SearchService } from '../../Services/search.service';
 
 @Component({
   selector: 'app-ginniwishlist',
@@ -10,28 +11,42 @@ import { ProductService } from '../../Services/product.service';
 })
 export class GinniwishlistComponent {
 
-  public products : any = [];
+  public productss : any = [];
   public grandTotal !: number;
   productlist! : any[];
+  searchTerm: string ='';
+  products: any;
 
 
-  constructor (private wishlistService : WishlistService, private cartService : CartService, private productService : ProductService) {}
+
+  constructor (private wishlistService : WishlistService, private cartService : CartService, 
+    private productService : ProductService,  private searchService : SearchService) {}
 
   ngOnInit(): void {
     const UserID: string = localStorage.getItem('UserID')!;
 
     this.wishlistService.getToWishlists(UserID).subscribe(res=>{
       console.log(res);
-        this.products = res;
+        this.productss = res;
         // this.grandTotal = this.cartService.getTotalPrice();
-        console.log(this.products);
+        console.log(this.productss);
+
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
       })
 
-      console.log(this.products);
+      console.log(this.productss);
 
       this.getProduct();
 
   }
+
+  onSearch () {
+    this.products = this.productss.filter((item: { productName: string; }) =>
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  } 
 
   addToCart(item: any): void {
     // Implement logic to add the item to the cart using your cart service

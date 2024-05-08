@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SearchService {
 
   private searchTermSubject = new BehaviorSubject<string>('');
+  
+  searchTerm$: Observable<string> = this.searchTermSubject.asObservable();
 
   setSearchTerm(searchTerm: string) 
   {
@@ -16,5 +18,9 @@ export class SearchService {
   getSearchTerm(): Observable<string> 
   {
     return this.searchTermSubject.asObservable();
+  }
+
+  getSearchVal(){
+    return this.searchTermSubject.getValue();
   }
 }
