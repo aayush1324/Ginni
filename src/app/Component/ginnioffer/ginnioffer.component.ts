@@ -65,12 +65,19 @@ export class GinniofferComponent {
         this.updateSearchTerm("");
       }
     });
+
+ 
   }
   updateSearchTerm(newSearchTerm: string) {
     this.searchService.setSearchTerm(newSearchTerm);
   }
   
   ngOnInit() {
+    const tokens = this.auth.getToken();
+    console.log(tokens);
+    this.loggedIn = !!tokens;
+
+
     this.userstore.getFullNameFromStore()
     .subscribe(val=>{
       const fullNameFromToken = this.auth.getfullNameFromToken();
@@ -86,23 +93,36 @@ export class GinniofferComponent {
       this.isUser = this.role === 'User';
     })
 
-    const UserID: string = localStorage.getItem('UserID')!;
+    const UserID: string = sessionStorage.getItem('UserID')!;
 
     this.cartService.getToCarts(UserID)
     .subscribe(res=>{
       this.totalItem = res.length;
       console.log(res);
     })
+    this.wishlistService.countWishList$.subscribe(count => {
+      console.log("Received count update:", count); // Add this for debugging
+      this.totalWislistItem = count;
+    });
 
     this.wishlistService.getToWishlists(UserID)
     .subscribe(res=>{
       this.totalWislistItem = res.length;
-      // sessionStorage.setItem("TotalWishListItem", JSON.stringify(res.length));
-      console.log(res);
+     
+     // console.log(res);
     })
-
+ 
     this.getProduct();
+
+    this.auth.isLoggedIn$.subscribe((val)=>{
+      this.loggedIn = val;
+      console.log(val);
+      
+    })
   }
+
+
+
 
   getProduct(): void {
     this.productService.getProducts().subscribe({
@@ -143,13 +163,13 @@ export class GinniofferComponent {
 
   logout() {
     this.loggedIn = false;
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       this.auth.logout(token).subscribe(
         () => {
           console.log('Logged out successfully');
-          localStorage.clear();
-          localStorage.removeItem('token');
+          sessionStorage.clear();
+          sessionStorage.removeItem('token');
 
           // Redirect or perform any additional actions after logout
         },

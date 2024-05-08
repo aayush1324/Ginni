@@ -22,7 +22,7 @@ export class SellerService {
       .subscribe((result)=>{
         console.log(result)
         if(result){
-          localStorage.setItem('seller',JSON.stringify(result.body))
+          sessionStorage.setItem('seller',JSON.stringify(result.body))
           this.router.navigate(['main/sellersignin'])
         }
       })
@@ -38,7 +38,7 @@ export class SellerService {
         console.warn(result)
         if(result && result.body && result.body.length===1){
           this.isLoginError.emit(false)
-          localStorage.setItem('seller',JSON.stringify(result.body))
+          sessionStorage.setItem('seller',JSON.stringify(result.body))
           this.router.navigate(['main/sellerhome'])
         }
         else{

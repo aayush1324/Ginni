@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,8 @@ export class AuthService {
   private baseUrl: string = 'https://localhost:7132/api/User/';
   private userPayload:any;
 
+  public isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
   
   constructor(private http: HttpClient, private router: Router) { 
     this.userPayload = this.decodedToken();
@@ -45,26 +47,26 @@ export class AuthService {
   }
 
   storeToken(tokenValue: string){
-    localStorage.setItem('token', tokenValue)
+    sessionStorage.setItem('token', tokenValue)
   }
 
   storeRefreshToken(tokenValue: string){
-    localStorage.setItem('refreshToken', tokenValue)
+    sessionStorage.setItem('refreshToken', tokenValue)
   }
 
 
 
   getToken(){
-    return localStorage.getItem('token')
+    return sessionStorage.getItem('token')
   }
 
   getRefreshToken(){
-    return localStorage.getItem('refreshToken')
+    return sessionStorage.getItem('refreshToken')
   }
 
 
   isLoggedIn(): boolean{
-    return !!localStorage.getItem('token')
+    return !!sessionStorage.getItem('token')
   }
 
   decodedToken(){

@@ -37,6 +37,10 @@ export class GinnisigninComponent {
   }
 
 
+  Login() {
+    this.auth.isLoggedInSubject.next(true);
+  }
+
   SigninForm()  {
     if (this.signInForm.valid) 
     {
@@ -49,9 +53,13 @@ export class GinnisigninComponent {
           this.signInForm.reset();
           this.auth.storeToken(res.token);
           const tokenPayload = this.auth.decodedToken();
-          localStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
+          console.log(tokenPayload);  
+          sessionStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
           this.userstore.setFullNameForStore(tokenPayload.name);
           this.userstore.setRoleForStore(tokenPayload.role);
+
+          this.auth.isLoggedInSubject.next(true);
+
           this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
           this.router.navigate(['/main/home'])
         },

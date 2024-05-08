@@ -117,7 +117,7 @@ export class GinnibestsellersComponent {
 
   addToWishlist(product: any): void {
     // Assuming UserId is stored in session storage with key 'userId'
-    const UserID = localStorage.getItem('UserID');
+    const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
       console.error('User ID not found in session storage');
       return;
@@ -158,7 +158,7 @@ export class GinnibestsellersComponent {
   }
   
   removeToWishlist(product: any): void {
-    const userId = localStorage.getItem('UserID');
+    const userId = sessionStorage.getItem('UserID');
     if (!userId) {
       console.error('User ID not found in session storage');
       return;

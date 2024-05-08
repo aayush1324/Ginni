@@ -25,7 +25,7 @@ export class GinnicartComponent {
 
   ngOnInit(): void {
     this.getProduct();
-    const UserID: string = localStorage.getItem('UserID')!;
+    const UserID: string = sessionStorage.getItem('UserID')!;
 
     this.cartService.getToCarts(UserID).subscribe(res=>{
       console.log(res);

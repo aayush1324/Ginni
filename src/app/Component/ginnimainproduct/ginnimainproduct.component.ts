@@ -129,7 +129,7 @@ export class GinnimainproductComponent {
   }
 
   addToCart(product: any): void {
-    const userId = localStorage.getItem('UserID');
+    const userId = sessionStorage.getItem('UserID');
     if (!userId) {
       console.error('User ID not found in local storage');
       return;

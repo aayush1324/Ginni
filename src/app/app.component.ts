@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from './Services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Ginni';
+  auth = inject(AuthService)
+  ngOnInit(){
+    var token = this.auth.getToken();
+    if(token){
+      this.auth.isLoggedInSubject.next(true);
+    }
+    else{
+      this.auth.isLoggedInSubject.next(false);
+    }
+  }
 }

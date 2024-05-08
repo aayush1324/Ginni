@@ -4,6 +4,7 @@ import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { tap } from 'rxjs';
 
 export interface WishlistItem {
   userId: string;
@@ -83,8 +84,7 @@ export class GinnicombosComponent {
   currentAvailabilityOption: string = ''; // Initialize currentAvailabilityOption
   currentCategoryOption: string = ''; // Initialize currentCategoryOption
   inWishlist!: boolean;
-
-
+  totalWislistItem:any;
   constructor( private cartService : CartService, private productService : ProductService, 
                 private wishlistService : WishlistService, private searchService : SearchService) 
     { this.availabilityForm = new FormGroup({
@@ -105,6 +105,19 @@ export class GinnicombosComponent {
     this.getProduct();
     this.toggleFeaturedSorting(null);
     this.getCartItems();
+
+    
+  }
+
+  getWishlistItems() {
+    const UserID = sessionStorage.getItem('UserID');
+    // Fetch wishlist items and update totalWishlistItem
+    return this.wishlistService.getToWishlists(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalWislistItem = res.length;
+      })
+    );
   }
 
   onSearch () {
@@ -113,7 +126,7 @@ export class GinnicombosComponent {
   } 
 
   addToCart(product: any): void {
-    const userId = localStorage.getItem('UserID');
+    const userId = sessionStorage.getItem('UserID');
     if (!userId) {
       console.error('User ID not found in local storage');
       return;
@@ -149,7 +162,7 @@ export class GinnicombosComponent {
 
   addToWishlist(product: any): void {
     // Assuming UserId is stored in session storage with key 'userId'
-    const UserID = localStorage.getItem('UserID');
+    const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
       console.error('User ID not found in session storage');
       return;
@@ -172,45 +185,55 @@ export class GinnicombosComponent {
     };
 
     
-    this.wishlistService.addToWishlist(wishlistItem)
-    .subscribe(
-      () => {
-        console.log('Item added to wishlist:', wishlistItem);
-        alert('Item added to wishlist');
-        this.getProduct();
-      },
-      error => {
-        console.error('Error adding item to wishlist:', error);
-        alert('Error adding item to wishlist');
-        // Rollback the wishlist status if there's an error
-      }
-    );
+    this.getWishlistItems().subscribe(() => {
+      this.wishlistService.addToWishlist(wishlistItem)
+        .subscribe({
+          next: () => {
+            console.log('Item added to wishlist:', wishlistItem);
+            alert('Item added to wishlist');
+            this.getProduct();
+            // Update the count after successfully adding the item
+            this.wishlistService.updateCount(this.totalWislistItem+1);
+          },
+          error: (err) => {
+            console.error('Error adding item to wishlist:', err);
+            alert('Error adding item to wishlist');
+            // Rollback the wishlist status if there's an error
+          }
+        });
+    });
+
   }
   
   removeToWishlist(product: any): void {
-    const userId = localStorage.getItem('UserID');
+    const userId = sessionStorage.getItem('UserID');
     if (!userId) {
       console.error('User ID not found in session storage');
       return;
     }
   
-    this.wishlistService.removeItems(userId, product.id)
-      .subscribe(
-        () => {
+    this.getWishlistItems().subscribe(() => {
+      this.wishlistService.removeItems(userId, product.id)
+      .subscribe({
+        next: (res) => {
           alert('Item removed from wishlist successfully');
           this.getProduct();
+          this.wishlistService.updateCount(this.totalWislistItem-1);
         },
-        error => {
-          console.error('Error removing item from wishlist:', error);
+        error: (err) => {
+          console.error('Error removing item from wishlist:', err);
           alert('Error removing item from wishlist');
           // Rollback the wishlist status if there's an error
-          product.wishlistStatus = true;
         }
-      );
+      });
+    });
+
+
+   
   }
   
   getCartItems(){
-    const UserID: string = localStorage.getItem('UserID')!;
+    const UserID: string = sessionStorage.getItem('UserID')!;
 
     this.cartService.getToCarts(UserID).subscribe(res=>{
       console.log(res);
@@ -219,7 +242,7 @@ export class GinnicombosComponent {
   }
   
   getProduct(): void {
-    const UserID = localStorage.getItem('UserID');
+    const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
       console.error('User ID not found in session storage');
       return;

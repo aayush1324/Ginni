@@ -23,7 +23,7 @@ export class GinniwishlistComponent {
     private productService : ProductService,  private searchService : SearchService) {}
 
   ngOnInit(): void {
-    const UserID: string = localStorage.getItem('UserID')!;
+    const UserID: string = sessionStorage.getItem('UserID')!;
 
     this.wishlistService.getToWishlists(UserID).subscribe(res=>{
       console.log(res);
