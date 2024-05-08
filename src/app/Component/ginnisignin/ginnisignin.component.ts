@@ -6,6 +6,8 @@ import { AuthService } from '../../Services/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { UserstoreService } from '../../Services/userstore.service';
 import { ResetPasswordService } from '../../Services/reset-password.service';
+import { WishlistService } from '../../Services/wishlist.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-ginnisignin',
@@ -16,10 +18,13 @@ export class GinnisigninComponent {
 
   signInForm: FormGroup;
   authError:String='';
+  totalWislistItem!: number;
 
   constructor(private formBuilder: FormBuilder, private seller: SellerService, 
               private router : Router, private auth: AuthService, private toast: NgToastService,
-              private userstore :UserstoreService, private resetPasswordService : ResetPasswordService) 
+              private userstore :UserstoreService, private resetPasswordService : ResetPasswordService,
+              private wishlist:WishlistService
+            ) 
   {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -41,6 +46,17 @@ export class GinnisigninComponent {
     this.auth.isLoggedInSubject.next(true);
   }
 
+  getWishlistItems() {
+    const UserID = sessionStorage.getItem('UserID');
+    // Fetch wishlist items and update totalWishlistItem
+    return this.wishlist.getToWishlists(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalWislistItem = res.length;
+      })
+    );
+  }
+
   SigninForm()  {
     if (this.signInForm.valid) 
     {
@@ -60,6 +76,11 @@ export class GinnisigninComponent {
 
           this.auth.isLoggedInSubject.next(true);
 
+          this.getWishlistItems().subscribe((res)=>{
+             this.totalWislistItem= res.length;
+             this.wishlist.updateCount(this.totalWislistItem);
+          })
+          
           this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
           this.router.navigate(['/main/home'])
         },

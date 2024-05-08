@@ -77,6 +77,10 @@ export class GinniofferComponent {
     console.log(tokens);
     this.loggedIn = !!tokens;
 
+    if(tokens){
+      this.auth.isLoggedInSubject.next(true);
+    }
+
 
     this.userstore.getFullNameFromStore()
     .subscribe(val=>{
@@ -171,6 +175,7 @@ export class GinniofferComponent {
           sessionStorage.clear();
           sessionStorage.removeItem('token');
 
+          this.wishlistService.updateCount(0);
           // Redirect or perform any additional actions after logout
         },
         error => {
