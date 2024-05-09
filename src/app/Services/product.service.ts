@@ -42,7 +42,6 @@ export class ProductService {
   }
 
   searchProducts(term: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}?term=${term}`);
+    return this.http.get<any[]>(`${this.baseUrl}search?term=${term}`);
   }
-
 }

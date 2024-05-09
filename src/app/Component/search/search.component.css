@@ -1,9 +1,65 @@
-
-
 input[type="text"] {
     width: 100%;
     height: 100%;
     padding: 2%;
     border: 1px solid #ccc;
+}
+
+.searchResult {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: aliceblue;
+    z-index: 1;
+}
+
+#image {
+    width: 20%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+}
+
+#image img {
+    /* max-width: 100%;
+    max-height: 4rem; */
+    width: 6rem; /* Specify the width you desire */
+    height: 4rem; /* Specify the height you desire */
+    object-fit: cover; /* Ensures the image covers the specified dimensions */
+}
+
+.imageDetail {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid; */
+}
+
+#name {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+
+}
+
+#price {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+
 }
 

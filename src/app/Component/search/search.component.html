@@ -1,12 +1,21 @@
-<!-- <div class="search-container">
-    <div class="searchbox">
-        <div class="searchbar">
-            <input type="text" placeholder="Search for DryFruits..." [(ngModel)]="searchTerm" (input)="onSearch()" >
-        </div>
-        <div class="searchbutton">
-            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-        </div>
-    </div>
-</div>   -->
+<!-- <input type="text" placeholder="Search for DryFruits..." [(ngModel)]="searchTerm" (input)="onSearch()" > -->
 
-<input type="text" placeholder="Search for DryFruits..." [(ngModel)]="searchTerm" (input)="onSearch()" >
+
+<div>
+    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products">
+    <br>
+    <div class="searchResult"  *ngFor="let result of searchResultss">
+      <div id="image">
+        <img [src]="result.imageData" alt="GINNI">
+      </div>
+
+      <div class="imageDetail">
+        <div id="name">
+          <a [routerLink]="['/main/ginnimainproduct', result.productName]"><h5>{{ result.productName }}</h5></a>
+        </div>
+        <div id="price">
+          <h5>Rs {{ result.price }}</h5>
+        </div>
+      </div>
+    </div>
+</div>

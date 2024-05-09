@@ -200,7 +200,7 @@
     width:  75%;
     height: fit-content;
     padding: 0%;
-    /* border: 2px solid; */
+    /* border: 4px solid; */
     border-radius: 1%;
     margin: 0%;
     position: relative;
@@ -213,33 +213,39 @@
     width:  90%;
     height: fit-content;
     padding: 0%;
-    border: 5px solid;
-    margin: 0%;
-    border-color: rgb(252, 252, 252);
+    /* border: 1px solid; */
+    margin: 0% 10%;
+    border-color: rgb(10, 10, 10);
+    user-select: none; /* Prevent selection when clicking on the search button */
+    position: absolute;
+    top: 0;
 }
 
 .searchbar input[type="text"] {
     width: 100%;
     height: 100%;
     padding: 2%;
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
+    user-select: none; /* Prevent selection when clicking on the search button */
 }
 
 .searchbutton {
-    width:  10%;
+    width:  11%;
     height: 100%;
     border-radius: 0px;
-    padding: 0.6%;
-    margin: -0.6%;
-    /* border: 1px solid; */
-    background: rgb(3, 4, 22);
-    cursor: pointer;
+    padding: 1.5%;
+    margin: 0%;
+    border: 1px solid;
+    background: rgb(1, 4, 61);
+    /* cursor: pointer; */
+    z-index: 1;
+    align-items: center;
 }
 
 .fa-search{
     /* width: 10%; */
     /* border: 1px solid; */
-    font-size: large;
+    font-size: x-large;
    color: #d8d0d0;
 }
 
@@ -261,6 +267,7 @@
 .searchbutton {
     user-select: none; /* Prevent selection when clicking on the search button */
 }
+
 
 .navbarlower {
     background-color: rgb(250, 250, 250);
@@ -337,3 +344,8 @@
   .active-link {
     background-color: #d8afaf; /* Change this to your desired highlight color */
   }
+
+
+  .active-icon {
+    color: rgb(192, 136, 136); /* Change this to the desired color */
+}

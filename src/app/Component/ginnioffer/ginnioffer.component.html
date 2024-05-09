@@ -20,7 +20,7 @@
                             <app-search></app-search>
                         </div>
                         <div class="searchbutton">
-                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                            <i class="fa fa-search"></i>
                         </div>
                     </div>
                 </div>  
@@ -29,10 +29,10 @@
                 
                 <div class="navbarupperright">   
                     <div class="items">
-                        <div class="wishlist" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()">
+                        <div class="wishlist" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()" [ngClass]="{'actives': isLinkActive('/main/ginniwishlist')}">
                             <a routerLink="/main/ginniwishlist">
                                 <div style="position: relative; display: inline-block;">
-                                    <i class="fa fa-heart" style="font-size: xx-large;"></i>
+                                    <i class="fa fa-heart" style="font-size: xx-large;" [ngClass]="{'active-icon': isLinkActive('/main/ginniwishlist')}"></i>
                                     <i class="wishlist-count">{{ totalWislistItem }}</i>
                                 </div>
                                 <h6 *ngIf="showWishlist">Wishlist</h6>
@@ -40,19 +40,19 @@
                         </div>
                     
 
-                        <div class="cart" (mouseover)="showCartText()" (mouseleave)="hideCartText()">
+                        <div class="cart" (mouseover)="showCartText()" (mouseleave)="hideCartText()" [ngClass]="{'actives': isLinkActive('/main/ginnicart')}">
                             <a routerLink="/main/ginnicart">
                                 <div style="position: relative; display: inline-block;">
-                                    <i class="fa fa-shopping-cart" style="font-size: xx-large;"></i>
+                                    <i class="fa fa-shopping-cart" style="font-size: xx-large;" [ngClass]="{'active-icon': isLinkActive('/main/ginnicart')}"></i>
                                     <i class="cart-count">{{ totalCartItem }}</i>
                                 </div>
                                 <h6 *ngIf="showCart">Cart</h6>
                             </a>
                         </div>
 
-                        <div class="cart" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()">
+                        <div class="cart" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()" [ngClass]="{'actives': isLinkActive('/main/ginnitrack')}">
                             <a routerLink="/main/ginnitrack">
-                                <i class="fa fa-truck" style="font-size: xx-large;"></i>
+                                <i class="fa fa-truck" style="font-size: xx-large;" [ngClass]="{'active-icon': isLinkActive('/main/ginnitrack')}"></i>
                                 <h6 *ngIf="showOrder">Track Order</h6>
                             </a>
                         </div>
@@ -90,16 +90,6 @@
                     <a routerLink="/main/ginnicontactus"><h6>Contact Us</h6></a>
                 </div>
                 
-                <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
-                    <a routerLink="/main/ginnidryfruit" class="dropdown-header"><h6>Dry Fruits <i class="fa fa-caret-down"></i></h6></a>
-                    <div class="dropdown-content" *ngIf="isDropdownOpen">
-                        <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
-                        <a routerLink="/main/ginnidryfruitcashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitcashew'}">Cashew</a>
-                        <a routerLink="/main/ginnidryfruitraisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitraisin'}">Raisin</a>
-                        <a routerLink="/main/ginnidryfruitpista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitpista'}">Pista</a>
-                    </div>
-                </div>
-                
                 <div class="combos" [ngClass]="{'active': isLinkActive('/main/ginnicombos')}">
                     <a routerLink="/main/ginnicombos"><h6>Combos</h6></a>
                 </div>
@@ -111,6 +101,16 @@
                 <div class="bestsellers" [ngClass]="{'active': isLinkActive('/main/ginnibestsellers')}">
                     <a routerLink="/main/ginnibestsellers"><h6>BestSellers</h6></a>
                 </div>                
+
+                <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
+                    <a routerLink="/main/ginnidryfruit" class="dropdown-header"><h6>Dry Fruits <i class="fa fa-caret-down"></i></h6></a>
+                    <div class="dropdown-content" *ngIf="isDropdownOpen">
+                        <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
+                        <a routerLink="/main/ginnidryfruitcashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitcashew'}">Cashew</a>
+                        <a routerLink="/main/ginnidryfruitraisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitraisin'}">Raisin</a>
+                        <a routerLink="/main/ginnidryfruitpista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitpista'}">Pista</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
