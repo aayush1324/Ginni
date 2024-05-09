@@ -40,15 +40,15 @@ export class WishlistService {
     return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity/${item.id}`, item);
   }
 
-  emptyWishlist(): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteAllItem`);
+  emptyWishlist(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
   }
 
   updateWishlistStatus(product: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/updateWishlistStatus`, product);
   }
+
   updateCount(count: number) {
-    debugger;
     console.log("Updating count to:", count); // Add this for debugging
     this.countWishListItem.next(count);
   }

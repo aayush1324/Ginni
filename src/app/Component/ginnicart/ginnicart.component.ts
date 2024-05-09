@@ -4,6 +4,7 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { PaymentService } from '../../Services/payment.service';
 import { ProductService } from '../../Services/product.service';
 import { SearchService } from '../../Services/search.service';
+import { tap } from 'rxjs';
 
 declare var Razorpay: any;
 
@@ -18,36 +19,61 @@ export class GinnicartComponent {
   productlist! : any[];
   searchTerm: string ='';
   products: any;
+  totalCartItem!: number;
 
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
-    private paymentService : PaymentService , private productService : ProductService,  private searchService : SearchService) { }
+    private paymentService : PaymentService , private productService : ProductService,  
+    private searchService : SearchService) { }
 
   ngOnInit(): void {
     this.getProduct();
+
     const UserID: string = sessionStorage.getItem('UserID')!;
 
-    this.cartService.getToCarts(UserID).subscribe(res=>{
-      console.log(res);
-        this.productss = res;
-        // this.grandTotal = this.cartService.getTotalPrice();
+    if (UserID == null){    
+      this.productss = [];
+      console.log(this.productss)
 
-        this.searchService.getSearchTerm().subscribe((searchTerm) => {
-          this.searchTerm = searchTerm;
-          this.onSearch();
-        });
+      this.searchService.getSearchTerm().subscribe((searchTerm) => {
+        this.searchTerm = searchTerm;
+        this.onSearch();
+      });
+    }
+    else {
+      this.cartService.getToCarts(UserID).subscribe(res=>{
+        console.log(res);
+          this.productss = res;
+          // this.grandTotal = this.cartService.getTotalPrice();
+  
+          this.searchService.getSearchTerm().subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+            this.onSearch();
+          });
       })
-
-      console.log(this.productss);
+    }
+    
   }
 
   onSearch () {
     this.products = this.productss.filter((item: { productName: string; }) =>
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
+
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    // Fetch cart items and update totalCartItem
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalCartItem = res.length;
+      })
+    );
+  }
   
   getProduct(): void {
-    this.productService.getProducts().subscribe({
+    this.productService.getProductsWithImages().subscribe({
       next: (res) => {
         res.forEach(item => {
           if (item.imageData) {
@@ -55,6 +81,8 @@ export class GinnicartComponent {
             item.imageData = 'data:image/jpeg;base64,' + item.imageData;
           }
         });
+        this.productlist = res
+        console.log(this.productlist);
         this.productlist = res.slice(0, 5);
         console.log(this.productlist);
 
@@ -131,21 +159,25 @@ export class GinnicartComponent {
   }
 
   removeItem(item: any): void {
-    this.cartService.removeItem(item.id)
-        .subscribe(
-            () => {
-                // Remove the item from the local array if needed
-                const index = this.products.indexOf(item);
-                if (index !== -1) {
-                    this.products.splice(index, 1);
-                }
-                alert('Item removed successfully');
-            },
-            error => {
-                console.error('Error removing item:', error);
-                alert('Error removing item');
+    this.getCartItems().subscribe(() => {
+      this.cartService.removeItem(item.id)
+      .subscribe({
+        next: () => {
+            // Remove the item from the local array if needed
+            const index = this.products.indexOf(item);
+            if (index !== -1) {
+                this.products.splice(index, 1);
             }
-        );
+            alert('Item removed successfully');
+            // Update the count after successfully removing the item
+            this.cartService.updateCount(this.totalCartItem-1); 
+          },
+          error: (err) => {
+            console.error('Error removing item:', err);
+            alert('Error removing item');
+          }
+      });
+    });
   }
 
   addToWishlist(product: any): void {
@@ -172,17 +204,28 @@ export class GinnicartComponent {
   }
 
   removeAllItem() : void {
-    this.cartService.emptyCart()
+    const userId = sessionStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
+    this.getCartItems().subscribe(() => {
+      this.cartService.emptyCart(userId)
         .subscribe(
-            () => {
-                this.products = []; // Clear the local cart array
-                alert('Cart emptied successfully');
-            },
-            error => {
-                console.error('Error emptying cart:', error);
-                alert('Error emptying cart');
-            }
+          () => {
+            this.products = []; // Clear the local cart array
+            alert('Cart emptied successfully');
+            // Update the count after successfully emptying the cart
+            this.totalCartItem = 0;
+            this.cartService.updateCount(this.totalCartItem);
+          },
+          error => {
+            console.error('Error emptying cart:', error);
+            alert('Error emptying cart');
+          }
         );
+    });
   }
 
 

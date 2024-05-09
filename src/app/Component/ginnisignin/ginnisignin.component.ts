@@ -8,6 +8,7 @@ import { UserstoreService } from '../../Services/userstore.service';
 import { ResetPasswordService } from '../../Services/reset-password.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { tap } from 'rxjs';
+import { CartService } from '../../Services/cart.service';
 
 @Component({
   selector: 'app-ginnisignin',
@@ -19,12 +20,12 @@ export class GinnisigninComponent {
   signInForm: FormGroup;
   authError:String='';
   totalWislistItem!: number;
+  totalCartItem!: number;
 
   constructor(private formBuilder: FormBuilder, private seller: SellerService, 
               private router : Router, private auth: AuthService, private toast: NgToastService,
               private userstore :UserstoreService, private resetPasswordService : ResetPasswordService,
-              private wishlist:WishlistService
-            ) 
+              private wishlist:WishlistService, private cartService: CartService) 
   {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -57,6 +58,18 @@ export class GinnisigninComponent {
     );
   }
 
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    // Fetch cart items and update totalCartItem
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalCartItem = res.length;
+      })
+    );
+  }
+
   SigninForm()  {
     if (this.signInForm.valid) 
     {
@@ -80,6 +93,16 @@ export class GinnisigninComponent {
              this.totalWislistItem= res.length;
              this.wishlist.updateCount(this.totalWislistItem);
           })
+
+          this.getWishlistItems().subscribe((res)=>{
+            this.totalWislistItem= res.length;
+            this.wishlist.updateCount(this.totalWislistItem);
+         })
+
+         this.getCartItems().subscribe((res) => {
+          this.totalCartItem = res.length;
+          this.cartService.updateCount(this.totalCartItem);
+         })
           
           this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
           this.router.navigate(['/main/home'])

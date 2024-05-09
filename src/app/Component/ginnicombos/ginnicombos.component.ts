@@ -5,6 +5,7 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface WishlistItem {
   userId: string;
@@ -85,29 +86,33 @@ export class GinnicombosComponent {
   currentCategoryOption: string = ''; // Initialize currentCategoryOption
   inWishlist!: boolean;
   totalWislistItem:any;
+  totalCartItem:any;
+  productLength!: number;
+
   constructor( private cartService : CartService, private productService : ProductService, 
-                private wishlistService : WishlistService, private searchService : SearchService) 
-    { this.availabilityForm = new FormGroup({
-        stock: new FormControl(null) // Define a FormControl for the radio buttons
-      });
+                private wishlistService : WishlistService, private searchService : SearchService,
+              private router : Router) 
+  { 
+    this.availabilityForm = new FormGroup({
+      stock: new FormControl(null) // Define a FormControl for the radio buttons
+    });
 
-      this.categoryForm = new FormGroup({
-        category: new FormControl(null) // Define a FormControl for the radio buttons
-      });
+    this.categoryForm = new FormGroup({
+      category: new FormControl(null) // Define a FormControl for the radio buttons
+    });
 
-      this.priceForm = new FormGroup({
-        minPrice: new FormControl(0), 
-        maxPrice:new FormControl(10000)
-      });
-    }
+    this.priceForm = new FormGroup({
+      minPrice: new FormControl(0), 
+      maxPrice:new FormControl(10000)
+    });
+  }
 
   ngOnInit(): void {
     this.getProduct();
     this.toggleFeaturedSorting(null);
     this.getCartItems();
-
-    
   }
+
 
   getWishlistItems() {
     const UserID = sessionStorage.getItem('UserID');
@@ -120,52 +125,19 @@ export class GinnicombosComponent {
     );
   }
 
+
   onSearch () {
     this.filteredData = this.productlist.filter((item) =>
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
-  addToCart(product: any): void {
-    const userId = sessionStorage.getItem('UserID');
-    if (!userId) {
-      console.error('User ID not found in local storage');
-      return;
-    }
-    
-    const cartItem: CartList = {
-      userId: userId,
-      productId: product.id,
-      productName: product.productName,
-      quantity: 1,
-      price: product.price,
-      totalPrice: 1 * product.price,
-      profileImage: product.profileImage,
-      imageData: product.imageData,
-      created_at: new Date(),
-      modified_at: null,
-      deleted_at: null
-    };
-
-    this.cartService.addToCart(cartItem)
-      .subscribe(
-        () => {
-          console.log('Item added to cart:', cartItem);
-          alert('Item added to cart successfully');
-        },
-        error => {
-          console.error('Error adding item to cart:', error);
-          alert('Error adding item to cart');
-          // Handle error
-        }
-      );
-  }
 
   addToWishlist(product: any): void {
     // Assuming UserId is stored in session storage with key 'userId'
     const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
-      console.error('User ID not found in session storage');
-      return;
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");  
     }
 
       // Create a WishlistItem object to send to the service
@@ -202,7 +174,6 @@ export class GinnicombosComponent {
           }
         });
     });
-
   }
   
   removeToWishlist(product: any): void {
@@ -227,68 +198,157 @@ export class GinnicombosComponent {
         }
       });
     });
-
-
-   
   }
   
-  getCartItems(){
-    const UserID: string = sessionStorage.getItem('UserID')!;
-
-    this.cartService.getToCarts(UserID).subscribe(res=>{
-      console.log(res);
-        // this.grandTotal = this.cartService.getTotalPrice();
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    // Fetch cart items and update totalCartItem
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalCartItem = res.length;
       })
+    );
+  }
+
+  addToCart(product: any): void {
+    const userId = sessionStorage.getItem('UserID');
+    if (!userId) {
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");    
+    }
+    
+    const cartItem: CartList = {
+      userId: userId,
+      productId: product.id,
+      productName: product.productName,
+      quantity: 1,
+      price: product.price,
+      totalPrice: 1 * product.price,
+      profileImage: product.profileImage,
+      imageData: product.imageData,
+      created_at: new Date(),
+      modified_at: null,
+      deleted_at: null
+    };
+
+    this.getCartItems().subscribe(() => {
+      this.cartService.addToCart(cartItem)
+      .subscribe({
+        next: () => {
+            console.log('Item added to cart:', cartItem);
+            alert('Item added to cart successfully');
+            // Update the count after successfully adding the item
+              this.cartService.updateCount(this.totalCartItem+1);        
+          },
+          error: (err) => {
+            console.error('Error adding item to cart:', err);
+            alert('Error adding item to cart');
+          }     
+        });
+    });
+
   }
   
   getProduct(): void {
     const UserID = sessionStorage.getItem('UserID');
-    if (!UserID) {
-      console.error('User ID not found in session storage');
-      return;
+    // if (!UserID) {
+    //   console.error('User ID not found in session storage');
+    //   return;
+    // }
+
+    if(UserID == null){
+      this.productService.getProductsWithImages().subscribe({
+        next: (res) => {
+          console.log(res);
+  
+          this.productLength = res.length;
+          res.forEach(item => {
+            if (item.imageData) {
+              // Prepend 'data:image/jpeg;base64,' to the imageData field
+              item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+            }
+          });
+  
+          this.productlist = res.filter((product) => product.subcategory === 'combo');
+          this.originalProductList = [...this.productlist];
+  
+          this.searchService.getSearchTerm().subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+            this.onSearch();
+          });
+      
+            // Filter products based on status
+          this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
+          this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
+  
+          // Filter products based on category
+          this.almonds = this.filteredData.filter(product => product.category === 'almond');
+          this.raisins = this.filteredData.filter(product => product.category === 'raisin');
+          this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
+          this.cashews = this.filteredData.filter(product => product.category === 'cashew');
+          this.pistas = this.filteredData.filter(product => product.category === 'pista');
+          this.dates = this.filteredData.filter(product => product.category === 'date');
+  
+          // Filter products based on price
+          this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
+          this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+          this.priceForm.get('minPrice')?.setValue(this.minPrices);
+          this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
+        },
+  
+        error: (err) => {
+          console.error('Error fetching addresses:', err);
+        }
+      });
+    }
+    else {  
+      this.productService.getProductsWithImage(UserID).subscribe({
+        next: (res) => {
+          console.log(res);
+
+          this.productLength = res.length;
+          res.forEach(item => {
+            if (item.imageData) {
+              // Prepend 'data:image/jpeg;base64,' to the imageData field
+              item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+            }
+          });
+
+          this.productlist = res.filter((product) => product.subcategory === 'combo');
+          this.originalProductList = [...this.productlist];
+
+          this.searchService.getSearchTerm().subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+            this.onSearch();
+          });
+      
+          // Filter products based on status
+          this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
+          this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
+
+          // Filter products based on category
+          this.almonds = this.filteredData.filter(product => product.category === 'almond');
+          this.raisins = this.filteredData.filter(product => product.category === 'raisin');
+          this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
+          this.cashews = this.filteredData.filter(product => product.category === 'cashew');
+          this.pistas = this.filteredData.filter(product => product.category === 'pista');
+          this.dates = this.filteredData.filter(product => product.category === 'date');
+
+          // Filter products based on price
+          this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
+          this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+          this.priceForm.get('minPrice')?.setValue(this.minPrices);
+          this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
+        },
+
+        error: (err) => {
+          console.error('Error fetching addresses:', err);
+        }
+      });
     }
 
-    this.productService.getProductsWithImage(UserID).subscribe({
-      next: (res) => {
-        console.log(res);
-        res.forEach(item => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-
-        this.productlist = res.filter((product) => product.subcategory === 'combo');
-        this.originalProductList = [...this.productlist];
-
-        this.searchService.getSearchTerm().subscribe((searchTerm) => {
-          this.searchTerm = searchTerm;
-          this.onSearch();
-        });
-    
-         // Filter products based on status
-        this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
-        this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
-
-        // Filter products based on category
-        this.almonds = this.filteredData.filter(product => product.category === 'almond');
-        this.raisins = this.filteredData.filter(product => product.category === 'raisin');
-        this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
-        this.cashews = this.filteredData.filter(product => product.category === 'cashew');
-        this.pistas = this.filteredData.filter(product => product.category === 'pista');
-        this.dates = this.filteredData.filter(product => product.category === 'date');
-
-        // Filter products based on price
-        this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-        this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
-        this.priceForm.get('minPrice')?.setValue(this.minPrices);
-        this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
-      },
-
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
   }
 
   // onchange in availability , category and Price

@@ -10,6 +10,9 @@ import { CartList } from '../Component/ginnicombos/ginnicombos.component';
 export class CartService {
   private baseUrl: string = 'https://localhost:7132/api/Cart/';
 
+  private countCartItem = new BehaviorSubject<number>(0);
+  countCart$ = this.countCartItem.asObservable();
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   addtoCart(product : any) {
@@ -36,24 +39,17 @@ export class CartService {
     return this.http.delete<any>(`${this.baseUrl}deleteItem/${itemId}`);
   }
 
-  emptyCart(): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteAllItem`);
+  emptyCart(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
   }
 
   addToWishlist(item: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}addToWishlist`, item);
   }
 
-
-  // CreateOrder(amount:number,user:number)
-  // {
-  //   let _headers: HttpHeaders = new HttpHeaders({
-  //     'accept': 'text/plain'
-  //   });
-    
-  //   //http call to api endpoint
-  //   return this.http.post(this.url+'security/createorder?amount='+amount+'&user='+user,null,{headers:_headers,responseType:'text'})
-  //               .pipe(map(response=>response));
-  // }
+  updateCount(count: number) {
+    console.log("Updating count to:", count); // Add this for debugging
+    this.countCartItem.next(count);
+  }
   
 }

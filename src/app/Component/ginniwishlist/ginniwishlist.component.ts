@@ -3,6 +3,7 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { SearchService } from '../../Services/search.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-ginniwishlist',
@@ -16,6 +17,7 @@ export class GinniwishlistComponent {
   productlist! : any[];
   searchTerm: string ='';
   products: any;
+  totalWislistItem!: number;
 
 
 
@@ -25,22 +27,46 @@ export class GinniwishlistComponent {
   ngOnInit(): void {
     const UserID: string = sessionStorage.getItem('UserID')!;
 
-    this.wishlistService.getToWishlists(UserID).subscribe(res=>{
-      console.log(res);
-        this.productss = res;
-        // this.grandTotal = this.cartService.getTotalPrice();
-        console.log(this.productss);
+    if (UserID == null){    
+      this.productss = [];
+      console.log(this.productss)
 
-        this.searchService.getSearchTerm().subscribe((searchTerm) => {
-          this.searchTerm = searchTerm;
-          this.onSearch();
-        });
-      })
+      this.searchService.getSearchTerm().subscribe((searchTerm) => {
+        this.searchTerm = searchTerm;
+        this.onSearch();
+      });
+    }
+    else {
+      this.wishlistService.getToWishlists(UserID).subscribe(res=>{
+        console.log(res);
+          this.productss = res;
+          // this.grandTotal = this.cartService.getTotalPrice();
+          console.log(this.productss);
+  
+          this.searchService.getSearchTerm().subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+            this.onSearch();
+          });
+        })
+    }
+
+    
 
       console.log(this.productss);
 
       this.getProduct();
 
+  }
+
+  getWishlistItems() {
+    const UserID = sessionStorage.getItem('UserID');
+    // Fetch wishlist items and update totalWishlistItem
+    return this.wishlistService.getToWishlists(UserID!).pipe(
+      tap(res => {
+        // setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalWislistItem = res.length;
+      })
+    );
   }
 
   onSearch () {
@@ -65,22 +91,34 @@ export class GinniwishlistComponent {
         );
   }
 
+
   removeItem(item: any): void {
-    this.wishlistService.removeItem(item.id)
-        .subscribe(
-            () => {
-                // Remove the item from the local array if needed
-                const index = this.products.indexOf(item);
-                if (index !== -1) {
-                    this.products.splice(index, 1);
-                }
-                alert('Item removed successfully');
-            },
-            error => {
-                console.error('Error removing item:', error);
-                alert('Error removing item');
+
+    const userId = sessionStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
+    this.getWishlistItems().subscribe(() => {
+      this.wishlistService.removeItems(userId, item.productId)
+      .subscribe({
+        next: () => {
+            // Remove the item from the local array if needed
+            const index = this.products.indexOf(item);
+            if (index !== -1) {
+                this.products.splice(index, 1);
             }
-        );
+            alert('Item removed successfully');
+            // Update the count after successfully removing the item
+            this.wishlistService.updateCount(this.totalWislistItem-1); 
+          },
+          error: (err) => {
+            console.error('Error removing item:', err);
+            alert('Error removing item');
+          }
+      });
+    });
   }
 
   addToCartAndRemoveFromWishlist(item: any): void {
@@ -92,17 +130,28 @@ export class GinniwishlistComponent {
   }
 
   removeAllItem() : void {
-    this.wishlistService.emptyWishlist()
+    const userId = sessionStorage.getItem('UserID');
+    if (!userId) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
+    this.getWishlistItems().subscribe(() => {
+      this.wishlistService.emptyWishlist(userId)
         .subscribe(
-            () => {
-                this.products = []; // Clear the local cart array
-                alert('Wishlist emptied successfully');
-            },
-            error => {
-                console.error('Error emptying cart:', error);
-                alert('Error emptying cart');
-            }
+          () => {
+            this.products = []; // Clear the local cart array
+            alert('Wishlist emptied successfully');
+            // Update the count after successfully emptying the wishlist
+            this.totalWislistItem = 0;
+            this.wishlistService.updateCount(this.totalWislistItem);
+          },
+          error => {
+            console.error('Error emptying wishlist:', error);
+            alert('Error emptying wishlist');
+          }
         );
+    });
   }
   
   incrementQuantity(item: any): void {

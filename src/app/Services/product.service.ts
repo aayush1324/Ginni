@@ -21,7 +21,7 @@ export class ProductService {
     return this.http.get<any[]>(`${this.baseUrl}getProductsWithImages`);
   }
 
-  getProductsWithImage(UserID : string): Observable<any[]> {
+  getProductsWithImage(UserID: string | null): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`);
   }
 
