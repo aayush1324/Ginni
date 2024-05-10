@@ -5,6 +5,7 @@ import { PaymentService } from '../../Services/payment.service';
 import { ProductService } from '../../Services/product.service';
 import { SearchService } from '../../Services/search.service';
 import { tap } from 'rxjs';
+import { OrderService } from '../../Services/order.service';
 
 declare var Razorpay: any;
 
@@ -24,7 +25,7 @@ export class GinnicartComponent {
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
     private paymentService : PaymentService , private productService : ProductService,  
-    private searchService : SearchService) { }
+    private searchService : SearchService, private orderService : OrderService) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -242,40 +243,69 @@ export class GinnicartComponent {
   razororder_Id: string = "";
 
   initiatePayment() {  
-    var amount = this.getTotalPrice();
+    const amount = this.getTotalPrice();
 
-    this.paymentService.createOrder(amount).subscribe(response => {
-      console.log(response.id);
-      const options = {
-        key: 'rzp_test_NHayhA8KgRDaCx',
-        amount: response.amount,
-        currency: 'INR',
-        name: 'Ginni Dry Fruits',
-        description: 'Test Payment',
-        order_id: response.id,
-        
-        handler: (responses: any) => {
-          var razorpay_Id = responses.razorpay_payment_id;
-          var razororder_Id = responses.razorpay_order_id;
-          console.log(responses);
-          this.paymentService.confirmPayment(responses).subscribe(
-            (confirmResponse) => {
-              alert(confirmResponse.message);
-              console.log(confirmResponse);
+    const UserID = sessionStorage.getItem('UserID');
+    
+    this.orderService.createOrders(UserID).subscribe({
+      next : (res: any) => {
+        console.log(res);
+        const orderId = res[0].orderId
+        console.log("OrderIDDDDD",orderId);
+
+        this.paymentService.createOrders(amount, orderId).subscribe(response => {
+          console.log(response.id);
+          const options = {
+            key: 'rzp_test_NHayhA8KgRDaCx',
+            amount: response.amount,
+            currency: 'INR',
+            name: 'Ginni Dry Fruits',
+            description: 'Test Payment',
+            order_id: response.id,
+            
+            handler: (responses: any) => {
+              var razorpay_Id = responses.razorpay_payment_id;
+              var razororder_Id = responses.razorpay_order_id;
+              console.log(responses);
+              
+              this.paymentService.confirmPayments(responses,orderId).subscribe(
+                (confirmResponse) => {
+                  alert(confirmResponse.message);
+                  console.log(confirmResponse);
+                },
+                (error) => {
+                  console.error(error);
+                  console.log("error");
+                }
+              );
             },
-            (error) => {
-              console.error(error);
-              console.log("error");
-            }
-          );
-        },
-      };
-      const razorpay = new Razorpay(options);
-      razorpay.open();
+          };
+          const razorpay = new Razorpay(options);
+          razorpay.open();
+        });    
+      },
+      error : (err: any) => {
+        console.error(err);
+      }
     });
+
+ 
+    
   }
 
-  initiatesPayment(amount : any) {  
+  initiatesPayment(productId : any , amount :any) { 
+    const UserID = sessionStorage.getItem('UserID');
+
+    this.orderService.createOrder(UserID,productId).subscribe({
+      next : (res: any) => {
+        console.log(res);
+      },
+      error : (err: any) => {
+        console.error(err);
+      }
+    });
+
+     
     this.paymentService.createOrder(amount).subscribe(response => {
       console.log(response.id);
       const options = {
@@ -305,6 +335,7 @@ export class GinnicartComponent {
       const razorpay = new Razorpay(options);
       razorpay.open();
     });
+
   }
 
   // Service or Component where you handle failure payment

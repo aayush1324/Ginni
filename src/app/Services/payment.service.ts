@@ -17,8 +17,16 @@ export class PaymentService {
     return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}`,{amount:amount});
   }
 
+  createOrders(amount: number, orderId:string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}&orderId=${orderId}`,{amount:amount, orderId:orderId});
+  }
+
   confirmPayment(response: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
+  }
+
+  confirmPayments(response: any, orderId:string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}confirm-payment?OrderID=${orderId}`, {response:response, orderId:orderId});
   }
 
   refundPayment(orderId: string, paymentId: string) {
