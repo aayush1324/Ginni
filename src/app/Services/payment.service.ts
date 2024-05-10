@@ -25,9 +25,10 @@ export class PaymentService {
     return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
   }
 
-  confirmPayments(response: any, orderId:string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}confirm-payment?OrderID=${orderId}`, {response:response, orderId:orderId});
+  confirmPayments(response: any, orderId: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}confirm-payment?orderId=${orderId}`, response);
   }
+  
 
   refundPayment(orderId: string, paymentId: string) {
     return this.http.post<any>(`${this.baseUrl}refund-payment`,  { razorpay_order_id: orderId, razorpay_payment_id: paymentId });
