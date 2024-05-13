@@ -4,6 +4,8 @@
             <h2>My Orders ({{orderList.length}})</h2>
         </div>
 
+        <br>
+        <br>
         <div class="header">
             <div class="order">
                 <h4>Order ID</h4>
@@ -36,7 +38,7 @@
             </div>
 
             <div class="date">
-                <p>{{item.createdAt}}</p>
+                <p>{{ item.createdAt | date:'ddMMMyyyy' }}</p>
             </div>
 
             <div class="payment">

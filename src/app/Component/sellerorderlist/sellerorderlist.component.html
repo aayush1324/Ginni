@@ -123,31 +123,38 @@
         <thead>
           <tr>
             <!-- <th style="width:5%">UserID</th> -->
-            <th style="width:5%">Name</th>
-            <th style="width:5%">Email</th>
-            <th style="width:5%">Mobile</th>
-            <th style="width:5%">Image</th>
-            <!-- <th style="width:5%">ProductID</th> -->
-            <th style="width:5%">Product</th>
-            <th style="width:5%">Url</th>
-            <th style="width:5%">Price</th>
-            <th style="width:5%">Discount</th>
-            <th style="width:5%">Delivery</th> 
-            <th style="width:5%">Category</th>
-            <th style="width:5%">Sub-Category</th>
-            <th style="width:5%">Weight</th>
-            <!-- <th style="width:5%">Category</th> -->
+            <th style="width:5%">User Name</th>
+            <th style="width:5%">User Email</th>
+            <th style="width:5%">User Mobile</th>
             <th style="width:5%">OrderID</th>
+            <th style="width:5%">OrderDate</th>
+            <!-- <th style="width:5%">ProductID</th> -->
+            <th style="width:5%">Product Name</th>
+            <th style="width:5%">Product Image</th>
+            <th style="width:5%">Product Amount</th>
+            <th style="width:5%">Product Count</th>
+            <th style="width:5%">Total Amount</th> 
             <th style="width:7%">PaymentID</th>   
-            <th style="width:5%">Status</th>  
+            <!-- <th style="width:5%">Status</th>   -->
           </tr>
         </thead>
   
         <tbody>
-          <tr *ngFor="let item of productlist">
+          <tr *ngFor="let item of orders">
             <ng-container *ngFor="let key of tableHeaders">
-              <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}</td>
-            </ng-container>
+                <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  <!-- Check if the current key is 'image' -->
+                  <ng-container *ngIf="key === 'productImage'">
+                    <!-- If 'image', display the image -->
+                    <img [src]="item.productImage" alt="Product Image" style="width: 100%; height: 50%;">
+                  </ng-container>
+    
+                  <!-- If not 'image', display the text value -->
+                  <ng-container *ngIf="key !== 'productImage'">
+                    {{ item[key] }}
+                  </ng-container>
+                </td>
+              </ng-container>
             
             <!-- <td>
               <button (click)="openEditPopup(item)"><b>Edit</b></button>

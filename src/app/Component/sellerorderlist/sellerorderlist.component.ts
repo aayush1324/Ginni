@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { OrderService } from '../../Services/order.service';
 
 @Component({
   selector: 'app-sellerorderlist',
@@ -17,23 +18,18 @@ export class SellerorderlistComponent {
 
     // Define your table headers
   tableHeaders: string[] = [
-    'image', 'productName', 'description', 'url', 'price', 'discount', 
-    'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
+    'userName','email', 'phone', 'orderId', 'orderDate',  
+    'productName', 'productImage', 'productAmount','productCount', 'totalAmount', 'receipt'
   ];
+  orders: any;
 
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private orderService : OrderService) { }
 
   ngOnInit(): void {
-    this.customerForm = this.fb.group({
-
-    });
-
+    this.getOrders();
   }
-
- 
-
   
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
@@ -47,7 +43,6 @@ export class SellerorderlistComponent {
   }
 
 
-
   openEditPopup(product: any): void {
     this.selectedproduct = product;
     this.populateForm(product);
@@ -55,81 +50,89 @@ export class SellerorderlistComponent {
     this.isEdit = true;
   }
 
- populateForm(product: any): void {
-  this.customerForm.patchValue({
-    productName: product.productName,
-    url: product.url,
-    price: product.price,
-    discount: product.discount,
-    deliveryPrice: product.deliveryPrice,
-    quantity: product.quantity,
-    description: product.description,
-    category: product.category,
-    subcategory: product.subcategory,
-    weight: product.weight,
-    status: product.status
-  });
-}
+  populateForm(product: any): void {
+    this.customerForm.patchValue({
+      productName: product.productName,
+      url: product.url,
+      price: product.price,
+      discount: product.discount,
+      deliveryPrice: product.deliveryPrice,
+      quantity: product.quantity,
+      description: product.description,
+      category: product.category,
+      subcategory: product.subcategory,
+      weight: product.weight,
+      status: product.status
+    });
+  }
 
-addedCustomer(): void {
-  // if (this.productForm.valid) {
-  //   console.log(this.productForm.value);
-  //   this.productService.addProducts(this.productForm.value).subscribe({
+  addedCustomer(): void {
+    // if (this.productForm.valid) {
+    //   console.log(this.productForm.value);
+    //   this.productService.addProducts(this.productForm.value).subscribe({
+    //     next: (res) => {
+    //       console.log(res.message);
+    //       this.togglePopup();
+    //       alert(res.message);
+    //       this.getProduct();
+    //     },
+    //     error: (err) => {
+    //       alert(err?.error.message);
+    //     },
+    //   });
+    // }
+  }
+
+  // getProduct(): void {
+  //   this.productService.getProducts().subscribe({
   //     next: (res) => {
-  //       console.log(res.message);
-  //       this.togglePopup();
-  //       alert(res.message);
-  //       this.getProduct();
+  //       this.productlist = res;
   //     },
   //     error: (err) => {
-  //       alert(err?.error.message);
-  //     },
-  //   });
-  // }
-}
-
-// getProduct(): void {
-//   this.productService.getProducts().subscribe({
-//     next: (res) => {
-//       this.productlist = res;
-//     },
-//     error: (err) => {
-//       console.error('Error fetching addresses:', err);
-//     }
-//   });
-// }
-
-deleteCustomer(productId: string): void {
-  // this.productService.deleteProducts(productId).subscribe({
-  //   next: (res) => {
-  //     console.log('Product deleted successfully!', res);
-  //     this.getProduct();
-  //   },
-  //   error: (err) => {
-  //     console.error('Error deleting product:', err);
-  //   }
-  // });
-}
-
-
-
-
-submitEditedCustomer(): void {
-  // if (this.productForm.valid) {
-  //   const updatedProduct = this.productForm.value;
-  //   this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
-  //     next: (res) => {
-  //       console.log('Product updated successfully!', res);
-  //       this.togglePopup();
-  //       this.getProduct();
-  //     },
-  //     error: (err) => {
-  //       console.error('Error updating Product:', err);
+  //       console.error('Error fetching addresses:', err);
   //     }
   //   });
   // }
-}
 
+  deleteCustomer(productId: string): void {
+    // this.productService.deleteProducts(productId).subscribe({
+    //   next: (res) => {
+    //     console.log('Product deleted successfully!', res);
+    //     this.getProduct();
+    //   },
+    //   error: (err) => {
+    //     console.error('Error deleting product:', err);
+    //   }
+    // });
+  }
+
+  submitEditedCustomer(): void {
+    // if (this.productForm.valid) {
+    //   const updatedProduct = this.productForm.value;
+    //   this.productService.editProducts(this.selectedproduct.id, updatedProduct).subscribe({
+    //     next: (res) => {
+    //       console.log('Product updated successfully!', res);
+    //       this.togglePopup();
+    //       this.getProduct();
+    //     },
+    //     error: (err) => {
+    //       console.error('Error updating Product:', err);
+    //     }
+    //   });
+    // }
+  }
+
+  getOrders(): void {
+    this.orderService.getOrders().subscribe(
+      (res) => {
+        this.orders = res;
+        console.log(this.orders);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
 
 }

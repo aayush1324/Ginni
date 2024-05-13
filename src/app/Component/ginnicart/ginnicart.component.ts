@@ -246,96 +246,96 @@ export class GinnicartComponent {
     const amount = this.getTotalPrice();
     const UserID = sessionStorage.getItem('UserID');
     
-    this.orderService.createOrders(UserID).subscribe({
-      next : (res: any) => {
-        console.log(res);
-        const orderId = res[0].orderId
-        console.log("OrderIDDDDD",orderId);
+    if (UserID !== null) {
+      this.orderService.createOrders(UserID).subscribe({
+        next : (res: any) => {
+          console.log(res);
+          const orderId = res[0].orderId
+          console.log("OrderIDDDDD",orderId);
 
-        this.paymentService.createOrders(amount, orderId).subscribe(response => {
-          console.log(response.id);
-          const options = {
-            key: 'rzp_test_NHayhA8KgRDaCx',
-            amount: response.amount,
-            currency: 'INR',
-            name: 'Ginni Dry Fruits',
-            description: 'Test Payment',
-            order_id: response.id,
-            
-            handler: (responses: any) => {
-              var razorpay_Id = responses.razorpay_payment_id;
-              var razororder_Id = responses.razorpay_order_id;
-              console.log(responses);
+          this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
+            console.log(response.id);
+            const options = {
+              key: 'rzp_test_NHayhA8KgRDaCx',
+              amount: response.amount,
+              currency: 'INR',
+              name: 'Ginni Dry Fruits',
+              description: 'Test Payment',
+              order_id: response.id,
+              
+              handler: (responses: any) => {
+                var razorpay_Id = responses.razorpay_payment_id;
+                var razororder_Id = responses.razorpay_order_id;
+                console.log(responses);
 
-              this.paymentService.confirmPayments(responses,orderId).subscribe(
-                (confirmResponse) => {
-                  alert(confirmResponse.message);
-                  console.log(confirmResponse);
-                },
-                (error) => {
-                  console.error(error);
-                  console.log("error");
-                }
-              );
-            },
-          };
-          const razorpay = new Razorpay(options);
-          razorpay.open();
-        });    
-      },
-      error : (err: any) => {
-        console.error(err);
-      }
-    });
-
- 
-    
+                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe(
+                  (confirmResponse) => {
+                    alert(confirmResponse.message);
+                    console.log(confirmResponse);
+                  },
+                  (error) => {
+                    console.error(error);
+                    console.log("error");
+                  }
+                );
+              },
+            };
+            const razorpay = new Razorpay(options);
+            razorpay.open();
+          });    
+        },
+        error : (err: any) => {
+          console.error(err);
+        }
+      });
+    } 
   }
 
   initiatesPayment(productId : any , amount :any) { 
     const UserID = sessionStorage.getItem('UserID');
 
-    this.orderService.createOrder(UserID,productId).subscribe({
-      next : (res: any) => {
-        console.log(res);
-        const orderId = res.orderId
-        console.log("OrderIDDDDD",orderId);
+    if (UserID !== null) {
+      this.orderService.createOrder(UserID,productId).subscribe({
+        next : (res: any) => {
+          console.log(res);
+          const orderId = res.orderId
+          console.log("OrderIDDDDD",orderId);
 
-        this.paymentService.createOrders(amount, orderId).subscribe(response => {
-          console.log(response.id);
-          const options = {
-            key: 'rzp_test_NHayhA8KgRDaCx',
-            amount: response.amount,
-            currency: 'INR',
-            name: 'Ginni Dry Fruits',
-            description: 'Test Payment',
-            order_id: response.id,
-            
-            handler: (responses: any) => {
-              var razorpay_Id = responses.razorpay_payment_id;
-              var razororder_Id = responses.razorpay_order_id;
-              console.log(responses);
-              this.paymentService.confirmPayments(responses, orderId).subscribe(
-                (confirmResponse) => {
-                  alert(confirmResponse.message);
-                  console.log(confirmResponse);
-                },
-                (error) => {
-                  console.error(error);
-                  console.log("error");
-                }
-              );
-            },
-          };
-          const razorpay = new Razorpay(options);
-          razorpay.open();
-        });
-      },
-      error : (err: any) => {
-        console.error(err);
-      }
-    });
-
+          this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
+            console.log(response.id);
+            const options = {
+              key: 'rzp_test_NHayhA8KgRDaCx',
+              amount: response.amount,
+              currency: 'INR',
+              name: 'Ginni Dry Fruits',
+              description: 'Test Payment',
+              order_id: response.id,
+              
+              handler: (responses: any) => {
+                var razorpay_Id = responses.razorpay_payment_id;
+                var razororder_Id = responses.razorpay_order_id;
+                console.log(responses);
+                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe(
+                  (confirmResponse) => {
+                    alert(confirmResponse.message);
+                    console.log(confirmResponse);
+                  },
+                  (error) => {
+                    console.error(error);
+                    console.log("error");
+                  }
+                );
+              },
+            };
+            const razorpay = new Razorpay(options);
+            razorpay.open();
+          });
+        },
+        error : (err: any) => {
+          console.error(err);
+        }
+      });
+    }
   }
 
 

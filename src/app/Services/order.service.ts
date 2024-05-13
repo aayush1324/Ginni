@@ -19,4 +19,16 @@ export class OrderService {
   createOrder(userId: any, productId: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}createOrder/${userId}/${productId}`, null);
   }
+
+  getOrder(userId: any) {
+    return this.http.get<any[]>(`${this.baseUrl}getOrder?userId=${userId}`);
+  }
+
+  getOrderByID(orderID : string) : Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getOrderById/${orderID}`);
+  }
+
+  getOrders(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getOrders`);
+  }
 }

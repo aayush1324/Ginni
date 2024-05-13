@@ -17,16 +17,16 @@ export class PaymentService {
     return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}`,{amount:amount});
   }
 
-  createOrders(amount: number, orderId:string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}&orderId=${orderId}`,{amount:amount, orderId:orderId});
+  createOrders(amount: number, orderId:string, userId : string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}&orderId=${orderId}&userId=${userId}`,{amount:amount, orderId:orderId, userId:userId});
   }
 
   confirmPayment(response: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
   }
 
-  confirmPayments(response: any, orderId: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}confirm-payment?orderId=${orderId}`, response);
+  confirmPayments(response: any, orderId: string, userID: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}confirm-payment?orderId=${orderId}&userID=${userID}`, response);
   }
   
 
@@ -38,8 +38,8 @@ export class PaymentService {
     return this.http.post<any>(`${this.baseUrl}failure-payment`, {razorpay_order_id: orderId});
   }
 
-  getOrders(){
-    return this.http.get<any[]>(`${this.baseUrl}getOrder`);
+  getOrder(userId: any) {
+    return this.http.get<any[]>(`${this.baseUrl}getOrder?userId=${userId}`);
   }
 
   getOrderByID(orderID : string) : Observable<any> {

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { PaymentService } from '../../Services/payment.service';
 import { log } from 'console';
+import { OrderService } from '../../Services/order.service';
 
 @Component({
   selector: 'app-ginnidetailorder',
@@ -12,8 +13,10 @@ import { log } from 'console';
 export class GinnidetailorderComponent {
   orderId: any;
   orderDetails: any;
+  shippingPrice: number = 50;
 
-  constructor(private route: ActivatedRoute,  private productService : ProductService, private paymentService : PaymentService) { }
+  constructor(private route: ActivatedRoute,  private productService : ProductService, 
+    private paymentService : PaymentService, private orderService : OrderService) { }
 
   ngOnInit(): void {
      // Get the order name from route parameters
@@ -26,7 +29,7 @@ export class GinnidetailorderComponent {
   }
 
   getOrderDetails(orderId : string) : void {
-    this.paymentService.getOrderByID(orderId).subscribe({
+    this.orderService.getOrderByID(orderId).subscribe({
       next: (data: any) => {
         this.orderDetails = data;
         console.log(this.orderDetails)
@@ -37,4 +40,26 @@ export class GinnidetailorderComponent {
     });
   }
 
+  // Assuming orderDetails is an array of objects representing products
+  // This function calculates the total amount for the first three products
+  calculateTotalAmount(orderDetails: any[]): number {
+    let total = 0;
+    for (let i = 0; i < Math.min(orderDetails.length, 3); i++) {
+      total += orderDetails[i].totalAmount;
+    }
+    return total;
+  }
+
+
+  calculateTax(totalAmount: number): number {
+    const taxPercentage = 0.12; // 12% tax rate
+    return totalAmount * taxPercentage;
+  }
+
+  calculateTotalAmountWithTax(orderDetails: any[]): number {
+    const totalAmount = this.calculateTotalAmount(orderDetails);
+    const taxAmount = this.calculateTax(totalAmount);
+    const shippingAmount = this.shippingPrice;
+    return totalAmount + taxAmount + shippingAmount;
+  }
 }
