@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ZipcodeService {
 
-  private baseUrl: string = 'https://localhost:7132/api/ZipCode/';
+  private baseUrl: string = 'https://localhost:7132/api/ZipCodes/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

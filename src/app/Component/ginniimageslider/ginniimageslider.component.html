@@ -1,11 +1,11 @@
 <div class="containerbox">
     <div class="slider" *ngFor="let image of images; let i = index" [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
-        <img [src]="image" alt="Slide {{i+1}}">
+      <img [src]="image" alt="Slide {{i+1}}">
     </div>
-
+  
     <!-- Navigation dots -->
     <div class="dotter">
-        <span class="dot" *ngFor="let image of images; let i = index" [class.active]="currentIndex === i" (click)="setCurrentIndex(i)"></span>
+      <span class="dot" *ngFor="let image of images; let i = index" [class.active]="isHighlighted(i)" (click)="setCurrentIndex(i)"></span>
     </div>
-</div>
-
+  </div>
+  

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { interval, take } from 'rxjs';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Subscription, interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-ginnislider',
@@ -7,31 +7,42 @@ import { interval, take } from 'rxjs';
   styleUrl: './ginnislider.component.css'
 })
 export class GinnisliderComponent  {
-  // var counter = 1;
+  images: string[] = [
+    '../../assets/images/slider/1.png',
+    '../../assets/images/slider/2.png',
+    '../../assets/images/slider/3.png',
+    '../../assets/images/slider/4.png',
+    '../../assets/images/slider/1.png',
+    '../../assets/images/slider/2.png',
+    '../../assets/images/slider/3.png',
+    '../../assets/images/slider/4.png',
+    '../../assets/images/slider/2.png',
+    '../../assets/images/slider/2.png'
+  ];
 
-  // setInterval(function() {
-  //   document.getElementById('radio' + counter).checked = true
-  //   counter++;
+  @ViewChild('sliderContainer') sliderContainer!: ElementRef;
+  currentIndex = 0;
 
-  //   if(counter > 4){
-  //     counter =1;
-  //   }
-  // }, 5000);
+  constructor() { }
 
-  // counter: number = 0;
+  ngOnInit(): void {
+  }
 
-  // constructor() { }
+  setCurrentIndex(index: number): void {
+    this.currentIndex = index;
+  }
 
-  // ngOnInit(): void {
-  //   this.startSlideInterval();
-  // }
+  isHighlighted(index: number): boolean {
+    return this.currentIndex === index;
+  }
 
-  // startSlideInterval() {
-  //   interval(5000)
-  //     .pipe(take(4)) // Adjust the number of slides accordingly
-  //     .subscribe(() => {
-  //       this.counter = (this.counter + 1) % 4; // Adjust the number of slides accordingly
-  //     });
-  // }
 
+  scroll(direction: number): void {
+    const container = this.sliderContainer.nativeElement as HTMLElement;
+    const imageWidth = container.offsetWidth*2.5 / this.images.length; // Assuming equal width for each image
+    const scrollAmount = imageWidth * direction;
+    container.scrollLeft += scrollAmount;
+  }
+
+  
 }

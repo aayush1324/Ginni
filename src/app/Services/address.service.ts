@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AddressService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Address/';
+  private baseUrl: string = 'https://localhost:7132/api/Addresses/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

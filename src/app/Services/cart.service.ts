@@ -8,7 +8,7 @@ import { CartList } from '../Component/ginnicombos/ginnicombos.component';
   providedIn: 'root'
 })
 export class CartService {
-  private baseUrl: string = 'https://localhost:7132/api/Cart/';
+  private baseUrl: string = 'https://localhost:7132/api/Carts/';
 
   private countCartItem = new BehaviorSubject<number>(0);
   countCart$ = this.countCartItem.asObservable();

@@ -1,142 +1,52 @@
 .containerbox {
-    width: 100%;
-    height: fit-content;
-    margin: 0%;
-    padding: 0%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: antiquewhite;
-}
-
-.slider {
-    width: 100%;
-    height: fit-content;
-    padding: 0%;
-    margin: 0%;
+    position: relative;
     overflow: hidden;
-    /* border: 5px solid; */
-}
-
-.slides {
-    width: 500%;
-    height: fit-content;
-    display: flex;
-    /* border: 5px solid; */
-}
-
-.slides input {
-    display: none;
-}
-
-.slide {
-    width: 20%;
-    transition: 1s;
-    /* border: 5px solid; */
-}
-
-.slide img {
-    width: 100%;
-    height: fit-content;
-    max-height: 25rem;
-}
-
-.navigation-manual {
-    position: absolute;
-    width: 100%;
-    height: fit-content;
-    margin-top: -40px;
     padding: 0%;
+  }
+  
+  .images-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid; */
-}
+    overflow-x: hidden;
+  }
+  
+  .images-wrapper img {
+    flex: 0 0 auto;
+    width: 25%; /* Adjust to fit 5 images on the screen */
+    height: 20rem;
+    border: 2px solid;
+  }
 
-.manual-btn {
+  .images-wrapper img:hover {
+    border: 5px solid blue; /* Add your desired highlighting style */
+
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: black;
     cursor: pointer;
-    height: 10px;
-    width: 10px;
-    padding: 0%;
-    margin: 0 5px;
-    background-color: #ffffff;
-    border: 2px solid;
-    border-radius: 50%;
-    border-color: white;
-    display: inline-block;
-    transition: background-color 1s ease;
-}
-
-/* Set background color to transparent when associated radio button is checked (active) */
-/* Set background color to transparent when associated radio button is checked (active) */
-.slides input[type="radio"]:checked + .manual-btn {
-    background-color: transparent;
-    border-color: rgb(243, 24, 214); /* Change border color when active */
-}
-
-
-
-
-
-
-
-/* .manual-btn:not(:last-child) {
-    margin-right: 25px;
-} */
-
-/* .manual-btn:hover {
-    background-color: aqua;
-} */
-
-
-
-#radio1:checked ~ .first {
-    margin-left: 0;
-}
-
-#radio2:checked ~ .first {
-    margin-left: -20%;
-}
-
-#radio3:checked ~ .first {
-    margin-left: -40%;
-}
-
-#radio4:checked ~ .first {
-    margin-left: -60%;
-}
-
-/* .navigation-auto {
-    position: absolute;
-    display: flex;
-    width: 800px;
-    justify-content: center;
-    margin-top: 450px;
-}
-
-.navigation-auto div {
-    border: 2px solid;
-    padding: 5px;
-    border-radius: 10px;
-    transition: 1s;
-}
-
-.navigation-auto div:not(:last-child) {
-    margin-right: 40px;
-}
-
-#radio1:checked ~ .navigation-auto .auto-btn1 {
-    background-color: aquamarine;
-}
-
-#radio2:checked ~ .navigation-auto .auto-btn2 {
-    background-color: aquamarine;
-}
-
-#radio3:checked ~ .navigation-auto .auto-btn3 {
-    background-color: aquamarine;
-}
-
-#radio4:checked ~ .navigation-auto .auto-btn4 {
-    background-color: aquamarine;
-} */
+  }
+  
+  .left-arrow {
+    left: 10px;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+  
+  /* Add styles for the circular container */
+  .arrow i {
+    background-color: transparent; /* Set the background color of the icon to transparent */
+    border-radius: 60%; /* Make the container circular */
+    padding: 10px; /* Adjust padding as needed */
+    transition: background-color 0.3s; /* Add a transition effect for the background color */
+  }
+  
+  /* Change the color of the icon on hover */
+  .arrow i:hover {
+    background-color: rgb(138, 138, 196); /* Change the background color to blue on hover */
+  }

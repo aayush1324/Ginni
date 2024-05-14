@@ -8,14 +8,5 @@ import { AuthService } from './Services/auth.service';
 })
 export class AppComponent {
   title = 'Ginni';
-  // auth = inject(AuthService)
-  // ngOnInit(){
-  //   var token = this.auth.getToken();
-  //   if(token){
-  //     this.auth.isLoggedInSubject.next(true);
-  //   }
-  //   else{
-  //     this.auth.isLoggedInSubject.next(false);
-  //   }
-  // }
+
 }

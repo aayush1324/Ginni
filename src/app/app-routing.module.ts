@@ -50,6 +50,7 @@ import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidet
 import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
 import { CustomPreloadingService } from './Services/custom-preloading.service';
 import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
+import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnireviewslider.component';
 
 
 const routes: Routes = [{
@@ -82,6 +83,7 @@ const routes: Routes = [{
       {path: "ginnicombos",  component : GinnicombosComponent},
       {path: "ginnibestsellers", component : GinnibestsellersComponent},
       {path: "ginniaddress", component : GinniaddressComponent},
+      {path: "ginnireviewslider", component : GinnireviewsliderComponent},
       {path: "ginnidryfruit" , component : GinnidryfruitComponent},
       {path: "ginnidryfruitalmond", component : GinnidryfruitalmondComponent},
       {path: "ginnidryfruitcashew", component : GinnidryfruitcashewComponent},

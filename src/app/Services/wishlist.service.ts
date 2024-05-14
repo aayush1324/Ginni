@@ -9,7 +9,7 @@ import { WishlistItem } from '../Component/ginnicombos/ginnicombos.component';
 })
 export class WishlistService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Wishlist/';
+  private baseUrl: string = 'https://localhost:7132/api/Wishlists/';
 
   private countWishListItem = new BehaviorSubject<number>(0);
   countWishList$ = this.countWishListItem.asObservable();

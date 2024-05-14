@@ -58,6 +58,7 @@ import { SearchComponent } from './Component/search/search.component';
 import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
 import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
 import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
+import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnireviewslider.component';
 
 
 @NgModule({
@@ -113,6 +114,7 @@ import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
     GinnidetailorderComponent,
     SellerzipcodelistComponent,
     GinniotpComponent,
+    GinnireviewsliderComponent,
   ],
   imports: [
     BrowserModule,

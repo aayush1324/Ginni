@@ -1,0 +1,30 @@
+<div class="containerbox">
+    <div class="containerhead">
+        <h1>What Our Customer Says</h1>
+    </div>
+    <br>
+    <div class="containericon">
+        <i class="fa fa-quote-left" style="font-size: xx-large; color: rgb(167, 163, 157);"></i>
+    </div>
+    <br>
+    <div class="containerimage">
+        <div class="images-wrapper" [class.transitioning]="transitioning" *ngFor="let image of images; let i = index" #sliderContainer [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
+            <img [src]="image" alt="Slide {{i+1}}">
+        </div>
+      
+        <!-- Left arrow -->
+        <!-- <div class="arrow left-arrow" (click)="scroll(-1)">
+            <i class="fa fa-angle-left"></i>
+        </div> -->
+        
+        <!-- Right arrow -->
+        <!-- <div class="arrow right-arrow" (click)="scroll(1)">
+            <i class="fa fa-angle-right"></i>
+        </div> -->
+    </div>
+
+</div>
+
+
+  
+  
