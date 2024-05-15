@@ -4,6 +4,7 @@ import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { SearchService } from '../../Services/search.service';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ginniwishlist',
@@ -12,19 +13,20 @@ import { tap } from 'rxjs';
 })
 export class GinniwishlistComponent {
 
-  public productss : any = [];
-  public grandTotal !: number;
+  productss : any = [];
+  grandTotal !: number;
   productlist! : any[];
   searchTerm: string ='';
   products: any;
   totalWislistItem!: number;
 
-
-
   constructor (private wishlistService : WishlistService, private cartService : CartService, 
-    private productService : ProductService,  private searchService : SearchService) {}
+              private productService : ProductService,  private searchService : SearchService,
+              private router : Router) {}
 
   ngOnInit(): void {
+    this.getProduct();
+
     const UserID: string = sessionStorage.getItem('UserID')!;
 
     if (UserID == null){    
@@ -39,40 +41,91 @@ export class GinniwishlistComponent {
     else {
       this.wishlistService.getToWishlists(UserID).subscribe(res=>{
         console.log(res);
-          this.productss = res;
-          // this.grandTotal = this.cartService.getTotalPrice();
-          console.log(this.productss);
+        this.productss = res;
+        // this.grandTotal = this.cartService.getTotalPrice();
+        console.log(this.productss);
   
-          this.searchService.getSearchTerm().subscribe((searchTerm) => {
-            this.searchTerm = searchTerm;
-            this.onSearch();
-          });
-        })
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
+      })
+    }
+  }
+
+
+  onSearch () {
+    this.products = this.productss.filter((item: { productName: string; }) =>
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  } 
+
+
+  getProduct(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        res.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+        this.productlist = res.slice(0, 5);
+        console.log(this.productlist);
+
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
+
+
+
+  addToWishlist(product: any): void {
+    const UserID = sessionStorage.getItem('UserID');
+    const ProductID = product.id;
+
+    if (!UserID) {
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");    
     }
 
-    
-
-      console.log(this.productss);
-
-      this.getProduct();
-
+    this.wishlistService.addToWishlists(UserID, ProductID)
+      .subscribe({
+        next: (res: any) => {
+          console.log(product);
+          alert('Item added to wishlist');
+        },
+        error: (err: any) => {
+          console.error('Error adding item to wishlist:', err);
+          alert('Error adding item to wishlist');
+        }
+      });
   }
+
 
   getWishlistItems() {
     const UserID = sessionStorage.getItem('UserID');
     // Fetch wishlist items and update totalWishlistItem
     return this.wishlistService.getToWishlists(UserID!).pipe(
       tap(res => {
+        res.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         // setTimeout(() => {}, 2000); // Not sure why you have this timeout
         this.totalWislistItem = res.length;
       })
     );
   }
 
-  onSearch () {
-    this.products = this.productss.filter((item: { productName: string; }) =>
-      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
-  } 
+
+
+
+
+
 
   addToCart(item: any): void {
     // Implement logic to add the item to the cart using your cart service
@@ -201,37 +254,8 @@ export class GinniwishlistComponent {
       );
   }
 
-  addToWishlist(product: any): void {
-    this.wishlistService.addToWishlist(product)
-      .subscribe(
-        () => {
-          console.log(product);
-          alert('Item added to wishlist');
-        },
-        error => {
-          console.error('Error adding item to wishlist:', error);
-          alert('Error adding item to wishlist');
-        }
-      );
-  }
 
-  getProduct(): void {
-    this.productService.getProducts().subscribe({
-      next: (res) => {
-        res.forEach(item => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-        this.productlist = res.slice(0, 5);
-        console.log(this.productlist);
 
-      },
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
+
 
 }

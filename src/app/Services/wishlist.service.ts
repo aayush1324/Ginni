@@ -16,6 +16,24 @@ export class WishlistService {
   
   constructor(private http: HttpClient, private router: Router) { }
 
+  updateCount(count: number) {
+    this.countWishListItem.next(count);
+  }
+
+
+  addToWishlists(userId : string, productId : string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}addWishlist/${userId}/${productId}`, null);
+  }
+
+
+  getToWishlists(userId: string): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}getWishlists/${userId}`); 
+  }
+
+
+
+
+
   addToWishlist(wishlistItem : any) {
     return this.http.post<any>(`${this.baseUrl}addWishlist`, wishlistItem);
   }
@@ -32,9 +50,7 @@ export class WishlistService {
     return this.http.get<any[]>(`${this.baseUrl}getWishlist`); 
   }
 
-  getToWishlists(userId: string): Observable<WishlistItem[]>{
-    return this.http.get<WishlistItem[]>(`${this.baseUrl}getWishlists/${userId}`); 
-  }
+
 
   updateWishlistItem(item: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity/${item.id}`, item);
@@ -48,9 +64,6 @@ export class WishlistService {
     return this.http.post<any>(`${this.baseUrl}/updateWishlistStatus`, product);
   }
 
-  updateCount(count: number) {
-    console.log("Updating count to:", count); // Add this for debugging
-    this.countWishListItem.next(count);
-  }
+
   
 }

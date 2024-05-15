@@ -17,7 +17,6 @@ export class GinniaddressComponent implements OnInit {
   constructor(private fb: FormBuilder, private addressService: AddressService) { }
 
   ngOnInit(): void {
-
     this.addressForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -46,45 +45,49 @@ export class GinniaddressComponent implements OnInit {
     this.addressForm.reset();
   }
 
+
+
+
   addAddress(): void {
-    if (this.addressForm.valid) {
-      console.log(this.addressForm.value);
-      this.addressService.addAddress(this.addressForm.value).subscribe({
+    const UserID = sessionStorage.getItem('UserID');
+
+    if(UserID !== null){
+      if (this.addressForm.valid) {
+        console.log(this.addressForm.value);
+        this.addressService.addAddress(UserID,this.addressForm.value).subscribe({
+          next: (res) => {
+            console.log(res.message);
+            this.togglePopup();
+            alert(res.message);
+            this.getAddresses();
+          },
+          error: (err) => {
+            alert(err?.error.message);
+          },
+        });
+      }
+    }
+  }
+
+ 
+
+  getAddresses(): void {
+    const UserID = sessionStorage.getItem('UserID');
+
+    if(UserID !== null){
+      this.addressService.getAddress(UserID).subscribe({
         next: (res) => {
-          console.log(res.message);
-          this.togglePopup();
-          alert(res.message);
-          this.getAddresses();
+          console.log(res);
+          this.addresses = res;
         },
         error: (err) => {
-          alert(err?.error.message);
-        },
+          console.error('Error fetching addresses:', err);
+        }
       });
     }
   }
 
-  getAddresses(): void {
-    this.addressService.getAddress().subscribe({
-      next: (res) => {
-        this.addresses = res;
-      },
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
 
-  deleteAddress(addressId: string): void {
-    this.addressService.deleteAddress(addressId).subscribe({
-      next: (res) => {
-        console.log('Address deleted successfully!', res);
-        this.getAddresses();
-      },
-      error: (err) => {
-        console.error('Error deleting address:', err);
-      }
-    });
-  }
 
   openEditPopup(address: any): void {
     this.selectedAddress = address;
@@ -108,18 +111,43 @@ export class GinniaddressComponent implements OnInit {
   }
 
   submitEditedAddress(): void {
-    if (this.addressForm.valid) {
-      const updatedAddress = this.addressForm.value;
-      this.addressService.editAddress(this.selectedAddress.id, updatedAddress).subscribe({
+    const UserID = sessionStorage.getItem('UserID');
+
+    if(UserID !== null){
+      if (this.addressForm.valid) {
+        const updatedAddress = this.addressForm.value;
+        this.addressService.editAddress(UserID, this.selectedAddress.id, updatedAddress).subscribe({
+          next: (res) => {
+            console.log('Address updated successfully!', res);
+            this.togglePopup();
+            this.getAddresses();
+          },
+          error: (err) => {
+            console.error('Error updating address:', err);
+          }
+        });
+      }
+    }
+  }
+
+
+
+  deleteAddress(addressId: string): void {
+    const UserID = sessionStorage.getItem('UserID');
+
+    if(UserID !== null){
+      this.addressService.deleteAddress(UserID, addressId).subscribe({
         next: (res) => {
-          console.log('Address updated successfully!', res);
-          this.togglePopup();
+          alert(res.message);
+          console.log('Address deleted successfully!', res);
           this.getAddresses();
         },
         error: (err) => {
-          console.error('Error updating address:', err);
+          console.error('Error deleting address:', err);
         }
       });
     }
   }
+
+
 }

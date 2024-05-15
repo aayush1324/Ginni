@@ -6,6 +6,8 @@ import { ProductService } from '../../Services/product.service';
 import { SearchService } from '../../Services/search.service';
 import { tap } from 'rxjs';
 import { OrderService } from '../../Services/order.service';
+import { Router } from '@angular/router';
+import { log } from 'console';
 
 declare var Razorpay: any;
 
@@ -24,8 +26,9 @@ export class GinnicartComponent {
 
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
-    private paymentService : PaymentService , private productService : ProductService,  
-    private searchService : SearchService, private orderService : OrderService) { }
+              private paymentService : PaymentService , private productService : ProductService,  
+              private searchService : SearchService, private orderService : OrderService,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -43,14 +46,19 @@ export class GinnicartComponent {
     }
     else {
       this.cartService.getToCarts(UserID).subscribe(res=>{
+        res.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
         console.log(res);
-          this.productss = res;
-          // this.grandTotal = this.cartService.getTotalPrice();
-  
-          this.searchService.getSearchTerm().subscribe((searchTerm) => {
-            this.searchTerm = searchTerm;
-            this.onSearch();
-          });
+        this.productss = res;
+
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
       })
     }
     
@@ -61,18 +69,7 @@ export class GinnicartComponent {
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
-  getCartItems() {
-    const UserID = sessionStorage.getItem('UserID');
-  
-    // Fetch cart items and update totalCartItem
-    return this.cartService.getToCarts(UserID!).pipe(
-      tap(res => {
-        setTimeout(() => {}, 2000); // Not sure why you have this timeout
-        this.totalCartItem = res.length;
-      })
-    );
-  }
-  
+
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({
       next: (res) => {
@@ -83,10 +80,7 @@ export class GinnicartComponent {
           }
         });
         this.productlist = res
-        console.log(this.productlist);
         this.productlist = res.slice(0, 5);
-        console.log(this.productlist);
-
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);
@@ -94,74 +88,64 @@ export class GinnicartComponent {
     });
   }
 
-  
+
+
   addToCart(product: any): void {
-    this.cartService.addtoCart(product)
-      .subscribe(
-        () => {
-          console.log(product);
-          alert('Item added to cart successfuly');
-          // Optionally, you can perform additional actions after adding to cart
-        },
-        error => {
-          console.error('Error adding item to cart:', error);
-          alert("Error")
-          // Handle error
-        }
-      );
-  }
+    const UserID = sessionStorage.getItem('UserID');
+    const ProductID = product.id;
 
-  removeToWishlist(product: any): void {
-    product.wishlistStatus = false; // Update the wishlist status
-    this.wishlistService.removeItem(product.id)
-      .subscribe(
-        () => {
-          alert('Item removed from wishlist successfully');
-        },
-        error => {
-          console.error('Error removing item from wishlist:', error);
-          alert('Error removing item from wishlist');
-          // Rollback the wishlist status if there's an error
-          product.wishlistStatus = true;
-        }
-      );
-  }
-
-
-  incrementQuantity(item: any): void {
-    console.log(item);
-    item.quantity++;
-    this.updateCartItemQuantity(item);
-  }
-
-  decrementQuantity(item: any): void {
-    if (item.quantity > 1) {
-      console.log(item);
-      item.quantity--;
-      this.updateCartItemQuantity(item);
+    if (!UserID) {
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");    
     }
+    
+
+    this.getCartItems().subscribe(() => {
+      this.cartService.addToCarts(UserID, ProductID).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          console.log('Item added to cart:', product);
+          alert('Item added to cart successfully');
+        },
+        error: (err: any) => {
+          console.error('Error adding item to cart:', err);
+          alert('Error adding item to cart');
+        }
+      });      
+    });
+
   }
 
-  updateCartItemQuantity(item: any): void {
-    // Calculate the new total price
-    item.totalPrice = item.quantity * item.price;
 
-    // Update the cart item
-    this.cartService.updateCartItem(item)
-        .subscribe(
-            () => {
-                alert('Quantity updated successfully');
-            },
-            error => {
-                console.error('Error updating quantity:', error);
-                alert('Error updating quantity');
-            }
-        );
+
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        res.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+        console.log(res);
+        this.totalCartItem = res.length;
+      })
+    );
   }
+
+
 
   removeItem(item: any): void {
+    const UserID = sessionStorage.getItem('UserID');
+    if (!UserID) {
+      console.error('User ID not found in session storage');
+      return;
+    }
+
     this.getCartItems().subscribe(() => {
-      this.cartService.removeItem(item.id)
+      this.cartService.removeItem(UserID, item.cartId)
       .subscribe({
         next: () => {
             // Remove the item from the local array if needed
@@ -181,28 +165,7 @@ export class GinnicartComponent {
     });
   }
 
-  addToWishlist(product: any): void {
-    this.wishlistService.addToWishlist(product)
-      .subscribe(
-        () => {
-          console.log(product);
-          alert('Item added to wishlist');
-        },
-        error => {
-          console.error('Error adding item to wishlist:', error);
-          alert('Error adding item to wishlist');
-        }
-      );
-  }
 
-  addToWishlistAndRemoveFromCart(item: any): void {
-
-    // Remove the item from the wishlist
-    this.removeItem(item);
-
-    // Add the item to the cart
-    this.addToWishlist(item);
-  }
 
   removeAllItem() : void {
     const userId = sessionStorage.getItem('UserID');
@@ -213,31 +176,105 @@ export class GinnicartComponent {
 
     this.getCartItems().subscribe(() => {
       this.cartService.emptyCart(userId)
-        .subscribe(
-          () => {
+        .subscribe({
+          next: (res) => {
             this.products = []; // Clear the local cart array
             alert('Cart emptied successfully');
             // Update the count after successfully emptying the cart
             this.totalCartItem = 0;
             this.cartService.updateCount(this.totalCartItem);
           },
-          error => {
-            console.error('Error emptying cart:', error);
+          error: (err) => {
+            console.error('Error emptying cart:', err);
             alert('Error emptying cart');
           }
-        );
+      });
     });
   }
+
+
+
+  incrementQuantity(item: any): void {
+    item.itemQuantity++;
+    this.updateCartItemQuantity(item);
+  }
+
+  decrementQuantity(item: any): void {
+    if (item.itemQuantity > 1) {
+      item.itemQuantity--;
+      this.updateCartItemQuantity(item);
+    }
+  }
+
+  updateCartItemQuantity(item: any): void {
+    // Calculate the new total price
+    item.itemTotalPrice = item.itemQuantity * item.itemPrice;
+
+    // Update the cart item
+    this.cartService.updateCartItem(item)
+      .subscribe({
+        next: (res) => {
+          alert('itemQuantity updated successfully');
+        },
+        error: (err) => {
+          console.error('Error updating quantity:', err);
+          alert('Error updating quantity');
+        }
+      });
+  }
+
+
+
+
+
+
+  addToWishlist(product: any): void {
+    this.wishlistService.addToWishlist(product)
+      .subscribe({
+        next: (res) => {
+          console.log(product);
+          alert('Item added to wishlist');
+        },
+        error: (err) => {
+          console.error('Error adding item to wishlist:', err);
+          alert('Error adding item to wishlist');
+        }
+    });
+  }
+
+  removeToWishlist(product: any): void {
+    this.wishlistService.removeItem(product.id)
+      .subscribe({
+        next: (res) => {
+          alert('Item removed from wishlist successfully');
+        },
+        error: (err) => {
+          console.error('Error removing item from wishlist:', err);
+          alert('Error removing item from wishlist');
+          // Rollback the wishlist status if there's an error
+          product.wishlistStatus = true;
+        }
+    });
+  }
+
+  addToWishlistAndRemoveFromCart(item: any): void {
+    // Remove the item from the wishlist
+    this.removeItem(item);
+
+    // Add the item to the cart
+    this.addToWishlist(item);
+  }
+
+
 
 
   getTotalPrice(): number {
     let totalPrice = 0;
-    this.products.forEach((item: { quantity: number; price: number; }) => {
-        totalPrice += item.quantity * item.price;
+    this.products.forEach((item: { itemQuantity: number; itemPrice: number; }) => {
+        totalPrice += item.itemQuantity * item.itemPrice;
     });
     return totalPrice;
   }
-
 
   razorpay_Id : string = "";
   razororder_Id: string = "";
@@ -338,8 +375,6 @@ export class GinnicartComponent {
     }
   }
 
-
-
   // Service or Component where you handle failure payment
   handleFailurePayment() {
     var orderId = "order_O0PrQwUhVAB0FW";
@@ -354,7 +389,7 @@ export class GinnicartComponent {
     );
   }
 
-// Service or Component where you handle refund payment
+  // Service or Component where you handle refund payment
   handleRefundPayment() {
     var paymentId = "pay_O0ProNZmIOLgHh";
     var orderId = "order_O0PrQwUhVAB0FW";

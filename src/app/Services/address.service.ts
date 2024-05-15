@@ -12,19 +12,28 @@ export class AddressService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addAddress(userAddress: any ) {
-    return this.http.post<any>(`${this.baseUrl}addAddress`, userAddress)
+  addAddress(userId: string, userAddress: any) {
+    return this.http.post<any>(`${this.baseUrl}addAddress?userId=${userId}`, userAddress);
+  }
+  
+
+  getAddress(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}getAddress/${userId}`);
   }
 
-  deleteAddress(addressId: string) {
-    return this.http.delete<any>(`${this.baseUrl}deleteAddress/${addressId}`);
-  }
 
-  editAddress(addressId: string, updatedAddress: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}editAddress/${addressId}`, updatedAddress);
+  editAddress(userId: string, addressId: string, updatedAddress: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}editAddress/${addressId}?userId=${userId}`, updatedAddress);
   }
+  
 
-  getAddress(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}getAddress`); // Make a GET request to fetch addresses
+
+  deleteAddress(userId: string, addressId: string) {
+    return this.http.delete<any>(`${this.baseUrl}deleteAddress/${addressId}?userId=${userId}`);
   }
+  
+
+
+
+
 }
