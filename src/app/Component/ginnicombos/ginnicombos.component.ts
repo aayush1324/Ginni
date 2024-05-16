@@ -90,7 +90,7 @@ export class GinnicombosComponent {
   productLength!: number;
 
   constructor( private cartService : CartService, private productService : ProductService, 
-                private wishlistService : WishlistService, private searchService : SearchService,
+              private wishlistService : WishlistService, private searchService : SearchService,
               private router : Router) 
   { 
     this.availabilityForm = new FormGroup({
@@ -114,73 +114,61 @@ export class GinnicombosComponent {
   }
 
 
-  getWishlistItems() {
-    const UserID = sessionStorage.getItem('UserID');
-    // Fetch wishlist items and update totalWishlistItem
-    return this.wishlistService.getToWishlists(UserID!).pipe(
-      tap(res => {
-        setTimeout(() => {}, 2000); // Not sure why you have this timeout
-        this.totalWislistItem = res.length;
-      })
-    );
-  }
-
-
   onSearch () {
     this.filteredData = this.productlist.filter((item) =>
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
 
-  addToWishlist(product: any): void {
-    // Assuming UserId is stored in session storage with key 'userId'
+
+  getWishlistItems() {
     const UserID = sessionStorage.getItem('UserID');
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin'])
-      return alert("Please Login First");  
-    }
-
-      // Create a WishlistItem object to send to the service
-    const wishlistItem: WishlistItem = {
-      userId: UserID,
-      productId: product.id,
-      productName: product.productName,
-      quantity: product.quantity,
-      price: product.price,
-      totalPrice: product.quantity * product.price,
-      wishlistStatus: true, // Assuming you want to set the status to true
-      profileImage: product.profileImage, // Assuming you have the profile image available
-      imageData: product.imageData, // Assuming you have the image data available
-      created_at: new Date(), // Assuming you want to set the current date/time as creation time
-      modified_at: null, // No modification yet
-      deleted_at: null // Item not deleted
-    };
-
-    
-    this.getWishlistItems().subscribe(() => {
-      this.wishlistService.addToWishlist(wishlistItem)
-        .subscribe({
-          next: () => {
-            console.log('Item added to wishlist:', wishlistItem);
-            alert('Item added to wishlist');
-            this.getProduct();
-            // Update the count after successfully adding the item
-            this.wishlistService.updateCount(this.totalWislistItem+1);
-          },
-          error: (err) => {
-            console.error('Error adding item to wishlist:', err);
-            alert('Error adding item to wishlist');
-            // Rollback the wishlist status if there's an error
+    // Fetch wishlist items and update totalWishlistItem
+    return this.wishlistService.getToWishlists(UserID!).pipe(
+      tap(res => {
+        console.log(res);
+        res.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
           }
         });
-    });
+        // setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalWislistItem = res.length;
+      })
+    );
+  }
+
+  addToWishlist(product: any): void {
+    const UserID = sessionStorage.getItem('UserID');
+    const ProductID = product.id;
+
+    if (!UserID) {
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");    
+    }
+
+    this.wishlistService.addToWishlists(UserID, ProductID)
+      .subscribe({
+        next: (res: any) => {
+          console.log(product);
+          alert('Item added to wishlist');
+          this.getProduct();
+          this.wishlistService.updateCount(this.totalWislistItem+1); 
+        },
+        error: (err: any) => {
+          console.error('Error adding item to wishlist:', err);
+          alert('Error adding item to wishlist');
+        }
+      });
   }
   
   removeToWishlist(product: any): void {
     const userId = sessionStorage.getItem('UserID');
-    if (!userId) {
-      console.error('User ID not found in session storage');
-      return;
+
+     if (!userId) {
+      this.router.navigate(['/main/ginnisignin'])
+      return alert("Please Login First");    
     }
   
     this.getWishlistItems().subscribe(() => {
@@ -200,6 +188,9 @@ export class GinnicombosComponent {
     });
   }
   
+
+
+
   getCartItems() {
     const UserID = sessionStorage.getItem('UserID');
   
@@ -213,44 +204,33 @@ export class GinnicombosComponent {
   }
 
   addToCart(product: any): void {
-    const userId = sessionStorage.getItem('UserID');
-    if (!userId) {
+   const UserID = sessionStorage.getItem('UserID');
+    const ProductID = product.id;
+
+    if (!UserID) {
       this.router.navigate(['/main/ginnisignin'])
       return alert("Please Login First");    
     }
     
-    const cartItem: CartList = {
-      userId: userId,
-      productId: product.id,
-      productName: product.productName,
-      quantity: 1,
-      price: product.price,
-      totalPrice: 1 * product.price,
-      profileImage: product.profileImage,
-      imageData: product.imageData,
-      created_at: new Date(),
-      modified_at: null,
-      deleted_at: null
-    };
 
     this.getCartItems().subscribe(() => {
-      this.cartService.addToCart(cartItem)
-      .subscribe({
-        next: () => {
-            console.log('Item added to cart:', cartItem);
-            alert('Item added to cart successfully');
-            // Update the count after successfully adding the item
-              this.cartService.updateCount(this.totalCartItem+1);        
-          },
-          error: (err) => {
-            console.error('Error adding item to cart:', err);
-            alert('Error adding item to cart');
-          }     
-        });
+      this.cartService.addToCarts(UserID, ProductID).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          console.log('Item added to cart:', product);
+          alert('Item added to cart successfully');
+          this.cartService.updateCount(this.totalCartItem+1); 
+        },
+        error: (err: any) => {
+          console.error('Error adding item to cart:', err);
+          alert('Error adding item to cart');
+        }
+      });      
     });
 
   }
-  
+
+
   getProduct(): void {
     const UserID = sessionStorage.getItem('UserID');
     // if (!UserID) {

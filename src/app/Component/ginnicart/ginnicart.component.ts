@@ -106,6 +106,7 @@ export class GinnicartComponent {
           console.log(res);
           console.log('Item added to cart:', product);
           alert('Item added to cart successfully');
+          this.cartService.updateCount(this.totalCartItem+1); 
         },
         error: (err: any) => {
           console.error('Error adding item to cart:', err);

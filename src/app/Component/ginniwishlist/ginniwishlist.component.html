@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="middleleftmainproductprice">
-                                <h6>Rs {{item.price}}</h6>
+                                <h6>Rs {{item.itemPrice}}</h6>
                                 <p><del>{{item.discount}}</del></p>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                         <div class="middleleftmainquantity">
                             <div class="middleleftmainquantityincrement">
                                 <h1 (click)="decrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>-</b></h1>
-                                <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.quantity}}</h6>
+                                <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.itemQuantity}}</h6>
                                 <h1 (click)="incrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>+</b></h1>
                             </div>
     
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="middleleftmaintotal">
-                            <h6>Rs {{item.totalPrice}}</h6>
+                            <h6>Rs {{item.itemTotalPrice}}</h6>
                         </div>
 
                         <div class="middleleftmainaction">
@@ -90,8 +90,8 @@
                 <div class="image">
                     <div class="saving">
                         <h6>{{ item.discount }}</h6>
-                        <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist"  style="font-size:24px" ></i>
-                        <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist"  style="font-size:24px"></i>
+                        <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist"  style="font-size:24px; border: 2px solid;"  ></i>
+                        <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist"  style="font-size:24px; border: 2px solid;"></i>
                     </div>
                     <img [src]="item.imageData" alt="Almond">               
                 </div>

@@ -25,13 +25,25 @@ export class WishlistService {
     return this.http.post<any>(`${this.baseUrl}addWishlist/${userId}/${productId}`, null);
   }
 
-
   getToWishlists(userId: string): Observable<any>{
     return this.http.get<any>(`${this.baseUrl}getWishlists/${userId}`); 
   }
 
+  removeItems(userId: string, productId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteItem/${userId}/${productId}`);
+  }
+
+  emptyWishlist(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
+  }
+
+  updateWishlistItem(item: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity`, item);
+  }
 
 
+
+  
 
 
   addToWishlist(wishlistItem : any) {
@@ -42,22 +54,8 @@ export class WishlistService {
     return this.http.delete<any>(`${this.baseUrl}deleteItem/${itemId}`);
   }
 
-  removeItems(userId: string, productId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteItem/${userId}/${productId}`);
-  }
-
   getToWishlist(){
     return this.http.get<any[]>(`${this.baseUrl}getWishlist`); 
-  }
-
-
-
-  updateWishlistItem(item: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity/${item.id}`, item);
-  }
-
-  emptyWishlist(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
   }
 
   updateWishlistStatus(product: any): Observable<any> {
