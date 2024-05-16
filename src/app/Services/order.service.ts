@@ -8,20 +8,21 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Order/';
+  private baseUrl: string = 'https://localhost:7132/api/Orders/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  createOrders(userId: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}createOrder/${userId}`, null);
+  createOrders(userId: string): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}createOrder/${userId}`, null);
   }
 
   createOrder(userId: any, productId: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}createOrder/${userId}/${productId}`, null);
   }
 
+  
   getOrder(userId: any) {
-    return this.http.get<any[]>(`${this.baseUrl}getOrder?userId=${userId}`);
+    return this.http.get<any[]>(`${this.baseUrl}getOrder/${userId}`);
   }
 
   getOrderByID(orderID : string) : Observable<any> {

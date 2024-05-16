@@ -15,22 +15,39 @@ export class SellerorderlistComponent {
   selectedproduct: any;
   productlist: any[] = [];
   selectedFile: File | undefined;
-
-    // Define your table headers
-  tableHeaders: string[] = [
-    'userName','email', 'phone', 'orderId', 'orderDate',  
-    'productName', 'productImage', 'productAmount','productCount', 'totalAmount', 'receipt'
-  ];
   orders: any;
 
 
+    // Define your table headers
+  tableHeaders: string[] = [
+    'name','email', 'mobile', 'orderId', 'orderDate', 'totalAmount', 'transactionId'];
+  
 
   constructor(private fb: FormBuilder, private orderService : OrderService) { }
 
   ngOnInit(): void {
     this.getOrders();
   }
+
+  getOrders(): void {
+    this.orderService.getOrders().subscribe(
+      (res) => {
+        this.orders = res.value;
+        console.log(this.orders);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   
+
+
+
+
+
+
+
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
     this.isEdit = false; // Reset edit mode when opening the popup
@@ -122,17 +139,8 @@ export class SellerorderlistComponent {
     // }
   }
 
-  getOrders(): void {
-    this.orderService.getOrders().subscribe(
-      (res) => {
-        this.orders = res;
-        console.log(this.orders);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+
+
 
 
 }

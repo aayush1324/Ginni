@@ -7,28 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Image/';
+  private baseUrl: string = 'https://localhost:7132/api/Images/';
 
   constructor(private http: HttpClient) { }
 
-  addImages(urls: string[]): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}addImage`, urls);
-  }
 
-  getImages(): Observable<any> {
-    return this.http.get(`${this.baseUrl}getImage`);
-  }
-
-  addMultipleImages(productId: string, images: { name: string, data: string | ArrayBuffer }[]) {
-    const formData = new FormData();
-    images.forEach(image => {
-      const blob = this.dataURItoBlob(image.data);
-      formData.append('images', blob, image.name);
-    });
-    formData.append('productId', productId); // Append the product ID to the FormData
-    return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData);
-  }
-  
   // Convert data URI to Blob
   dataURItoBlob(dataURI: string | ArrayBuffer): Blob {
     const byteString = atob(dataURI.toString().split(',')[1]);
@@ -39,6 +22,19 @@ export class ImageService {
       ia[i] = byteString.charCodeAt(i);
     }
     return new Blob([ab], { type: mimeString });
+  }
+
+  addMultipleImages(productId: string, images: { name: string, data: string | ArrayBuffer }[]) {
+    const formData = new FormData();
+    
+    images.forEach(image => {
+      const blob = this.dataURItoBlob(image.data);
+      formData.append('images', blob, image.name);
+    });
+    
+    formData.append('productId', productId); // Append the product ID to the FormData
+    
+    return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData);
   }
   
   getImagesByProductId(productId: string): Observable<any> {

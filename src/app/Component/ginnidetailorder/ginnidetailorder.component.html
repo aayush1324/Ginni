@@ -26,14 +26,12 @@
         <div class="middledata" *ngFor ="let item of orderDetails"> 
             <div class="middledataleft">
                 <div class="middledataleftimage">
-                    <img [src]="item.productImage" alt="Almond">
+                    <img [src]="item.imageData" alt="Almond">
                 </div>
 
                 <div class="middledataleftname">
                     <h5><a [routerLink]="['/main/ginnimainproduct', orderDetails.productName]">{{item.productName}}</a></h5>               
-                    <!-- <h5>Dried Apricots (200 g) & Dried Cranberry (200 g)</h5> -->
-                    <br>
-                    <h6>Rs. {{item.productAmount}}</h6>
+                    <h6>Rs. {{item.price}}</h6>
                 </div>
             </div>
             <div class="middledataright">

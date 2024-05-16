@@ -38,7 +38,7 @@
             </div>
 
             <div class="date">
-                <p>{{ item.createdAt | date:'ddMMMyyyy' }}</p>
+                <p>{{ item.orderDate | date:'ddMMMyyyy' }}</p>
             </div>
 
             <div class="payment">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="total">
-                <p>Rs. {{item.amount/100}}</p>
+                <p>Rs. {{item.totalAmount}}</p>
             </div>
         </div>
     </ng-container>

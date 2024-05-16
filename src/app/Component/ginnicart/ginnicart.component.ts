@@ -288,7 +288,7 @@ export class GinnicartComponent {
       this.orderService.createOrders(UserID).subscribe({
         next : (res: any) => {
           console.log(res);
-          const orderId = res[0].orderId
+          const orderId = res.orderId;
           console.log("OrderIDDDDD",orderId);
 
           this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {

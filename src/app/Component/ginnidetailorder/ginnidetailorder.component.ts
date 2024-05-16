@@ -31,7 +31,13 @@ export class GinnidetailorderComponent {
   getOrderDetails(orderId : string) : void {
     this.orderService.getOrderByID(orderId).subscribe({
       next: (data: any) => {
-        this.orderDetails = data;
+        data.value.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+        this.orderDetails = data.value;
         console.log(this.orderDetails)
       },
       error: (err: any) => {
@@ -40,8 +46,7 @@ export class GinnidetailorderComponent {
     });
   }
 
-  // Assuming orderDetails is an array of objects representing products
-  // This function calculates the total amount for the first three products
+
   calculateTotalAmount(orderDetails: any[]): number {
     let total = 0;
     for (let i = 0; i < Math.min(orderDetails.length, 3); i++) {
@@ -49,7 +54,6 @@ export class GinnidetailorderComponent {
     }
     return total;
   }
-
 
   calculateTax(totalAmount: number): number {
     const taxPercentage = 0.12; // 12% tax rate

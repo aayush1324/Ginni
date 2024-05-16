@@ -19,9 +19,10 @@ export class GinniorderComponent implements OnInit{
   getOrder(){
     const UserID = sessionStorage.getItem('UserID');
 
-    this.paymentService.getOrder(UserID).subscribe({
-      next: (res) => {
-        this.orderList = res;
+    this.orderService.getOrder(UserID).subscribe({
+      next: (res : any) => {
+        console.log(res.value);
+        this.orderList = res.value;
         console.log(this.orderList);
       },
       error: (err) => {
