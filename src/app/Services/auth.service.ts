@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private baseUrl: string = 'https://localhost:7132/api/User/';
+  private baseUrl: string = 'https://localhost:7132/api/Users/';
   private userPayload:any;
 
   public isLoggedInSubject = new BehaviorSubject<boolean>(false);
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   logout(token: string) {
-    return this.http.post<any>(`${this.baseUrl}logout`, { token });
+    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null);
   }
 
   verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {
