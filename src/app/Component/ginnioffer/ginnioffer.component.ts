@@ -127,7 +127,7 @@ export class GinniofferComponent {
 
 
   getProduct(): void {
-    this.productService.getProducts().subscribe({
+    this.productService.getProductsWithImages().subscribe({
       next: (res) => {
         console.log(this.productList);
         console.log(this.originalProductList);
@@ -154,7 +154,6 @@ export class GinniofferComponent {
       this.isDropdownOpen = false;
   }
 
- 
   showaccountDropdown() {
     this.isAccountDropdown = true;
   }
@@ -192,8 +191,6 @@ export class GinniofferComponent {
   updateCartCount(count: number): void {
     this.cartCount = count;
   }
-
-
   
   showWishlistText() {
     this.showWishlist = true;

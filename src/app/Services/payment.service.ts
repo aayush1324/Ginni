@@ -8,27 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Payment/';
+  private baseUrl: string = 'https://localhost:7132/api/Payments/';
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  
-  createOrder(amount: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}`,{amount:amount});
-  }
 
   createOrders(amount: number, orderId:string, userId : string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}&orderId=${orderId}&userId=${userId}`,{amount:amount, orderId:orderId, userId:userId});
   }
 
-  confirmPayment(response: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
-  }
-
   confirmPayments(response: any, orderId: string, userID: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}confirm-payment?orderId=${orderId}&userID=${userID}`, response);
   }
-  
 
   refundPayment(orderId: string, paymentId: string) {
     return this.http.post<any>(`${this.baseUrl}refund-payment`,  { razorpay_order_id: orderId, razorpay_payment_id: paymentId });
@@ -36,6 +26,19 @@ export class PaymentService {
 
   failurePayment(orderId: string) {
     return this.http.post<any>(`${this.baseUrl}failure-payment`, {razorpay_order_id: orderId});
+  }
+
+
+
+
+
+  
+  createOrder(amount: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}create-order?amount=${amount}`,{amount:amount});
+  }
+
+  confirmPayment(response: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}confirm-payment`, response);
   }
 
   getOrder(userId: any) {

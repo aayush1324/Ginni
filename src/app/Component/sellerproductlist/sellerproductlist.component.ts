@@ -48,7 +48,7 @@ export class SellerproductlistComponent {
       image: [null, Validators.required] // Image is required
     });
     // this.getProduct();
-    this.getProductsWithImages();
+    this.getProducts();
   }
 
   
@@ -136,7 +136,7 @@ export class SellerproductlistComponent {
           alert(response.message);
           this.productForm!.reset();
           this.selectedFile = null;
-          this.getProductsWithImages();
+          this.getProducts();
         },
         (error) => {
           console.error(error);
@@ -163,8 +163,8 @@ export class SellerproductlistComponent {
   }
   
 
-  getProductsWithImages(): void {
-    this.productService.getProductsWithImages().subscribe({
+  getProducts(): void {
+    this.productService.getProducts().subscribe({
       next: (res: any[]) => { // Assuming the response is an array of objects containing product and image data/
         console.log(res);
         this.productlist = res;
@@ -194,7 +194,7 @@ export class SellerproductlistComponent {
       next: (res) => {
         alert(res.message)
         console.log('Product deleted successfully!', res);
-        this.getProductsWithImages();
+        this.getProducts();
       },
       error: (err) => {
         console.error('Error deleting product:', err);
@@ -251,7 +251,7 @@ export class SellerproductlistComponent {
           alert(res.message);
           console.log('Product updated successfully!', res);
           this.togglePopup();
-          this.getProductsWithImages();
+          this.getProducts();
         },
         error: (err) => {
           console.error('Error updating Product:', err);
