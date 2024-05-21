@@ -1,0 +1,110 @@
+<p>ginniofferresponse works!</p>
+
+<div class="containerbox">
+    <div class="offertop">
+        <h5 id="offer">Get 8% Discount on Purchase of 899 and Above With Code "SAVER8"</h5>
+    </div>
+
+    <div class="ginninavbar">
+        <div class="navbarimage">
+            <a class="logo" routerLink="/main/home">
+                <img src="../../assets/images/logo/freshcart-logo.jpeg" alt="GINNI DryFruits">
+            </a>
+        </div>
+
+        <div class="navbardata">
+            <div class="navbarupper">
+                <div class="search-container">
+                    <div class="searchbox">
+                        <input type="text" placeholder="Search...">
+                        <button class="searchbutton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navbarupperright">
+                    <div class="items">
+                        <div class="wishlist">
+                            <a routerLink="/main/ginniwishlist">
+                                <div style="position: relative; display: inline-block;">
+                                    <i class="fa fa-heart"></i>
+                                    <i class="wishlist-count">0</i>
+                                </div>
+                                <h6>Wishlist</h6>
+                            </a>
+                        </div>
+
+                        <div class="cart">
+                            <a routerLink="/main/ginnicart">
+                                <div style="position: relative; display: inline-block;">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <i class="cart-count">0</i>
+                                </div>
+                                <h6>Cart</h6>
+                            </a>
+                        </div>
+
+                        <div class="cart">
+                            <a routerLink="/main/ginnitrack">
+                                <i class="fa fa-truck"></i>
+                                <h6>Track Order</h6>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="account">
+                        <div class="my-account">
+                            <i class="fa fa-user" (click)="toggleAccountDropdown()"></i>
+                            <div class="dropdown-contents" *ngIf="isAccountDropdownOpen">
+                                <a routerLink="/main/sellerdashboard">Admin Dashboard</a>
+                                <a routerLink="/main/ginniorder">My Order</a>
+                                <a routerLink="/main/ginniaddress">My Address</a>
+                                <a routerLink="/main/home">Logout</a>
+                                <a routerLink="/main/ginnisignin">Login</a>
+                                <a routerLink="/main/ginnisignup">Signup</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbarlower">
+                <div class="menu-icon" (click)="toggleMenu()">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="menu-items" [ngClass]="{'active': isMenuOpen}">
+                    <div class="home">
+                        <a routerLink="/main/home"><h6>Home</h6></a>
+                    </div>
+                    <div class="aboutUs">
+                        <a routerLink="/main/ginniaboutus"><h6>About Us</h6></a>
+                    </div>
+                    <div class="seller">
+                        <a routerLink="/main/ginnicontactus"><h6>Contact Us</h6></a>
+                    </div>
+                    <div class="combos">
+                        <a routerLink="/main/ginnicombos"><h6>Combos</h6></a>
+                    </div>
+                    <div class="giftings">
+                        <a routerLink="/main/ginnigiftings"><h6>Giftings</h6></a>
+                    </div>
+                    <div class="bestsellers">
+                        <a routerLink="/main/ginnibestsellers"><h6>BestSellers</h6></a>
+                    </div>
+                    <div class="dropdown">
+                        <a routerLink="/main/ginnidryfruit" class="dropdown-header">
+                            <h6>Dry Fruits <i class="fa fa-caret-down"></i></h6>
+                        </a>
+                        <div class="dropdown-content">
+                            <a routerLink="/main/ginnidryfruitalmond">Almond</a>
+                            <a routerLink="/main/ginnidryfruitcashew">Cashew</a>
+                            <a routerLink="/main/ginnidryfruitraisin">Raisin</a>
+                            <a routerLink="/main/ginnidryfruitpista">Pista</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
