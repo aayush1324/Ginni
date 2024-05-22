@@ -10,40 +10,36 @@ import { ConfirmPasswordValidator } from '../../Helpers/confirmpassword.validato
   templateUrl: './ginnisignup.component.html',
   styleUrl: './ginnisignup.component.css'
 })
+
 export class GinnisignupComponent {
 
   signupForm: FormGroup;
-  // signInForm: FormGroup;
+  showPassword: boolean = true;
+  showConfirmPassword: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private seller: SellerService, private router : Router, private auth: AuthService) 
+
+  constructor(private formBuilder: FormBuilder, private seller: SellerService, 
+              private router : Router, private auth: AuthService) 
   {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]]
+      mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
     },
     { validator: ConfirmPasswordValidator("password", "confirmPassword") });
-
   }
 
-
-  // Add this property to your component class
-  showPassword: boolean = false;
 
   // Add this method to your component class
   togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
   }
 
-
-  showConfirmPassword: boolean = false;
-
   toggleConfirmPasswordVisibility() {
       this.showConfirmPassword = !this.showConfirmPassword;
   }
-
 
 
   SignupForm() : void {
@@ -54,13 +50,12 @@ export class GinnisignupComponent {
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (res) => {
           alert(res.message);
-          alert("Please Check OTP on Email ");
-          alert("Please Check OTP on Mobile ");
+          alert("Please Check OTP on Email and Mobile ");
           this.signupForm.reset();
           this.router.navigate(['/main/ginniotp']);
         },
         error: (err) => {
-          alert(err?.error.message);
+          alert(err?.error);
         },
       })
     }

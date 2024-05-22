@@ -13,14 +13,14 @@ export class GinniotpComponent {
   otpForm: FormGroup;
   authError:String='';
 
-  constructor(private formBuilder: FormBuilder,
-              private router : Router, private auth: AuthService) 
+  constructor(private formBuilder: FormBuilder,private router : Router, private auth: AuthService) 
   {
     this.otpForm = this.formBuilder.group({
-      emailOtp: ['', [Validators.required, Validators.minLength(6)]],
-      mobileOtp: ['', [Validators.required, Validators.minLength(6)]],
+      emailOtp: ['', [Validators.required, Validators.minLength(6) , Validators.maxLength(6)]],
+      mobileOtp: ['', [Validators.required, Validators.minLength(6) , Validators.maxLength(6)]],
     });
   }
+
 
   OtpForm () {
     if (this.otpForm.valid) {
@@ -29,30 +29,56 @@ export class GinniotpComponent {
 
       // Call your backend service to verify OTPs
       this.auth.verifyOtps(emailOtp, phoneOtp).subscribe({
-        next: (response) => {
-          // Handle success response
-          if (response) {
-            console.log(response);
-            alert(response.message);
-            this.otpForm.reset();
-            this.router.navigate(['/main/ginnisignin']);
-          } else {
-            // OTPs are not valid, display an error message
-            this.authError = 'Invalid OTPs. Please try again.';
-          }
+        next: (response) => {      
+            console.log(response);           
+            if (response.message == "OTP verification successful") 
+            {
+              alert(response.message);
+              this.otpForm.reset();
+              this.router.navigate(['/main/ginnisignin']);
+            }
+            else  
+            {
+              alert(response.message);
+            }                  
         },
         error: (error) => {
-          // Handle error response
-          console.error('Error verifying OTPs:', error);
-          if (error && error.error && error.error.message && error.error.message.includes('OTP expired')) {
-            // Display alert for OTP expiration
-            alert('OTP Expired');
-          } else {
-            // Display generic error message or handle other error cases
-            alert('An error occurred during OTP verification');
-          }
+          console.log(error);
         },
       });
     }
   }
+
+    // OtpForms() {
+  //   if (this.otpForm.valid) {
+  //     const emailOtp = this.otpForm.value.emailOtp;
+  //     const phoneOtp = this.otpForm.value.mobileOtp;
+
+  //     // Call your backend service to verify OTPs
+  //     this.auth.verifyOtps(emailOtp, phoneOtp).subscribe({
+  //       next: (response) => {
+  //         if (response) {
+  //           console.log(response);
+  //           alert(response.message);
+  //           this.otpForm.reset();
+  //           this.router.navigate(['/main/ginnisignin']);
+  //         } else {
+  //           // OTPs are not valid, display an error message
+  //           this.authError = 'Invalid OTPs. Please try again.';
+  //         }
+  //       },
+  //       error: (error) => {
+  //         // Handle error response
+  //         console.error('Error verifying OTPs:', error);
+  //         if (error && error.error && error.error.message && error.error.message.includes('OTP expired')) {
+  //           // Display alert for OTP expiration
+  //           alert('OTP Expired');
+  //         } else {
+  //           // Display generic error message or handle other error cases
+  //           alert('An error occurred during OTP verification');
+  //         }
+  //       },
+  //     });
+  //   }
+  // }
 }

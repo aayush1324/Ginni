@@ -17,18 +17,19 @@ export class GinniresetpasswordComponent implements OnInit {
   emailToReset!: string;
   emailToken!: string;
   resetPasswordObj = new ResetPassword();
+  showPassword: boolean = true;
+  showConfirmPassword: boolean = true;
   
   constructor(private fb: FormBuilder, private activated: ActivatedRoute,
-    private toast: NgToastService, private router: Router,
-    private resetPasswordService: ResetPasswordService) { }
+              private toast: NgToastService, private router: Router,
+              private resetPasswordService: ResetPasswordService) { }
 
   ngOnInit(): void {
-    this.resetPasswordForm = this.fb.group({
-      password: [null, Validators.required],
-      confirmPassword: [null, Validators.required]
-    },
+    this.resetPasswordForm = this.fb.group(
+      { password: [null, Validators.required],
+      confirmPassword: [null, Validators.required] },
       { validator: ConfirmPasswordValidator("password", "confirmPassword") }
-      );
+    );
       
     this.activated.queryParams.subscribe(val => {
       console.log(val);
@@ -48,10 +49,12 @@ export class GinniresetpasswordComponent implements OnInit {
       this.resetPasswordObj.newPassword = this.resetPasswordForm.value.password;
       this.resetPasswordObj.confirmPassword = this.resetPasswordForm.value.confirmPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
+
       this.resetPasswordService.resetPassword(this.resetPasswordObj)
         .subscribe({
           next: (res) => {
             console.log("Reset Successfully")
+            alert(res.message)
             this.toast.success({
               detail: 'SUCCESS',
               summary: res.message,
@@ -70,5 +73,15 @@ export class GinniresetpasswordComponent implements OnInit {
     } else {
       // ValidateForm.validateAllFormFields(this.resetPasswordForm);
     }
+  }
+
+  
+  // Add this method to your component class
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+      this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

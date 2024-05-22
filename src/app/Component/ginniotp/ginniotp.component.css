@@ -55,10 +55,10 @@ form {
 }
 
 button {
-    width: 75%;
+    width: 100%;
     height: fit-content;
     padding: 2%;
-    margin: 5%;
+    margin: 10%;
     display: flex;
     border-radius: 10px;
     background-color:rgb(72, 72, 146);

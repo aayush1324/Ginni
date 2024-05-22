@@ -4,7 +4,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from '../../Services/reset-password.service';
 import { UserstoreService } from '../../Services/userstore.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ginniforgotpassword',
@@ -14,10 +14,18 @@ import { FormBuilder } from '@angular/forms';
 export class GinniforgotpasswordComponent {
 
   resetPasswordEmail: string = '';
+  resetFrom: FormGroup;
 
-  constructor(private router: Router, private toast: NgToastService, private resetPasswordService: ResetPasswordService) {}
+  constructor(private router: Router, private toast: NgToastService, 
+              private resetPasswordService: ResetPasswordService, private fb: FormBuilder) 
+  {
+    this.resetFrom = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
 
   public isValidEmail!: boolean;
+
   checkValidEmail(event: string) {
     const value = event;
     const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -26,11 +34,12 @@ export class GinniforgotpasswordComponent {
   }
   
   confirmToReset() {
-    if (this.resetPasswordEmail) {
-      console.log(this.resetPasswordEmail)
-      this.resetPasswordService.sendResetPasswordLink(this.resetPasswordEmail).subscribe({
-        next: () => {
-          alert("Email Sent Successfully");
+    if (this.resetFrom.valid) {
+      const email = this.resetFrom.value.email;
+
+      this.resetPasswordService.sendResetPasswordLink(email).subscribe({
+        next: (res) => {
+          alert(res.message);
           console.log("Email Sent Successfully");
           // Optionally, navigate to a different route after sending the email
           this.router.navigate(['/main/ginnisignin']);

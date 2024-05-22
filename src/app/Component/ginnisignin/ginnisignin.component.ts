@@ -34,11 +34,10 @@ export class GinnisigninComponent {
   }
 
     // Add this property to your component class
-  showPassword: boolean = false;
+  showPassword: boolean = true;
 
   // Add this method to your component class
   togglePasswordVisibility() {
-    console.log(this.showPassword);
       this.showPassword = !this.showPassword;
   }
 
@@ -78,39 +77,47 @@ export class GinnisigninComponent {
       this.auth.signIn(this.signInForm.value).subscribe({
         next: (res) => {
           console.log(res);
-          alert(res.message);
-          this.signInForm.reset();
-          this.auth.storeToken(res.token);
-          const tokenPayload = this.auth.decodedToken();
-          console.log(tokenPayload);  
-          sessionStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
-          this.userstore.setFullNameForStore(tokenPayload.name);
-          this.userstore.setRoleForStore(tokenPayload.role);
-
-          this.auth.isLoggedInSubject.next(true);
-
-          this.getWishlistItems().subscribe((res)=>{
-             this.totalWislistItem= res.length;
-             this.wishlist.updateCount(this.totalWislistItem);
-          })
-
-          this.getWishlistItems().subscribe((res)=>{
-            this.totalWislistItem= res.length;
-            this.wishlist.updateCount(this.totalWislistItem);
-         })
-
-         this.getCartItems().subscribe((res) => {
-          this.totalCartItem = res.length;
-          this.cartService.updateCount(this.totalCartItem);
-         })
-          
-          this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
-          this.router.navigate(['/main/home'])
+          if (res.message != "Login Success!")
+          {
+            alert(res.message);
+            this.signInForm.reset();
+          }
+          else
+          {
+            alert(res.message);
+            this.signInForm.reset();
+            this.auth.storeToken(res.token);
+            const tokenPayload = this.auth.decodedToken();
+            console.log(tokenPayload);  
+            sessionStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
+            this.userstore.setFullNameForStore(tokenPayload.name);
+            this.userstore.setRoleForStore(tokenPayload.role);
+  
+            this.auth.isLoggedInSubject.next(true);
+  
+            this.getWishlistItems().subscribe((res)=>{
+               this.totalWislistItem= res.length;
+               this.wishlist.updateCount(this.totalWislistItem);
+            })
+  
+            this.getWishlistItems().subscribe((res)=>{
+              this.totalWislistItem= res.length;
+              this.wishlist.updateCount(this.totalWislistItem);
+           })
+  
+           this.getCartItems().subscribe((res) => {
+            this.totalCartItem = res.length;
+            this.cartService.updateCount(this.totalCartItem);
+           })
+            
+            this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+            this.router.navigate(['/main/home'])
+          } 
         },
-        error: (err) => {
-          this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
-          alert(err?.error.message);
-        },
+      error: (err) => {
+        this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
+        alert(err?.error.message);
+      },
       })
     }
   }
