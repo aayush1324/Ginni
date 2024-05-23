@@ -6,37 +6,9 @@ import { SearchService } from '../../Services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-
-export interface WishlistItem {
-  userId: string;
-  productId: string;
-  productName: string;
-  quantity: number;
-  price: number;
-  totalPrice: number;
-  wishlistStatus: boolean;
-  profileImage: string | null; // Profile image as string or null if not available
-  imageData: string | null; // Image data as string or null if not available
-  created_at: Date;
-  modified_at: Date | null;
-  deleted_at: Date | null;
-}
-
-export interface CartList {
-  userId: string;
-  productId: string;
-  productName: string;
-  quantity: number;
-  price: number;
-  totalPrice: number;
-  profileImage: string | null;
-  imageData: string | null;
-  created_at: Date;
-  modified_at: Date | null;
-  deleted_at: Date | null;
-}
-
-
+import { ProductHelperService } from '../../Services/product-helper.service';
+import { WishlistHelperService } from '../../Services/wishlist-helper.service';
+import { CartHelperService } from '../../Services/cart-helper.service';
 
 // Define sorting options
 enum SortingOptions {
@@ -85,13 +57,14 @@ export class GinnicombosComponent {
   currentAvailabilityOption: string = ''; // Initialize currentAvailabilityOption
   currentCategoryOption: string = ''; // Initialize currentCategoryOption
   inWishlist!: boolean;
-  totalWislistItem:any;
+  totalWishlistItem:any;
   totalCartItem:any;
   productLength!: number;
 
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
-              private router : Router) 
+              private router : Router, private ProductHelperService : ProductHelperService,
+              private wishlistHelperService : WishlistHelperService, private cartHelperService : CartHelperService) 
   { 
     this.availabilityForm = new FormGroup({
       stock: new FormControl(null) // Define a FormControl for the radio buttons
@@ -111,6 +84,9 @@ export class GinnicombosComponent {
     this.getProduct();
     this.toggleFeaturedSorting(null);
     this.getCartItems();
+    this.getWishlistItems();
+    this.refreshCartItemCount();
+    this.refreshWishlistItemCount();
   }
 
 
@@ -120,117 +96,96 @@ export class GinnicombosComponent {
   } 
 
 
-
+//...................................................................
   getWishlistItems() {
     const UserID = sessionStorage.getItem('UserID');
-    // Fetch wishlist items and update totalWishlistItem
+
     return this.wishlistService.getToWishlists(UserID!).pipe(
       tap(res => {
-        console.log(res);
-        res.forEach((item: { imageData: string; }) => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-        // setTimeout(() => {}, 2000); // Not sure why you have this timeout
-        this.totalWislistItem = res.length;
+        this.totalWishlistItem = res.length;
       })
     );
   }
 
-  addToWishlist(product: any): void {
-    const UserID = sessionStorage.getItem('UserID');
-    const ProductID = product.id;
-
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin'])
-      return alert("Please Login First");    
-    }
-
-    this.wishlistService.addToWishlists(UserID, ProductID)
-      .subscribe({
-        next: (res: any) => {
-          console.log(product);
-          alert('Item added to wishlist');
-          this.getProduct();
-          this.wishlistService.updateCount(this.totalWislistItem+1); 
-        },
-        error: (err: any) => {
-          console.error('Error adding item to wishlist:', err);
-          alert('Error adding item to wishlist');
-        }
-      });
-  }
-  
-  removeToWishlist(product: any): void {
-    const userId = sessionStorage.getItem('UserID');
-
-     if (!userId) {
-      this.router.navigate(['/main/ginnisignin'])
-      return alert("Please Login First");    
-    }
-  
-    this.getWishlistItems().subscribe(() => {
-      this.wishlistService.removeItems(userId, product.id)
-      .subscribe({
-        next: (res) => {
-          alert('Item removed from wishlist successfully');
-          this.getProduct();
-          this.wishlistService.updateCount(this.totalWislistItem-1);
-        },
-        error: (err) => {
-          console.error('Error removing item from wishlist:', err);
-          alert('Error removing item from wishlist');
-          // Rollback the wishlist status if there's an error
-        }
-      });
+  refreshWishlistItemCount(): void {
+    this.wishlistHelperService.getWishlistItems().subscribe({
+      next: (items: any[]) => {
+        this.totalWishlistItem = items.length;
+      },
+      error: (err: any) => {
+        console.error('Error getting wishlist items:', err);
+      }
     });
   }
+
+  //Use WishlistHelperService
+  addToWishlist(product: any): void {
+    // this.getWishlistItems().subscribe(() => {
+      this.wishlistHelperService.addToWishlist(product).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.refreshWishlistItemCount();
+            this.wishlistService.updateCount(this.totalWishlistItem+1);  // Update the wishlist count
+            this.getProduct(); // Call your method to refresh the product list
+          }
+        }
+      });
+    // })
+  }
+  
+  //Use WishlistHelperService
+  removeToWishlist(product: any): void {
+    // this.getWishlistItems().subscribe(() => {
+      this.wishlistHelperService.removeToWishlist(product).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.refreshWishlistItemCount();
+            this.wishlistService.updateCount(this.totalWishlistItem-1);  // Update the wishlist count
+            this.getProduct(); // Call your method to refresh the product list
+          }
+        }
+      });
+    // })
+  }
   
 
-
-
+//...................................................................
   getCartItems() {
     const UserID = sessionStorage.getItem('UserID');
   
-    // Fetch cart items and update totalCartItem
     return this.cartService.getToCarts(UserID!).pipe(
       tap(res => {
-        setTimeout(() => {}, 2000); // Not sure why you have this timeout
         this.totalCartItem = res.length;
       })
     );
   }
 
-  addToCart(product: any): void {
-   const UserID = sessionStorage.getItem('UserID');
-    const ProductID = product.id;
-
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin'])
-      return alert("Please Login First");    
-    }
-    
-
-    this.getCartItems().subscribe(() => {
-      this.cartService.addToCarts(UserID, ProductID).subscribe({
-        next: (res: any) => {
-          console.log(res);
-          console.log('Item added to cart:', product);
-          alert('Item added to cart successfully');
-          this.cartService.updateCount(this.totalCartItem+1); 
-        },
-        error: (err: any) => {
-          console.error('Error adding item to cart:', err);
-          alert('Error adding item to cart');
-        }
-      });      
+  refreshCartItemCount(): void {
+    this.cartHelperService.getCartItems().subscribe({
+      next: (items: any[]) => {
+        this.totalCartItem = items.length;
+      },
+      error: (err: any) => {
+        console.error('Error getting cart items:', err);
+      }
     });
+  }
 
+  addToCart(product: any): void {
+    this.cartHelperService.addToCart(product).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.refreshCartItemCount(); // Refresh cart item count after adding to cart
+          this.cartService.updateCount(this.totalCartItem+1); 
+          this.getProduct();
+        }
+      },      
+    });
   }
 
 
+
+//...........................................................................................
   getProduct(): void {
     const UserID = sessionStorage.getItem('UserID');
     // if (!UserID) {

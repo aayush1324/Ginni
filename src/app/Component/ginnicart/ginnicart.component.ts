@@ -8,6 +8,9 @@ import { tap } from 'rxjs';
 import { OrderService } from '../../Services/order.service';
 import { Router } from '@angular/router';
 import { log } from 'console';
+import { ProductHelperService } from '../../Services/product-helper.service';
+import { CartHelperService } from '../../Services/cart-helper.service';
+import { WishlistHelperService } from '../../Services/wishlist-helper.service';
 
 declare var Razorpay: any;
 
@@ -23,12 +26,14 @@ export class GinnicartComponent {
   searchTerm: string ='';
   products: any;
   totalCartItem!: number;
+  totalWislistItem! : number;
 
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
               private paymentService : PaymentService , private productService : ProductService,  
               private searchService : SearchService, private orderService : OrderService,
-              private router : Router) { }
+              private router : Router, private ProductHelperService : ProductHelperService,
+              private cartHelperService : CartHelperService, private wishlistHelperService: WishlistHelperService) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -69,8 +74,8 @@ export class GinnicartComponent {
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
-
-  getProduct(): void {
+   //chnage into helper service
+  getProducts(): void {
     this.productService.getProductsWithImages().subscribe({
       next: (res) => {
         res.forEach(item => {
@@ -88,9 +93,55 @@ export class GinnicartComponent {
     });
   }
 
+  getProduct(): void {
+    this.ProductHelperService.getProduct().subscribe({
+      next: (res: any[]) => {
+        console.log(res);
+        this.productlist = res;
+        this.productlist = res.slice(0, 5);
+        console.log(this.productlist);
+      },
+      error: (err: any) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
 
 
-  addToCart(product: any): void {
+   //chnage into helper service
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        res.forEach((item: { imageData: string; }) => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+        console.log(res);
+        this.totalCartItem = res.length;
+      })
+    );
+  }
+
+  getCartItem(): void {
+    this.cartHelperService.getCartItems().subscribe({
+      next: (items: any[]) => {
+        // Handle the fetched cart items, e.g., update UI or perform calculations
+        this.totalCartItem = items.length; // Example: update total cart items count
+      },
+      error: (err: any) => {
+        console.error('Error getting cart items:', err);
+      }
+    });
+  }
+
+
+
+   //chnage into helper service
+  addToCarts(product: any): void {
     const UserID = sessionStorage.getItem('UserID');
     const ProductID = product.id;
 
@@ -114,31 +165,30 @@ export class GinnicartComponent {
         }
       });      
     });
-
   }
 
-
-
-  getCartItems() {
-    const UserID = sessionStorage.getItem('UserID');
-  
-    return this.cartService.getToCarts(UserID!).pipe(
-      tap(res => {
-        res.forEach((item: { imageData: string; }) => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+  addToCart(product: any): void {
+    this.getCartItems().subscribe(() => {
+      this.cartHelperService.addToCart(product).subscribe({
+        next: (res: any) => {
+          if (res) {
+            console.log(res);
+            console.log('Item added to cart:', product);
+            alert('Item added to cart successfully');
+            this.cartService.updateCount(this.totalCartItem+1); 
           }
-        });
-        console.log(res);
-        this.totalCartItem = res.length;
-      })
-    );
+        },
+        error: (err: any) => {
+          console.error('Error adding item to cart:', err);
+          alert('Error adding item to cart');
+        }
+      });
+    })
   }
 
 
-
-  removeItem(item: any): void {
+   //chnage into helper service
+  removeItems(item: any): void {
     const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
       console.error('User ID not found in session storage');
@@ -164,6 +214,27 @@ export class GinnicartComponent {
           }
       });
     });
+  }
+
+  removeItem(item: any): void {
+    this.getCartItems().subscribe(() => {
+      this.cartHelperService.removeItem(item).subscribe({
+        next: (res: any) => {
+          if (res) {
+            // Handle success, maybe update some UI
+            console.log('Item removed successfully:', item);
+            // Example: Refresh the product list after removing item
+            this.cartService.updateCount(this.totalCartItem-1); 
+            this.getProduct();
+          }
+        },
+        error: (err: any) => {
+          // Handle error
+          console.error('Error removing item:', err);
+          alert('Error removing item');
+        }
+      });
+    })
   }
 
 
@@ -226,10 +297,8 @@ export class GinnicartComponent {
 
 
 
-
-
-
-  addToWishlist(product: any): void {
+   //chnage into helper service
+  addToWishlists(product: any): void {
     this.wishlistService.addToWishlist(product)
       .subscribe({
         next: (res) => {
@@ -242,6 +311,19 @@ export class GinnicartComponent {
         }
     });
   }
+
+  addToWishlist(product: any): void {
+    this.wishlistHelperService.addToWishlist(product).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.getProduct(); // Call your method to refresh the product list
+          this.wishlistService.updateCount(this.totalWislistItem+1);  // Update the wishlist count
+        }
+      }
+    });
+  }
+
+
 
   removeToWishlist(product: any): void {
     this.wishlistService.removeItem(product.id)
