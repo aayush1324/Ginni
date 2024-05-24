@@ -287,9 +287,11 @@ export class GinnicombosComponent {
     // Update currentAvailabilityOption when availability option changes
     if (!this.availabilityForm.dirty) {
         this.currentAvailabilityOption = '';
-    } else if (selectedStock === 'In Stock') {
+    } 
+    else if (selectedStock === 'In Stock') {
         this.currentAvailabilityOption = 'In Stock';
-    } else if (selectedStock === 'Out of Stock') {
+    } 
+    else if (selectedStock === 'Out of Stock') {
         this.currentAvailabilityOption = 'Out of Stock';
     }
   }
@@ -302,10 +304,11 @@ export class GinnicombosComponent {
     // Update currentCategoryOption when category option changes
     if (!this.categoryForm.dirty) {
       this.currentCategoryOption = ''; // Reset currentCategoryOption if the form is reset
-  } else {
+    } 
+    else {
       this.currentCategoryOption = selectedCategory;
+    }
   }
-}
 
 
   applyFilters(availabilityFilter: string, categoryFilter: string, minPrice:number, maxPrice:number) {
@@ -367,12 +370,6 @@ export class GinnicombosComponent {
     this.categoryForm.reset(); 
     this.onChange();
     this.onCategoryChange();
-  }
-
-  // Function to reset Price filters
-  removePriceFilters() {
-    this.priceForm.reset(); 
-    this.onChange();
   }
 
 
@@ -476,7 +473,6 @@ export class GinnicombosComponent {
   
   isDropdownOpenAvailability: boolean = false;
   isDropdownOpenCategory: boolean = false;
-  isDropdownOpenPricing: boolean = false;
   isDropdownOpenSortby: boolean = false;
   currentSortingOption: string = 'Featured'; // Initialize currentSortingOption
 
@@ -489,19 +485,13 @@ export class GinnicombosComponent {
     this.isDropdownOpenCategory = !this.isDropdownOpenCategory;
   }
 
-  toggleDropdownPricing() {
-    this.isDropdownOpenPricing = !this.isDropdownOpenPricing;
-  }
-
   toggleDropdownSortby() {
     this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
   }
 
-   // Define methods to handle toggling sorting options
-   toggleSortingOption(option: string) {
+  toggleSortingOption(option: string) {
     this.currentSortingOption = option;
-    // Add your existing logic for toggling sorting options
-}
+  }
 
   resetFilters(): void {
     // Uncheck all radio buttons
