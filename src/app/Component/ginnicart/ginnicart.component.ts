@@ -26,7 +26,7 @@ export class GinnicartComponent {
   searchTerm: string ='';
   products: any;
   totalCartItem!: number;
-  totalWislistItem! : number;
+  totalWishlistItem! : number;
 
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
@@ -36,8 +36,6 @@ export class GinnicartComponent {
               private cartHelperService : CartHelperService, private wishlistHelperService: WishlistHelperService) { }
 
   ngOnInit(): void {
-    this.getProduct();
-
     const UserID: string = sessionStorage.getItem('UserID')!;
 
     if (UserID == null){    
@@ -53,11 +51,9 @@ export class GinnicartComponent {
       this.cartService.getToCarts(UserID).subscribe(res=>{
         res.forEach((item: { imageData: string; }) => {
           if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
             item.imageData = 'data:image/jpeg;base64,' + item.imageData;
           }
         });
-        console.log(res);
         this.productss = res;
 
         this.searchService.getSearchTerm().subscribe((searchTerm) => {
@@ -69,175 +65,79 @@ export class GinnicartComponent {
     
   }
 
+  
   onSearch () {
     this.products = this.productss.filter((item: { productName: string; }) =>
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
-   //chnage into helper service
-  getProducts(): void {
-    this.productService.getProductsWithImages().subscribe({
-      next: (res) => {
-        res.forEach(item => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-        this.productlist = res
-        this.productlist = res.slice(0, 5);
-      },
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
 
-  getProduct(): void {
-    this.ProductHelperService.getProduct().subscribe({
-      next: (res: any[]) => {
-        console.log(res);
-        this.productlist = res;
-        this.productlist = res.slice(0, 5);
-        console.log(this.productlist);
-      },
-      error: (err: any) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
-
-
-   //chnage into helper service
+  
   getCartItems() {
     const UserID = sessionStorage.getItem('UserID');
   
     return this.cartService.getToCarts(UserID!).pipe(
       tap(res => {
-        res.forEach((item: { imageData: string; }) => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-        console.log(res);
         this.totalCartItem = res.length;
       })
     );
   }
 
-  getCartItem(): void {
-    this.cartHelperService.getCartItems().subscribe({
-      next: (items: any[]) => {
-        // Handle the fetched cart items, e.g., update UI or perform calculations
-        this.totalCartItem = items.length; // Example: update total cart items count
-      },
-      error: (err: any) => {
-        console.error('Error getting cart items:', err);
-      }
-    });
-  }
-
-
-
-   //chnage into helper service
-  addToCarts(product: any): void {
-    const UserID = sessionStorage.getItem('UserID');
-    const ProductID = product.id;
-
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin'])
-      return alert("Please Login First");    
-    }
-    
-
-    this.getCartItems().subscribe(() => {
-      this.cartService.addToCarts(UserID, ProductID).subscribe({
-        next: (res: any) => {
-          console.log(res);
-          console.log('Item added to cart:', product);
-          alert('Item added to cart successfully');
-          this.cartService.updateCount(this.totalCartItem+1); 
-        },
-        error: (err: any) => {
-          console.error('Error adding item to cart:', err);
-          alert('Error adding item to cart');
-        }
-      });      
-    });
-  }
-
   addToCart(product: any): void {
-    this.getCartItems().subscribe(() => {
-      this.cartHelperService.addToCart(product).subscribe({
-        next: (res: any) => {
-          if (res) {
-            console.log(res);
-            console.log('Item added to cart:', product);
-            alert('Item added to cart successfully');
-            this.cartService.updateCount(this.totalCartItem+1); 
-          }
-        },
-        error: (err: any) => {
-          console.error('Error adding item to cart:', err);
-          alert('Error adding item to cart');
-        }
-      });
-    })
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.productId;
+
+    if (userId) {  
+      this.getCartItems().subscribe(() => {
+        this.cartHelperService.addToCart(userId, productId, product).subscribe({
+          next: (res: any) => {
+            if (res) {
+              this.cartService.updateCount(this.totalCartItem+1); 
+            }
+          },   
+          error: (err) => {
+            console.error('Error:', err);
+          }   
+        });   
+      }) 
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
 
+  removeCartItem(product: any): void {
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.productId;
 
-   //chnage into helper service
-  removeItems(item: any): void {
-    const UserID = sessionStorage.getItem('UserID');
-    if (!UserID) {
-      console.error('User ID not found in session storage');
-      return;
-    }
-
-    this.getCartItems().subscribe(() => {
-      this.cartService.removeItem(UserID, item.cartId)
-      .subscribe({
-        next: () => {
-            // Remove the item from the local array if needed
-            const index = this.products.indexOf(item);
-            if (index !== -1) {
+    if (userId) {  
+      this.getCartItems().subscribe(() => {
+        this.cartHelperService.removeCartItem(userId, productId, this.products).subscribe({
+          next: (res: any) => {
+            if (res) {
+              const index = this.products.findIndex((item: { productId: any; }) => item.productId === productId);
+              if (index !== -1) {
                 this.products.splice(index, 1);
+              }
+              this.cartService.updateCount(this.totalCartItem-1); 
             }
-            alert('Item removed successfully');
-            // Update the count after successfully removing the item
-            this.cartService.updateCount(this.totalCartItem-1); 
           },
-          error: (err) => {
+          error: (err: any) => {
+            // Handle error
             console.error('Error removing item:', err);
             alert('Error removing item');
           }
-      });
-    });
+        });
+      })
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
-
-  removeItem(item: any): void {
-    this.getCartItems().subscribe(() => {
-      this.cartHelperService.removeItem(item).subscribe({
-        next: (res: any) => {
-          if (res) {
-            // Handle success, maybe update some UI
-            console.log('Item removed successfully:', item);
-            // Example: Refresh the product list after removing item
-            this.cartService.updateCount(this.totalCartItem-1); 
-            this.getProduct();
-          }
-        },
-        error: (err: any) => {
-          // Handle error
-          console.error('Error removing item:', err);
-          alert('Error removing item');
-        }
-      });
-    })
-  }
-
-
 
   removeAllItem() : void {
     const userId = sessionStorage.getItem('UserID');
@@ -263,8 +163,6 @@ export class GinnicartComponent {
       });
     });
   }
-
-
 
   incrementQuantity(item: any): void {
     item.itemQuantity++;
@@ -297,52 +195,45 @@ export class GinnicartComponent {
 
 
 
-   //chnage into helper service
-  addToWishlists(product: any): void {
-    this.wishlistService.addToWishlist(product)
-      .subscribe({
-        next: (res) => {
-          console.log(product);
-          alert('Item added to wishlist');
-        },
-        error: (err) => {
-          console.error('Error adding item to wishlist:', err);
-          alert('Error adding item to wishlist');
-        }
-    });
+  getWishlistItems() {
+    const UserID = sessionStorage.getItem('UserID');
+
+    return this.wishlistService.getToWishlists(UserID!).pipe(
+      tap(res => {
+        this.totalWishlistItem = res.length;
+      })
+    );
   }
 
   addToWishlist(product: any): void {
-    this.wishlistHelperService.addToWishlist(product).subscribe({
-      next: (res: any) => {
-        if (res) {
-          this.getProduct(); // Call your method to refresh the product list
-          this.wishlistService.updateCount(this.totalWislistItem+1);  // Update the wishlist count
-        }
-      }
-    });
-  }
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.productId;
 
-
-
-  removeToWishlist(product: any): void {
-    this.wishlistService.removeItem(product.id)
-      .subscribe({
+    if (userId) {  
+    this.getWishlistItems().subscribe(() => {
+      this.wishlistHelperService.addToWishlist(userId, productId, product).subscribe({
         next: (res) => {
-          alert('Item removed from wishlist successfully');
+          if (res) {
+            this.wishlistService.updateCount(this.totalWishlistItem+1);  // Update the wishlist count
+          }
         },
         error: (err) => {
-          console.error('Error removing item from wishlist:', err);
-          alert('Error removing item from wishlist');
-          // Rollback the wishlist status if there's an error
-          product.wishlistStatus = true;
+          console.error('Error:', err);
         }
-    });
+      });
+      })
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
+
 
   addToWishlistAndRemoveFromCart(item: any): void {
     // Remove the item from the wishlist
-    this.removeItem(item);
+    this.removeCartItem(item);
 
     // Add the item to the cart
     this.addToWishlist(item);
@@ -392,6 +283,8 @@ export class GinnicartComponent {
                   (confirmResponse) => {
                     alert(confirmResponse.message);
                     console.log(confirmResponse);
+                    // Reload the page to update the cart
+                    window.location.reload();
                   },
                   (error) => {
                     console.error(error);
@@ -435,16 +328,19 @@ export class GinnicartComponent {
                 var razorpay_Id = responses.razorpay_payment_id;
                 var razororder_Id = responses.razorpay_order_id;
                 console.log(responses);
-                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe(
-                  (confirmResponse) => {
+
+                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe({
+                  next : (confirmResponse) => {
                     alert(confirmResponse.message);
                     console.log(confirmResponse);
+                     // Reload the page to update the cart
+                    window.location.reload();
                   },
-                  (error) => {
-                    console.error(error);
+                  error : (err) => {
+                    console.error(err);
                     console.log("error");
                   }
-                );
+                });
               },
             };
             const razorpay = new Razorpay(options);
@@ -457,6 +353,8 @@ export class GinnicartComponent {
       });
     }
   }
+
+
 
   // Service or Component where you handle failure payment
   handleFailurePayment() {

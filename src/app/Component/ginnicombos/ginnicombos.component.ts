@@ -81,7 +81,7 @@ export class GinnicombosComponent {
   }
 
   ngOnInit(): void {
-    this.getProduct();
+    this.getProducts();
     this.toggleFeaturedSorting(null);
     this.getCartItems();
     this.getWishlistItems();
@@ -90,13 +90,8 @@ export class GinnicombosComponent {
   }
 
 
-  onSearch () {
-    this.filteredData = this.productlist.filter((item) =>
-      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
-  } 
 
-
-//...................................................................
+//.......................................................................................................
   getWishlistItems() {
     const UserID = sessionStorage.getItem('UserID');
 
@@ -107,6 +102,7 @@ export class GinnicombosComponent {
     );
   }
 
+  //Use WishlistHelperService
   refreshWishlistItemCount(): void {
     this.wishlistHelperService.getWishlistItems().subscribe({
       next: (items: any[]) => {
@@ -120,36 +116,59 @@ export class GinnicombosComponent {
 
   //Use WishlistHelperService
   addToWishlist(product: any): void {
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.id;
+
+    if (userId) {  
     // this.getWishlistItems().subscribe(() => {
-      this.wishlistHelperService.addToWishlist(product).subscribe({
-        next: (res: any) => {
+      this.wishlistHelperService.addToWishlist(userId, productId, product).subscribe({
+        next: (res) => {
           if (res) {
             this.refreshWishlistItemCount();
             this.wishlistService.updateCount(this.totalWishlistItem+1);  // Update the wishlist count
-            this.getProduct(); // Call your method to refresh the product list
+            this.getProducts(); // Call your method to refresh the product list
           }
+        },
+        error: (err) => {
+          console.error('Error:', err);
         }
       });
-    // })
+      // })
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
   
   //Use WishlistHelperService
   removeToWishlist(product: any): void {
-    // this.getWishlistItems().subscribe(() => {
-      this.wishlistHelperService.removeToWishlist(product).subscribe({
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.id;
+
+    if (userId) {  
+      // this.getWishlistItems().subscribe(() => {
+      this.wishlistHelperService.removeWishlistItem(userId, productId, product).subscribe({
         next: (res: any) => {
           if (res) {
             this.refreshWishlistItemCount();
             this.wishlistService.updateCount(this.totalWishlistItem-1);  // Update the wishlist count
-            this.getProduct(); // Call your method to refresh the product list
+            this.getProducts(); // Call your method to refresh the product list
           }
         }
       });
-    // })
+      // })
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
   
 
-//...................................................................
+//......................................................................................................
   getCartItems() {
     const UserID = sessionStorage.getItem('UserID');
   
@@ -160,6 +179,7 @@ export class GinnicombosComponent {
     );
   }
 
+  //Use CartHelperService
   refreshCartItemCount(): void {
     this.cartHelperService.getCartItems().subscribe({
       next: (items: any[]) => {
@@ -171,121 +191,84 @@ export class GinnicombosComponent {
     });
   }
 
+  //Use CartHelperService
   addToCart(product: any): void {
-    this.cartHelperService.addToCart(product).subscribe({
-      next: (res: any) => {
-        if (res) {
-          this.refreshCartItemCount(); // Refresh cart item count after adding to cart
-          this.cartService.updateCount(this.totalCartItem+1); 
-          this.getProduct();
-        }
-      },      
-    });
+    const userId = sessionStorage.getItem('UserID');
+    const productId = product.id;
+
+    if (userId) {  
+      this.cartHelperService.addToCart(userId, productId, product).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.refreshCartItemCount(); // Refresh cart item count after adding to cart
+            this.cartService.updateCount(this.totalCartItem+1); 
+          }
+        },   
+        error: (err) => {
+          console.error('Error:', err);
+        }   
+      });    
+    }
+    else {
+      console.error('User ID not found in session storage');
+      alert('Please login first');
+      this.router.navigate(['/main/ginnisignin']);
+    }
   }
 
 
 
 //...........................................................................................
-  getProduct(): void {
-    const UserID = sessionStorage.getItem('UserID');
-    // if (!UserID) {
-    //   console.error('User ID not found in session storage');
-    //   return;
-    // }
+  onSearch () {
+    this.filteredData = this.productlist.filter((item) =>
+      item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  } 
 
-    if(UserID == null){
-      this.productService.getProductsWithImages().subscribe({
-        next: (res) => {
-          console.log(res);
-  
-          this.productLength = res.length;
-          res.forEach(item => {
-            if (item.imageData) {
-              // Prepend 'data:image/jpeg;base64,' to the imageData field
-              item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-            }
-          });
-  
-          this.productlist = res.filter((product) => product.subcategory === 'combo');
-          this.originalProductList = [...this.productlist];
-  
-          this.searchService.getSearchTerm().subscribe((searchTerm) => {
-            this.searchTerm = searchTerm;
-            this.onSearch();
-          });
-      
-            // Filter products based on status
-          this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
-          this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
-  
-          // Filter products based on category
-          this.almonds = this.filteredData.filter(product => product.category === 'almond');
-          this.raisins = this.filteredData.filter(product => product.category === 'raisin');
-          this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
-          this.cashews = this.filteredData.filter(product => product.category === 'cashew');
-          this.pistas = this.filteredData.filter(product => product.category === 'pista');
-          this.dates = this.filteredData.filter(product => product.category === 'date');
-  
-          // Filter products based on price
-          this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-          this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
-          this.priceForm.get('minPrice')?.setValue(this.minPrices);
-          this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
-        },
-  
-        error: (err) => {
-          console.error('Error fetching addresses:', err);
-        }
-      });
-    }
-    else {  
-      this.productService.getProductsWithImage(UserID).subscribe({
-        next: (res) => {
-          console.log(res);
+  private processProductData(res: any[]): void {
+    // Filter products based on status
+    this.inStockProducts = res.filter(product => product.status === 'instock');
+    this.outOfStockProducts = res.filter(product => product.status === 'outofstock');
 
-          this.productLength = res.length;
-          res.forEach(item => {
-            if (item.imageData) {
-              // Prepend 'data:image/jpeg;base64,' to the imageData field
-              item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-            }
-          });
+    // Filter products based on category
+    this.almonds = res.filter(product => product.category === 'almond');
+    this.raisins = res.filter(product => product.category === 'raisin');
+    this.walnuts = res.filter(product => product.category === 'walnut');
+    this.cashews = res.filter(product => product.category === 'cashew');
+    this.pistas = res.filter(product => product.category === 'pista');
+    this.dates = res.filter(product => product.category === 'date');
 
-          this.productlist = res.filter((product) => product.subcategory === 'combo');
-          this.originalProductList = [...this.productlist];
-
-          this.searchService.getSearchTerm().subscribe((searchTerm) => {
-            this.searchTerm = searchTerm;
-            this.onSearch();
-          });
-      
-          // Filter products based on status
-          this.inStockProducts = this.filteredData.filter(product => product.status === 'instock');
-          this.outOfStockProducts = this.filteredData.filter(product => product.status === 'outofstock');
-
-          // Filter products based on category
-          this.almonds = this.filteredData.filter(product => product.category === 'almond');
-          this.raisins = this.filteredData.filter(product => product.category === 'raisin');
-          this.walnuts = this.filteredData.filter(product => product.category === 'walnut');
-          this.cashews = this.filteredData.filter(product => product.category === 'cashew');
-          this.pistas = this.filteredData.filter(product => product.category === 'pista');
-          this.dates = this.filteredData.filter(product => product.category === 'date');
-
-          // Filter products based on price
-          this.minPrices = this.filteredData.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-          this.maxPrices = this.filteredData.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
-          this.priceForm.get('minPrice')?.setValue(this.minPrices);
-          this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
-        },
-
-        error: (err) => {
-          console.error('Error fetching addresses:', err);
-        }
-      });
-    }
-
+    // Filter products based on price
+    this.minPrices = res.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
+    this.maxPrices = res.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+    this.priceForm.get('minPrice')?.setValue(this.minPrices);
+    this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
   }
 
+  //Use ProductHelperService
+  getProducts(): void {
+    const UserID = sessionStorage.getItem('UserID');
+
+    this.ProductHelperService.getProducts(UserID).subscribe({
+      next: (res) => {
+        this.productLength = res.length;
+        this.productlist = res.filter((product) => product.subcategory === 'combo');
+        this.originalProductList = [...this.productlist];
+        this.processProductData(res);
+        this.searchService.getSearchTerm().subscribe((searchTerm) => {
+          this.searchTerm = searchTerm;
+          this.onSearch();
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    });
+  }
+
+
+
+
+//.............................................................................................
   // onchange in availability , category and Price
   onChange() {
     const selectedAvalability = this.availabilityForm.get('stock')?.value;
@@ -476,7 +459,7 @@ export class GinnicombosComponent {
     this.toggleFeaturedSorting(null);
 
     // Reset the product list to show all products
-    this.getProduct();
+    this.getProducts();
   }
 
   uncheckOtherSortOptions(category: string): void {
@@ -528,7 +511,7 @@ export class GinnicombosComponent {
       radio.checked = false;
     });
 
-    this.getProduct();
+    this.getProducts();
   }
 
 }

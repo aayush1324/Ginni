@@ -11,17 +11,9 @@ export class WishlistHelperService {
 
   constructor(private wishlistService: WishlistService, private router: Router) { }
 
-  addToWishlist(product: any): Observable<any> {
-    const UserID = sessionStorage.getItem('UserID');
-    const ProductID = product.id;
 
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin']);
-      alert("Please Login First");
-      return of(null);
-    }
-
-    return this.wishlistService.addToWishlists(UserID, ProductID).pipe(
+  addToWishlist(userId: string, productId: string, products: any[]): Observable<any> {
+    return this.wishlistService.addToWishlists(userId, productId).pipe(
       tap(() => {
         alert('Item added to wishlist');
       }),
@@ -32,30 +24,6 @@ export class WishlistHelperService {
       })
     );
   }
-
-  
-  removeToWishlist(product: any): Observable<any> {
-    const UserID = sessionStorage.getItem('UserID');
-    const ProductID = product.id;
-
-    if (!UserID) {
-      this.router.navigate(['/main/ginnisignin']);
-      alert("Please Login First");
-      return of(null);
-    }
-
-    return this.wishlistService.removeItems(UserID, ProductID).pipe(
-      tap(() => { 
-        alert('Item removed successfully');
-      }),
-      catchError(err => {
-        console.error('Error removing item:', err);
-        alert('Error removing item');
-        return of(null);
-      })
-    );
-  }
-
 
   getWishlistItems(): Observable<any[]> {
     const UserID = sessionStorage.getItem('UserID');
@@ -78,10 +46,10 @@ export class WishlistHelperService {
   removeWishlistItem(userId: string, productId: string, products: any[]): Observable<any> {
     return this.wishlistService.removeItems(userId, productId).pipe(
       tap(() => {
-        const index = products.findIndex(item => item.productId === productId);
-        if (index !== -1) {
-          products.splice(index, 1);
-        }
+        // const index = products.findIndex(item => item.productId === productId);
+        // if (index !== -1) {
+        //   products.splice(index, 1);
+        // }
         alert('Item removed successfully');
       }),
       catchError(err => {
@@ -91,4 +59,5 @@ export class WishlistHelperService {
       })
     );
   }
+
 }

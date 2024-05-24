@@ -48,16 +48,16 @@
                             </div>
     
                             <div class="middleleftmainquantityremove">
-                                <a (click)="removeItem(item)" style="text-decoration: underline; cursor: pointer;">Remove</a>
+                                <a (click)="removeWishlistItem(item)" style="text-decoration: underline; cursor: pointer;">Remove</a>
                             </div>
                         </div>
 
                         <div class="middleleftmaintotal">
-                            <h6>Rs {{item.itemTotalPrice}}</h6>
+                            <h3>Rs {{item.itemTotalPrice}}</h3>
                         </div>
 
                         <div class="middleleftmainaction">
-                            <button>Buy Now</button>
+                            <button (click)="initiatesPayment(item.productId, item.itemTotalPrice)">Buy Now</button>
                             <button (click)="addToCartAndRemoveFromWishlist(item)">Add to Cart</button>
                         </div>
                     </div>
