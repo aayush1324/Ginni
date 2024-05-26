@@ -1,102 +1,142 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './Component/navbar/navbar.component';
-import { FooterComponent } from './Component/footer/footer.component';
-import { CardThumbnail2Component } from './Component/card-thumbnail2/card-thumbnail2.component';
-import { CardThumbnailwithProgressbarComponent } from './Component/card-thumbnailwith-progressbar/card-thumbnailwith-progressbar.component';
-import { CounterComponent } from './Component/counter/counter.component';
-import { WishlistComponent } from './Component/wishlist/wishlist.component';
-import { OrderComponent } from './Component/order/order.component';
-import { RatingComponent } from './Component/rating/rating.component';
-import { WriteReviewComponent } from './Component/write-review/write-review.component';
-import { ReviewsComponent } from './Component/reviews/reviews.component';
-import { CreateReviewComponent } from './Component/create-review/create-review.component';
-import { TestimonialComponent } from './Component/testimonial/testimonial.component';
-import { PaymentListComponent } from './Component/payment-list/payment-list.component';
-import { CheckoutListComponent } from './Component/checkout-list/checkout-list.component';
-import { AccountSettingsComponent } from './Component/account-settings/account-settings.component';
-import { CategoryImageComponent } from './Component/category-image/category-image.component';
-import { SignupMobComponent } from './Component/signup-mob/signup-mob.component';
-import { RetailerComponent } from './Component/retailer/retailer.component';
-import { FiltersComponent } from './Component/filters/filters.component';
-import { CategoryFilterComponent } from './Component/category-filter/category-filter.component';
-import { StoreFilterComponent } from './Component/store-filter/store-filter.component';
-import { PriceFilterComponent } from './Component/price-filter/price-filter.component';
-import { RatingFilterComponent } from './Component/rating-filter/rating-filter.component';
-import { FilterbarComponent } from './Component/filterbar/filterbar.component';
-import { Feature6Component } from './Component/feature6/feature6.component';
-import { Feature4Component } from './Component/feature4/feature4.component';
-import { LargeImageProductComponent } from './Component/large-image-product/large-image-product.component';
-import { CheckoutOrderComponent } from './Component/checkout-order/checkout-order.component';
-import { OneLineFilterComponent } from './Component/one-line-filter/one-line-filter.component';
-import { OrderDetailsComponent } from './Component/order-details/order-details.component';
-import { SlideproductsComponent } from './Component/slideproducts/slideproducts.component';
-import { SlidecategoriesComponent } from './Component/slidecategories/slidecategories.component';
-import { SliderComponent } from './Component/slider/slider.component';
-import { GriditemsComponent } from './Component/griditems/griditems.component';
-import { TextandimageComponent } from './Component/textandimage/textandimage.component';
-import { AccordionComponent } from './Component/accordion/accordion.component';
-import { BadgeComponent } from './Component/badge/badge.component';
-import { PaginationComponent } from './Component/pagination/pagination.component';
-import { HeaderComponent } from './Component/header/header.component';
 import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component';
+import { GinnifooterComponent } from './Component/ginnifooter/ginnifooter.component';
+import { GinniimagesliderComponent } from './Component/ginniimageslider/ginniimageslider.component';
+import { GinniproductsComponent } from './Component/ginniproducts/ginniproducts.component';
+import { GinnitextandimageComponent } from './Component/ginnitextandimage/ginnitextandimage.component';
+import { GinniupperfooterComponent } from './Component/ginniupperfooter/ginniupperfooter.component';
+import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
+import { GinnisignupComponent } from './Component/ginnisignup/ginnisignup.component';
+import { GinnisigninComponent } from './Component/ginnisignin/ginnisignin.component';
+import { GinniforgotpasswordComponent } from './Component/ginniforgotpassword/ginniforgotpassword.component';
+import { GinnicustomerreviewComponent } from './Component/ginnicustomerreview/ginnicustomerreview.component';
+import { GinniaboutusComponent } from './Component/ginniaboutus/ginniaboutus.component';
+import { GinnitermserviceComponent } from './Component/ginnitermservice/ginnitermservice.component';
+import { GinniprivacypolicyComponent } from './Component/ginniprivacypolicy/ginniprivacypolicy.component';
+import { GinnishippingpolicyComponent } from './Component/ginnishippingpolicy/ginnishippingpolicy.component';
+import { GinnireturnpolicyComponent } from './Component/ginnireturnpolicy/ginnireturnpolicy.component';
+import { GinnicontactusComponent } from './Component/ginnicontactus/ginnicontactus.component';
+import { GinnifilterComponent } from './Component/ginnifilter/ginnifilter.component';
+import { GinniallproductsComponent } from './Component/ginniallproducts/ginniallproducts.component';
+import { GinnicartComponent } from './Component/ginnicart/ginnicart.component';
+import { GinnimainproductComponent } from './Component/ginnimainproduct/ginnimainproduct.component';
+import { MainComponent } from './Component/main/main.component';
+import { HomeComponent } from './Component/home/home.component';
+import { GinnisliderComponent } from './Component/ginnislider/ginnislider.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { GinnicombosComponent } from './Component/ginnicombos/ginnicombos.component';
+import { GinnigiftingsComponent } from './Component/ginnigiftings/ginnigiftings.component';
+import { GinnibestsellersComponent } from './Component/ginnibestsellers/ginnibestsellers.component';
+import { GinnidryfruitalmondComponent } from './Component/ginnidryfruitalmond/ginnidryfruitalmond.component';
+import { GinnidryfruitcashewComponent } from './Component/ginnidryfruitcashew/ginnidryfruitcashew.component';
+import { GinnidryfruitraisinComponent } from './Component/ginnidryfruitraisin/ginnidryfruitraisin.component';
+import { GinnidryfruitpistaComponent } from './Component/ginnidryfruitpista/ginnidryfruitpista.component';
+import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/ginnidryfruitwalnut.component';
+import { GinnidryfruitComponent } from './Component/ginnidryfruit/ginnidryfruit.component';
+import { GinniwishlistComponent } from './Component/ginniwishlist/ginniwishlist.component';
+import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component';
+import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
+import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
+import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
+import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
+import { TokenInterceptor } from './Interceptors/token.interceptor';
+import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
+import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
+import { SellerdashboardComponent } from './Component/sellerdashboard/sellerdashboard.component';
+import { SellerproductlistComponent } from './Component/sellerproductlist/sellerproductlist.component';
+import { SellerorderlistComponent } from './Component/sellerorderlist/sellerorderlist.component';
+import { SellercustomerlistComponent } from './Component/sellercustomerlist/sellercustomerlist.component';
+import { SearchComponent } from './Component/search/search.component';
+import { GinnidetailorderComponent } from './Component/ginnidetailorder/ginnidetailorder.component';
+import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/sellerzipcodelist.component';
+import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
+import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnireviewslider.component';
+import { GinniofferresponseComponent } from './Component/ginniofferresponse/ginniofferresponse.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    CardThumbnail2Component,
-    CardThumbnailwithProgressbarComponent,
-    CounterComponent,
-    WishlistComponent,
-    OrderComponent,
-    RatingComponent,
-    WriteReviewComponent,
-    ReviewsComponent,
-    CreateReviewComponent,
-    TestimonialComponent,
-    PaymentListComponent,
-    CheckoutListComponent,
-    AccountSettingsComponent,
-    CategoryImageComponent,
-    SignupMobComponent,
-    RetailerComponent,
-    FiltersComponent,
-    CategoryFilterComponent,
-    StoreFilterComponent,
-    PriceFilterComponent,
-    RatingFilterComponent,
-    FilterbarComponent,
-    Feature6Component,
-    Feature4Component,
-    LargeImageProductComponent,
-    CheckoutOrderComponent,
-    OneLineFilterComponent,
-    OrderDetailsComponent,
-    SlideproductsComponent,
-    SlidecategoriesComponent,
-    SliderComponent,
-    GriditemsComponent,
-    TextandimageComponent,
-    AccordionComponent,
-    BadgeComponent,
-    PaginationComponent,
-    HeaderComponent,
     GinniofferComponent,
-  
+    GinnifooterComponent,
+    GinniimagesliderComponent,
+    GinniproductsComponent,
+    GinnitextandimageComponent,
+    GinniupperfooterComponent,
+    GinnifaqComponent,
+    GinnisignupComponent,
+    GinnisigninComponent,
+    GinniforgotpasswordComponent,
+    GinnicustomerreviewComponent,
+    GinniaboutusComponent,
+    GinnitermserviceComponent,
+    GinniprivacypolicyComponent,
+    GinnishippingpolicyComponent,
+    GinnireturnpolicyComponent,
+    GinnicontactusComponent,
+    GinnifilterComponent,
+    GinniallproductsComponent,
+    GinnicartComponent,
+    GinnimainproductComponent,
+    MainComponent,
+    HomeComponent,
+    GinnisliderComponent,
+    GinnicombosComponent,
+    GinnigiftingsComponent,
+    GinnibestsellersComponent,
+    GinnidryfruitalmondComponent,
+    GinnidryfruitcashewComponent,
+    GinnidryfruitraisinComponent,
+    GinnidryfruitpistaComponent,
+    GinnidryfruitwalnutComponent,
+    GinnidryfruitComponent,
+    GinniwishlistComponent,
+    GinnitrackComponent,
+    GinniprofileComponent,
+    GinniaddressComponent,
+    GinniorderComponent,
+    GinnideliveryComponent,
+    SelleraddproductComponent,
+    GinniresetpasswordComponent,
+    GinniconfirmemailComponent,
+    SellerdashboardComponent,
+    SellerproductlistComponent,
+    SellerorderlistComponent,
+    SellercustomerlistComponent,
+    SearchComponent,
+    GinnidetailorderComponent,
+    SellerzipcodelistComponent,
+    GinniotpComponent,
+    GinnireviewsliderComponent,
+    GinniofferresponseComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgToastModule,
   ],
-  providers: [
-    provideClientHydration()
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi:true
+  },
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor() {
+    provideHttpClient();
+  }
+}

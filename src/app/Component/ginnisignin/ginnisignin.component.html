@@ -1,0 +1,40 @@
+<div class="containerbox">
+    <div class="header">
+        <h1>Login to my account</h1>
+        <p>Enter your E-mail and Password:</p>
+    </div>
+
+    <form [formGroup]="signInForm" (ngSubmit)="SigninForm()">
+        <p class="error-p">{{authError}}</p>
+    
+        <div class="form-group">
+            <!-- <label for="email">Email:</label> -->
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+            <div *ngIf="signInForm.get('email')?.errors?.['required'] && signInForm.get('email')?.touched" class="text-danger">
+                Email is required.
+            </div>
+            <div *ngIf="signInForm.get('email')?.errors?.['email'] && signInForm.get('email')?.touched" class="text-danger">
+                Invalid email format.
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <!-- <label for="password">Password:</label> -->
+            <input [type]="!showPassword ? 'text' : 'password'" id="password" formControlName="password" class="form-control" placeholder="Password">
+            <span class="password-toggle-icon" (click)="togglePasswordVisibility()">
+                <i class="fa fa-eye" *ngIf="!showPassword"></i>
+                <i class="fa fa-eye-slash" *ngIf="showPassword"></i>
+            </span>
+            <div *ngIf="signInForm.get('password')?.errors?.['required'] && signInForm.get('password')?.touched" class="text-danger">
+                Password is required.
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">Sign In</button>
+    </form>
+
+    <div class="footer">
+        <p>New Customer? <a routerLink="/main/ginnisignup">Create your Account</a></p>
+        <p>Forgot Password? <a routerLink="/main/ginniforgotpassword">Recover Password</a></p>
+    </div>
+</div>

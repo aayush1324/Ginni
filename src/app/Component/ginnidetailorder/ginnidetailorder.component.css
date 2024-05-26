@@ -1,0 +1,218 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding:  5%;
+    padding-top: 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+}
+
+.headerdate {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.headerorder{
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+}
+
+.middle {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+}
+
+.middleheading {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2% ;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.middleheadingleft {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.middleheadingright {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.middledata {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+}
+
+.middledataleft {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 1% 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.middledataleftimage {
+    width: 15%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    background-color: blue;  
+
+}
+
+.middledataleftimage img {
+    width: 100%;
+    height: 100%;   
+    /* border: 5px solid; */
+}
+
+
+.middledataleftname {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.middledataright {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.middlefooting {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.middlefootingleft {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.middlefootingright {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.middlefootingrightsubtotal, .middlefootingrightshipping, .middlefootingrighttax, .middlefootingrighttotal {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+.footer {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10%;
+}
+
+.footerleft, .footerright {
+    width: 100%;
+    height: fit-content;
+    margin: 0%;
+    padding: 2% 5%;
+    border: 1px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

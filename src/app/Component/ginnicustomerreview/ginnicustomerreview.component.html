@@ -1,0 +1,18 @@
+<div class="containerbox">
+    <div class="header">
+        <h1>WHAT OUR CUSTOMER SAY</h1>
+        <i class="fa fa-quote-left" aria-hidden="true"></i>
+    </div>
+
+    <div class="footer" *ngFor = "let review of reviews; let i = index"  [ngStyle]="{ 'left.px': currentIndex * -100 }">
+        <div class="feedback-container">
+            <div class="feedback" *ngIf="i === currentIndex">
+                <p>{{ review.feed }}</p>
+            </div>
+
+            <div class="name" *ngIf="i === currentIndex">
+                <h6>{{ review.name }}</h6>
+            </div>
+        </div>
+    </div>
+</div>

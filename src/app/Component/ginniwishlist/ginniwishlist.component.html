@@ -1,0 +1,114 @@
+<div class="containerbox">
+
+     <!-- Check if wishlist has items -->
+    <ng-container *ngIf="products.length > 0; else emptyWishlist">
+        <div class="header">
+            <h2>My Wishlist</h2>
+            <button (click)="removeAllItem()">Empty Wishlist</button>
+        </div>
+        
+        <div class="middle">
+            <div class="middleleft">
+                <div class="middlelefttop">
+                    <div class="middlelefttopproduct">
+                        <h6>Product</h6>
+                    </div>
+
+                    <div class="middlelefttopcombine">
+                        <h6>Quantity</h6>
+                        <h6>Total</h6>
+                        <h6>Action</h6>
+                    </div>
+                </div>
+
+                <div class="middleleftmain" *ngFor="let item of products; let i = index">
+                    <div class="middleleftmainproduct">
+                        <div class="middleleftmainproductimages">
+                            <img [src]="item.imageData" alt="" style="height: 5rem; width: 5rem;">
+                        </div>
+
+                        <div class="middleleftmainproductnaming">
+                            <div class="middleleftmainproductname">
+                                <a  [routerLink]="['/main/ginnimainproduct', item.productName]">{{item.productName}}</a>
+                            </div>
+
+                            <div class="middleleftmainproductprice">
+                                <h6>Rs {{item.itemPrice}}</h6>
+                                <p><del>{{item.discount}}</del></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="middleleftmaincombine">
+                        <div class="middleleftmainquantity">
+                            <div class="middleleftmainquantityincrement">
+                                <h1 (click)="decrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>-</b></h1>
+                                <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.itemQuantity}}</h6>
+                                <h1 (click)="incrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>+</b></h1>
+                            </div>
+    
+                            <div class="middleleftmainquantityremove">
+                                <a (click)="removeWishlistItem(item)" style="text-decoration: underline; cursor: pointer;">Remove</a>
+                            </div>
+                        </div>
+
+                        <div class="middleleftmaintotal">
+                            <h3>Rs {{item.itemTotalPrice}}</h3>
+                        </div>
+
+                        <div class="middleleftmainaction">
+                            <button (click)="initiatesPayment(item.productId, item.itemTotalPrice)">Buy Now</button>
+                            <button (click)="addToCartAndRemoveFromWishlist(item)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- Empty cart message -->
+    <ng-template #emptyWishlist>
+        <div class="empty-cart">
+            <img src="../../assets/images/png/emptywishlists.png" alt="Wishlist Icon">
+            <br>
+            <br>
+            <p>Oops! Your wishlist is empty!</p>
+            <p>Explore more and shortlist some items</p>
+            <button routerLink="/main/ginnidryfruit">Shop Now</button>
+        </div>
+    </ng-template>
+   
+
+    <!-- <div class="footer">
+        <div class="footertop">
+            <h5>BestSellers</h5>
+        </div>
+
+        <div class="footerbottom">
+            <div class="almond" *ngFor = "let item of productlist">
+                <div class="image">
+                    <div class="saving">
+                        <h6>{{ item.discount }}</h6>
+                        <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist"  style="font-size:24px;"  ></i>
+                        <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist"  style="font-size:24px; "></i>
+                    </div>
+                    <img [src]="item.imageData" alt="Almond">               
+                </div>
+            
+                <div class="naming">
+                    <a href=""><h5>{{ item.productName }}</h5></a>
+                </div>
+            
+                <div class="pricing">
+                    <h5>Rs {{ item.price }}</h5>
+                </div>
+            
+                <div class="carting">
+                    <button (click)="addToCart(item)">Add to Cart</button>
+                </div>
+            </div>     
+
+        </div>
+    </div> -->
+</div>

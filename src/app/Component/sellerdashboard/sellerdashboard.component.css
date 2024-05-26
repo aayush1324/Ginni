@@ -1,0 +1,47 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid; */
+    background-color: rgb(253, 253, 253);
+}
+
+.navbar {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: space-evenly;
+    /* border: 1px solid; */
+    background-color: rgb(146, 226, 213);
+}
+
+.Product , .Order, .Customer, .ZipCode{
+    background-color: rgb(222, 228, 230);
+    width:  15%;
+    height: 100%;
+    padding: 0.5%;
+    border-radius: 5px;
+    margin: 0%;
+    justify-content: center;
+    display: flex;
+     /* border: 1px solid; */
+}
+
+.Product a, .Order a, .Customer a, .ZipCode a{
+    text-decoration: none;
+    color: rgb(79, 4, 255);
+}
+
+.active {
+    background-color: #a79e9e; /* Change this to your desired highlight color */
+}
+
+
+.active-link {
+    background-color: #d8afaf; /* Change this to your desired highlight color */
+}

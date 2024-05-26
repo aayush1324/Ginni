@@ -1,0 +1,60 @@
+.containerbox {
+    position: relative; /* Ensure the container is positioned relatively */
+    width: 100%;
+    height: fit-content;
+    max-height: 50%;
+    overflow: hidden; /* Hide overflow to remove white gap */
+    white-space: nowrap;
+
+}
+
+@keyframes slideIn {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+}
+
+.slider {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.slider img {
+    width: 100%;
+    height: fit-content;
+    max-height: 25rem;
+    animation: slideIn 0.5s forwards; /* Apply animation to each image */
+}
+
+
+.dotter {
+    position: absolute; /* Position the navigation dots relative to the container */
+    bottom: 10px; /* Adjust the position as needed */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #ffffff;
+    border: 2px solid;
+    border-radius: 50%;
+    border-color: white;
+    display: inline-block;
+    transition: background-color 0.5s ease;
+}
+
+.dot.active {
+    background-color: transparent;
+}
+
+
+  

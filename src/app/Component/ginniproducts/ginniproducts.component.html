@@ -1,0 +1,36 @@
+
+<div class="containerbox">
+    <div class="upper">
+        <div class="upperleft">
+            <h3>All Products</h3>
+        </div>
+
+        <div class="upperright">
+            <button type="submit" routerLink="/main/ginnidryfruit">View All</button>
+        </div>
+    </div>
+
+    <div class="lower">
+        <div class="almond" *ngFor = "let item of productlist">
+            <div class="image">
+                <div class="saving">
+                    <h6>{{ item.discount }}</h6>
+                    <h6>{{ item.subcategory }}</h6>
+                </div>
+                <img [src]= "item.imageData" alt="GINNI">
+            </div>
+        
+            <div class="naming">
+                <a href=""><h5>{{ item.productName }}</h5></a>
+            </div>
+        
+            <div class="pricing">
+                <h5>Rs {{ item.price }}</h5>
+            </div>
+        
+            <div class="carting">
+                <button (click)="addtocart(item)">Add to Cart</button>
+            </div>
+        </div>    
+    </div>
+</div>

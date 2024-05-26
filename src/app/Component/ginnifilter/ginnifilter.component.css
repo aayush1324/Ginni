@@ -1,0 +1,176 @@
+.containerbox {
+	width: 25%;
+	height: fit-content;
+	padding: 2%;
+	margin: 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-items: center; */
+	border: 1px solid;
+}
+
+.heading {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* border: 2px solid; */
+}
+
+.availability {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.availabilityfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.intstock input[type="radio"] , .outstock input[type="radio"] {
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+
+.categories {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.categoryfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.almonds input[type="radio"], 
+.cashews input[type="radio"],
+.raisins input[type="radio"], 
+.walnuts input[type="radio"],
+.pistas input[type="radio"], 
+.combos input[type="radio"],
+.giftings input[type="radio"], 
+.bestsellers input[type="radio"]
+{
+    margin-right: 15px; /* Adjust the right margin as needed */
+	transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+.sortby {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.sortbyfooter {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* border: 2px solid; */
+}
+
+.price {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 10px;
+}
+
+.pricefooter {
+    width: 100%;
+	height: fit-content;
+    padding: 0%;
+    margin: 5% 0%;
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid; */
+}
+
+.pricefooter form {
+    width: 100%;
+	height: fit-content;
+	padding: 0%;
+	margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+	/* border: 1px solid; */
+}
+
+.pricefooter .minprice,
+.pricefooter .maxprice {
+    width: 40%; /* Adjust width as needed */
+	height: fit-content;
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+    border: 1px solid;
+	border-radius: 10px;
+}
+
+.pricefooter input[type="text"] {
+    width: 80%;
+	height: fit-content;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 3%;
+    margin: 0% 5%; /* Remove margin to avoid extra spacing */
+    /* border: 2px solid; */
+	border: none; /* Remove border */
+    outline: none; /* Remove outline */
+}
+
+
+.currency-icon {
+    padding: 0%;
+	margin: 0% 5%;
+    font-size: 20px;
+}
+
+.fa-caret-down {
+    cursor: pointer;
+}

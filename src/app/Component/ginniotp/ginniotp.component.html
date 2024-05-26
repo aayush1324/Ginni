@@ -1,0 +1,23 @@
+<div class="containerbox">
+    <form [formGroup]="otpForm" (ngSubmit)="OtpForm()">
+        <h5 class="error-p">{{authError}}</h5>
+    
+        <div class="form-group">
+            <h6><label for="emailOtp">Please Enter the OTP from your Email:</label></h6>
+            <input type="text" id="emailOtp" formControlName="emailOtp" class="form-control" placeholder="Email OTP">
+            <div *ngIf="otpForm.get('emailOtp')?.errors?.['required'] && otpForm.get('emailOtp')?.touched" class="text-danger">
+                Email OTP is required.
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <h6><label for="mobileOtp">Please Enter the OTP from your Mobile:</label></h6>
+            <input type="text" id="mobileOtp" formControlName="mobileOtp" class="form-control" placeholder="Mobile OTP">
+            <div *ngIf="otpForm.get('mobileOtp')?.errors?.['required'] && otpForm.get('mobileOtp')?.touched" class="text-danger">
+                Mobile OTP is required.
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="otpForm.invalid">Submit</button>
+    </form>
+</div>

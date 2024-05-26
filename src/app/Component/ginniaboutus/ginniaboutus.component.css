@@ -1,0 +1,30 @@
+.containerbox {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    margin: 5% 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+.paragraph {
+    width: 50%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    text-align: justify;
+}

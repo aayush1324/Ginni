@@ -1,0 +1,113 @@
+<div class="containerbox">
+    <div class="header">
+        <div class="left"> 
+            <div class="leftimagesbox">
+                <!-- Full-width images with number text -->
+                <div class="mySlides" *ngFor="let image of imageList; let i = index" [style.display]="i === slideIndex - 1 ? 'block' : 'none'">
+                  <img [src]="image.imageData" style="width:100%">
+                </div>
+              
+                <!-- Thumbnail images -->
+                <div class="row">
+                  <div class="column">
+                    <img class="demo cursor" *ngFor="let image of imageList; let i = index" [src]="image.imageData" style="width:100%" (click)="currentSlide(i + 1)" alt="Ginni">
+                  </div>
+                </div>
+            </div>
+              
+
+            <div class="leftdescription">
+                <h4>Description</h4>
+                <br>
+                <br>
+                <p>{{ productDetails.description }}</p>
+            </div>
+        </div>
+
+        <div class="right" *ngIf="productDetails">
+            <div class="rightupper">
+                <h1>{{ productDetails.productName }}</h1>
+                <br>
+                <h6>Save Rs.{{ productDetails.discount }}</h6>
+            </div>
+
+            <div class="rightmiddle">
+                <div class="rightmiddlemrp">
+                    <h6>M.R.P</h6>
+                    <p><del>Rs. {{ productDetails.price }}</del></p>
+                </div>
+                <br>
+                <div class="rightmiddleoffer">
+                    <h6>Offer Price:</h6>
+                    <p><b>Rs. {{ productDetails.price - productDetails.discount }}</b> (incl. of all taxes)</p>
+                </div>
+                <br>
+                <div class="rightmiddlequantity">
+                    <h6>Quantity:</h6>
+                    <div class="rightmiddlebox">
+                        <div class="rightmiddlequantitybox">
+                            <h1 (click)="decrementQuantity()" style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178); cursor: pointer;">
+                                <b>-</b>
+                            </h1>
+                            <h6 style="border: 1px solid; font-size: larger; padding: 5%; border-color: rgb(184, 181, 178);">
+                                {{ quantity }}</h6>
+                            <h1 (click)="incrementQuantity()" style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178); cursor: pointer;">
+                                <b>+</b>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="rightmiddletotal">
+                    <h6>Total Price:</h6>
+                    <p><b>Rs. {{getTotalPrice()}}</b> (incl. of all taxes)</p>
+                </div>
+            </div>
+
+            <div class="rightlower">
+                <button (click)="addToCart(productDetails)">Add to Cart</button>
+                <button (click)="initiatePayment()">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="footer">
+        <div class="upper">
+            <div class="upperleft">
+                <h3>You May also Like</h3>
+            </div>
+        </div>
+
+        <div class="lower">
+            <div class="almond" *ngFor="let item of productlist">
+                <div class="image">
+                    <div class="saving">
+                        <h6>{{ item.discount }}</h6>
+                        <i class="fa fa-heart-o" (click)="addToWishlist(item)" *ngIf="!item.wishlistStatus"
+                            style="font-size:24px"></i>
+                        <i class="fa fa-heart" (click)="removeToWishlist(item)" *ngIf="item.wishlistStatus"
+                            style="font-size:24px"></i>
+                    </div>
+                    <img [src]="item.imageData" alt="GINNI">
+                </div>
+
+                <div class="naming">
+                    <a href="">
+                        <h5>{{ item.productName }}</h5>
+                    </a>
+                </div>
+
+                <div class="pricing">
+                    <h5>Rs {{ item.price }}</h5>
+                </div>
+
+                <div class="carting">
+                    <button (click)="addToCart(item)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

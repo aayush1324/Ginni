@@ -1,0 +1,199 @@
+<div class="containerbox">
+    <ng-container *ngIf="addresses.length > 0; else emptyAddress">
+        <div class="upper">
+            <div class="upperhead">
+                <h1>My Addresses</h1>
+            </div>
+
+            <button (click)="togglePopup()" class="upperbutton">Add Address</button>
+
+            <!-- Overlay -->
+            <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
+
+
+            <div class="addresspopup" *ngIf="isPopupOpen">
+                <div class="popup">
+                    <div class="popuphead">
+                        <div class="popupheadleft">
+                            <h2>{{ isEdit ? 'Edit' : 'Add' }} Address Detail</h2>
+                            <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
+                        </div>
+                        <div class="popupheadright">
+                            <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="popupdown">
+                        <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
+                            <div class="form-group">
+                                <input type="text" id="firstName" formControlName="firstName" placeholder="First Name">
+                                <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
+                                    First Name is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
+                                <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
+                                    Last Name is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="phone" formControlName="phone" placeholder="Phone">
+                                <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
+                                    Phone is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
+                                <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                    Address 1 is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
+                                <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
+                                    Pin Code is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="city" formControlName="city" placeholder="City">
+                                <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
+                                    City is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="state" formControlName="state" placeholder="State">
+                                <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
+                                    State is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="default" formControlName="default" >
+                                <label for="default"> Set as Default Address </label>
+                            </div>
+                            <button type="submit" [disabled]="!addressForm.valid">
+                                {{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>              
+        </div>
+
+        <div class="grid">
+            <ng-container *ngFor="let address of addresses; let i = index">
+                <div class="loweraddress">
+                    <div class="loweraddresshead">
+                        <h6>{{ address.default ? 'Default Address' : 'Address ' + (i + 1) }}</h6>
+                        <br>
+                    </div>
+            
+                    <div class="loweraddressmiddle">
+                        <p>Name: {{ address.firstName + ' ' + address.lastName }}</p>
+                        <p>Phone: {{ address.phone }}</p>
+                        <p>Address: {{ address.address1 }}{{ address.address2 ? ', ' + address.address2 : '' }}</p>
+                        <p>Pin Code: {{ address.pincode }}</p>
+                        <p>City: {{ address.city }}</p>
+                        <p>State: {{ address.state }}</p>
+                        <br>
+                    </div>
+            
+                    <div class="loweraddressbottom">
+                        <button (click)="openEditPopup(address)">Edit</button>
+                        <button (click)="deleteAddress(address.id)">Delete </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div> 
+    </ng-container>
+
+
+    <ng-template #emptyAddress>
+        <div class="empty-cart">
+            <img src="../../assets/images/png/address.png" alt="Address Icon">
+            <br>
+            <br>
+            <p>No addresses yet</p>
+            <button (click)="togglePopup()" class="upperbutton">Add your First Address</button>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
+
+
+        <div class="addresspopup" *ngIf="isPopupOpen">
+            <div class="popup">
+                <div class="popuphead">
+                    <div class="popupheadleft">
+                        <h2>{{ isEdit ? 'Edit' : 'Add' }} Address Detail</h2>
+                        <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
+                    </div>
+                    <div class="popupheadright">
+                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
+                    </div>
+                </div>
+                <br>
+                <div class="popupdown">
+                    <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
+                        <div class="form-group">
+                            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name">
+                            <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
+                                First Name is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
+                            <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
+                                Last Name is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="phone" formControlName="phone" placeholder="Phone">
+                            <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
+                                Phone is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
+                            <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                Address 1 is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
+                            <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
+                                Pin Code is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="city" formControlName="city" placeholder="City">
+                            <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
+                                City is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="state" formControlName="state" placeholder="State">
+                            <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
+                                State is required.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="default" formControlName="default" >
+                            <label for="default"> Set as Default Address </label>
+                        </div>
+                        <button type="submit" [disabled]="!addressForm.valid">
+                            {{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>     
+    </ng-template>
+      
+</div>

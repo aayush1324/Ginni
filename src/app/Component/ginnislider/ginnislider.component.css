@@ -1,0 +1,52 @@
+.containerbox {
+    position: relative;
+    overflow: hidden;
+    padding: 0%;
+  }
+  
+  .images-wrapper {
+    display: flex;
+    overflow-x: hidden;
+  }
+  
+  .images-wrapper img {
+    flex: 0 0 auto;
+    width: 25%; /* Adjust to fit 5 images on the screen */
+    height: 20rem;
+    border: 2px solid;
+  }
+
+  .images-wrapper img:hover {
+    border: 5px solid blue; /* Add your desired highlighting style */
+
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .left-arrow {
+    left: 10px;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+  
+  /* Add styles for the circular container */
+  .arrow i {
+    background-color: transparent; /* Set the background color of the icon to transparent */
+    border-radius: 60%; /* Make the container circular */
+    padding: 10px; /* Adjust padding as needed */
+    transition: background-color 0.3s; /* Add a transition effect for the background color */
+  }
+  
+  /* Change the color of the icon on hover */
+  .arrow i:hover {
+    background-color: rgb(138, 138, 196); /* Change the background color to blue on hover */
+  }
