@@ -40,6 +40,37 @@
     background-color: rgb(233, 245, 245);
 }
 
+
+@media (max-width: 1080px) {
+    .upperleft h3 {
+        font-size: x-large;
+    }
+    button {
+        font-size: medium;
+    }
+}
+
+
+@media (max-width: 720px) {
+    .upperleft h3 {
+        font-size: larger;
+    }  
+    button {
+        font-size: small;
+    }
+}
+
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+    .upperleft h3 {
+        font-size: large;
+    }
+    button {
+        font-size: x-small;
+    }
+}
+
 .lower {
     width: 100%;
     height: fit-content;

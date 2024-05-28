@@ -1,5 +1,5 @@
 .containerbox {
-    width: 50%;
+    width: 75%;
     height: fit-content;
     padding: auto;
     margin: auto;
@@ -8,7 +8,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
+}
+
+.containerhead {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containericon {
+  font-size: xx-large; 
+  color: rgb(167, 163, 157);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .containerimage {
@@ -53,3 +68,50 @@
     right: 10px;
   }
   
+
+@media (max-width: 1080px) {
+  .containerbox {
+    width: 80%;
+  }
+
+  .containerhead h1 {
+    font-size: x-large;
+  }
+
+  .containericon {
+    font-size: x-large;
+  }
+
+}
+
+
+@media (max-width: 720px) {
+  .containerbox {
+    width: 85%;
+  }
+
+  .containerhead h1 {
+    font-size: larger;
+  }
+
+  .containericon {
+    font-size: larger;
+  }
+    
+}
+
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .containerbox {
+    width: 90%;
+  }
+
+  .containerhead h1 {
+    font-size: large;
+  }
+
+  .containericon {
+    font-size: large;
+  }
+}
