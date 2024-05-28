@@ -1,4 +1,5 @@
-<div class="containerbox">
+<div class="maincontainer">
+  <div class="containerbox">
     <div class="header">
         <h5>Check Product Availability</h5>
         <br>
@@ -15,11 +16,12 @@
           ZipCode must be 6 digits.
         </div>
         <br>
+        
         <button type="button" (click)="checkAvailability()" [disabled]="!zipCodeFormControl.valid">Check Availability</button>
         <br>
         <h5 *ngIf="isAvailable !== undefined" style="text-align: center; color: rgb(39, 1, 252);">
           {{ isAvailable ? 'Delivery at this Pin code is available.' : 'Delivery at this Pin code is not available.' }}
         </h5>
-      </div>
-      
+      </div>     
+</div>
 </div>

@@ -1,3 +1,11 @@
+.maincontainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .containerbox {
     width: 25%;
     height: fit-content;
@@ -6,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid;
+    border: 1px solid wheat;
     border-radius: 10px;
 }
 
@@ -41,10 +49,70 @@
 }
 
 button {
-    width: 50%;
+    width: 100%;
     height: fit-content;
     padding: 2%;
     margin: 0%;
     border-radius: 5px;
     background-color: rgb(231, 170, 90);
+}
+
+
+  /* For devices with a minimum width of 1080px (e.g., desktops) */
+  @media (max-width: 1080px) {
+    .containerbox {
+        width: 40%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .header h5 {
+        font-size: x-large;
+    }
+
+    .header p {
+        font-size: small;
+    }
+}
+
+
+  /* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    .containerbox {
+        width: 60%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .header h5 {
+        font-size: larger;
+    }
+
+    .header p {
+        font-size: smaller;
+    }
+}
+
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .containerbox {
+        width: 80%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .header h5 {
+        font-size: large;
+    }
+
+    .header p {
+        font-size: x-small;
+    }
 }
