@@ -1,21 +1,84 @@
+/* Basic styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.containerbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: fit-content; /* Adjusts the height based on content */
+    height: 10rem;
     z-index: 1000; /* Ensure the header is above other content */
-    /* Add other styling as needed */
+    background-color: #fff; /* Optional: Change background color */
+    border-bottom: 1px solid #000000; /* Optional: Add border for separation */
 }
 
 .main {
-    margin-top: calc(13%);
+    flex: 1;
+    margin-top: 10rem; /* Adjust this value based on the header's height */
+    overflow-y: auto; /* Make the main content scrollable */
+    /* padding: 20px; Optional: Add padding for better content display */
+    background-color: rgb(242, 250, 250);
+    border: 1px solid;
+
 }
 
-.footer {
-    /* Additional styling for the footer */
-    background-color: #f4f4f4; /* Example background color */
-    padding: 0%;
+/* Optional: Styling for the router-outlet to demonstrate scrollable content */
+router-outlet {
+    display: block;
+    height: 100%;
 }
+
+/* Media Queries */
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .header {
+        font-size: 14px; /* Smaller font size for the header */
+        height: 4rem;
+    }
+    .main {
+        /* padding: 10px; Reduce padding for smaller screens */
+        margin-top: 4rem;
+        border: 1px solid;
+
+    }
+}
+
+/* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    .header {
+        font-size: 14px; /* Smaller font size for the header */
+        height: 6rem;
+    }
+    .main {
+        /* padding: 10px; Reduce padding for smaller screens */
+        margin-top: 6rem;
+        border: 1px solid;
+
+    }
+}
+
+/* For devices with a minimum width of 1080px (e.g., desktops) */
+@media (max-width: 1080px) {
+    .header {
+        font-size: 14px; /* Smaller font size for the header */
+        height: 8rem;
+    }
+    .main {
+        margin-top: 8rem;
+        border: 1px solid;
+    }
+}
+
 
 
