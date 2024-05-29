@@ -6,6 +6,12 @@
     padding: 1%;
     margin: 0%;
     /* border: 1px solid; */
+    /* overflow-x: auto; 
+    white-space: nowrap;  */
+}
+
+.containerbox i {
+    font-size: medium;
 }
 
 .shipping, .refund, .nutrition, .payment {
@@ -21,4 +27,84 @@
 .text {
     margin-left: 5%;    
     /* border: 1px solid; */
+}
+
+
+@media (max-width: 1080px) {
+    .containerbox p {
+        font-size: smaller;
+    }
+
+    .containerbox h6 {
+        font-size: small;
+    }
+    
+    .containerbox i {
+        font-size: small;
+    }
+
+}
+
+
+@media (max-width: 720px) {
+    .containerbox p {
+        font-size: x-small;
+    }
+
+    .containerbox h6 {
+        font-size: smaller;
+    }
+    
+    .containerbox i {
+        font-size: smaller;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .containerbox p {
+        font-size: xx-small;
+    }
+
+    .containerbox h6 {
+        font-size: x-small;
+    }
+    
+    .containerbox i {
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 320px) {
+    .containerbox p {
+        display: none;
+    }
+
+    .containerbox h6 {
+        font-size: xx-small;
+    }
+    
+    .containerbox i {
+        font-size: xx-small;
+    }
+}
+
+@media (max-width: 220px) {
+    .containerbox{
+        overflow-x: auto; 
+        white-space: nowrap; 
+    }
+
+    .containerbox p {
+        display: none;
+    }
+
+    .containerbox h6 {
+        font-size: xx-small;
+    }
+    
+    .containerbox i {
+        font-size: xx-small;
+    }
 }
