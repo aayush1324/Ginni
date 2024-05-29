@@ -82,6 +82,8 @@
     margin: 0%;
     /* border: 4px solid; */
     /* background-color: antiquewhite; */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks inside the container */
 }
 
 .almond {
@@ -104,10 +106,9 @@
     /* border: 3px solid; */
 }
 
-.image img{
-    width: 14rem;
-    height: 14rem;
-    /* border: 3px solid; */
+.image img {
+    width: 100%; /* Ensure image fits the container */
+    height: 12rem;
 }
 
 .saving {
@@ -184,22 +185,16 @@
 
 
 @media (max-width: 1080px) {
-    .lower {
-        overflow-x: auto; /* Enable horizontal scrolling */
-        white-space: nowrap; /* Prevent line breaks inside the container */
-    }
-
     .almond {
         width: 100%; /* Take full width on small screens */
     }
 
     .saving h6 {
-        font-size: medium;
+        font-size: small;
     }
 
     .image img {
-        width: 100%; /* Ensure image fits the container */
-        height: 7rem;
+        height: 10rem;
     }
 
     .naming h5 {
@@ -216,22 +211,16 @@
 
 
 @media (max-width: 720px) {
-    .lower {
-        overflow-x: auto; /* Enable horizontal scrolling */
-        white-space: nowrap; /* Prevent line breaks inside the container */
-    }
-
     .almond {
         width: 100%; /* Take full width on small screens */
     }
 
     .saving h6 {
-        font-size: small;
+        font-size: smaller;
     }
 
     .image img {
-        width: 100%; /* Ensure image fits the container */
-        height: 6rem;
+        height: 8rem;
     }
 
     .naming h5 {
@@ -246,22 +235,17 @@
 
 
 @media (max-width: 480px) {
-    .lower {
-        overflow-x: auto; /* Enable horizontal scrolling */
-        white-space: nowrap; /* Prevent line breaks inside the container */
-    }
-
     .almond {
         width: 100%; /* Take full width on small screens */
     }
 
     .saving h6 {
-        font-size: smaller;
+        font-size: x-small;
     }
 
     .image img {
         width: 100%; /* Ensure image fits the container */
-        height: 5rem;
+        height: 6rem;
     }
 
     .naming h5 {
@@ -274,21 +258,15 @@
 }
 
 @media (max-width: 240px) {
-    .lower {
-        overflow-x: auto; /* Enable horizontal scrolling */
-        white-space: nowrap; /* Prevent line breaks inside the container */
-    }
-
     .almond {
         width: 100%; /* Take full width on small screens */
     }
 
     .saving h6 {
-        font-size: x-small;
+        font-size: xx-small;
     }
 
     .image img {
-        width: 100%; /* Ensure image fits the container */
         height: 4rem;
     }
 
@@ -298,5 +276,9 @@
 
     .pricing h5 {
         font-size: x-small;
+    }
+
+    .carting button {
+        padding: 1%;
     }
 }

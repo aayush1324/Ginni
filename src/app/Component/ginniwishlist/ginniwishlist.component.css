@@ -458,14 +458,20 @@
     color: aliceblue;
 }
 
+
+
+
+
+
+
 .empty-cart {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 2rem;
 }
 
 .empty-cart img {
-    width: 30%; /* Adjust the size as needed */
-    height: 25%;
+    width: 50%; /* Adjust the size as needed */
+    height:16rem;
 }
 
 
@@ -477,13 +483,124 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
-    width: 10%;
+    margin-top: 0.5rem;
+    width: 25%;
 }
 
 .empty-cart button:hover {
     background-color: #0056b3; /* Adjust color as needed */
 }
+
+
+
+@media (max-width: 1080px) {
+    .empty-cart img {
+        width: 50%; /* Adjust the size as needed */
+        height: 14rem;
+    }
+    
+    .empty-cart p {
+        font-size: medium;
+    }
+
+    .empty-cart button {
+        padding: 5px 10px;
+        margin-top: 0.5rem;
+        width: 25%;
+        font-size: medium;
+    }
+}
+
+
+@media (max-width: 720px) {
+    .empty-cart img {
+        width: 50%; /* Adjust the size as needed */
+        height: 12rem;
+    }
+    
+    .empty-cart p {
+        font-size: small;
+    }
+
+    .empty-cart button {
+        padding: 7px 14px;
+        margin-top: 0.5rem;
+        width: 35%;
+        font-size: small;
+
+    }
+}
+
+
+@media (max-width: 480px) {
+    .empty-cart img {
+        width: 75%; /* Adjust the size as needed */
+        height: 10rem;
+    }
+    
+    .empty-cart p {
+        font-size: smaller;
+    }
+
+    .empty-cart button {
+        padding: 6px 12px;
+        margin-top: 0.5rem;
+        width: 50%;
+        font-size: smaller;
+    }
+}
+
+@media (max-width: 240px) {
+    .empty-cart img {
+        width: 75%; /* Adjust the size as needed */
+        height: 8rem;
+    }
+    
+    .empty-cart p {
+        font-size: x-small;
+    }
+
+    .empty-cart button {
+        padding: 5px 10px;
+        margin-top: 0.5rem;
+        width: 50%;
+        font-size: x-small;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
