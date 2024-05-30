@@ -56,10 +56,9 @@
     align-items: center;
 }
 
-.payment  {
+.payment {
     width: 100%;
     height: 50%;
-    /* border: 5px solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,9 +67,16 @@
 .payment ul {
     width: 25%;
     height: fit-content;
-    /* border: 5px solid; */
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.payment li {
+    list-style: none; /* Remove default list style */
+    display: flex;
+    align-items: center;
 }
 
 .payment i {
@@ -87,29 +93,32 @@
     /* border: 3px solid; */
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
 
 .footerlower ul {
     list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
 }
 
 .copyright {
-    width: 50%;
+    width: 40%;
     height: fit-content;
     /* border: 1px solid; */
 }
 
 .followuson {
-    width: 50%;
+    width: 40%;
     height: fit-content;
     /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    order: 1; /* Default order for larger screens */
 }
 
 .follow {
@@ -182,29 +191,45 @@
 
 /* For devices with a max-width of 720px */
 @media (max-width: 720px) {
-    .footerupper {
-        flex-direction: column;
-        align-items: center;
+    .footerupper a {
+        font-size: smaller;
+    }
+    
+    .footerupper h4 {
+        font-size: small;
     }
 
-    .footerupper div {
-        width: 100%;
-        text-align: center;
+    .footerupper p {
+        font-size: smaller;
     }
 
-    .payment ul {
-        width: 70%;
+    .shopicon img {
+        width: 7rem;
+        height: 3rem;
     }
 
-    .footerlower {
-        flex-direction: column;
-        align-items: center;
+    .footermiddle i {
+        font-size: smaller;
     }
 
-    .copyright,
-    .followuson {
-        width: 100%;
-        text-align: center;
+    .footermiddle h4 {
+        font-size: smaller;
+    }
+
+    .footerlower p {
+        font-size: smaller;
+    }
+
+    .footerlower a {
+        font-size: smaller;
+    }
+
+    .footerlower i{
+        font-size: smaller;
+    }
+
+    .footerlower h5 {
+        font-size: small;
     }
 }
 
@@ -221,8 +246,13 @@
         margin-bottom: 1rem;
     }
 
+    .address p {
+        font-size: x-small;
+    }
+
     .payment ul {
-        width: 90%;
+        width: 40%;
+        margin-bottom: 1rem;
     }
 
     .footerlower {
@@ -235,5 +265,102 @@
         width: 100%;
         text-align: center;
         margin-bottom: 1rem;
+    }
+    
+    .copyright p {
+        font-size: x-small;
+    }
+
+    .followuson {
+        order: -1; /* Move followuson before copyright */
+    }
+
+    .copyright {
+        order: 1; /* Ensure copyright is after followuson */
+    }
+}
+
+@media (max-width: 180px) {
+    .footerupper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footerupper div {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .footerupper a {
+        font-size: xx-small;
+    }
+    
+    .footerupper h4 {
+        font-size: smaller;
+    }
+
+    .footerupper p {
+        font-size: xx-small;
+    }
+
+    .shopicon img {
+        width: 4rem;
+        height: 2rem;
+    }
+
+    .footermiddle i {
+        font-size: x-small;
+    }
+
+    .footermiddle h4 {
+        font-size: smaller;
+    }
+
+    .footerlower p {
+        font-size: x-small;
+    }
+
+    .footerlower a {
+        font-size: small;
+    }
+
+    .footerlower i{
+        font-size: x-small;
+    }
+
+    .footerlower h5 {
+        font-size: medium;
+    }
+
+
+
+    .payment ul {
+        width: 40%;
+        margin-bottom: 1rem;
+    }
+
+    .footerlower {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .copyright,
+    .followuson {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .copyright p {
+        font-size: x-small;
+    }
+
+    .followuson {
+        order: -1; /* Move followuson before copyright */
+    }
+
+    .copyright {
+        order: 1; /* Ensure copyright is after followuson */
     }
 }
