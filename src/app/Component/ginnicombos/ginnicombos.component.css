@@ -267,6 +267,8 @@ button{
     margin: 0%;
     /* border: 5px solid; */
     align-items: center;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks inside the container */
 }
 
 .dryfruit {
@@ -287,22 +289,21 @@ button{
     width: fit-content;
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 items per row */
-    gap: 30px; /* Adjust the gap between items as needed */
+    gap: 2rem; /* Adjust the gap between items as needed */
     /* border: 1px solid; */
     padding: 1%;
   }
   
 
-.image {
-    width: 13rem;
-    height: 13rem;
-    /* border: 1px solid; */
-}
-
-.image img{
+  .image {
     width: 100%;
     height: fit-content;
     /* border: 3px solid; */
+}
+
+.image img {
+    width: 100%; /* Ensure image fits the container */
+    height: 12rem;
 }
 
 .saving {
@@ -314,6 +315,9 @@ button{
     justify-content: space-between;
 }
 
+.saving i {
+    font-size: x-large;
+}
 #save {
     width: fit-content;
     height: fit-content;
@@ -389,3 +393,198 @@ button{
     background-color: rgb(211, 223, 223);
 }
 
+
+
+@media (max-width: 1080px) {
+    .almond-grid {
+        grid-template-columns: repeat(4, 1fr); /* 3 items per row */
+        gap: 1.5rem; 
+    }
+
+    .left input[type="radio"] {
+        margin-right: 10px; /* Adjust the right margin as needed */
+        transform: scale(1.0); /* Adjust the scale factor as needed */
+    }
+
+    .left h3 {
+        font-size: larger;
+    }
+
+    .left h6 {
+        font-size: small;
+    }
+
+    .left label {
+        font-size: smaller;
+    }
+
+    .right h1 {
+        font-size: x-large;
+    }
+
+    .dryfruit {
+        width: 100%; /* Take full width on small screens */
+    }
+
+    .saving h6 {
+        font-size: small;
+    }
+
+    .saving i {
+        font-size: large;
+    }
+
+    .image img {
+        height: 10rem;
+    }
+
+    .naming h5 {
+        font-size: medium;
+    }
+
+    .pricing h5 {
+        font-size: medium;
+    }
+
+
+}
+
+
+
+@media (max-width: 720px) {
+    .almond-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+        gap: 1rem; 
+    }
+
+    .left {
+        padding: 2% 0%;
+        margin: 0% 2%;
+    }
+
+    .left input[type="radio"] {
+        margin-right: 10px; /* Adjust the right margin as needed */
+        transform: scale(0.5); /* Adjust the scale factor as needed */
+    }
+
+    .left h3 {
+        font-size: large;
+    }
+
+    .left h6 {
+        font-size: smaller;
+    }
+
+    .left label {
+        font-size: x-small;
+    }
+
+    .right h1 {
+        font-size: larger;
+    }
+
+    .dryfruit {
+        width: 100%; /* Take full width on small screens */
+    }
+
+    .saving h6 {
+        font-size: x-small;
+    }
+
+    .saving i {
+        font-size: medium;
+    }
+
+    .image img {
+        height: 8rem;
+    }
+
+    .naming h5 {
+        font-size: smaller;
+    }
+
+    .pricing h5 {
+        font-size: smaller;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+  .containerbox{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .heading {
+    display: none;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .almond-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 1rem; 
+  }
+
+}
+
+@media (max-width: 360px) {
+    .containerbox{
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .left {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+    
+      .heading {
+        display: none;
+      }
+    
+      .right {
+        width: 100%;
+      }
+    
+      .almond-grid {
+        grid-template-columns: repeat(2, 1fr); /* 3 items per row */
+        gap: 1rem; 
+      }
+}
+
+@media (max-width: 240px) {
+    .containerbox{
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .heading {
+        display: block;
+      }
+    
+      .right {
+        width: 100%;
+      }
+    
+      .almond-grid {
+        grid-template-columns: repeat(1, 1fr); /* 3 items per row */
+        gap: 1rem; 
+      }
+}
