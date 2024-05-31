@@ -1,6 +1,5 @@
 <!-- <p>ginnioffer works!</p> -->
 <div class="containerbox">
-
     <div class="offertop">
         <h5 id="offer">Get 8% Discount on Purchase of 899 and Above With Code "SAVER8"</h5>
     </div>
@@ -8,7 +7,7 @@
     <div class="ginninavbar">
         <div class="navbarimage">
             <a class="logo" routerLink="/main/home">
-                <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo" height="150" width="250" alt="GINNI DryFruits">
+                <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
             </a> 
         </div>
         
@@ -23,9 +22,7 @@
                             <i class="fa fa-search"></i>
                         </div>
                     </div>
-                </div>  
-
-                
+                </div>         
                 
                 <div class="navbarupperright"> 
                     <div class="items">
@@ -60,7 +57,9 @@
                     
                     
                     <div class="account">
-                        <p>{{ loggedIn ? 'Hello, ' + userName : 'Login / Signup' }}</p>
+                        <div class="auth">
+                            <p>{{ loggedIn ? 'Hello, ' + userName : 'Login / Signup' }}</p>
+                        </div>
                         <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()">
                             <h6 class="account-title">My Account <i class="fa fa-angle-down" style="font-size: large;"></i></h6>
                             <div class="dropdown-contents" *ngIf="isAccountDropdown">
@@ -73,8 +72,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
+                </div>             
             </div>
 
 
@@ -114,6 +112,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>
