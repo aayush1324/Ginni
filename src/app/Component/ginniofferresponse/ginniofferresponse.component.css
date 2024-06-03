@@ -7,7 +7,9 @@
     display: flex;
     flex-direction: column; 
     position: fixed;
+    display: block;
 }
+
 
 .offertop {
     background-color: rgb(250, 250, 250);
@@ -41,13 +43,6 @@
     border: 1px solid;
 }
 
-.hamburger-menu {
-    display: none;
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
 
 .navbarimage {
     width: auto;
@@ -146,7 +141,7 @@
 
 .fa-search {
     font-size: 2em;
-    color: #d8d0d0;
+    color: blue;
 }
 
 .searchbar input[type="text"]:focus {
@@ -290,12 +285,6 @@
     display: block;
 }
 
-.user-icon {
-    display: none;
-    font-size: 2em;
-    cursor: pointer;
-}
-
 
 .navbarlower {
     background-color: rgb(191, 214, 201);
@@ -372,7 +361,15 @@
     color: rgb(192, 136, 136); /* Change this to the desired color */
 }
 
+@media (min-width: 720px) {
+    .containerbox {
+        display: block;
+    }
 
+    .containermobile {
+        display: none;
+    }
+}
 
 
 
@@ -520,3 +517,283 @@
     }
 } */
 
+
+
+.containermobile {
+    background-color: rgb(229, 199, 250);
+    width:  99.9%;
+    height: 5.9rem;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column; 
+    position: fixed;
+    display: none;
+}
+
+.ginninavbarmobile {
+    background-color: rgb(255, 255, 255);
+    width:  100%;
+    height: inherit;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row; 
+    border: 1px solid;
+}
+
+.navbarlowers {
+    background-color: rgb(253, 255, 252);
+    width:  10%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    position: relative;
+
+}
+
+
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.navbarlowerss {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 70vh; /* Set the height to occupy the entire screen */
+    max-height: 80vh; /* Set maximum height to 80% of viewport height */
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateX(-100%); 
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.navbarlowerss.open {
+    display: flex;
+    transform: translateX(0); 
+}
+
+.navbarlowerss > div {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbarlowerss > div:last-child {
+    border-bottom: none;
+}
+
+.navbarimages {
+    background-color: rgb(254, 255, 255);
+    width:  60%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    border: 2px solid;
+}
+
+
+.navbaruppers {
+    background-color: rgb(212, 183, 102);
+    width: 30%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid;
+}
+
+.user-icon {
+    font-size: 2em;
+    cursor: pointer;
+    color: blue;
+}
+
+.accounts {
+    position: relative;
+    display: inline-block;
+  }
+  
+
+.dropdown-contentss {
+    width: 50%;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    background-color: #fff;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-contentss a {
+    display: block;
+    padding: 1%;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-contentss a:hover {
+    background-color: #f0f0f0;
+}
+/* 
+.my-account:hover .dropdown-contentss {
+    display: block;
+} */
+
+.fa-search {
+    font-size: 2em;
+    color: blue;
+}
+
+.wishlists .fa-heart, .carts .fa-shopping-cart, .tracks .fa-truck {
+    position: relative; /* Ensure the wishlist icon is the reference point */
+    font-size: 2em;
+    color: blue;
+
+}
+
+
+.accountss {
+    background-color: rgb(253, 255, 252);
+    width:  10%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    position: relative;
+
+}
+
+
+.account-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.accountsss {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 70vh; /* Set the height to occupy the entire screen */
+    max-height: 80vh; /* Set maximum height to 80% of viewport height */
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateX(-100%); 
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.accountsss.open {
+    display: flex;
+    transform: translateX(0); 
+}
+
+.accountsss > div {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.accountsss > div:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 720px) {
+    .containerbox {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .user-icon {
+        font-size: 2em;
+    }
+    
+    .fa-search {
+        font-size: 2em;
+    }
+    
+    .wishlists .fa-heart, .carts .fa-shopping-cart, .tracks .fa-truck {
+        font-size: 2em;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .containerbox {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .user-icon {
+        font-size: 1.5em;
+    }
+    
+    .fa-search {
+        font-size: 1.5em;
+    }
+    
+    .wishlists .fa-heart, .carts .fa-shopping-cart, .tracks .fa-truck {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 240px) {
+    .containerbox {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .user-icon {
+        font-size: 1em;
+    }
+    
+    .fa-search {
+        font-size: 1em;
+    }
+    
+    .wishlists .fa-heart, .carts .fa-shopping-cart, .tracks .fa-truck {
+        font-size: 1em;
+    }
+}

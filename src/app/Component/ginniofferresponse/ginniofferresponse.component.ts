@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
@@ -15,8 +15,10 @@ import { ProductService } from '../../Services/product.service';
 export class GinniofferresponseComponent {
 
   isAccountDropdown: boolean = false;
+  isAccountDropdowns: boolean = false;
 
   isMenuOpen: boolean = false;
+  isAccountOpen: boolean = false;
   isSearchBarVisible: boolean = false;
 
   toggleSearchBar() {
@@ -27,6 +29,19 @@ export class GinniofferresponseComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+  toggleAccount() {
+    this.isAccountOpen = !this.isAccountOpen;
+  }
+
+  closeAccount() {
+    this.isAccountOpen = false;
+  }
+
+  
   showaccountDropdown() {
     this.isAccountDropdown = true;
   }
@@ -35,10 +50,24 @@ export class GinniofferresponseComponent {
     this.isAccountDropdown = false;
   }
 
+
   toggleAccountDropdown() {
-    this.isAccountDropdown = !this.isAccountDropdown;
+    console.log("HI");
+    this.isAccountDropdowns = true;
+    console.log("Bye");
   }
   
+
+  handleUserIconClick() {
+    if (this.loggedIn) {
+      this.isAccountDropdowns = !this.isAccountDropdowns;
+      this.cd.detectChanges(); // Ensure the change detection is triggered
+
+      // this.router.navigate(['/main/ginniorder']);
+    } else {
+      this.router.navigate(['/main/ginnisignin']);
+    }
+  }
 
   isDropdownOpen: boolean = false;
   showWishlist: boolean = false;
@@ -65,7 +94,7 @@ export class GinniofferresponseComponent {
   constructor(private elementRef: ElementRef, private router:Router, 
     private auth :AuthService, private userstore : UserstoreService, 
     private cartService : CartService, private wishlistService: WishlistService,
-    private productService : ProductService, private searchService : SearchService) 
+    private productService : ProductService, private searchService : SearchService, private cd: ChangeDetectorRef) 
   { 
     // Subscribe to router events to update selectedLink
     this.router.events.subscribe((event) => {
