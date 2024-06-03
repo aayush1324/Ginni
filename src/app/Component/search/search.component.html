@@ -1,7 +1,4 @@
-<!-- <input type="text" placeholder="Search for DryFruits..." [(ngModel)]="searchTerm" (input)="onSearch()" > -->
-
-
-<div>
+<div class = "containerbox">
     <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products">
     <br>
     <div class="searchResult"  *ngFor="let result of searchResultss">

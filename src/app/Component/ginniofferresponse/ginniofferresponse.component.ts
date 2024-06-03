@@ -14,20 +14,33 @@ import { ProductService } from '../../Services/product.service';
 })
 export class GinniofferresponseComponent {
 
-  isMenuOpen = false;
-  isAccountDropdownOpen = false;
+  isAccountDropdown: boolean = false;
+
+  isMenuOpen: boolean = false;
+  isSearchBarVisible: boolean = false;
+
+  toggleSearchBar() {
+    this.isSearchBarVisible = !this.isSearchBarVisible;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  showaccountDropdown() {
+    this.isAccountDropdown = true;
+  }
+
+  hideaccountDropdown() {
+    this.isAccountDropdown = false;
+  }
+
   toggleAccountDropdown() {
-    this.isAccountDropdownOpen = !this.isAccountDropdownOpen;
+    this.isAccountDropdown = !this.isAccountDropdown;
   }
   
 
   isDropdownOpen: boolean = false;
-  isAccountDropdown: boolean = false;
   showWishlist: boolean = false;
   showCart: boolean = false;
   showOrder: boolean = false;
@@ -166,13 +179,7 @@ export class GinniofferresponseComponent {
       this.isDropdownOpen = false;
   }
 
-  showaccountDropdown() {
-    this.isAccountDropdown = true;
-  }
 
-  hideaccountDropdown() {
-    this.isAccountDropdown = false;
-  }
 
   logout() {
     this.loggedIn = false;
