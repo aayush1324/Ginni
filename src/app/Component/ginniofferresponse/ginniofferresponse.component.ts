@@ -19,6 +19,7 @@ export class GinniofferresponseComponent {
 
   isMenuOpen: boolean = false;
   isAccountOpen: boolean = false;
+  
   isSearchBarVisible: boolean = false;
 
   toggleSearchBar() {
