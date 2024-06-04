@@ -17,9 +17,9 @@
                         <div class="searchbar">
                             <app-search></app-search>
                         </div>
-                        <div class="searchbutton">
+                        <!-- <div class="searchbutton">
                             <i class="fa fa-search"></i>
-                        </div>
+                        </div> -->
                     </div>
                 </div>         
                 
@@ -59,8 +59,8 @@
                             <p>{{ loggedIn ? 'Hello, ' + userName : 'Login / Signup' }}</p>
                         </div>
                         <div class="my-account" >
-                            <h6 class="account-title">My Account <i class="fa fa-angle-down" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()"></i></h6>
-                            <div class="dropdown-contents" *ngIf="isAccountDropdown">
+                            <h6 class="account-title">My Account <i (click)="toggleAccountDropdown()" class="fa" [ngClass]="{'fa-angle-down': !isAccountDropdown, 'fa-angle-up': isAccountDropdown}"></i> </h6>
+                            <div class="dropdown-contents" *ngIf = "isAccountDropdown">
                                 <a *ngIf="loggedIn && isAdmin" routerLink="/main/sellerdashboard">Admin Dashboard</a>
                                 <a *ngIf="loggedIn && (isUser || isAdmin)" routerLink="/main/ginniorder">My Order</a>
                                 <a *ngIf="loggedIn && (isUser || isAdmin)" routerLink="/main/ginniaddress">My Address</a>
@@ -72,7 +72,6 @@
                     </div>    
                 </div>             
             </div>
-
 
             <div class="navbarlower">
                 <div class="home" [ngClass]="{'active': isLinkActive('/main/home')}">
@@ -134,9 +133,9 @@
             <div class="searchbars">
                 <app-search></app-search>
             </div>
-            <div class="searchbuttons">
+            <!-- <div class="searchbuttons">
                 <i class="fa fa-search"></i>
-            </div>
+            </div> -->
         </div>
 
         <div class="ginninavbarmobile">

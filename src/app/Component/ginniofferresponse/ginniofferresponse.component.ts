@@ -15,8 +15,6 @@ import { ProductService } from '../../Services/product.service';
 export class GinniofferresponseComponent {
 
   isAccountDropdown: boolean = false;
-  isAccountDropdowns: boolean = false;
-
   isMenuOpen: boolean = false;
   isAccountOpen: boolean = false;
   
@@ -42,6 +40,13 @@ export class GinniofferresponseComponent {
     this.isAccountOpen = false;
   }
 
+  toggleAccountDropdown(){
+    this.isAccountDropdown = !this.isAccountDropdown;
+  }
+
+  closeAccountDropdown() {
+    this.isAccountDropdown = false;
+  }
   
   showaccountDropdown() {
     this.isAccountDropdown = true;
@@ -52,23 +57,6 @@ export class GinniofferresponseComponent {
   }
 
 
-  toggleAccountDropdown() {
-    console.log("HI");
-    this.isAccountDropdowns = true;
-    console.log("Bye");
-  }
-  
-
-  handleUserIconClick() {
-    if (this.loggedIn) {
-      this.isAccountDropdowns = !this.isAccountDropdowns;
-      this.cd.detectChanges(); // Ensure the change detection is triggered
-
-      // this.router.navigate(['/main/ginniorder']);
-    } else {
-      this.router.navigate(['/main/ginnisignin']);
-    }
-  }
 
   isDropdownOpen: boolean = false;
   showWishlist: boolean = false;

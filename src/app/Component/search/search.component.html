@@ -1,4 +1,4 @@
-<div class = "containerbox">
+<!-- <div class = "containerbox">
     <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products">
     <br>
     <div class="searchResult"  *ngFor="let result of searchResultss">
@@ -15,4 +15,26 @@
         </div>
       </div>
     </div>
+</div> -->
+
+<div class="containerbox">
+  <div class="search-container">
+      <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products" class="search-input">
+      <i class="fa fa-search search-icon"></i>
+  </div>
+  <br>
+  <div class="searchResult" *ngFor="let result of searchResultss">
+      <div id="image">
+          <img [src]="result.imageData" alt="GINNI">
+      </div>
+
+      <div class="imageDetail">
+          <div id="name">
+              <a [routerLink]="['/main/ginnimainproduct', result.productName]"><h5>{{ result.productName }}</h5></a>
+          </div>
+          <div id="price">
+              <h5>Rs {{ result.price }}</h5>
+          </div>
+      </div>
+  </div>
 </div>
