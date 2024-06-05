@@ -14,33 +14,37 @@ body, html {
 .header {
     grid-row: 1;
     width: 100%;
+    height: 10vh;
     z-index: 1000;
-    border: 5px solid;
+    /* border: 5px solid; */
+    position: fixed;
     background-color: blue;
 }
 
 .temp{
     width: 100%;
-
+    height: 100%;
 }
 
 .navbar {
     grid-row: 2;
-    height: fit-content;
+    height: 25vh;
     width: 100%;
     z-index: 1000;
-    border: 5px solid;
-    background-color: rgb(223, 15, 26);
+    /* border: 5px solid; */
      padding: 0%;
     margin: 0%;
+    position: fixed;
+    margin-top: 10vh;
 }
 
 .body {
     grid-row: 3;
-    /* overflow-y: auto; */
     height: fit-content;
-    background-color: rgb(87, 170, 170);
-    border: 3px solid;
+    /* border: 3px solid; */
+    background-color: white;
+    margin-top: 35vh;
+    padding-bottom: 5%;
 }
 
 /* Optional: Styling for the router-outlet to demonstrate scrollable content */
@@ -53,8 +57,7 @@ router-outlet {
     grid-row: 4;
     width: 100%;
     height: fit-content;
-    border: 3px solid;
-    background-color: burlywood;
+    /* border: 3px solid; */
 }
 
 /* For devices with a minimum width of 1080px (e.g., desktops) */

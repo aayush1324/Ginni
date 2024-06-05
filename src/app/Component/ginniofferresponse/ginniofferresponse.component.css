@@ -11,7 +11,7 @@
 .containerlaptop {
     background-color: white;
     width:  100%;
-    height: 90%;
+    height: 100%;
     padding: 0%;
     margin: 0%;
     display: block;
@@ -55,7 +55,7 @@
     height: inherit;
     padding: 0;
     margin: 0;
-    border: 2px solid;
+    /* border: 2px solid; */
 }
 
 .responsive-logo {
@@ -76,12 +76,12 @@
 }
 
 .navbarupper {
-    background-color: white;
+    background-color: rgb(190, 149, 149);
     width:  100%;
     height: 50%;
-    padding: 0%;
-    border: 1px solid;
-    margin: 0%;
+    padding: auto;
+    /* border: 1px solid; */
+    margin: auto;
     display: flex;
     flex-direction: row;
 }
@@ -236,6 +236,9 @@
     height: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: auto;
+    margin: auto;
     /* border: 1px solid; */
     background-color: white;
 }
@@ -252,6 +255,9 @@
     /* border: 1px solid; */
     background-color: white;
     position: relative;
+    align-items: center;
+    padding: auto;
+    margin: auto;
 }
 
 .account-title {
@@ -268,7 +274,7 @@
     position: absolute;
     top: 75%;
     left: 25%;
-    background-color: wheat;
+    background-color: rgb(255, 255, 255);
     z-index: 1;
     justify-content: center;
     align-items: center;
@@ -292,12 +298,12 @@
 
 
 .navbarlower {
-    background-color: rgb(248, 201, 201);
+    background-color: rgb(255, 255, 255);
     width:  100%;
     height: 50%;
     padding: 0% 2%;
-    border: 1px solid;
-    margin: 0%;
+    /* border: 1px solid; */
+    margin:auto;
     display: flex;
     flex-direction: row; 
     text-decoration: none; 
@@ -378,9 +384,6 @@
 
 /* For devices with a minimum width of 1080px (e.g., desktops) */
 @media (max-width: 1080px) {
-    .containerbox {
-        height: 8.9rem;
-    }
 
     #offer {
         font-size: 0.9rem;
@@ -537,27 +540,25 @@
 .containermobile {
     background-color: rgb(255, 255, 255);
     width:  99.9%;
-    height: 7.9rem;
+    height: 100%;
     padding: 0%;
-    margin: 0%;
-    display: flex;
-    flex-direction: column; 
-    position: fixed;
+    margin: 0%;    
     display: none;
-
 }
 
 .navbarmobile {
     background-color: rgb(255, 255, 255);
     width:  100%;
-    height: fit-content;
+    height: 100%;
     padding: 1% 0%;
     margin: 0%;
     display: flex;
     flex-direction: column; 
     /* justify-content: center; */
-    border: 1px solid;
+    /* border: 1px solid; */
 }
+
+
 
 
 .searchboxes {
@@ -568,7 +569,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0% 4%;
+    padding: 1% 4%;
     /* border: 1px solid; */
 }
 
@@ -576,11 +577,12 @@
 .searchbars {
     width: 100% ;
     height: 100%;
-    padding: 0;
-    margin: 0;
+    padding: auto;
+    margin: auto;
     user-select: none;
     background-color: rgb(255, 255, 255);
     /* border: 1px solid; */
+    
 }
 
 
@@ -588,30 +590,13 @@
 .searchbars input[type="text"] {
     width: 100%;
     height: 100%; /* Ensure input takes full height */
-    padding: 5%; /* Adjust padding for better spacing */
+    padding: 2%; /* Adjust padding for better spacing */
     border: 1px solid #ccc;
     user-select: none;
     box-sizing: border-box; /* Ensure padding does not overflow */
 }
 
 
-/* .searchbuttons {
-    cursor: pointer;
-    width: 10%;
-    margin: 0;
-    padding: 1.35%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(0, 0, 0);
-    border: 1px solid;
-}
-
-
-.fa-search {
-    font-size: 2em;
-    color: rgb(255, 255, 255);
-} */
 
 .ginninavbarmobile {
     background-color: rgb(255, 255, 255);
@@ -625,7 +610,7 @@
 }
 
 .navbarmenu {
-    background-color: rgb(253, 255, 252);
+    background-color: rgb(255, 255, 255);
     width:  10%;
     height: 100%;
     padding: 0%;
@@ -822,7 +807,6 @@
 
     .containermobile {
         display: block;
-        height: 7.9rem;
     }
 
     .fa-search {
@@ -861,7 +845,6 @@
 
     .containermobile {
         display: block;
-        height: 6.9rem;
     }
 
     .fa-search {
@@ -898,7 +881,6 @@
 
     .containermobile {
         display: block;
-        height: 5.9rem;
     }
 
     .fa-search {
@@ -937,7 +919,6 @@
 
     .containermobile {
         display: block;
-        height: 4.9rem;
     }
 
     .fa-search {
