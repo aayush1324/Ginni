@@ -1,20 +1,26 @@
+
 .containerbox {
-    background-color: white;
-    width:  99.9%;
-    height: 9.9rem;
+    background-color: rgb(182, 231, 136);
+    width:  100%;
+    height: 100%;
+    display: flex;
     padding: 0%;
     margin: 0%;
-    display: flex;
-    flex-direction: column; 
-    position: fixed;
-    display: block;
 }
 
+.containerlaptop {
+    background-color: white;
+    width:  100%;
+    height: 90%;
+    padding: 0%;
+    margin: 0%;
+    display: block;
+}
 
 .offertop {
     background-color: white;
     width: 100%;
-    height: fit-content;
+    height: 1rem;
     padding: 0;
     margin: 0;
     /* border: 1px solid; */
@@ -35,7 +41,7 @@
 .ginninavbar {
     background-color: white;
     width:  100%;
-    height: inherit;
+    height: 100%;
     padding: 0%;
     margin: 0%;
     display: flex;
@@ -46,14 +52,14 @@
 
 .navbarimage {
     width: auto;
-    height: 100%;
+    height: inherit;
     padding: 0;
     margin: 0;
-    /* border: 2px solid; */
+    border: 2px solid;
 }
 
 .responsive-logo {
-    width: 8em;
+    width: 10em;
     height: 100%;
 }
 
@@ -74,7 +80,7 @@
     width:  100%;
     height: 50%;
     padding: 0%;
-    /* border: 1px solid; */
+    border: 1px solid;
     margin: 0%;
     display: flex;
     flex-direction: row;
@@ -85,8 +91,8 @@
     background-color: white;
     width: 60%;
     height: 100%;
-    padding: 0;
-    margin: 0;
+    padding: auto;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,22 +103,21 @@
     background-color: white;
     width: 75%;
     height: 50%;
-    padding: 0;
+    padding: auto;
     border-radius: 1%;
-    margin: 0;
-    position: relative;
+    margin: auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* Ensure space between elements */
+    justify-content: center;
+    /* border: 1px solid; */
 }
 
 .searchbar {
     background-color: white;
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
+    padding: auto;
+    margin: auto;
     user-select: none;
     /* border: 1px solid; */
 }
@@ -287,11 +292,11 @@
 
 
 .navbarlower {
-    background-color: white;
+    background-color: rgb(248, 201, 201);
     width:  100%;
     height: 50%;
     padding: 0% 2%;
-    /* border: 1px solid; */
+    border: 1px solid;
     margin: 0%;
     display: flex;
     flex-direction: row; 
@@ -362,7 +367,7 @@
 }
 
 @media (min-width: 720px) {
-    .containerbox {
+    .containerlaptop {
         display: block;
     }
 
@@ -545,7 +550,7 @@
 .navbarmobile {
     background-color: rgb(255, 255, 255);
     width:  100%;
-    height: inherit;
+    height: fit-content;
     padding: 1% 0%;
     margin: 0%;
     display: flex;
@@ -811,7 +816,7 @@
 
 
 @media (max-width: 720px) {
-    .containerbox {
+    .containerlaptop {
         display: none;
     }
 
@@ -850,7 +855,7 @@
 
 
 @media (max-width: 480px) {
-    .containerbox {
+    .containerlaptop {
         display: none;
     }
 
@@ -887,7 +892,7 @@
 
 
 @media (max-width: 240px) {
-    .containerbox {
+    .containerlaptop {
         display: none;
     }
 
@@ -926,7 +931,7 @@
 
 
 @media (max-width: 180px) {
-    .containerbox {
+    .containerlaptop {
         display: none;
     }
 

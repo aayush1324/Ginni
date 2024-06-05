@@ -112,6 +112,7 @@ export class GinniofferresponseComponent {
   }
 
 
+  
   updateSearchTerm(newSearchTerm: string) {
     this.searchService.setSearchTerm(newSearchTerm);
   }
