@@ -55,9 +55,9 @@
                             <div class="auth">
                                 <p>{{ loggedIn ? 'Hello, ' + userName : 'Login / Signup' }}</p>
                             </div>
-                            <div class="my-account" >
-                                <h6 class="account-title">My Account <i (click)="toggleAccountDropdown()" class="fa" [ngClass]="{'fa-angle-down': !isAccountDropdown, 'fa-angle-up': isAccountDropdown}"></i> </h6>
-                                <div class="dropdown-contents" *ngIf = "isAccountDropdown">
+                            <div class="my-account" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()">
+                                <h6 class="account-title">My Account <i class="fa fa-angle-down"></i></h6>
+                                <div class="dropdown-contents" *ngIf="isAccountDropdown">
                                     <a *ngIf="loggedIn && isAdmin" routerLink="/main/sellerdashboard">Admin Dashboard</a>
                                     <a *ngIf="loggedIn && (isUser || isAdmin)" routerLink="/main/ginniorder">My Order</a>
                                     <a *ngIf="loggedIn && (isUser || isAdmin)" routerLink="/main/ginniaddress">My Address</a>
