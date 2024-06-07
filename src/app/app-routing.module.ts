@@ -93,7 +93,7 @@ const routes: Routes = [{
       {path: "home", component : HomeComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
-      {path: "ginniotp", component : GinniotpComponent},
+      {path: "ginniotp", component : GinniotpComponent,  canActivate:[authGuard]},
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
       {path: "sellerdashboard", component : SellerdashboardComponent, children : [
         {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},

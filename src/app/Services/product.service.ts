@@ -14,7 +14,11 @@ export class ProductService {
 
 
   getProductsWithImage(UserID: string | null): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`, {headers});
   }
 
   getProductsWithImages(): Observable<any[]> {

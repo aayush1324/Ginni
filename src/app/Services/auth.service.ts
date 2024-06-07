@@ -39,7 +39,10 @@ export class AuthService {
   }
 
   logout(token: string) {
-    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null, {headers});
   }
 
   verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {

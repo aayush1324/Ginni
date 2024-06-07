@@ -20,27 +20,47 @@ export class CartService {
 
 
   addToCarts(userId : string, productId : string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}addToCarts/${userId}/${productId}`, null);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}addToCarts/${userId}/${productId}`, null, {headers});
   }
 
 
   getToCarts(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`, {headers});
   }
 
 
   removeItem(userId : string, itemId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteItem/${userId}/${itemId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteCartItem/${userId}/${itemId}`, {headers});
   }
 
 
   emptyCart(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteAllCartItem/${userId}`, {headers});
   }
 
 
   updateCartItem(item: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}updateCartQuantity`, item);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}updateCartQuantity`, item, {headers});
   }
 
 
