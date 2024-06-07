@@ -58,6 +58,7 @@ router-outlet {
     width: 100%;
     height: fit-content;
     /* border: 3px solid; */
+    background-color: aqua;
 }
 
 /* For devices with a minimum width of 1080px (e.g., desktops) */
