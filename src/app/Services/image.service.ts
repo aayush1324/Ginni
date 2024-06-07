@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -33,8 +33,13 @@ export class ImageService {
     });
     
     formData.append('productId', productId); // Append the product ID to the FormData
+
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
     
-    return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData);
+    return this.http.post<any>(`${this.baseUrl}addMultipleImage`, formData, {headers});
   }
   
   getImagesByProductId(productId: string): Observable<any> {

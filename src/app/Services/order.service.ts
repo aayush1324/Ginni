@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -30,6 +30,10 @@ export class OrderService {
   }
 
   getOrders(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}getOrders`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}getOrders`, {headers});
   }
 }

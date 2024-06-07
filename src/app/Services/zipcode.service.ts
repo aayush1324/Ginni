@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,11 +14,19 @@ export class ZipcodeService {
 
 
   addZipcode(zipCode: string) {
-    return this.http.post<any>(`${this.baseUrl}addZipCode`, zipCode)
+      const token = sessionStorage.getItem("token");  
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    return this.http.post<any>(`${this.baseUrl}addZipCode`, zipCode, {headers})
   }
 
   getAllZipCode() : Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}getAllZipCode`)
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}getAllZipCode`, {headers})
   }
 
  
@@ -27,11 +35,18 @@ export class ZipcodeService {
   }
 
   deleteZipCode(zipcodeId : string){
-    return this.http.delete<any>(`${this.baseUrl}deleteZipCode/${zipcodeId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteZipCode/${zipcodeId}`, {headers});
   }
 
   editZipCode(zipcodeId: string, updatedZipCode: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}editZipCode/${zipcodeId}`, updatedZipCode);
-
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}editZipCode/${zipcodeId}`, updatedZipCode, {headers});
   }
 }
