@@ -21,9 +21,23 @@
                 <li><a routerLink="/main/ginnishippingpolicy">Shipping Policy</a></li>
                 <li><a routerLink="/main/ginnireturnpolicy">Return Policy</a></li>
                 <!-- <li><a routerLink="/refund-policy">Refund Policy</a></li> -->
-              </ul>
-              
+            </ul>        
         </div>
+
+        <div class="mobiletermsandpolicy">
+            <div class="mobileTnP" (click)="toggleDropdownTnP()">
+                <h5>Terms & Policy</h5>
+                <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenTnP, 'fa-angle-up': isDropdownOpenTnP}"></i>
+            </div>
+            <ul class="dropdown-term" #menu *ngIf="isDropdownOpenTnP">
+                <li><a routerLink="/main/ginnitermservice">Terms and Conditions</a></li>
+                <li><a routerLink="/main/ginniprivacypolicy">Privacy Policy</a></li>
+                <li><a routerLink="/main/ginnishippingpolicy">Shipping Policy</a></li>
+                <li><a routerLink="/main/ginnireturnpolicy">Return Policy</a></li>
+                <!-- <li><a routerLink="/refund-policy">Refund Policy</a></li> -->
+            </ul>            
+        </div>
+
 
         <div class="information">
             <h4>Information</h4>
@@ -35,9 +49,38 @@
             </ul>
         </div>
 
+        <div class="mobileinformation">
+            <div class="mobileInf" (click)="toggleDropdownInf()">
+                <h5>Information</h5>
+                <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenInf, 'fa-angle-up': isDropdownOpenInf}"></i>
+            </div>
+            <ul *ngIf="isDropdownOpenInf" class="dropdown-term">
+                <li><a routerLink="/main/ginniaboutus">About Us</a></li>
+                <li><a routerLink="/main/ginnicontactus">Contact Us</a></li>
+                <!-- <li><a routerLink="/main/ginniaboutus">Bulk Orders</a></li> -->
+                <!-- <li><a routerLink="/main/ginniaboutus">Contact Information</a></li> -->
+            </ul>
+        </div>
+
+
+
         <div class="allproducts">
-            <h4>All Products</h4>
+            <h4>Products</h4>
             <ul>
+                <li><a routerLink="/main/ginnidryfruit">Dry Fruits</a></li>
+                <!-- <li><a routerLink="/main/ginnidryfruit">Seeds</a></li> -->
+                <li><a routerLink="/main/ginnicombos">Combos</a></li>
+                <li><a routerLink="/main/ginnigiftings">Giftings</a></li>
+                <li><a routerLink="/main/ginnibestsellers">BestSellers</a></li>
+            </ul>
+        </div>
+
+        <div class="mobileproducts">
+            <div class="mobileProd" (click)="toggleDropdownProduct()">
+                <h5>Products</h5>
+                <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenProduct, 'fa-angle-up': isDropdownOpenProduct}"></i>
+            </div>
+            <ul *ngIf="isDropdownOpenProduct" class="dropdown-term">
                 <li><a routerLink="/main/ginnidryfruit">Dry Fruits</a></li>
                 <!-- <li><a routerLink="/main/ginnidryfruit">Seeds</a></li> -->
                 <li><a routerLink="/main/ginnicombos">Combos</a></li>

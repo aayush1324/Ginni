@@ -58,7 +58,7 @@ const routes: Routes = [{
     path:"main" ,component : MainComponent, children: [
       {path: "ginniaboutus" , component : GinniaboutusComponent},
       {path: "ginniallproducts" , component : GinniallproductsComponent},
-      {path: "ginnicart" , component : GinnicartComponent,  canActivate:[authGuard]},
+      {path: "ginnicart" , component : GinnicartComponent},
       {path: "ginnicontactus" , component : GinnicontactusComponent},
       {path: "ginnicustomerreview" , component : GinnicustomerreviewComponent},
       {path: "ginnifaq", component : GinnifaqComponent},
@@ -76,7 +76,7 @@ const routes: Routes = [{
       {path: "ginnitextandimage", component : GinnitextandimageComponent},
       {path: "ginniupperfooter", component : GinniupperfooterComponent},
       {path: "ginnitrack" , component : GinnitrackComponent},
-      {path: "ginniwishlist" , component : GinniwishlistComponent,  canActivate:[authGuard]},
+      {path: "ginniwishlist" , component : GinniwishlistComponent},
       {path: "ginniprofile" , component : GinniprofileComponent,  canActivate:[authGuard]},
       {path: "ginniorder", component : GinniorderComponent,  canActivate:[authGuard]},
       {path: "ginnidetailorder/:orderId", component : GinnidetailorderComponent,  canActivate:[authGuard]},

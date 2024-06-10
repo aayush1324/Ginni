@@ -17,6 +17,11 @@
     justify-content: space-between;
 }
 
+
+.mobiletermsandpolicy, .mobileinformation, .mobileproducts {
+    display: none;
+}
+
 .footerupper a {
     text-decoration: none; /* Remove underline */
 }
@@ -187,8 +192,6 @@
     }
 }
 
-
-
 /* For devices with a max-width of 720px */
 @media (max-width: 720px) {
     .footerupper a {
@@ -278,6 +281,65 @@
     .copyright {
         order: 1; /* Ensure copyright is after followuson */
     }
+
+
+    .termsandpolicy, .information, .allproducts {
+        display: none;
+    }
+    
+    .mobiletermsandpolicy, .mobileinformation, .mobileproducts {
+        display: block;
+        /* background-color: rgb(233, 233, 233); */
+    }
+
+    .mobileTnP, .mobileInf, .mobileProd {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /* align-items: center; */
+        cursor: pointer;
+        padding: 0% 3%;
+    }
+       
+    .mobileTnP i, .mobileInf i, .mobileInf i {
+        font-size: 16px;
+    }
+    
+    .dropdown-term {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /* border: 1px solid #000000; */
+        border-radius: 5px;
+        /* background-color: rgb(233, 233, 233); */
+        position: relative; 
+        width: 100%; 
+        align-items: start;
+        overflow: hidden;
+        max-height: fit-content;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    .dropdown-term li {
+        display: flex;
+        justify-content: start;
+        padding: 1em;
+        /* border-bottom: 1px solid #ccc; */
+    }
+    
+    .dropdown-term li:last-child {
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .dropdown-term li a {
+        text-decoration: none;
+        color: rgb(5, 5, 5);
+    }
+    
+    .dropdown-term li a:hover {
+        text-decoration: underline;
+    }
+    
 }
 
 @media (max-width: 180px) {
