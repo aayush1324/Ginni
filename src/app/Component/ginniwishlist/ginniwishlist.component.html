@@ -3,7 +3,7 @@
      <!-- Check if wishlist has items -->
     <ng-container *ngIf="products.length > 0; else emptyWishlist">
         <div class="header">
-            <h2>My Wishlist</h2>
+            <h1>My Wishlist</h1>
             <button (click)="removeAllItem()">Empty Wishlist</button>
         </div>
         
@@ -24,7 +24,7 @@
                 <div class="middleleftmain" *ngFor="let item of products; let i = index">
                     <div class="middleleftmainproduct">
                         <div class="middleleftmainproductimages">
-                            <img [src]="item.imageData" alt="" style="height: 5rem; width: 5rem;">
+                            <img [src]="item.imageData" alt="">
                         </div>
 
                         <div class="middleleftmainproductnaming">
@@ -42,9 +42,9 @@
                     <div class="middleleftmaincombine">
                         <div class="middleleftmainquantity">
                             <div class="middleleftmainquantityincrement">
-                                <h1 (click)="decrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>-</b></h1>
-                                <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.itemQuantity}}</h6>
-                                <h1 (click)="incrementQuantity(item)" style="border: 1px solid; font-size: larger; cursor: pointer; padding: 5% 10%; border-color: rgb(184, 181, 178);"><b>+</b></h1>
+                                <h1 (click)="decrementQuantity(item)" ><b>-</b></h1>
+                                <h6 > {{item.itemQuantity}}</h6>
+                                <h1 (click)="incrementQuantity(item)" ><b>+</b></h1>
                             </div>
     
                             <div class="middleleftmainquantityremove">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="middleleftmaintotal">
-                            <h3>Rs {{item.itemTotalPrice}}</h3>
+                            <h6>Rs {{item.itemTotalPrice}}</h6>
                         </div>
 
                         <div class="middleleftmainaction">

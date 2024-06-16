@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,7 +14,11 @@ export class ProductService {
 
 
   getProductsWithImage(UserID: string | null): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}getProductsWithImage/${UserID}`, {headers});
   }
 
   getProductsWithImages(): Observable<any[]> {
@@ -23,17 +27,29 @@ export class ProductService {
 
 
   addProducts(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}addProductsWithImages`, formData);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}addProductsWithImages`, formData, {headers});
   }
 
 
   editProducts(productId: string, updatedProduct: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}editProduct/${productId}`, updatedProduct);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}editProduct/${productId}`, updatedProduct, {headers});
   }
 
 
   deleteProducts(productId: string) {
-    return this.http.delete<any>(`${this.baseUrl}deleteProduct/${productId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteProduct/${productId}`, {headers});
   }
 
 

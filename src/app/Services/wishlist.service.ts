@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -21,23 +21,43 @@ export class WishlistService {
 
 
   addToWishlists(userId : string, productId : string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}addWishlist/${userId}/${productId}`, null);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}addWishlistItem/${userId}/${productId}`, null, {headers});
   }
 
   getToWishlists(userId: string): Observable<any>{
-    return this.http.get<any>(`${this.baseUrl}getWishlists/${userId}`); 
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}getWishlistItem/${userId}`, {headers}); 
   }
 
   removeItems(userId: string, productId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteItem/${userId}/${productId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteWishlistItem/${userId}/${productId}`, {headers});
   }
 
   emptyWishlist(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}deleteAllItem/${userId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteAllWishlistItem/${userId}`, {headers});
   }
 
   updateWishlistItem(item: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity`, item);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}updateWishlistQuantity`, item, {headers});
   }
 
 

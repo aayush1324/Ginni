@@ -3,12 +3,13 @@
     height: fit-content;
     padding: 0%;
     margin: 0%;
-    margin: 5% 0%;
+    margin: 0%;
     /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .heading {
@@ -21,10 +22,36 @@
 }
 
 .paragraph {
-    width: 50%;
+    width: 60%;
     height: fit-content;
     padding: 0%;
     margin: 0%;
     display: flex;
     text-align: justify;
 }
+
+
+
+  /* For devices with a minimum width of 1080px (e.g., desktops) */
+@media (max-width: 1080px) {
+    .paragraph {
+        width: 70%;
+    }
+}
+
+
+  /* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    .paragraph {
+        width: 80%;
+    }
+}
+
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .paragraph {
+        width: 90%;
+    }
+}
+

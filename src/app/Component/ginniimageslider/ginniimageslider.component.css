@@ -1,19 +1,18 @@
+/* General Styles */
 .containerbox {
-    position: relative; /* Ensure the container is positioned relatively */
+    position: relative;
     width: 100%;
     height: fit-content;
     max-height: 50%;
-    overflow: hidden; /* Hide overflow to remove white gap */
-    white-space: nowrap;
-
+    overflow: hidden;
 }
 
 @keyframes slideIn {
     0% {
-      transform: translateX(100%);
+        transform: translateX(100%);
     }
     100% {
-      transform: translateX(0%);
+        transform: translateX(0%);
     }
 }
 
@@ -26,28 +25,26 @@
 
 .slider img {
     width: 100%;
-    height: fit-content;
-    max-height: 25rem;
-    animation: slideIn 0.5s forwards; /* Apply animation to each image */
+    height: auto;
+    animation: slideIn 0.5s forwards;
 }
 
-
+/* Navigation dots */
 .dotter {
-    position: absolute; /* Position the navigation dots relative to the container */
-    bottom: 10px; /* Adjust the position as needed */
-    left: 50%; /* Center horizontally */
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
     transform: translateX(-50%);
 }
 
 .dot {
     cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 5px;
+    height: 0.8rem;
+    width: 0.8rem;
+    margin: 0 0.5rem;
     background-color: #ffffff;
-    border: 2px solid;
+    border: 2px solid white;
     border-radius: 50%;
-    border-color: white;
     display: inline-block;
     transition: background-color 0.5s ease;
 }
@@ -57,4 +54,43 @@
 }
 
 
-  
+@media (max-width: 1080px) {
+    .containerbox {
+        height: fit-content;
+        max-height: 25rem;
+    }
+
+    .slider img {
+        height: 25rem;
+    }
+    
+
+}
+
+
+@media (max-width: 720px) {
+    .containerbox {
+        height: fit-content;
+        max-height: 27.5rem;
+    }
+
+    .slider img {
+        height: 27.5rem;
+    }
+    
+}
+
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+    .containerbox {
+        height: fit-content;
+        max-height: 30rem;
+    }
+
+    .slider img {
+        height: 30rem;
+    }
+
+}
+

@@ -76,6 +76,11 @@
             },
             "development": {
               "buildTarget": "Ginni:build:development"
+            },
+            "options": {
+              "liveReload": true,
+              "poll": 1000,
+              "publicHost": "localhost:4200"
             }
           },
           "defaultConfiguration": "development"

@@ -29,3 +29,66 @@
     width: 100%;
     height: 100%;
 } 
+
+
+@media (max-width: 1080px) {
+
+    .containerbox {
+        width: 100%;
+    }
+    
+    .text {
+        width: 50%;
+    }
+    
+    .image {
+        width: 50%;
+    }
+}
+
+
+@media (max-width: 720px) {
+    .containerbox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .text {
+        width: 100%;
+    }
+    
+    .image {
+        width: 100%;
+    }
+    
+    .image img{
+        width: 100%;
+        height: 20rem;
+    } 
+    
+}
+
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+    .containerbox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .text {
+        width: 100%;
+    }
+    
+    .image {
+        width: 100%;
+    }
+    
+    .image img{
+        width: 100%;
+        height: 25rem;
+    } 
+
+}

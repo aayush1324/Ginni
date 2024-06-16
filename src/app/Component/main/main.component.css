@@ -1,21 +1,90 @@
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: fit-content; /* Adjusts the height based on content */
-    z-index: 1000; /* Ensure the header is above other content */
-    /* Add other styling as needed */
+/* Basic styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.main {
-    margin-top: calc(13%);
+.containerbox {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+}
+
+.header {
+    grid-row: 1;
+    width: 100%;
+    height: 10vh;
+    z-index: 1000;
+    /* border: 5px solid; */
+    position: fixed;
+    background-color: blue;
+}
+
+.temp{
+    width: 100%;
+    height: 100%;
+}
+
+.navbar {
+    grid-row: 2;
+    height: 25vh;
+    width: 100%;
+    z-index: 1000;
+    /* border: 5px solid; */
+     padding: 0%;
+    margin: 0%;
+    position: fixed;
+    margin-top: 10vh;
+}
+
+.body {
+    grid-row: 3;
+    height: fit-content;
+    /* border: 3px solid; */
+    background-color: white;
+    margin-top: 35vh;
+    padding-bottom: 5%;
+}
+
+/* Optional: Styling for the router-outlet to demonstrate scrollable content */
+router-outlet {
+    display: block;
+    height: 100%;
 }
 
 .footer {
-    /* Additional styling for the footer */
-    background-color: #f4f4f4; /* Example background color */
-    padding: 0%;
+    grid-row: 4;
+    width: 100%;
+    height: fit-content;
+    /* border: 3px solid; */
+    background-color: aqua;
 }
 
+/* For devices with a minimum width of 1080px (e.g., desktops) */
+@media (max-width: 1080px) {
+    .header {
+        font-size: 14px; /* Smaller font size for the header */
+    }
+}
 
+/* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    .header {
+        font-size: 14px;
+    }
+}
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .header {
+        font-size: 14px;
+    }
+}
+
+/* For devices with a maximum width of 240px (e.g., mobile phones) */
+@media (max-width: 240px) {
+    .header {
+        font-size: 10px;
+    }
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -39,7 +39,10 @@ export class AuthService {
   }
 
   logout(token: string) {
-    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null, {headers});
   }
 
   verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {
@@ -87,19 +90,35 @@ export class AuthService {
   }
 
   addCustomers(customer : any){
-    return this.http.post<any>(`${this.baseUrl}addCustomer`, customer);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}addCustomer`, customer, {headers});
   }
 
   getCustomers(){
-    return this.http.get<any[]>(`${this.baseUrl}getCustomer`); 
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}getCustomer`, {headers}); 
   }
 
   editCustomers(customerId: string, updatedCustomer: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}editCustomer/${customerId}`, updatedCustomer);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}editCustomer/${customerId}`, updatedCustomer, {headers});
   }
 
   deleteCustomers(customerId: string) {
-    return this.http.delete<any>(`${this.baseUrl}deleteCustomer/${customerId}`);
+    const token = sessionStorage.getItem("token");  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}deleteCustomer/${customerId}`, {headers});
   }
 
 }

@@ -23,7 +23,7 @@
                 <div class="middleleftmain" *ngFor="let item of products; let i = index">
                     <div class="middleleftmainproduct">
                         <div class="middleleftmainproductimages">
-                            <img [src]= "item.imageData" alt="" style="height: 5rem; width: 5rem;">
+                            <img [src]= "item.imageData" alt="" >
                         </div>
     
                         <div class="middleleftmainproductnaming">
@@ -41,9 +41,9 @@
                     <div class="middleleftmaincombine">
                         <div class="middleleftmainquantity">
                             <div class="middleleftmainquantityincrement">
-                                <h1 (click)="decrementQuantity(item)" style="border: 1px solid; font-size: larger; padding: 5% 10%; cursor: pointer; border-color: rgb(184, 181, 178);"><b>-</b></h1>
-                                <h6 style="border: 1px solid; font-size: larger; padding: 5% 10%; border-color: rgb(184, 181, 178);"> {{item.itemQuantity}}</h6>
-                                <h1 (click)="incrementQuantity(item)" style="border: 1px solid; font-size: larger; padding: 5% 10%; cursor: pointer; border-color: rgb(184, 181, 178);"><b>+</b></h1>
+                                <h1 (click)="decrementQuantity(item)" ><b>-</b></h1>
+                                <h6> {{item.itemQuantity}} </h6>
+                                <h1 (click)="incrementQuantity(item)" ><b>+</b></h1>
                             </div>
     
                             <div class="middleleftmainquantityremove">

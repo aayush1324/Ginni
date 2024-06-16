@@ -45,3 +45,53 @@
     margin-right: 10px; /* Add some spacing between h6 and p */
     color: rgb(94, 94, 240);
 }
+
+
+
+
+  /* For devices with a minimum width of 1080px (e.g., desktops) */
+@media (max-width: 1080px) {
+    .paragraph {
+        width: 60%;
+    }
+
+    .paragraph h6  {
+        font-size: small;
+    }
+    
+    .paragraph p  {
+        font-size: smaller;
+    }
+}
+
+
+  /* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    .paragraph {
+        width: 70%;
+    }
+
+    .paragraph h6  {
+        font-size: smaller;
+    }
+    
+    .paragraph p  {
+        font-size: x-small;
+    }
+}
+
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .paragraph {
+        width: 80%;
+    }
+
+    .paragraph h6  {
+        font-size: x-small;
+    }
+    
+    .paragraph p  {
+        font-size: xx-small;
+    }
+}

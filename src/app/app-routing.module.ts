@@ -51,11 +51,12 @@ import { SellerzipcodelistComponent } from './Component/sellerzipcodelist/seller
 import { CustomPreloadingService } from './Services/custom-preloading.service';
 import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
 import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnireviewslider.component';
+import { GinninotfoundComponent } from './Component/ginninotfound/ginninotfound.component';
 
 
 const routes: Routes = [{
     path:"main" ,component : MainComponent, children: [
-      {path: "ginniaboutus" ,data : {preload :true}, component : GinniaboutusComponent},
+      {path: "ginniaboutus" , component : GinniaboutusComponent},
       {path: "ginniallproducts" , component : GinniallproductsComponent},
       {path: "ginnicart" , component : GinnicartComponent},
       {path: "ginnicontactus" , component : GinnicontactusComponent},
@@ -76,13 +77,13 @@ const routes: Routes = [{
       {path: "ginniupperfooter", component : GinniupperfooterComponent},
       {path: "ginnitrack" , component : GinnitrackComponent},
       {path: "ginniwishlist" , component : GinniwishlistComponent},
-      {path: "ginniprofile" , component : GinniprofileComponent},
-      {path: "ginniorder", component : GinniorderComponent},
-      {path: "ginnidetailorder/:orderId", component : GinnidetailorderComponent},
+      {path: "ginniprofile" , component : GinniprofileComponent,  canActivate:[authGuard]},
+      {path: "ginniorder", component : GinniorderComponent,  canActivate:[authGuard]},
+      {path: "ginnidetailorder/:orderId", component : GinnidetailorderComponent,  canActivate:[authGuard]},
       {path: "ginnigiftings", component : GinnigiftingsComponent},
       {path: "ginnicombos",  component : GinnicombosComponent},
       {path: "ginnibestsellers", component : GinnibestsellersComponent},
-      {path: "ginniaddress", component : GinniaddressComponent},
+      {path: "ginniaddress", component : GinniaddressComponent,  canActivate:[authGuard]},
       {path: "ginnireviewslider", component : GinnireviewsliderComponent},
       {path: "ginnidryfruit" , component : GinnidryfruitComponent},
       {path: "ginnidryfruitalmond", component : GinnidryfruitalmondComponent},
@@ -91,17 +92,18 @@ const routes: Routes = [{
       {path: "ginnidryfruitraisin", component : GinnidryfruitraisinComponent},
       {path: "ginnidryfruitwalnut", component : GinnidryfruitwalnutComponent},
       {path: "home", component : HomeComponent},
+      {path: "ginninotfound", component : GinninotfoundComponent},
       {path: "ginnisignin" , component : GinnisigninComponent},
       {path: "ginnisignup", component : GinnisignupComponent},
-      {path: "ginniotp", component : GinniotpComponent},
+      {path: "ginniotp", component : GinniotpComponent,  canActivate:[authGuard]},
       {path: "ginniresetpassword", component : GinniresetpasswordComponent},
       {path: "sellerdashboard", component : SellerdashboardComponent, children : [
         {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
-        {path: "sellercustomerlist", component : SellercustomerlistComponent},
-        {path: "sellerorderlist", component : SellerorderlistComponent},
-        {path: "sellerproductlist", component : SellerproductlistComponent},
-        {path: "sellerzipcodelist", component : SellerzipcodelistComponent},
-        { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' } // Default child route
+        {path: "sellercustomerlist", component : SellercustomerlistComponent, canActivate:[authGuard]},
+        {path: "sellerorderlist", component : SellerorderlistComponent, canActivate:[authGuard]},
+        {path: "sellerproductlist", component : SellerproductlistComponent, canActivate:[authGuard]},
+        {path: "sellerzipcodelist", component : SellerzipcodelistComponent, canActivate:[authGuard]},
+        { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' } 
         ]
       }, 
       {path: "search", component : SearchComponent},     

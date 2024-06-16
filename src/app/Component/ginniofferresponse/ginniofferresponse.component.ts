@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
@@ -14,20 +14,51 @@ import { ProductService } from '../../Services/product.service';
 })
 export class GinniofferresponseComponent {
 
-  isMenuOpen = false;
-  isAccountDropdownOpen = false;
+  isAccountDropdown: boolean = false;
+  isMenuOpen: boolean = false;
+  isAccountOpen: boolean = false;
+  
+  isSearchBarVisible: boolean = false;
+
+  toggleSearchBar() {
+    this.isSearchBarVisible = !this.isSearchBarVisible;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  toggleAccountDropdown() {
-    this.isAccountDropdownOpen = !this.isAccountDropdownOpen;
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+  toggleAccount() {
+    this.isAccountOpen = !this.isAccountOpen;
+  }
+
+  closeAccount() {
+    this.isAccountOpen = false;
+  }
+
+  toggleAccountDropdown(){
+    this.isAccountDropdown = !this.isAccountDropdown;
+  }
+
+  closeAccountDropdown() {
+    this.isAccountDropdown = false;
   }
   
+  showaccountDropdown() {
+    this.isAccountDropdown = true;
+  }
+
+  hideaccountDropdown() {
+    this.isAccountDropdown = false;
+  }
+
+
 
   isDropdownOpen: boolean = false;
-  isAccountDropdown: boolean = false;
   showWishlist: boolean = false;
   showCart: boolean = false;
   showOrder: boolean = false;
@@ -52,7 +83,7 @@ export class GinniofferresponseComponent {
   constructor(private elementRef: ElementRef, private router:Router, 
     private auth :AuthService, private userstore : UserstoreService, 
     private cartService : CartService, private wishlistService: WishlistService,
-    private productService : ProductService, private searchService : SearchService) 
+    private productService : ProductService, private searchService : SearchService, private cd: ChangeDetectorRef) 
   { 
     // Subscribe to router events to update selectedLink
     this.router.events.subscribe((event) => {
@@ -81,6 +112,7 @@ export class GinniofferresponseComponent {
   }
 
 
+  
   updateSearchTerm(newSearchTerm: string) {
     this.searchService.setSearchTerm(newSearchTerm);
   }
@@ -166,13 +198,7 @@ export class GinniofferresponseComponent {
       this.isDropdownOpen = false;
   }
 
-  showaccountDropdown() {
-    this.isAccountDropdown = true;
-  }
 
-  hideaccountDropdown() {
-    this.isAccountDropdown = false;
-  }
 
   logout() {
     this.loggedIn = false;

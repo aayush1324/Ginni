@@ -1,225 +1,950 @@
-/* General Styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Light grey background for a clean look */
-    color: #333; /* Dark grey text for readability */
-}
 
 .containerbox {
-    background-color: #fff; /* White background for content boxes */
-    width: 100%;
-    padding: 0;
+    background-color: rgb(182, 231, 136);
+    width:  100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    padding: 0%;
+    margin: 0%;
+}
+
+.containerlaptop {
+    background-color: white;
+    width:  100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: block;
 }
 
 .offertop {
-    background-color: #e0f7e0; /* Light green for offers */
-    padding: 10px;
-    text-align: center;
-    color: #2d6a2d; /* Dark green text for emphasis */
+    background-color: white;
+    width: 100%;
+    height: 1rem;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid; */
 }
+
+#offer {
+    background-color: rgb(236, 234, 153);
+    width: 100%;
+    padding: 1%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 1rem; 
+}
+
 
 .ginninavbar {
-    background-color: #fff;
-    padding: 10px;
+    background-color: white;
+    width:  100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    border-bottom: 1px solid #ddd; /* Light border for separation */
+    flex-direction: row; 
+    /* border: 1px solid; */
 }
 
-.navbarimage img {
-    max-width: 100%;
-    height: auto;
+
+.navbarimage {
+    width: auto;
+    height: inherit;
+    padding: 0;
+    margin: 0;
+    /* border: 2px solid; */
 }
+
+.responsive-logo {
+    width: 10em;
+    height: 100%;
+}
+
 
 .navbardata {
-    background-color: #fff;
-    width: 100%;
-    padding: 10px 0;
+    background-color: white;
+    width:  100%;
+    height: 100%;                                     
+    padding: 0%;
+    /* border: 1px solid; */
+    margin: 0%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
 }
 
 .navbarupper {
-    background-color: #fff;
-    padding: 10px;
+    background-color: rgb(190, 149, 149);
+    width:  100%;
+    height: 50%;
+    padding: auto;
+    /* border: 1px solid; */
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.search-container {
+    background-color: white;
+    width: 60%;
+    height: 100%;
+    padding: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+}
+
+.searchbox {
+    background-color: white;
+    width: 75%;
+    height: 50%;
+    padding: auto;
+    border-radius: 1%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid; */
+}
+
+.searchbar {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: auto;
+    margin: auto;
+    user-select: none;
+    /* border: 1px solid; */
+}
+
+.searchbar input[type="text"] {
+    width: 100%;
+    height: 100%; /* Ensure input takes full height */
+    padding: 5%; /* Adjust padding for better spacing */
+    border: 1px solid #ccc;
+    user-select: none;
+    box-sizing: border-box; /* Ensure padding does not overflow */
+}
+
+/* .searchbutton {
+    width: 10%;
+    height: 100%;
+    padding: 1%;
+    margin: 0;
+    background: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+} */
+
+/* .fa-search {
+    font-size: 2em;
+    color: rgb(253, 253, 253);
+} */
+
+.searchbar input[type="text"]:focus {
+    outline: none;
+    border-color: #aaa; /* Better color contrast on focus */
+}
+
+.searchbutton button:focus,
+.fa-search:focus {
+    outline: none;
+}
+
+.searchbutton {
+    user-select: none;
+}
+
+
+
+
+.navbarupperright {
+    width: 40%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-.navbarupperright {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    /* border: 1px solid; */
 }
 
 .items {
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Ensure items are in a row */
     align-items: center;
     justify-content: space-around;
+    /* border: 1px solid; */
 }
 
+.icontext {
+    position: relative;
+    display: inline-block;
+}
+
+.cart a, .wishlist a, .track a {
+    text-decoration: none;
+}
+
+.wishlist-count, .cart-count {
+    position: absolute;
+    top: -0.5em;  /* Adjust this value to position the count as needed */
+    right: -0.5em; /* Adjust this value to position the count as needed */
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 1.25em; /* Adjusted to be relative */
+    height: 1.25em; /* Adjusted to be relative */
+    font-size: 0.75em; /* Ensure the font size is relative */
+    text-align: center;
+    line-height: 1.25em; /* Ensure the text is centered vertically */
+}
+
+.wishlist .fa-heart, .cart .fa-shopping-cart, .track .fa-truck {
+    position: relative; /* Ensure the wishlist icon is the reference point */
+    font-size: 2em;
+}
+
+
+
 .account {
+    width: 50%;
+    height: 100%;
+    padding: auto;
+    margin: 0%;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    /* border: 1px solid; */
+}
+
+.auth {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    margin: auto;
+    /* border: 1px solid; */
+    background-color: white;
+}
+
+.auth p {
+    color: blue;
 }
 
 .my-account {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid; */
+    background-color: white;
     position: relative;
+    align-items: center;
+    padding: auto;
+    margin: auto;
     cursor: pointer;
 }
 
+.account-title {
+    display: inline-block; 
+}
+
+.fa-angle-down {
+    font-size: large;
+}
+
 .dropdown-contents {
+    width: 50%;
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    min-width: 150px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 75%;
+    left: 25%;
+    background-color: rgb(210, 210, 210);
     z-index: 1;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+}
+
+.dropdown-contents a {
+    display: block;
+    padding: 5%;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-contents a:hover {
+    background-color: rgb(200, 200, 200);
 }
 
 .my-account:hover .dropdown-contents {
     display: block;
 }
 
-.search-container {
-    width: 60%;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.searchbox {
-    width: 100%;
-    max-width: 400px;
-    padding: 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.searchbox input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px; /* Rounded corners for inputs */
-}
-
-.searchbutton {
-    width: 70px;
-    height: 100%;
-    border: 1px solid;
-    background: #2d6a2d; /* Dark green for buttons */
-    color: #fff; /* White text on buttons */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 5px 5px 0; /* Matching rounded corners */
-}
 
 .navbarlower {
-    background-color: #fff;
-    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    width:  100%;
+    height: 50%;
+    padding: 0% 2%;
+    /* border: 1px solid; */
+    margin:auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: row; 
+    text-decoration: none; 
     align-items: center;
-    border-top: 1px solid #ddd; /* Light border for separation */
+    /* border: 2px solid; */
+    gap: 1rem;
 }
 
-.navbarlower .menu-icon {
-    display: none;
-    cursor: pointer;
-}
 
-.navbarlower .menu-items {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.home, .aboutUs, .seller, .combos, .giftings, .dropdown, .bestsellers {
+    background-color: white;
+    width: fit-content;
+    height: 50%;
+    padding: 0% 1%;
+    border-radius: 5px;
+    margin: 0;
     justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center; /* Ensures text is centered within the div */
 }
 
-.navbarlower > .menu-items > div {
-    margin: 5px;
+.home a, .aboutUs a, .seller a, .combos a, .giftings a, .dropdown a, .bestsellers a {
+    text-decoration: none;
+    color: rgb(118, 116, 238);
 }
 
+/* Dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: #f5f5f5;
+    left: 0; /* Ensure it starts from the left */
+    top: 100%; /* Position it below the "Dry Fruits" header */
+    background-color: white;
     min-width: 110px;
     z-index: 2;
 }
 
-.dropdown-header:hover + .dropdown-content {
+/* Show the dropdown content when hovering over dropdown header */
+.dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .search-container {
-        width: auto;
-    }
+/* Style the dropdown links */
+.dropdown-link {
+    display: block;
+    padding: 10%;
+    text-decoration: none;
+    color: #e77b7b;
+}
 
-    .searchbox input[type="text"] {
-        display: none;
-    }
+/* Style the dropdown links on hover */
+.dropdown-link:hover {
+    background-color: white;
+}
 
-    .searchbutton {
-        width: auto;
-        padding: 10px;
-    }
+.active {
+    background-color: #a79e9e; /* Change this to your desired highlight color */
+}
 
-    .searchbutton i {
-        font-size: 20px;
-    }
+.active-link {
+    background-color: #d8afaf; /* Change this to your desired highlight color */
+}
 
-    .account {
-        display: none;
-    }
+.active-icon {
+    color: rgb(192, 136, 136); /* Change this to the desired color */
+}
 
-    .my-account i {
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    .navbarlower .menu-icon {
+@media (min-width: 720px) {
+    .containerlaptop {
         display: block;
-        font-size: 24px;
     }
 
-    .navbarlower .menu-items {
+    .containermobile {
         display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: left;
-    }
-
-    .navbarlower.active .menu-items {
-        display: flex;
     }
 }
 
-.navbarlower.active .menu-items {
+/* For devices with a minimum width of 1080px (e.g., desktops) */
+@media (max-width: 1080px) {
+
+    #offer {
+        font-size: 0.9rem;
+    }
+   
+    .wishlist .fa-heart, .cart .fa-shopping-cart, .track .fa-truck {
+        font-size: 1.5em;
+    }
+
+
+    .wishlist-count, .cart-count {
+        top: -0.5em;  /* Adjust this value to position the count as needed */
+        right: -0.5em; /* Adjust this value to position the count as needed */
+        width: 1em; /* Adjusted to be relative */
+        height: 1em; /* Adjusted to be relative */
+        font-size: 0.75em; /* Ensure the font size is relative */
+        line-height: 1em; /* Ensure the text is centered vertically */
+    }
+
+    .fa-search {
+        font-size: 1.5em;
+        color: #d8d0d0;
+    }
+    
+    
+    .auth p {
+        font-size: small;
+    }
+    
+    .my-account h6 {
+        font-size: small;
+    }
+    
+    .fa-angle-down {
+        font-size: small;
+    }
+    
+    .dropdown-contents a {
+       font-size: medium;
+    }
+
+    .items h6 {
+        font-size: smaller;
+    }
+
+    .navbarlower h6 {
+        font-size: small;
+    }
+
+}
+
+/* For devices with a maximum width of 720px (e.g., tablets) */
+/* @media (max-width: 720px) {
+    .containerbox {
+        height: 7.8rem;
+    }
+
+    #offer {
+        font-size: 0.8rem;
+    }
+
+
+    .items {
+        width: 75%;
+    }
+
+    .wishlist .fa-heart, .cart .fa-shopping-cart, .track .fa-truck {
+        font-size: 1.0em;
+    }
+
+
+    .wishlist-count, .cart-count {
+        top: -0.5em; 
+        right: -0.5em; 
+        width: 1em; 
+        height: 1em; 
+        font-size: 0.75em;
+        line-height: 1em; 
+    }
+    
+    .account {
+        width: 25%;
+    }
+
+    .auth{
+        display: none;
+    }
+
+    .my-account{
+        display: none;
+    }
+ 
+    .user-icon {
+        display: block;
+        font-size: 1rem;
+        color: blue;
+    }
+
+    .dropdown-contents {
+        display: block;
+    }
+
+    .navbarlower {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .navbarlower.open {
+        display: flex;
+    }
+    .hamburger-menu {
+        display: block;
+    }
+
+
+    .searchbox {
+        display: none; 
+    }
+    
+    .search-icon {
+        display: block; 
+        font-size: 1em; 
+        color: #000000;
+        cursor: pointer; 
+        z-index: 1;
+    }
+
+    .searchbox.visible {
+        display: flex; 
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.containermobile {
+    background-color: rgb(255, 255, 255);
+    width:  99.9%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;    
+    display: none;
+}
+
+.navbarmobile {
+    background-color: rgb(255, 255, 255);
+    width:  100%;
+    height: 100%;
+    padding: 1% 0%;
+    margin: 0%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    /* justify-content: center; */
+    /* border: 1px solid; */
+}
+
+
+
+
+.searchboxes {
+    position: relative;
     width: 100%;
+    height: 40%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 4%;
+    /* border: 1px solid; */
+}
+
+
+.searchbars {
+    width: 100% ;
+    height: 100%;
+    padding: auto;
+    margin: auto;
+    user-select: none;
+    background-color: rgb(255, 255, 255);
+    /* border: 1px solid; */
+    
+}
+
+
+
+.searchbars input[type="text"] {
+    width: 100%;
+    height: 100%; /* Ensure input takes full height */
+    padding: 2%; /* Adjust padding for better spacing */
+    border: 1px solid #ccc;
+    user-select: none;
+    box-sizing: border-box; /* Ensure padding does not overflow */
+}
+
+
+
+.ginninavbarmobile {
+    background-color: rgb(255, 255, 255);
+    width:  100%;
+    height: 60%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row; 
+    /* border: 1px solid; */
+}
+
+.navbarmenu {
+    background-color: rgb(255, 255, 255);
+    width:  10%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+    position: relative;
+}
+
+
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.navbarmenumobile {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 70vh; /* Set the height to occupy the entire screen */
+    max-height: 80vh; /* Set maximum height to 80% of viewport height */
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateX(-100%); 
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.navbarmenumobile.open {
+    display: flex;
+    transform: translateX(0); 
+}
+
+.navbarmenumobile > div {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbarmenumobile > div:last-child {
+    border-bottom: none;
+}
+
+.navbarimagemobile {
+    background-color: rgb(254, 255, 255);
+    width:  40%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid; */
+}
+
+
+.navbaruppermobile {
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    /* border: 2px solid; */
+}
+
+.user-icon {
+    font-size: 2em;
+    cursor: pointer;
+    color: blue;
+}
+
+.accounts {
+    position: relative;
+    display: inline-block;
+  }
+  
+
+.dropdown-contentss {
+    width: 50%;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    background-color: #fff;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-contentss a {
+    display: block;
+    padding: 1%;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-contentss a:hover {
+    background-color: #f0f0f0;
+}
+
+
+.wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
+    position: relative; /* Ensure the wishlist icon is the reference point */
+    font-size: 2em;
+    color: blue;
+
+}
+
+
+.accountmobile {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.accountmobile i {
+    color: blue;
+    font-size: 2em;
+}
+
+.account-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.accountmobiledropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 50vw;
+    max-height: 50vh;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    overflow-y: auto;
+}
+
+.accountmobiledropdown.open {
+    display: flex;
+    transform: translateX(0);
+}
+
+.accountmobiledropdown > div {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.accountmobiledropdown > div:last-child {
+    border-bottom: none;
+}
+
+.Dashboard a, .Order a, .Address a, .Logout a, .Login a, .Signup a {
+    text-decoration: none;
+    color: rgb(118, 116, 238);
+}
+
+.Dashboard, .Order , .Address , .Logout , .Login , .Signup  {
+    padding: 0%;
+}
+
+
+
+
+@media (max-width: 720px) {
+    .containerlaptop {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .fa-search {
+        font-size: 2em;
+        color: rgb(255, 255, 255);
+    }
+    
+
+    .menu-toggle {
+        font-size: 2em;
+    }
+
+    .user-icon {
+        font-size: 2em;
+    }
+    
+    
+    .wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
+        font-size: 2em;
+    }
+    
+    .accountmobile i {
+        font-size: 2em;
+    }
+
+    .responsive-logo {
+        width: 8em;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .containerlaptop {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .fa-search {
+        font-size: 2em;
+    }
+    
+
+    .menu-toggle {
+        font-size: 1.5em;
+    }
+
+    .user-icon {
+        font-size: 1.5em;
+    }
+    
+    .wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
+        font-size: 1.5em;
+    }
+    
+    .accountmobile i {
+        font-size: 1.5em;
+    }
+
+    .responsive-logo {
+        width: 7em;
+    }
+}
+
+
+@media (max-width: 240px) {
+    .containerlaptop {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .fa-search {
+        font-size: 1.5em;
+        color: rgb(255, 255, 255);
+    }
+    
+
+    .menu-toggle {
+        font-size: 1em;
+    }
+
+    .user-icon {
+        font-size: 1em;
+    }
+    
+    
+    .wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
+        font-size: 1em;
+    }
+    
+    .accountmobile i {
+        font-size: 1em;
+    }
+
+    .responsive-logo {
+        width: 5em;
+    }
+}
+
+
+@media (max-width: 180px) {
+    .containerlaptop {
+        display: none;
+    }
+
+    .containermobile {
+        display: block;
+    }
+
+    .fa-search {
+        font-size: 1.5em;
+    }
+    
+
+    .menu-toggle {
+        font-size: 0.5em;
+    }
+
+    .user-icon {
+        font-size: 0.5em;
+    }
+    
+    
+    .wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
+        font-size: 0.5em;
+    }
+    
+    .accountmobile i {
+        font-size: 0.5em;
+    }
+
+    .responsive-logo {
+        width: 4em;
+    }
 }

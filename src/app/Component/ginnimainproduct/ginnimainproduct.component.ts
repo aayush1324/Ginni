@@ -27,6 +27,7 @@ export interface CartList {
   created_at: Date;
   modified_at: Date | null;
   deleted_at: Date | null;
+  
 }
 
 @Component({
@@ -43,6 +44,8 @@ export class GinnimainproductComponent {
   imageList!: any[];
   slideIndex = 1;
   quantity: number = 1; // Initialize the quantity to 1
+  selectedImageIndex = 0;
+
 
 
   constructor(private route: ActivatedRoute,  private cartService : CartService, private productService : ProductService, 
@@ -64,6 +67,7 @@ export class GinnimainproductComponent {
     this.showSlides(this.slideIndex);
   }
 
+
   plusSlides(n: number) {
     this.showSlides(this.slideIndex += n);
   }
@@ -73,6 +77,8 @@ export class GinnimainproductComponent {
   }
 
   showSlides(n: number) {
+    this.selectedImageIndex = n-1;
+
     let i;
     const slides = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
     const dots = document.getElementsByClassName("demo") as HTMLCollectionOf<HTMLElement>;

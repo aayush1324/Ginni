@@ -60,6 +60,8 @@ export class GinnicombosComponent {
   totalWishlistItem:any;
   totalCartItem:any;
   productLength!: number;
+  isOpenSortby: boolean = false;
+  isOpenFilter: boolean = false;
 
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
@@ -89,6 +91,24 @@ export class GinnicombosComponent {
     this.refreshWishlistItemCount();
   }
 
+
+  toggleSortby() {
+    this.isOpenSortby = !this.isOpenSortby;
+    this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
+  }
+
+  closeSortby() {
+    this.isOpenSortby = false;
+    this.isDropdownOpenSortby = false;
+  }
+
+  toggleFilter() {
+    this.isOpenFilter = !this.isOpenFilter;
+  }
+
+  closeFilter() {
+    this.isOpenFilter = false;
+  }
 
 
 //.......................................................................................................
@@ -488,6 +508,8 @@ export class GinnicombosComponent {
   toggleDropdownSortby() {
     this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
   }
+
+
 
   toggleSortingOption(option: string) {
     this.currentSortingOption = option;

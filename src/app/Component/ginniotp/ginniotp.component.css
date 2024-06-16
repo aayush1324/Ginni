@@ -9,20 +9,9 @@
     align-items: center;
 }
 
-.header {
-    width: 100%;
-    height: fit-content;
-    padding: 0%;
-    margin: 2%;
-    /* border: 1px solid; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 form {
-    width: 25%;
+    width: 60%;
     height: fit-content;
     padding: 0%;
     margin: 0%;
@@ -76,4 +65,40 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+
+  /* For devices with a minimum width of 1080px (e.g., desktops) */
+  @media (max-width: 1080px) {
+    form {
+        width: 60%;
+    }
+
+    form h6 {
+        font-size: medium;
+    }
+}
+
+
+  /* For devices with a maximum width of 720px (e.g., tablets) */
+@media (max-width: 720px) {
+    form {
+        width: 60%;
+    }
+
+    form h6 {
+        font-size: small;
+    }
+}
+
+
+/* For devices with a maximum width of 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+    form {
+        width: 60%;
+    }
+
+    form h6 {
+        font-size: smaller;
+    }
 }

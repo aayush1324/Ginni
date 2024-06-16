@@ -48,5 +48,40 @@
   
   /* Change the color of the icon on hover */
   .arrow i:hover {
-    background-color: rgb(138, 138, 196); /* Change the background color to blue on hover */
+    background-color: rgb(167, 167, 243); /* Change the background color to blue on hover */
   }
+
+
+
+
+@media (max-width: 1080px) {
+  .images-wrapper img {
+    height: 15rem;
+  }
+
+  .arrow {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .images-wrapper img {
+    height: 10rem;
+  }
+
+  .arrow {
+    font-size: 16px;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .images-wrapper img {
+    height: 5rem;
+  }
+
+  .arrow {
+    font-size: 12px;
+  }
+}
