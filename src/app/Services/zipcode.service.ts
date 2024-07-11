@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ZipcodeService {
 
-  private baseUrl: string = 'https://localhost:7132/api/ZipCodes/';
+  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/ZipCodes/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

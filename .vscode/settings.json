@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b9401161-72e7-4241-968e-0155a25eef30/resourceGroups/GinniFrontends/providers/Microsoft.Web/sites/GinniAngular",
+    "appService.deploySubpath": "dist"
+}

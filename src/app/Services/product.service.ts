@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Products/';
+  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Products/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

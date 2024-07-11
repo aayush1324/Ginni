@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AddressService {
 
-  private baseUrl: string = 'https://localhost:7132/api/Addresses/';
+  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Addresses/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
