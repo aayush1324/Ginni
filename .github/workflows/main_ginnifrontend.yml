@@ -26,7 +26,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -39,12 +39,21 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: node-app
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FD7677C951774CAEA9382D9753764809 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F40581BE25C249E0AA62B14CDC2F5549 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_05B3A27A03E9446D8F5A6E8F9400178B }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -52,5 +61,5 @@ jobs:
         with:
           app-name: 'GinniFrontend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_71059B56B17F4389B5E8F1493EEE4730 }}
           package: .
+          
