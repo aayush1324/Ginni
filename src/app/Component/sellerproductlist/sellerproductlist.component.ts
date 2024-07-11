@@ -5,8 +5,7 @@ import { ProductService } from '../../Services/product.service';
 import { Observable } from 'rxjs';
 import { ImageService } from '../../Services/image.service';
 import { HttpResponse } from '@angular/common/http';
-import { error } from 'console';
-import { url } from 'inspector';
+
 
 @Component({
   selector: 'app-sellerproductlist',

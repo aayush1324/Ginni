@@ -7,7 +7,6 @@ import { SearchService } from '../../Services/search.service';
 import { tap } from 'rxjs';
 import { OrderService } from '../../Services/order.service';
 import { Router } from '@angular/router';
-import { log } from 'console';
 import { ProductHelperService } from '../../Services/product-helper.service';
 import { CartHelperService } from '../../Services/cart-helper.service';
 import { WishlistHelperService } from '../../Services/wishlist-helper.service';

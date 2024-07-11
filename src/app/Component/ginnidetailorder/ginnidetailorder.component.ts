@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { PaymentService } from '../../Services/payment.service';
-import { log } from 'console';
 import { OrderService } from '../../Services/order.service';
 
 @Component({
