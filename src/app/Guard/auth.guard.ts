@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   
   else
   {
-    router.navigate(['/main/ginninotfound']);
+    router.navigate(['/not-found']);
   
     return false;
   }

@@ -53,7 +53,7 @@ export class GinnisignupComponent {
           alert("Please Check OTP on Email and Mobile ");
           alert("OTP is valid for 10 minutes ");
           this.signupForm.reset();
-          this.router.navigate(['/main/ginniotp']);
+          this.router.navigate(['/account/otp']);
         },
         error: (err) => {
           alert(err?.error);

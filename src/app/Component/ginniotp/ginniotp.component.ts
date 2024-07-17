@@ -35,7 +35,7 @@ export class GinniotpComponent {
             {
               alert(response.message);
               this.otpForm.reset();
-              this.router.navigate(['/main/ginnisignin']);
+              this.router.navigate(['/account/login']);
             }
             else  
             {

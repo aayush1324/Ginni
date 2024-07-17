@@ -111,7 +111,7 @@ export class GinnisigninComponent {
            })
             
             this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
-            this.router.navigate(['/main/home'])
+            this.router.navigate([''])
           } 
         },
       error: (err) => {

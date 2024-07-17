@@ -80,6 +80,7 @@ const routes: Routes = [{
       {path: "account/cart" , component : GinnicartComponent},
       {path: "account/wishlist" , component : GinniwishlistComponent},
       {path: "account/track" , component : GinnitrackComponent},
+      {path: "account/otp", component : GinniotpComponent,  canActivate:[authGuard]},
       {path: "account/address", component : GinniaddressComponent,  canActivate:[authGuard]},
       {path: "account/order", component : GinniorderComponent,  canActivate:[authGuard]},
       {path: "account/order/:orderId", component : GinnidetailorderComponent,  canActivate:[authGuard]},
@@ -88,7 +89,6 @@ const routes: Routes = [{
 
 
       {path: "not-found", component : GinninotfoundComponent},
-      {path: "otp", component : GinniotpComponent,  canActivate:[authGuard]},
       {path: "profile" , component : GinniprofileComponent,  canActivate:[authGuard]},
 
       {path: "offer" , component : GinniofferComponent},

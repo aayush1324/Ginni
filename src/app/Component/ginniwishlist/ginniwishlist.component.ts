@@ -200,7 +200,7 @@ export class GinniwishlistComponent {
     else {
       console.error('User ID not found in session storage');
       alert('Please login first');
-      this.router.navigate(['/main/ginnisignin']);
+      this.router.navigate(['/account/login']);
     }
   }
 

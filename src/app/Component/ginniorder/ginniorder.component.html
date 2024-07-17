@@ -34,7 +34,7 @@
 
         <div class="footer" *ngFor = "let item of orderList">
             <div class="order">
-                <a [routerLink]="['/main/ginnidetailorder', item.orderId]"><p>{{item.orderId}}</p></a>
+                <a [routerLink]="['/account/order', item.orderId]"><p>{{item.orderId}}</p></a>
             </div>
 
             <div class="date">
@@ -60,7 +60,7 @@
             <img src="../../assets/images/png/emptyorder.png" alt="Cart Icon">
             <p>Oops! No Orders Yet!</p>
             <p>Looks like you have not order yet.</p>
-            <button routerLink="/main/ginnidryfruit">Shop Now</button>
+            <button routerLink="/collections/dryfruit">Shop Now</button>
         </div>
     </ng-template>
 
