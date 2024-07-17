@@ -219,7 +219,7 @@ export class GinniofferComponent {
  // Method to check if the dropdown is active based on the current route
   isDropdownActive(): boolean {
     const currentRoute = this.router.url;
-    return currentRoute.startsWith('/main/ginnidryfruit');
+    return currentRoute.startsWith('/collections/dryfruit');
   }
 
 }

@@ -55,48 +55,61 @@ import { GinninotfoundComponent } from './Component/ginninotfound/ginninotfound.
 
 
 const routes: Routes = [{
-    path:"main" ,component : MainComponent, children: [
-      {path: "ginniaboutus" , component : GinniaboutusComponent},
-      {path: "ginniallproducts" , component : GinniallproductsComponent},
-      {path: "ginnicart" , component : GinnicartComponent},
-      {path: "ginnicontactus" , component : GinnicontactusComponent},
-      {path: "ginnicustomerreview" , component : GinnicustomerreviewComponent},
-      {path: "ginnifaq", component : GinnifaqComponent},
-      {path: "ginnifilter", component : GinnifilterComponent},
-      {path: "ginnifooter",  component : GinnifooterComponent},
-      {path: "ginniforgotpassword", component : GinniforgotpasswordComponent},
-      {path: "ginniimageslider" , component : GinniimagesliderComponent},
-      {path: "ginnimainproduct/:productName" , component : GinnimainproductComponent},
-      {path: "ginnioffer" , component : GinniofferComponent},
-      {path: "ginniprivacypolicy" , component : GinniprivacypolicyComponent},
-      {path: "ginniproducts" , component : GinniproductsComponent},
-      {path: "ginnireturnpolicy", component : GinnireturnpolicyComponent},
-      {path: "ginnishippingpolicy", component : GinnishippingpolicyComponent},
-      {path: "ginnitermservice",  component : GinnitermserviceComponent},
-      {path: "ginnitextandimage", component : GinnitextandimageComponent},
-      {path: "ginniupperfooter", component : GinniupperfooterComponent},
-      {path: "ginnitrack" , component : GinnitrackComponent},
-      {path: "ginniwishlist" , component : GinniwishlistComponent},
-      {path: "ginniprofile" , component : GinniprofileComponent,  canActivate:[authGuard]},
-      {path: "ginniorder", component : GinniorderComponent,  canActivate:[authGuard]},
-      {path: "ginnidetailorder/:orderId", component : GinnidetailorderComponent,  canActivate:[authGuard]},
-      {path: "ginnigiftings", component : GinnigiftingsComponent},
-      {path: "ginnicombos",  component : GinnicombosComponent},
-      {path: "ginnibestsellers", component : GinnibestsellersComponent},
-      {path: "ginniaddress", component : GinniaddressComponent,  canActivate:[authGuard]},
-      {path: "ginnireviewslider", component : GinnireviewsliderComponent},
-      {path: "ginnidryfruit" , component : GinnidryfruitComponent},
-      {path: "ginnidryfruitalmond", component : GinnidryfruitalmondComponent},
-      {path: "ginnidryfruitcashew", component : GinnidryfruitcashewComponent},
-      {path: "ginnidryfruitpista",  component : GinnidryfruitpistaComponent},
-      {path: "ginnidryfruitraisin", component : GinnidryfruitraisinComponent},
-      {path: "ginnidryfruitwalnut", component : GinnidryfruitwalnutComponent},
-      {path: "home", component : HomeComponent},
-      {path: "ginninotfound", component : GinninotfoundComponent},
-      {path: "ginnisignin" , component : GinnisigninComponent},
-      {path: "ginnisignup", component : GinnisignupComponent},
-      {path: "ginniotp", component : GinniotpComponent,  canActivate:[authGuard]},
-      {path: "ginniresetpassword", component : GinniresetpasswordComponent},
+    path:"" ,component : MainComponent, children: [
+      {path: "", component : HomeComponent},
+
+      {path: "pages/about-us" , component : GinniaboutusComponent},
+      {path: "pages/contact-us" , component : GinnicontactusComponent},
+      {path: "pages/terms-conditions",  component : GinnitermserviceComponent},
+      {path: "pages/privacy-policy" , component : GinniprivacypolicyComponent},
+      {path: "pages/shipping-policy", component : GinnishippingpolicyComponent},
+      {path: "pages/return-policy", component : GinnireturnpolicyComponent},
+
+
+      {path: "collections/giftings", component : GinnigiftingsComponent},
+      {path: "collections/combos",  component : GinnicombosComponent},
+      {path: "collections/bestsellers", component : GinnibestsellersComponent},
+      {path: "collections/dryfruit" , component : GinnidryfruitComponent},
+      {path: "collections/all" , component : GinniallproductsComponent},
+
+
+      {path: "account/login" , component : GinnisigninComponent},
+      {path: "account/register", component : GinnisignupComponent},
+      {path: "account/reset-password", component : GinniresetpasswordComponent},
+      {path: "account/forgot-password", component : GinniforgotpasswordComponent},
+      {path: "account/cart" , component : GinnicartComponent},
+      {path: "account/wishlist" , component : GinniwishlistComponent},
+      {path: "account/track" , component : GinnitrackComponent},
+      {path: "account/address", component : GinniaddressComponent,  canActivate:[authGuard]},
+      {path: "account/order", component : GinniorderComponent,  canActivate:[authGuard]},
+      {path: "account/order/:orderId", component : GinnidetailorderComponent,  canActivate:[authGuard]},
+
+      {path: "mainproduct/:productName" , component : GinnimainproductComponent},
+
+
+      {path: "not-found", component : GinninotfoundComponent},
+      {path: "otp", component : GinniotpComponent,  canActivate:[authGuard]},
+      {path: "profile" , component : GinniprofileComponent,  canActivate:[authGuard]},
+
+      {path: "offer" , component : GinniofferComponent},
+      {path: "image-slider" , component : GinniimagesliderComponent},
+      {path: "customer-review" , component : GinnicustomerreviewComponent},
+      {path: "review-slider", component : GinnireviewsliderComponent},
+      {path: "text-image", component : GinnitextandimageComponent},
+      {path: "faq", component : GinnifaqComponent},
+      {path: "upper-footer", component : GinniupperfooterComponent},
+      {path: "footer",  component : GinnifooterComponent},
+      {path: "filter", component : GinnifilterComponent},
+      {path: "products" , component : GinniproductsComponent},
+
+     
+
+      {path: "almond", component : GinnidryfruitalmondComponent},
+      {path: "cashew", component : GinnidryfruitcashewComponent},
+      {path: "pista",  component : GinnidryfruitpistaComponent},
+      {path: "raisin", component : GinnidryfruitraisinComponent},
+      {path: "walnut", component : GinnidryfruitwalnutComponent},
+    
       {path: "sellerdashboard", component : SellerdashboardComponent, children : [
         {path: "selleraddproduct", component : SelleraddproductComponent, canActivate:[authGuard]},
         {path: "sellercustomerlist", component : SellercustomerlistComponent, canActivate:[authGuard]},

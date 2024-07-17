@@ -103,7 +103,7 @@ export class GinnicartComponent {
     else {
       console.error('User ID not found in session storage');
       alert('Please login first');
-      this.router.navigate(['/main/ginnisignin']);
+      this.router.navigate(['/account/login']);
     }
   }
 
@@ -134,7 +134,7 @@ export class GinnicartComponent {
     else {
       console.error('User ID not found in session storage');
       alert('Please login first');
-      this.router.navigate(['/main/ginnisignin']);
+      this.router.navigate(['/account/login']);
     }
   }
 
@@ -225,7 +225,7 @@ export class GinnicartComponent {
     else {
       console.error('User ID not found in session storage');
       alert('Please login first');
-      this.router.navigate(['/main/ginnisignin']);
+      this.router.navigate(['/account/login']);
     }
   }
 

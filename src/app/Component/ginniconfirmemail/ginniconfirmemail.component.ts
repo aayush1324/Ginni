@@ -41,7 +41,7 @@ export class GinniconfirmemailComponent implements OnInit{
         this.confirmationStatus = 'Your email has been successfully confirmed.';
         // Set a timeout to navigate to another page after 10 seconds
         setTimeout(() => {
-          this.router.navigate(['/main/ginnisignin']);
+          this.router.navigate(['/account/login']);
         }, 2000); // 10000 milliseconds = 10 seconds
       },
 

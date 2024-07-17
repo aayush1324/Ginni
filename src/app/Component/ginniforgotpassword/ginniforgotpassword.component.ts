@@ -42,7 +42,7 @@ export class GinniforgotpasswordComponent {
           alert(res.message);
           console.log("Email Sent Successfully");
           // Optionally, navigate to a different route after sending the email
-          this.router.navigate(['/main/ginnisignin']);
+          this.router.navigate(['/account/login']);
         },
         error: (err) => {
           this.toast.error({
