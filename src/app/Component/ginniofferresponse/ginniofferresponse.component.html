@@ -63,8 +63,10 @@
                                 </div>
                             </div>
                             <div class="auth" *ngIf="!loggedIn">
-                                <a routerLink="/account/login">Login/</a>
-                                <a routerLink="/account/register">Register</a>
+                                <button>
+                                    <a routerLink="/account/login">Login/</a>
+                                    <a routerLink="/account/register">Register</a>
+                                </button>           
                             </div>
                             <div class="auth" *ngIf="loggedIn">
                                 <p>{{'Hello, ' + userName }}</p>

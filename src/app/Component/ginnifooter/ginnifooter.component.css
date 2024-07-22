@@ -70,7 +70,7 @@
 }
 
 .payment ul {
-    width: 25%;
+    width: 20%;
     height: fit-content;
     display: flex;
     justify-content: space-between;
@@ -85,8 +85,8 @@
 }
 
 .payment i {
-    font-size: 1.5rem; /* Adjust the size as needed */
-    color: #75a8a8; /* Light green color for Google Pay */
+    font-size: xx-large; /* Adjust the size as needed */
+    color: #aee2f1; /* Light green color for Google Pay */
 }
 
 
@@ -113,6 +113,10 @@
     width: 40%;
     height: fit-content;
     /* border: 1px solid; */
+}
+
+.copyright h6 {
+    font-size: small;
 }
 
 .followuson {
@@ -146,10 +150,8 @@
 }
 
 
-/* Media Queries */
 
-/* For devices with a max-width of 1080px */
-@media (max-width: 1080px) {
+@media (min-width:1121px ) and (max-width: 1440px) {
     .footerupper a {
         font-size: small;
     }
@@ -192,8 +194,54 @@
     }
 }
 
-/* For devices with a max-width of 720px */
-@media (max-width: 720px) {
+
+
+@media (min-width:801px ) and (max-width: 1120px) {
+    .footerupper a {
+        font-size: small;
+    }
+    
+    .footerupper h4 {
+        font-size: medium;
+    }
+
+    .footerupper p {
+        font-size: small;
+    }
+
+    .shopicon img {
+        width: 8rem;
+        height: 4rem;
+    }
+
+    .footermiddle i {
+        font-size: medium;
+    }
+
+    .footermiddle h4 {
+        font-size: medium;
+    }
+
+    .footerlower p {
+        font-size: small;
+    }
+
+    .footerlower a {
+        font-size: small;
+    }
+
+    .footerlower i{
+        font-size: small;
+    }
+
+    .footerlower h5 {
+        font-size: medium;
+    }
+}
+
+
+
+@media (min-width:481px ) and (max-width: 800px) {
     .footerupper a {
         font-size: smaller;
     }
@@ -235,6 +283,9 @@
         font-size: small;
     }
 }
+
+
+
 
 /* For devices with a max-width of 480px */
 @media (max-width: 480px) {

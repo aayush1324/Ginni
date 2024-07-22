@@ -63,8 +63,7 @@ router-outlet {
 }
 
 
-/* For devices with a maximum width of 480px (e.g., mobile phones) */
-@media (max-width: 540px) {
+/* @media (max-width: 540px) {
     .header {
         height: 10vh;
     }
@@ -75,7 +74,6 @@ router-outlet {
     
 }
 
-/* For devices with a maximum width of 240px (e.g., mobile phones) */
 @media (max-width: 320px) {
     .header {
         height: 15vh;
@@ -84,4 +82,90 @@ router-outlet {
     .navbar {
         margin-top: 15vh;
     }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width:1441px ) {
+    .header {
+        height: 5vh;
+    }
+    
+    .navbar {
+        margin-top: 5vh;
+    } 
+}
+
+@media (min-width:1121px ) and (max-width: 1440px) {
+    .header {
+        height: 5vh;
+    }
+    
+    .navbar {
+        margin-top: 5vh;
+    }
+}
+
+
+@media (min-width:801px ) and (max-width: 1120px) {
+    .header {
+        height: 5vh;
+    }
+    
+    .navbar {
+        margin-top: 5vh;
+    }
+}
+
+
+@media (min-width:481px ) and (max-width: 800px) {
+    .header {
+        height: 10vh;
+    }
+    
+    .navbar {
+        margin-top: 10vh;
+    }
+}
+
+
+@media (min-width:321px ) and (max-width: 480px) {
+    .header {
+        height: 10vh;
+    }
+    
+    .navbar {
+        margin-top: 10vh;
+    }
+}
+
+@media (min-width:161px ) and (max-width:320px ) {
+    .header {
+        height: 15vh;
+    }
+    
+    .navbar {
+        margin-top: 15vh;
+    } 
+}
+
+
+@media (max-width:160px ) {
+    .header {
+        height: 20vh;
+    }
+    
+    .navbar {
+        margin-top: 20vh;
+    } 
 }
