@@ -35,9 +35,11 @@
 
 .upperright button{
     width: fit-content;
-    padding: 1%;
+    padding: 1% 2%;
     border-radius: 10px;
-    background-color: rgb(233, 245, 245);
+    background-color: #0066b2;
+    color: aliceblue;
+    border: 1px solid;
 }
 
 

@@ -51,7 +51,7 @@ form {
     margin: 0%;
     display: flex;
     border-radius: 10px;
-    border-color: rgb(92, 88, 88);
+    border-color: #0066b2;
 }
 
 button {
@@ -62,7 +62,7 @@ button {
     margin-bottom: 0%;
     display: flex;
     border-radius: 10px;
-    background-color:rgb(72, 72, 146);
+    background-color: #0066b2;
     justify-content: center;
     color: aliceblue;
 }

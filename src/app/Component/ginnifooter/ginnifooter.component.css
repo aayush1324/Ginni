@@ -3,7 +3,8 @@
     height: fit-content;
      display: flex;
     flex-direction: column;
-    background-color: rgb(215, 241, 188);
+    background-color: #0066b2;
+    color: aliceblue;
     padding: 2%;
 }
 
@@ -24,6 +25,7 @@
 
 .footerupper a {
     text-decoration: none; /* Remove underline */
+    color: aliceblue;
 }
 
 .footerupper ul {
@@ -31,6 +33,11 @@
     padding: 0;
     margin: 0;
 }
+
+.footerupper ul :hover {
+    text-decoration: underline;   
+}
+
 
 .shopicon img {
     width: 10rem;
@@ -142,13 +149,27 @@
     align-items: center;
 }
 
-.socialmedia a {
+.socialmedia ul a {
+    display: inline-block;
+    transition: transform 0.5s ease; /* Smooth transition effect */
+}
+
+.socialmedia a i{
     text-decoration: none;
-    color: #0ca1f7; /* Adjust color as needed */
+    color: whitesmoke; /* Adjust color as needed */
     margin: 0 10px; /* Adjust spacing between icons */
     font-size: 1rem; /* Adjust icon size */
 }
 
+.socialmedia ul a:hover {
+    transform: scale(1.5); /* Increase the size by 20% */
+}
+
+.socialmedia a i  :hover{
+    color: rgb(31, 83, 129); /* Adjust color as needed */
+    margin: 0 10px; /* Adjust spacing between icons */
+    font-size: 1rem; /* Adjust icon size */
+}
 
 
 @media (min-width:1121px ) and (max-width: 1440px) {
@@ -156,13 +177,13 @@
         font-size: small;
     }
     
-    .footerupper h4 {
-        font-size: medium;
-    }
+    /* .footerupper h4 {
+        font-size: large;
+    } */
 
-    .footerupper p {
+    /* .footerupper p {
         font-size: small;
-    }
+    } */
 
     .shopicon img {
         width: 8rem;

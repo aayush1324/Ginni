@@ -28,7 +28,7 @@ body, html {
 
 .navbar {
     grid-row: 2;
-    height: 25vh;
+    height: 15vh;
     width: 100%;
     z-index: 1000;
     /* border: 5px solid; */
@@ -44,7 +44,7 @@ body, html {
     height: fit-content;
     /* border: 3px solid; */
     background-color: white;
-    margin-top: 30vh;
+    margin-top: 20vh;
     padding-bottom: 5%;
 }
 

@@ -57,7 +57,6 @@ export class GinniofferresponseComponent {
   }
 
 
-
   isDropdownOpen: boolean = false;
   showWishlist: boolean = false;
   showCart: boolean = false;

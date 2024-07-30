@@ -803,19 +803,19 @@
 
 .empty-cart {
     text-align: center;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 }
 
 .empty-cart img {
     width: 50%; /* Adjust the size as needed */
-    height: 16rem;
+    height: 20rem;
 }
 
 
 
 .empty-cart button {
     padding: 10px 20px;
-    background-color: #007bff; /* Adjust color as needed */
+    background-color: #0066b2; /* Adjust color as needed */
     color: #fff;
     border: none;
     border-radius: 5px;

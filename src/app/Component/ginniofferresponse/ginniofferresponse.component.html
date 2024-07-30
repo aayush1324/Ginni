@@ -1,6 +1,7 @@
 <div class="containerbox">
     <div class="containerlaptop">
-        <div class="ginninavbar">
+
+        <!-- <div class="ginninavbar">
             <div class="navbarimage">
                 <a class="logo" routerLink="">
                     <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
@@ -14,9 +15,6 @@
                             <div class="searchbar">
                                 <app-search></app-search>
                             </div>
-                            <!-- <div class="searchbutton">
-                                <i class="fa fa-search"></i>
-                            </div> -->
                         </div>
                     </div>         
                     
@@ -51,8 +49,7 @@
                         </div>  
                         
                         
-                        <div class="account">
-                            
+                        <div class="account">         
                             <div class="my-account" *ngIf="loggedIn" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()">
                                 <h6 class="account-title">My Account <i class="fa fa-angle-down"></i></h6>
                                 <div class="dropdown-contents" *ngIf="isAccountDropdown">
@@ -71,8 +68,7 @@
                             <div class="auth" *ngIf="loggedIn">
                                 <p>{{'Hello, ' + userName }}</p>
                             </div>
-                        </div>
-                        
+                        </div>                    
                     </div>             
                 </div>
     
@@ -96,9 +92,6 @@
                         </div>
                     </div>
     
-                    <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
-                        <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
-                    </div>
     
                     <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
                         <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
@@ -109,18 +102,189 @@
                     </div>
                     
                     
+                    <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
+                        <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
+                    </div>
+
                     <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
                         <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
-                    </div>
-                    
+                    </div>                  
                 </div>
 
             </div>
-        </div>
+        </div> -->
+
+        <div class="ginninavbar">
+            <div class="navbarimage">
+                <a class="logo" routerLink="">
+                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
+                </a> 
+            </div>
+            
+            <div class="navbarcontent">
+
+                <!-- <div class="navbarleft">
+                    <div class="search-container">
+                        <div class="searchbox">
+                            <div class="searchbar">
+                                <app-search></app-search>
+                            </div>
+                        </div>
+                    </div>         
+                </div> -->
+    
+                <div class="navbarcontentleft">
+                    <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
+                        <a routerLink="/collections/bestsellers"><h6>Best Seller</h6></a>
+                    </div>    
+    
+                    <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/giftings')}">
+                        <a routerLink="/collections/giftings"><h6>Giftings</h6></a>
+                    </div>
+    
+                    <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+                        <a class="dropdown-header">
+                            <h6>Shop by Category </h6>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-content" *ngIf="isDropdownOpen">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Dry Fruits</th>
+                                        <th>Roasted</th>
+                                        <th>Seeds</th>
+                                        <th>Mixture</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a routerLink="/almond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/almond'}">Almond</a></td>
+                                        <td><a routerLink="/almond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/almond'}">Almond</a></td>
+                                        <td><a routerLink="/almond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/almond'}">Almond</a></td>
+                                        <td><a routerLink="/almond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/almond'}">Almond</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a routerLink="/raisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/raisin'}">Raisin</a></td>
+                                        <td><a routerLink="/raisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/raisin'}">Raisin</a></td>
+                                        <td><a routerLink="/raisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/raisin'}">Raisin</a></td>
+                                        <td><a routerLink="/raisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/raisin'}">Raisin</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a routerLink="/pista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/pista'}">Pista</a></td>
+                                        <td><a routerLink="/pista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/pista'}">Pista</a></td>
+                                        <td><a routerLink="/pista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/pista'}">Pista</a></td>
+                                        <td><a routerLink="/pista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/pista'}">Pista</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a routerLink="/cashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/cashew'}">Cashew</a></td>
+                                        <td><a routerLink="/cashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/cashew'}">Cashew</a></td>
+                                        <td><a routerLink="/cashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/cashew'}">Cashew</a></td>
+                                        <td><a routerLink="/cashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/cashew'}">Cashew</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a routerLink="/walnut" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/walnut'}">Walnut</a></td>
+                                        <td><a routerLink="/walnut" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/walnut'}">Walnut</a></td>
+                                        <td><a routerLink="/walnut" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/walnut'}">Walnut</a></td>
+                                        <td><a routerLink="/walnut" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/walnut'}">Walnut</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    
+    
+    
+                    <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
+                        <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
+                    </div>
+    
+                    <div class="combos" [ngClass]="{'active': isLinkActive('/collections/combos')}">
+                        <a routerLink="/collections/combos"><h6>Combos</h6></a>
+                    </div>
+                    
+                    
+                    <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
+                        <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
+                    </div>
+
+                    <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
+                        <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
+                    </div>                  
+                </div>
+
+                <div class="navbarcontentright">                   
+                    <div class="wishlist" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
+                        <a routerLink="/account/wishlist">
+                            <div class="icontext">
+                                <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
+                                <i class="wishlist-count">{{ totalWislistItem }}</i>
+                            </div>
+                        </a>
+                    </div>
+                
+                    <div class="cart"  [ngClass]="{'actives': isLinkActive('/account/cart')}">
+                        <a routerLink="/account/cart">
+                            <div class="icontext">
+                                <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
+                                <i class="cart-count">{{ totalCartItem }}</i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="accountlaptop">
+                        <button class="account-toggle" (click)="toggleAccount()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+        
+                        <div class="accountlaptopdropdown" [ngClass]="{'open': isAccountOpen}">
+                            <div class="authlaptop" *ngIf="loggedIn">
+                                <p>{{'Hi, ' + userName }}</p>
+                                <i class="fas fa-times" (click)="toggleAccount()"></i>
+                            </div>
+
+                            <div class="authlaptop" *ngIf="!loggedIn">
+                                <p>{{'Hi GINNI User!' }}</p>
+                                <i class="fas fa-times" (click)="toggleAccount()"></i>
+                            </div> 
+
+                            <div class="Dashboard"  *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/sellerdashboard')}">
+                                <button><a routerLink="/sellerdashboard"  (click)="closeAccount()"><h6>Admin Dashboard</h6></a></button>
+                            </div>
+                            
+                            <div class="Order" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/account/order')}">
+                                <button><a  routerLink="/account/order" (click)="closeAccount()"><h6>My Order</h6></a></button>
+                            </div>
+        
+                            <div class="Address" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/account/address')}">
+                                <button><a  routerLink="/account/address" (click)="closeAccount()"><h6>My Address</h6></a></button>
+                            </div>
+        
+                            <div class="Logout" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('')}">
+                                <button><a  routerLink="" (click)="logout()" (click)="closeAccount()"><h6>Logout</h6></a></button>
+                            </div>
+        
+                            <div class="Login" *ngIf="!loggedIn" [ngClass]="{'active': isLinkActive('/account/login')}">
+                                <button><a routerLink="/account/login" (click)="closeAccount()"><h6>Login</h6></a></button>
+                            </div>
+        
+                            <div class="Signup" *ngIf="!loggedIn" [ngClass]="{'active': isLinkActive('/account/register')}">
+                                <button><a  routerLink="/account/register" (click)="closeAccount()"><h6>Signup</h6></a></button>
+                            </div>         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
     
     
     
+
+
+
+
     <div class="containermobile">
         <div class="navbarmobile">
             <div class="searchboxes">
@@ -146,7 +310,7 @@
                         </div>
         
                         <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
-                            <a routerLink="/collections/dryfruit" class="dropdown-header"><h6>Shop by Category <i class="fa fa-caret-down"></i></h6></a>
+                            <a  class="dropdown-header"><h6>Shop by Category <i class="fa fa-caret-down"></i></h6></a>
                             <div class="dropdown-content" *ngIf="isDropdownOpen">
                                 <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
                                 <a routerLink="/main/ginnidryfruitcashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitcashew'}">Cashew</a>
