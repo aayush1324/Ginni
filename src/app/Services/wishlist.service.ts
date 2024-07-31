@@ -8,7 +8,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class WishlistService {
 
-  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Wishlists/';
+  // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Wishlists/';
+  private baseUrl: string = 'https://localhost:7132/api/Wishlists/';
+
 
   private countWishListItem = new BehaviorSubject<number>(0);
   countWishList$ = this.countWishListItem.asObservable();

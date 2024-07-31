@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
 
-  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Payments/';
+  // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Payments/';
+  private baseUrl: string = 'https://localhost:7132/api/Payments/';
+
 
   constructor(private http: HttpClient, private router: Router) { }
 

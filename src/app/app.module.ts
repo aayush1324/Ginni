@@ -62,6 +62,10 @@ import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnir
 import { GinniofferresponseComponent } from './Component/ginniofferresponse/ginniofferresponse.component';
 import { GinnisaveheaderComponent } from './Component/ginnisaveheader/ginnisaveheader.component';
 import { GinninotfoundComponent } from './Component/ginninotfound/ginninotfound.component';
+import { GinnifivecombosComponent } from './Component/ginnifivecombos/ginnifivecombos.component';
+import { GinnifivebestsellersComponent } from './Component/ginnifivebestsellers/ginnifivebestsellers.component';
+import { GinnifivegiftingsComponent } from './Component/ginnifivegiftings/ginnifivegiftings.component';
+import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnifiveproducts.component';
 
 
 @NgModule({
@@ -121,6 +125,10 @@ import { GinninotfoundComponent } from './Component/ginninotfound/ginninotfound.
     GinniofferresponseComponent,
     GinnisaveheaderComponent,
     GinninotfoundComponent,
+    GinnifivecombosComponent,
+    GinnifivebestsellersComponent,
+    GinnifivegiftingsComponent,
+    GinnifiveproductsComponent,
   ],
   imports: [
     BrowserModule,

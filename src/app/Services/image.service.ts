@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
 
-  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Images/';
+  // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Images/';
+  private baseUrl: string = 'https://localhost:7132/api/Images/';
+
 
   constructor(private http: HttpClient) { }
 

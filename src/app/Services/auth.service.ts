@@ -9,7 +9,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Users/';
+  // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Users/';
+  private baseUrl: string = 'https://localhost:7132/api/Users/';
+
   private userPayload:any;
 
   public isLoggedInSubject = new BehaviorSubject<boolean>(false);

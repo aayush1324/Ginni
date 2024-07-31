@@ -157,7 +157,7 @@
                               <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist "></i>
                               <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist "></i>
                           </div>
-                          <img [src]= "item.imageData" alt="GINNI">
+                          <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
                       </div>
               
                       <div class="naming">

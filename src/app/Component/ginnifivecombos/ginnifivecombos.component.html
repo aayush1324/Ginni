@@ -1,0 +1,36 @@
+
+<div class="containerbox">
+    <div class="upper">
+        <div class="upperleft">
+            <h3>Combos</h3>
+        </div>
+
+        <div class="upperright">
+            <button type="submit" routerLink="/collections/dryfruit">View All</button>
+        </div>
+    </div>
+
+    <div class="lower">
+        <div class="almond" *ngFor = "let item of productlist">
+            <div class="image">
+                <div class="saving">
+                    <h6>Save Rs. {{ item.discount }}</h6>
+                    <!-- <h6>{{ item.subcategory }}</h6> -->
+                </div>
+                <img [src]="'../../assets/images/product_Images/' + item.productName + 1 +'.jpg'" alt="GINNI">
+            </div>
+        
+            <div class="naming">
+                <a href=""><h6>{{ item.productName }}</h6></a>
+            </div>
+        
+            <div class="pricing">
+                <h6>Rs {{ item.price }}</h6>
+            </div>
+        
+            <div class="carting">
+                <button (click)="addtocart(item)">Add to Cart</button>
+            </div>
+        </div>    
+    </div>
+</div>

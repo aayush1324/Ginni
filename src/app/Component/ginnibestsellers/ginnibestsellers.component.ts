@@ -270,7 +270,7 @@ export class GinnibestsellersComponent {
     this.ProductHelperService.getProducts(UserID).subscribe({
       next: (res) => {
         this.productLength = res.length;
-        this.productlist = res.filter((product) => product.subcategory === 'combo');
+        this.productlist = res.filter((product) => product.subcategory === 'bestseller');
         this.originalProductList = [...this.productlist];
         this.processProductData(res);
         this.searchService.getSearchTerm().subscribe((searchTerm) => {

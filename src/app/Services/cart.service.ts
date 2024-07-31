@@ -7,7 +7,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Carts/';
+  // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Carts/';
+  private baseUrl: string = 'https://localhost:7132/api/Carts/';
+
 
   private countCartItem = new BehaviorSubject<number>(0);
   countCart$ = this.countCartItem.asObservable();
