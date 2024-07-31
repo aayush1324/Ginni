@@ -424,16 +424,16 @@
 }
 
 .dropdown-content {
-    width: 100vw; 
-    background: #e4e2e2;
-    padding: 20px;
+    width: 50vw; 
+    background: white;
+    padding: 4vh 0vh;
     /* box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2); */
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     /* transform: translateX(0%); */
-    z-index: 1000;
+    z-index: 100;
 }
 
 table {
@@ -442,7 +442,7 @@ table {
 }
 
 th, td {
-    padding: 10px;
+    padding: 5px;
     text-align: left;
 }
 
@@ -454,12 +454,8 @@ td {
     background-color: #ffffff;
 }
 
-
-.dropdown-link {
-    display: block;
-    margin-bottom: 5px;
-    color: #a13232; /* Adjust as needed */
-    text-decoration: none;
+td :hover {
+    text-decoration: underline;
 }
 
 .dropdown-link.active-link {

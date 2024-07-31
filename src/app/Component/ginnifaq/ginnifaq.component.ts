@@ -7,9 +7,12 @@ import { Component } from '@angular/core';
 })
 export class GinnifaqComponent {
   faqs = [
-    { question: 'Where can I buy Premium Dry fruits online?', answer: 'Ginni is the one-stop destination for premium dry fruits & nuts. Our products are made of 100% dry fruits & nuts. It is fresh and natural.', showAnswer: false },
-    { question: 'Where can I buy Premium Dry fruits online and bulk?', answer: 'Ginni is the one-stop destination for premium dry fruits & nuts. Our products are made of 100% dry fruits & nuts. It is fresh and natural.', showAnswer: false },
-    { question: 'Where can I buy Premium Dry fruits online?', answer: 'Ginni is the one-stop destination for premium dry fruits & nuts. Our products are made of 100% dry fruits & nuts. It is fresh and natural.', showAnswer: false },
+    { question: 'Who are Ginni Dry Fruits?', answer: 'Ginni Dry Fruits is a family-owned business dedicated to providing the highest quality nuts, dried fruits, and seeds, sourced from the best farms and orchards around the world.', showAnswer: false },
+    { question: 'How do I place an order?', answer: 'You can place an order through our website by selecting the products you wish to purchase, adding them to your cart, and following the checkout process.', showAnswer: false },
+    { question: 'Do you have a physical store?', answer: 'Currently, we are an online store. However, our products are available for purchase on our website, and we deliver straight to your door.', showAnswer: false },
+    { question: 'Can I buy your products in bulk?', answer: 'Yes, we offer bulk purchasing options. Please contact our sales team at admin@ginnidryfruits.com for more information.', showAnswer: false },
+    { question: 'What payment methods do you accept?', answer: 'We accept various payment methods including credit/debit cards, PayPal, and other secure payment gateways.', showAnswer: false },
+
     // Add more FAQ items here
   ];
 

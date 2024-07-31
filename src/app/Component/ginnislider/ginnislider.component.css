@@ -11,14 +11,13 @@
   
   .images-wrapper img {
     flex: 0 0 auto;
-    width: 25%; /* Adjust to fit 5 images on the screen */
+    width: 20%; /* Adjust to fit 5 images on the screen */
     height: 20rem;
-    border: 2px solid;
+    border: 1px solid;
   }
 
   .images-wrapper img:hover {
-    border: 5px solid blue; /* Add your desired highlighting style */
-
+    border: 1px solid #0066b2; /* Add your desired highlighting style */
   }
   
   .arrow {
@@ -41,14 +40,14 @@
   /* Add styles for the circular container */
   .arrow i {
     background-color: transparent; /* Set the background color of the icon to transparent */
-    border-radius: 60%; /* Make the container circular */
+    border-radius: 70%; /* Make the container circular */
     padding: 10px; /* Adjust padding as needed */
-    transition: background-color 0.3s; /* Add a transition effect for the background color */
+    transition: background-color 0.1s; /* Add a transition effect for the background color */
   }
   
   /* Change the color of the icon on hover */
   .arrow i:hover {
-    background-color: rgb(167, 167, 243); /* Change the background color to blue on hover */
+    background-color: #0066b2; /* Change the background color to blue on hover */
   }
 
 
