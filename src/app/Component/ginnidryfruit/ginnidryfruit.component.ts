@@ -527,4 +527,5 @@ export class GinnidryfruitComponent {
     this.getProducts();
   }
 
+
 }

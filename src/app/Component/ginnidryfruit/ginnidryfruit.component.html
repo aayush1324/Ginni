@@ -152,16 +152,16 @@
                   <div class="dryfruit">
                       <!-- Almond content here -->
                       <div class="image">
-                          <div class="saving">
+                          <!-- <div class="saving">
                               <h6>Save Rs. {{ item.discount }}</h6>
                               <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist "></i>
                               <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist "></i>
-                          </div>
+                          </div> -->
                           <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
                       </div>
               
                       <div class="naming">
-                        <a [routerLink]="['/main/ginnimainproduct', item.productName]"><h5>{{ item.productName }}</h5></a>
+                        <a [routerLink]="['/mainproduct', item.productName]"><h5>{{ item.productName }}</h5></a>
                       </div>
                   
                       <div class="pricing">

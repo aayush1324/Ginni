@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: antiquewhite;
+    background-color: white;
 }
 
 .product {
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgb(207, 205, 209);
+  background-color: white;
   gap: 1em;
   align-items: stretch;
 }
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   /* border: 2px solid; */
-  border-color: rgb(253, 203, 137);
+  border-color: rgb(255, 255, 255);
 }
 
 .leftimagesbox {
@@ -52,13 +52,13 @@
   height: fit-content;
   padding: 0;
   margin: 0;
-  /* border: 1px solid; */
+  border: 1px solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
-  background-color: rgb(223, 230, 230);
+  background-color: white;
   gap: 1em;
 }
 
@@ -68,10 +68,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  /* border: 1px solid; */
+  border: 1px solid;
   padding: 2%;
   overflow-x: auto; /* Enable horizontal scrolling */
   white-space: nowrap; /* Prevent line breaks inside the container */
+}
+
+.column img {
+  width: 100%;
+  height: 20%;
 }
 
 .slideshow-container {
@@ -102,7 +107,7 @@ img {
 }
 
 img:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 img.selected {
@@ -146,7 +151,7 @@ img.selected {
     top: 0; /* Adjust as needed */
     right: 0; /* Adjust as needed */
     overflow-y: auto; /* Enable vertical scrolling if needed */
-    border-color: antiquewhite;
+    background-color: whitesmoke;
 }
 
 .rightupper {
@@ -314,7 +319,7 @@ img.selected {
     margin-left: 2%;
     border:  1px solid;
     border-radius: 5px;
-    background-color: rgb(167, 167, 243)
+    background-color: #0066B2;
 }
 
 
@@ -348,7 +353,7 @@ img.selected {
     width: fit-content;
     padding: 1%;
     border-radius: 10px;
-    background-color: rgb(233, 245, 245);
+    background-color: whitesmoke;
 }
 
 .lower {
@@ -458,7 +463,7 @@ img.selected {
   border-radius: 20px;
   align-items: center;
   padding: 3%;
-  background-color: green;
+  background-color: #0066b2;
   color: aliceblue;
   border-color: antiquewhite;
 }

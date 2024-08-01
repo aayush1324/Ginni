@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
@@ -12,7 +12,7 @@ import { ProductService } from '../../Services/product.service';
   templateUrl: './ginniofferresponse.component.html',
   styleUrl: './ginniofferresponse.component.css'
 })
-export class GinniofferresponseComponent {
+export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
   isAccountDropdown: boolean = false;
   isMenuOpen: boolean = false;
@@ -120,6 +120,8 @@ export class GinniofferresponseComponent {
     const tokens = this.auth.getToken();
     this.loggedIn = !!tokens;
 
+    // document.addEventListener('click', this.handleClickOutside.bind(this));
+
     if(tokens){
       this.auth.isLoggedInSubject.next(true);
     }
@@ -168,6 +170,17 @@ export class GinniofferresponseComponent {
     this.getProduct();
   }
 
+  ngOnDestroy() {
+    document.removeEventListener('click', this.handleClickOutside.bind(this));
+  }
+
+
+  handleClickOutside(event: MouseEvent) {
+    const clickedInside = (event.target as HTMLElement).closest('.accountlaptopdropdown');
+    if (!clickedInside) {
+      this.closeAccount();
+    }
+  }
 
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({

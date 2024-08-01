@@ -90,7 +90,7 @@ button{
 .availabilityfooter {
 	width: 100%;
 	height: fit-content;
-	padding: 5%;
+	padding: 2%;
 	margin: 5% 0%;
 	display: flex;
 	flex-direction: column;
@@ -419,7 +419,7 @@ button{
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: green;
+    background-color: #0066b2;
     color: aliceblue;
     border-color: antiquewhite;
 }

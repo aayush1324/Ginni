@@ -321,10 +321,10 @@ button{
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 1%;
+    padding: 2%;
     margin: 0%;
     border: 1px solid;
-    border-radius: 10px;
+    border-radius: 10%;
     border-color: rgb(225, 225, 225);
 }
 
@@ -347,6 +347,7 @@ button{
 .image img {
     width: 100%; /* Ensure image fits the container */
     height: 12rem;
+    border-radius: 10%;
 }
 
 .saving {
@@ -419,7 +420,7 @@ button{
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: green;
+    background-color: #0066b2;
     color: aliceblue;
     border-color: antiquewhite;
 }

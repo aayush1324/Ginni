@@ -4,14 +4,21 @@
             <div class="left"> 
                 <div class="leftimagesbox">
                     <!-- Thumbnail images -->
-                    <div class="column">
-                        <img class="demo cursor" *ngFor="let image of imageList; let i = index" [src]="image.imageData" [ngClass]="{'selected': i === selectedImageIndex}" (click)="currentSlide(i + 1)" alt="Ginni">
+                    <div class="column" >
+                       <div  *ngFor="let index of [1, 2, 3, 4, 5]; let i = index">
+                            <img 
+                            class="demo cursor" 
+                            [src]="'../../assets/images/product_Images/' + productDetails.productName + index + '.jpg'" 
+                            [ngClass]="{'selected': index === selectedImageIndex + 1}" 
+                            (click)="currentSlide(index)" 
+                            alt="Ginni">
+                        </div>
                     </div>
     
                     <!-- Main slideshow images -->
                     <div class="slideshow-container">
-                        <div class="mySlides" *ngFor="let image of imageList; let i = index" [style.display]="i === slideIndex - 1 ? 'block' : 'none'">
-                            <img [src]="image.imageData">
+                        <div class="mySlides" *ngFor="let index of [1, 2, 3, 4, 5]; let i = index"  [style.display]="i === slideIndex - 1 ? 'block' : 'none'">
+                            <img [src]="'../../assets/images/product_Images/' + productDetails.productName + index + '.jpg'" >
                         </div>
                     </div>           
                 </div>
@@ -79,7 +86,7 @@
                         <h6>{{ item.discount }}</h6>
                         <h6>{{ item.subcategory }}</h6>
                     </div>
-                    <img [src]= "item.imageData" alt="GINNI">
+                    <img [src]="'../../assets/images/product_Images/' + item.productName + 1 + '.jpg'" alt="GINNI">
                 </div>
             
                 <div class="naming">
