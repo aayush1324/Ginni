@@ -52,6 +52,10 @@ import { CustomPreloadingService } from './Services/custom-preloading.service';
 import { GinniotpComponent } from './Component/ginniotp/ginniotp.component';
 import { GinnireviewsliderComponent } from './Component/ginnireviewslider/ginnireviewslider.component';
 import { GinninotfoundComponent } from './Component/ginninotfound/ginninotfound.component';
+import { GinnifivebestsellersComponent } from './Component/ginnifivebestsellers/ginnifivebestsellers.component';
+import { GinnifivecombosComponent } from './Component/ginnifivecombos/ginnifivecombos.component';
+import { GinnifivegiftingsComponent } from './Component/ginnifivegiftings/ginnifivegiftings.component';
+import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnifiveproducts.component';
 
 
 const routes: Routes = [{
@@ -100,7 +104,11 @@ const routes: Routes = [{
       {path: "upper-footer", component : GinniupperfooterComponent},
       {path: "footer",  component : GinnifooterComponent},
       {path: "filter", component : GinnifilterComponent},
-      {path: "products" , component : GinniproductsComponent},
+      {path: "fivebestseller" , component : GinnifivebestsellersComponent},
+      {path: "fivecombos" , component : GinnifivecombosComponent},
+      {path: "fivegiftings" , component : GinnifivegiftingsComponent},
+      {path: "fiveproducts" , component : GinnifiveproductsComponent},
+
 
      
 

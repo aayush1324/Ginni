@@ -1,19 +1,21 @@
 <div class="containerbox">
-    <div class="images-wrapper" #sliderContainer>
-      <img *ngFor="let image of images; let i = index"
-           [src]="image"
-           alt="Slide {{i+1}}"
-           [class.active]="isHighlighted(i)">
-    </div>
-  
-    <!-- Left arrow -->
-    <div class="arrow left-arrow" (click)="scroll(-1)">
-      <i class="fa fa-angle-left"></i>
-    </div>
-  
-    <!-- Right arrow -->
-    <div class="arrow right-arrow" (click)="scroll(1)">
-      <i class="fa fa-angle-right"></i>
-    </div>
+  <div class="images-wrapper" #sliderContainer>
+    <a *ngFor="let post of instagramPosts; let i = index"
+       [href]="post.url"
+       target="_blank"
+       [class.active]="isHighlighted(i)">
+      <img [src]="post.thumbnail" 
+           [alt]="post.alt">
+    </a>
   </div>
-  
+
+  <!-- Left arrow -->
+  <div class="arrow left-arrow" (click)="scroll(-1)">
+    <i class="fa fa-angle-left"></i>
+  </div>
+
+  <!-- Right arrow -->
+  <div class="arrow right-arrow" (click)="scroll(1)">
+    <i class="fa fa-angle-right"></i>
+  </div>
+</div>

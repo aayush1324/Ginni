@@ -1,33 +1,25 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Subscription, interval, take } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ginnislider',
   templateUrl: './ginnislider.component.html',
-  styleUrl: './ginnislider.component.css'
+  styleUrls: ['./ginnislider.component.css']
 })
-export class GinnisliderComponent  {
-  images: string[] = [
-    '../../assets/images/post/1.png',
-    '../../assets/images/post/2.png',
-    '../../assets/images/post/3.png',
-    '../../assets/images/post/4.png',
-    '../../assets/images/post/5.png',
-    '../../assets/images/post/6.png',
-    '../../assets/images/post/7.png',
-    '../../assets/images/post/8.png',
-    '../../assets/images/post/9.png',
-    '../../assets/images/post/10.png',
-    '../../assets/images/post/21.png',
-    '../../assets/images/post/12.png',
-    '../../assets/images/post/13.png',
-    '../../assets/images/post/14.png',
-    '../../assets/images/post/15.png',
-    '../../assets/images/post/16.png',
-    '../../assets/images/post/17.png',
-    '../../assets/images/post/18.png',
-    '../../assets/images/post/19.png',
-    '../../assets/images/post/20.png',
+export class GinnisliderComponent implements OnInit {
+  instagramPosts: { url: string, thumbnail: string, alt: string }[] = [
+    { url: 'https://www.instagram.com/reel/C2KA6obIfg3/?igsh=ODA4cGtxcmt2d2kw', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab2020d5226.jpg', alt: 'Instagram post with the caption: W' },
+    { url: 'https://www.instagram.com/reel/C9zdmLmPgmz/?igsh=MWx3N3hwaWx4c2wxbg==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab205f91231.jpg', alt: 'Instagram post with the caption:' },
+    { url: 'https://www.instagram.com/reel/C0a4WshoZrY/?igsh=MW94anF4ZG9ucXgybw==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab207b053cf.jpg', alt: 'Instagram post with the caption: .' },
+    { url: 'https://www.instagram.com/reel/C2KA6obIfg3/?igsh=ODA4cGtxcmt2d2kw', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab2020d5226.jpg', alt: 'Instagram post with the caption: W' },
+    { url: 'https://www.instagram.com/reel/C9zdmLmPgmz/?igsh=MWx3N3hwaWx4c2wxbg==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab205f91231.jpg', alt: 'Instagram post with the caption:' },
+    { url: 'https://www.instagram.com/reel/C0a4WshoZrY/?igsh=MW94anF4ZG9ucXgybw==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab207b053cf.jpg', alt: 'Instagram post with the caption: .' },
+    { url: 'https://www.instagram.com/reel/C2KA6obIfg3/?igsh=ODA4cGtxcmt2d2kw', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab2020d5226.jpg', alt: 'Instagram post with the caption: W' },
+    { url: 'https://www.instagram.com/reel/C9zdmLmPgmz/?igsh=MWx3N3hwaWx4c2wxbg==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab205f91231.jpg', alt: 'Instagram post with the caption:' },
+    { url: 'https://www.instagram.com/reel/C0a4WshoZrY/?igsh=MW94anF4ZG9ucXgybw==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab207b053cf.jpg', alt: 'Instagram post with the caption: .' },
+    { url: 'https://www.instagram.com/reel/C2KA6obIfg3/?igsh=ODA4cGtxcmt2d2kw', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab2020d5226.jpg', alt: 'Instagram post with the caption: W' },
+    { url: 'https://www.instagram.com/reel/C9zdmLmPgmz/?igsh=MWx3N3hwaWx4c2wxbg==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab205f91231.jpg', alt: 'Instagram post with the caption:' },
+    { url: 'https://www.instagram.com/reel/C0a4WshoZrY/?igsh=MW94anF4ZG9ucXgybw==', thumbnail: 'https://reelsaver.io/thumbdata/thumb_66ab207b053cf.jpg', alt: 'Instagram post with the caption: .' },
+ 
   ];
 
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
@@ -35,8 +27,7 @@ export class GinnisliderComponent  {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   setCurrentIndex(index: number): void {
     this.currentIndex = index;
@@ -46,13 +37,10 @@ export class GinnisliderComponent  {
     return this.currentIndex === index;
   }
 
-
   scroll(direction: number): void {
     const container = this.sliderContainer.nativeElement as HTMLElement;
-    const imageWidth = container.offsetWidth*2.5 / this.images.length; // Assuming equal width for each image
-    const scrollAmount = imageWidth * direction;
+    const postWidth = container.offsetWidth * 2.5 / this.instagramPosts.length; // Assuming equal width for each post
+    const scrollAmount = postWidth * direction;
     container.scrollLeft += scrollAmount;
   }
-
-  
 }
