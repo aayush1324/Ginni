@@ -23,7 +23,7 @@
 
 .product {
   width: 100%;
-  height: fit-content;
+  height: 30rem;
   padding: auto;
   margin: 0%;
   /* border: 3px solid; */
@@ -31,28 +31,28 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  gap: 1em;
+  gap: 1rem;
   align-items: stretch;
 }
 
 
 .left {
   width: 50%;
-  height: 100%;
+  height: 90%;
   padding: auto;
   margin: 2%;
   display: flex;
   flex-direction: column;
-  /* border: 2px solid; */
-  border-color: rgb(255, 255, 255);
+  border: 1px solid;
+  border-color: rgb(200,200,200);
 }
 
 .leftimagesbox {
   width: 100%;
-  height: fit-content;
+  height: 100%;
   padding: 0;
   margin: 0;
-  border: 1px solid;
+  /* border: 1px solid; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,29 +68,36 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  border: 1px solid;
-  padding: 2%;
+  /* border: 5px solid; */
+  padding: 1%;
   overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent line breaks inside the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.column::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
 }
 
 .column img {
   width: 100%;
-  height: 20%;
+  height: 5rem;
 }
 
 .slideshow-container {
   width: 80%;  /* Adjust this width as needed to fit your layout */
-  height: fit-content;
+  height: 100%;
   /* margin-left: 2%;  Adjust the left margin to create space between thumbnails and slideshow */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 2px solid; */
+
 }
 
 .mySlides {
   width: 100%; 
-  height: fit-content;
+  height: 100%;
   padding: 0;
   margin: 0;
   /* border: 1px solid; */
@@ -99,7 +106,7 @@
 
 .mySlides img {
   width: 100%;
-  height: auto;  /* Maintain the aspect ratio of images */
+  height: 100%;  /* Maintain the aspect ratio of images */
 }
 
 img {
@@ -143,7 +150,7 @@ img.selected {
 
 .right {
     width: 50%;
-    height: 100%;
+    height: 90%;
     padding: auto;
     margin: 2%;
     border:  1px solid;
@@ -151,7 +158,9 @@ img.selected {
     top: 0; /* Adjust as needed */
     right: 0; /* Adjust as needed */
     overflow-y: auto; /* Enable vertical scrolling if needed */
-    background-color: whitesmoke;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid;
+    border-color: rgb(200, 200, 200);
 }
 
 .rightupper {
@@ -185,6 +194,46 @@ img.selected {
     flex-direction: column;
 }
 
+.rating {
+  width: 60%;
+  height: fit-content;
+  /* border: 1px solid; */
+  /* text-align: center; */
+  padding: 0% 5%;
+  margin: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.star-rating {
+  display: inline-block;
+  color: gold;
+}
+
+.star-rating .fa {
+  font-size: 1.5em;
+  margin: 0 0.25em;
+}
+
+
+.rating p {
+  font-size: small;
+  font-weight: normal;
+  /* border: 1px solid; */
+  padding: 0%;
+  margin: 0%;
+}
+
+.rating h6 {
+  font-size: large;
+  font-weight: bolder;
+  color: #0066b2;
+  /* border: 1px solid; */
+  padding: 0%;
+  margin: 0%;
+}
+
 .rightmiddlemrp {
     width: 100%;
     height: fit-content;
@@ -201,9 +250,29 @@ img.selected {
     /* border: 5px solid; */
 }
 
-.rightmiddlemrp p {
-    width: 60%;
+.rightmiddlemrpoff {
+  width: 60%;
+  padding: 0%;
+  margin: 0%;
+  /* border:  1px solid; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.rightmiddlemrpoff p {
+    width: 20%;
+    font-weight: normal;
+    text-decoration: line-through;
     /* border: 5px solid; */
+}
+
+
+.rightmiddlemrpoff h6 {
+  width: 20%;
+  font-weight: bolder;
+  /* border: 5px solid; */
+  color: #0066B2;
 }
 
 .rightmiddleoffer {

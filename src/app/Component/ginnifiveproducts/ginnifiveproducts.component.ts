@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 
@@ -11,11 +11,16 @@ import { ProductService } from '../../Services/product.service';
 export class GinnifiveproductsComponent {
   productlist: any[] = [];
 
+  // @Input() rating: number = 0; // Default value to avoid undefined
+  stars: number[] = [1, 2, 3, 4, 5];
+
   constructor( private cartService : CartService, private productService : ProductService) { }
 
   ngOnInit(): void {
     this.getProduct();
   }
+
+
 
   addtocart(item: any){
     console.log(item);

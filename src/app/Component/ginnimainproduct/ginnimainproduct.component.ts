@@ -45,6 +45,7 @@ export class GinnimainproductComponent {
   slideIndex = 1;
   quantity: number = 1; // Initialize the quantity to 1
   selectedImageIndex = 0;
+  stars: number[] = [1, 2, 3, 4, 5];
 
 
 
@@ -261,7 +262,7 @@ export class GinnimainproductComponent {
   
   getTotalPrice(): number {
     let totalPrice = 0;
-    totalPrice += this.quantity * this.productDetails.price;
+    totalPrice += this.quantity * this.productDetails.discountedPrice;
     // this.productDetails.forEach((item: { quantity: number; price: number; }) => {
     //     totalPrice += item.quantity * item.price;
     // });

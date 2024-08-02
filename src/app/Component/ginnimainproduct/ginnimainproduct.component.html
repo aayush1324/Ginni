@@ -5,7 +5,7 @@
                 <div class="leftimagesbox">
                     <!-- Thumbnail images -->
                     <div class="column" >
-                       <div  *ngFor="let index of [1, 2, 3, 4, 5]; let i = index">
+                       <div  *ngFor="let index of [1, 2, 3, 4, 5, 1, 2]; let i = index">
                             <img 
                             class="demo cursor" 
                             [src]="'../../assets/images/product_Images/' + productDetails.productName + index + '.jpg'" 
@@ -26,20 +26,39 @@
     
             <div class="right" *ngIf="productDetails">
                 <div class="rightupper">
-                    <h1>{{ productDetails.productName }}</h1>
-                    <br>
-                    <h6>Save Rs.{{ productDetails.discount }}</h6>
+                    <h1>{{ productDetails.productName | titlecase}}  ({{productDetails.weight}})</h1>
+                    <!-- <h6>Save Rs.{{ productDetails.discount }}</h6> -->
+                </div>
+                <div class="rating">
+                    <div class="star-rating">
+                        <i *ngFor="let star of stars; let i = index"
+                            class="fa"
+                            [ngClass]="{
+                            'fa-star': productDetails.rating >= i + 1,
+                            'fa-star-half-o': productDetails.rating > i && productDetails.rating < i + 1,
+                            'fa-star-o': productDetails.rating < i + 1
+                            }">
+                        </i>
+                      </div>
+                    <h6>{{ productDetails.rating | number:'1.1-1' }}</h6>
+                    <p>({{productDetails.userRating}} reviews)</p>
                 </div>
                 <br>
                 <div class="rightmiddle">
                     <div class="rightmiddlemrp">
                         <h6>M.R.P</h6>
-                        <p><del>Rs. {{ productDetails.price }}</del></p>
+                        <div class="rightmiddlemrpoff">
+                            <p>&#x20B9; {{ productDetails.price }}</p>
+                            <h6>{{ (productDetails.discount / productDetails.price) * 100 | number:'1.0-0' }}% off</h6>
+                        </div>
+                     
                     </div>
+
                     <div class="rightmiddleoffer">
                         <h6>Offer Price:</h6>
-                        <p><b>Rs. {{ productDetails.price - productDetails.discount }}</b> (incl. of all taxes)</p>
+                        <p><b>&#x20B9; {{ productDetails.discountedPrice }}</b> (incl. of all taxes)</p>
                     </div>
+
                     <div class="rightmiddlequantity">
                         <h6>Quantity:</h6>
                         <div class="rightmiddlebox">
@@ -50,10 +69,10 @@
                             </div>
                         </div>
                     </div>
-                    <br>
+
                     <div class="rightmiddletotal">
                         <h6>Total Price:</h6>
-                        <p><b>Rs. {{getTotalPrice()}}</b> (incl. of all taxes)</p>
+                        <p><b>&#x20B9; {{getTotalPrice()}}</b> (incl. of all taxes)</p>
                     </div>
                 </div>
     

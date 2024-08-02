@@ -63,6 +63,8 @@ export class GinnidryfruitComponent {
   productLength!: number;
   isOpenSortby: boolean = false;
   isOpenFilter: boolean = false;
+  stars: number[] = [1, 2, 3, 4, 5];
+
 
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
@@ -272,6 +274,7 @@ export class GinnidryfruitComponent {
     this.ProductHelperService.getProducts(UserID).subscribe({
       next: (res) => {
         this.productLength = res.length;
+        console.log(res);
         this.productlist = res;
         this.originalProductList = [...this.productlist];
         this.processProductData(res);
