@@ -26,6 +26,8 @@ export class GinnicartComponent {
   products: any;
   totalCartItem!: number;
   totalWishlistItem! : number;
+  stars: number[] = [1, 2, 3, 4, 5];
+
 
 
   constructor(private cartService: CartService, private wishlistService : WishlistService, 
@@ -53,6 +55,7 @@ export class GinnicartComponent {
             item.imageData = 'data:image/jpeg;base64,' + item.imageData;
           }
         });
+        console.log(res);
         this.productss = res;
 
         this.searchService.getSearchTerm().subscribe((searchTerm) => {
@@ -77,6 +80,7 @@ export class GinnicartComponent {
   
     return this.cartService.getToCarts(UserID!).pipe(
       tap(res => {
+        console.log(res);
         this.totalCartItem = res.length;
       })
     );
@@ -243,11 +247,20 @@ export class GinnicartComponent {
 
   getTotalPrice(): number {
     let totalPrice = 0;
-    this.products.forEach((item: { itemQuantity: number; itemPrice: number; }) => {
-        totalPrice += item.itemQuantity * item.itemPrice;
+    this.products.forEach((item: { itemQuantity: number; itemDiscountedPrice: number; }) => {
+        totalPrice += item.itemQuantity * item.itemDiscountedPrice;
     });
     return totalPrice;
   }
+
+  getDiscountPrice(): number {
+    let totalPrice = 0;
+    this.products.forEach((item: { itemQuantity: number; itemDiscountedPrice: number; itemPrice: number;}) => {
+        totalPrice += (item.itemQuantity * item.itemPrice) -(item.itemQuantity * item.itemDiscountedPrice);
+    });
+    return totalPrice;
+  }
+
 
   razorpay_Id : string = "";
   razororder_Id: string = "";

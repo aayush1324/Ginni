@@ -25,9 +25,24 @@
 } */
 
 /* .header button{
-    font-size: x-large;
+    font-size: large;
+    background-color: #0066b2;
+    border: 5px solid;
+    border-radius: 10%;
+    color: aliceblue;
 } */
 
+.header button {
+    width: 10%;
+    height: fit-content;
+    border: 1px solid;
+    border-radius: 10px;
+    align-items: center;
+    padding: 0.5%;
+    background-color:  #0066b2;
+    color: aliceblue;
+    border-color: antiquewhite;
+}
 
 .middle {
     width: 100%;
@@ -247,6 +262,11 @@
     padding: 5%;
     margin: 2%;
     border-radius: 10px;
+    border: 2px solid;
+    border-color: gray;
+    background-color: #0066b2;
+    color: aliceblue;
+
 }
 
 
@@ -292,7 +312,8 @@
     width: fit-content;
     padding: 1%;
     border-radius: 10px;
-    background-color: rgb(233, 245, 245);
+    border: 2px solid;
+    background-color: #0066b2;
 }
 
 .lower {
@@ -360,6 +381,47 @@
     border-radius: 5px;
 }
 
+
+.rating {
+    width: 100%;
+    height: fit-content;
+    /* border: 1px solid; */
+    /* text-align: center; */
+    padding: 0% ;
+    margin: 0%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+.star-rating {
+    display: inline-block;
+    color: gold;
+  }
+  
+  .star-rating .fa {
+    font-size: 1em;
+    margin: 0 0.1em;
+  }
+  
+.rating p {
+    font-size: small;
+    font-weight: lighter;
+    /* border: 1px solid; */
+    padding: 0%;
+    margin: 0%;
+}
+
+.rating h6 {
+    font-size: small;
+    font-weight: bolder;
+    color: #0066b2;
+    /* border: 1px solid; */
+    padding: 0%;
+    margin: 0%;
+}
+
 .naming {
     width: 100%;
     height: 3em;
@@ -398,7 +460,7 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: green;
+    background-color: #0066b2;
     color: aliceblue;
     border-color: antiquewhite;
 }
@@ -412,6 +474,8 @@
     padding: 1%;
     margin: 2%;
     border: 1px solid;
+    border-radius: 2%;
+    border-color: rgb(200, 200, 200);
     position: sticky;
     top: 0; /* Adjust as needed */
     right: 0; /* Adjust as needed */
@@ -479,9 +543,11 @@
     height: fit-content;
     padding: 2%;
     margin: 0%;
-    background-color: rgb(27, 2, 255);
+    background-color: #0066b2;
     border-radius: 5px;
     color: aliceblue;
+    border: 2px solid;
+    border-color: black;
 }
 
 
@@ -825,7 +891,7 @@
 }
 
 .empty-cart button:hover {
-    background-color: #0056b3; /* Adjust color as needed */
+    background-color: #0066b2;
 }
 
 
@@ -1054,7 +1120,7 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: green;
+    background-color: #0066b2;
     color: aliceblue;
     border-color: antiquewhite;
 }

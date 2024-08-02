@@ -182,6 +182,8 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     }
   }
 
+  
+
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({
       next: (res) => {

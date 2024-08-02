@@ -3,7 +3,7 @@
      <ng-container *ngIf="products.length > 0; else emptyCart">
         <div class="header">
             <h1>My Cart</h1>
-            <button (click)="removeAllItem()">Empty Cart</button>
+            <button (click)="removeAllItem()"><h5>Empty Cart</h5></button>
         </div>
 
         <div class="middle">
@@ -23,17 +23,34 @@
                 <div class="middleleftmain" *ngFor="let item of products; let i = index">
                     <div class="middleleftmainproduct">
                         <div class="middleleftmainproductimages">
-                            <img [src]= "item.imageData" alt="" >
+                            <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
+
                         </div>
     
                         <div class="middleleftmainproductnaming">
                             <div class="middleleftmainproductname">
-                                <a  [routerLink]="['/main/ginnimainproduct', item.productName]">{{item.productName}}</a>
+                                <a  [routerLink]="['/mainproduct', item.productName]"><h5>{{item.productName | titlecase}}</h5></a>
                             </div>
     
                             <div class="middleleftmainproductprice">
-                                <h6>Rs {{item.itemPrice}}</h6>
-                                <!-- <p><del>{{item.discount}}</del></p> -->
+                                <del><h6> &#x20B9; {{item.itemPrice}}</h6></del>
+                                <p> &#x20B9; {{item.itemDiscountedPrice}} </p>
+                                <h6>{{ (item.itemDiscount / item.itemPrice) * 100 | number:'1.0-0' }}% off</h6>
+                            </div>
+
+                            <div class="rating">
+                                <div class="star-rating">
+                                    <i *ngFor="let star of stars; let i = index"
+                                        class="fa"
+                                        [ngClass]="{
+                                        'fa-star': item.itemRating >= i + 1,
+                                        'fa-star-half-o': item.itemRating > i && item.itemRating < i + 1,
+                                        'fa-star-o': item.itemRating < i + 1
+                                        }">
+                                    </i>
+                                  </div>
+                                <h6>{{ item.itemRating | number:'1.1-1' }}</h6>
+                                <p>({{item.itemUserRating}})</p>
                             </div>
                         </div>
                     </div>
@@ -46,18 +63,19 @@
                                 <h1 (click)="incrementQuantity(item)" ><b>+</b></h1>
                             </div>
     
-                            <div class="middleleftmainquantityremove">
+                            <!-- <div class="middleleftmainquantityremove">
                                 <a (click)="removeCartItem(item)" style="text-decoration: underline; cursor: pointer;">Remove</a>
-                            </div>
+                            </div> -->
                         </div>
     
                         <div class="middleleftmaintotal">
-                            <h6>Rs {{item.itemTotalPrice}}</h6>
+                            <h6> &#x20B9; {{item.itemTotalPrice}}</h6>
                         </div>
     
                         <div class="middleleftmainaction">
                             <button (click)="initiatesPayment(item.productId, item.itemTotalPrice)">Buy Now</button>
-                            <button (click)="addToWishlistAndRemoveFromCart(item)">Add to Wishlist</button>
+                            <button (click)="removeCartItem(item)">Remove</button> 
+                            <!-- <button (click)="addToWishlistAndRemoveFromCart(item)">Add to Wishlist</button> -->
                         </div>
                     </div>
                 </div>
@@ -67,11 +85,11 @@
                 <div class="middlerighttop">
                     <div class="middlerighttoptotal">
                         <h6>Total</h6>
-                        <h6>Rs. {{ getTotalPrice() }}</h6>
+                        <h6>&#x20B9;  {{ getTotalPrice() }}</h6>
                     </div>
     
                     <div class="middlerighttopsave">
-                        <h6>You saved Rs. {{getTotalPrice()}} !</h6>
+                        <h6>You saved &#x20B9;  {{getDiscountPrice()}} !</h6>
                     </div>
                 </div>
     
@@ -80,7 +98,7 @@
                 </div>
     
                 <div class="middlerightbottom">
-                    <button (click)="initiatePayment()">Checkout</button>
+                    <button (click)="initiatePayment()"><h4>Checkout</h4></button>
                 </div>
             </div>
         </div>
