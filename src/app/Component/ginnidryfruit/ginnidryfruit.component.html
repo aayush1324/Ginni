@@ -163,12 +163,6 @@
                       <div class="naming">
                         <a [routerLink]="['/mainproduct', item.productName]"><h5>{{ item.productName | titlecase}} ({{item.weight}})</h5></a>
                       </div>
-                  
-                      <div class="pricing">
-                        <h5>&#8377; {{ item.price }}</h5>
-                        <p> &#x20B9; {{item.price - item.discount}} </p>
-                        <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
-                      </div>
 
                       <div class="rating">
                         <div class="star-rating">
@@ -180,10 +174,18 @@
                                 'fa-star-o': item.rating < i + 1
                                 }">
                             </i>
-                          </div>
+                        </div>
                         <h6>{{ item.rating | number:'1.1-1' }}</h6>
                         <p>({{item.userRating}})</p>
-                    </div>
+                      </div>
+                  
+                      <div class="pricing">
+                        <h5>&#8377; {{ item.price }}</h5>
+                        <p> &#x20B9; {{item.price - item.discount}} </p>
+                        <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
+                      </div>
+
+   
                   
                       <div class="carting">
                           <button *ngIf="item.status === 'instock'" (click)="addToCart(item)">Add to Cart</button>

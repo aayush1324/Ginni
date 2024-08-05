@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
 
       this.search();
     });
-    }
+  }
     
 
   search(): void {

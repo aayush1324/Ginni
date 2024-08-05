@@ -121,18 +121,7 @@
                 </a> 
             </div>
             
-            <div class="navbarcontent">
-
-                <!-- <div class="navbarleft">
-                    <div class="search-container">
-                        <div class="searchbox">
-                            <div class="searchbar">
-                                <app-search></app-search>
-                            </div>
-                        </div>
-                    </div>         
-                </div> -->
-    
+            <div class="navbarcontent">    
                 <div class="navbarcontentleft">
                     <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
                         <a routerLink="/collections/bestsellers"><h6>Best Sellers</h6></a>
@@ -193,8 +182,6 @@
                         </div>
                         
                     </div>
-                    
-    
     
                     <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
                         <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
@@ -215,20 +202,56 @@
                 </div>
 
                 <div class="navbarcontentright">                   
-                    <div class="wishlist" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
+                    <!-- <div class="wishlist" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
                         <a routerLink="/account/wishlist">
                             <div class="icontext">
                                 <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
                                 <i class="wishlist-count">{{ totalWislistItem }}</i>
                             </div>
                         </a>
+                    </div> -->
+
+                    <div class="searchnavbaricon" (click)="toggleSearchContainer()">
+                        <i class="fa fa-search search-icon"></i>
                     </div>
+                    
+                    <div class="search-container" *ngIf="isSearchContainerOpen">
+                        <div class="searchbox">
+                            <div class="searchbar">
+                                <!-- <app-search></app-search> -->
+                                <div class="search-containers">
+                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products" class="search-input">
+                                    <i class="fa fa-search searchbaricon"></i>
+                                </div>
+
+                                <div class="searchResult" *ngFor="let result of searchResultss">
+                                    <div id="image">
+                                      <img [src]="'../../assets/images/product_Images/' + result.productName  + 1 +'.jpg'" alt="GINNI">
+                                    </div>
+                              
+                                    <div class="imageDetail">
+                                        <div id="name">
+                                            <a [routerLink]="['/mainproduct', result.productName]"><h5>{{ result.productName | titlecase}} ({{result.weight}})</h5></a>
+                                        </div>
+                                        <div id="price">
+                                            <h5>Rs {{ result.price }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="searchclose" (click)="toggleSearchContainer()">
+                                <i class="fa fa-close"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
                 
                     <div class="cart"  [ngClass]="{'actives': isLinkActive('/account/cart')}">
                         <a routerLink="/account/cart">
                             <div class="icontext">
                                 <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
-                                <i class="cart-count">{{ totalCartItem }}</i>
+                                <i class="cart-count"  *ngIf="loggedIn">{{ totalCartItem }}</i>
                             </div>
                         </a>
                     </div>

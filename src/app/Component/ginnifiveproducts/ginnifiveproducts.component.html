@@ -24,11 +24,6 @@
                 <a [routerLink]="['/mainproduct', item.productName]"><h6>{{ item.productName | titlecase}} ({{item.weight}})</h6></a>
             </div>
             <!-- <br> -->
-            <div class="pricing">
-                <h5>&#8377; {{ item.price }}</h5>
-                <p> &#x20B9; {{item.price - item.discount}} </p>
-                <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
-            </div>
 
             <div class="rating">
                 <div class="star-rating">
@@ -44,6 +39,14 @@
                 <h6>{{ item.rating | number:'1.1-1' }}</h6>
                 <p>({{item.userRating}})</p>
             </div>
+
+            <div class="pricing">
+                <h5>&#8377; {{ item.price }}</h5>
+                <p> &#x20B9; {{item.price - item.discount}} </p>
+                <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
+            </div>
+
+           
         
             <div class="carting">
                 <!-- <button (click)="addtocart(item)">Add to Cart</button> -->

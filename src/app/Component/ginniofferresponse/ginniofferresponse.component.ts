@@ -6,6 +6,7 @@ import { UserstoreService } from '../../Services/userstore.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { ProductService } from '../../Services/product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ginniofferresponse',
@@ -19,7 +20,11 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   isAccountOpen: boolean = false;
   
   isSearchBarVisible: boolean = false;
+  isSearchContainerOpen: boolean = false;
 
+  toggleSearchContainer() {
+      this.isSearchContainerOpen = !this.isSearchContainerOpen;
+  }
   toggleSearchBar() {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
@@ -77,6 +82,13 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   productList: any[] = []; // Assuming productList contains your list of products
   originalProductList: any[] = []; // Original list of products (not filtered)
   searchResults: string[] = []; // Assuming searchResults will hold the results of the search
+
+  
+  searchTerms: string = '';
+
+  searchTerm: string = '';
+  searchTermSubscription: Subscription | undefined;
+  searchResultss: any[] = [];
 
 
   constructor(private elementRef: ElementRef, private router:Router, 
@@ -168,6 +180,14 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     })
 
     this.getProduct();
+
+    this.searchTerm = this.searchService.getSearchVal();
+
+    this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
+     this.searchTerms = term;
+
+     this.search();
+   });
   }
 
   ngOnDestroy() {
@@ -183,6 +203,27 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   }
 
   
+
+  search(): void {
+    //this.searchService.setSearchTerm(this.searchTerms);
+
+    this.productService.searchProducts(this.searchTerms).subscribe({
+      next : (res) => {
+        this.searchResultss = res;
+        console.log(this.searchResultss);
+        this.searchResultss.forEach(item => {
+          if (item.imageData) {
+            // Prepend 'data:image/jpeg;base64,' to the imageData field
+            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+          }
+        });
+        console.log(this.searchResultss);
+      },
+      error: (err) => {
+        console.error('Error fetching addresses:', err);
+      }
+    });
+  }
 
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({

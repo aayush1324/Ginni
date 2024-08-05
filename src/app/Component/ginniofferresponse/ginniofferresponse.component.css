@@ -108,69 +108,162 @@
 
 
 .search-container {
-    background-color: white;
-    width: 60%;
+    background-color: rgb(255, 255, 255);
+    width: 99vw;
     height: 100%;
-    padding: auto;
-    margin: auto;
+    padding: 0%;
+    margin: 0%;
     display: flex;
     justify-content: center;
     align-items: center;
     /* border: 1px solid; */
+    position: absolute; /* Position the element absolutely */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    z-index: 1000; /* Ensure it's on top of other content */
 }
 
 .searchbox {
-    background-color: white;
-    width: 75%;
-    height: 50%;
-    padding: auto;
-    border-radius: 1%;
-    margin: auto;
+    background-color: #ffffff;
+    width: 50%;
+    height: 100%;
+    padding: 0%;
+    margin: 0;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    /* border: 1px solid; */
+    /* border: 5px solid; */
 }
+
+.search-containers {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(35, 2, 184);
+    /* border: 1px solid; */
+    border-radius: 50px;
+    padding: 0%;
+    margin: 0%;
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    padding-left: 3em; /* Adjusted for icon */
+    /* border: 3px solid; */
+    box-sizing: border-box;
+    border-radius: 80px;
+}
+
+.searchbaricon {
+    position: absolute;
+    left: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0066b2; 
+    pointer-events: none;
+}
+
+.searchbaricon  .fa-search{
+    font-size: 1.5em;
+    font-weight: bolder;
+    border: 5px solid;
+} 
 
 .searchbar {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    padding: auto;
-    margin: auto;
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    height: 50%;
+    padding: 0%;
+    margin: 0%;
     user-select: none;
+    /* border: 3px solid; */
+    z-index: 1000;
+    align-items: center;
+}
+
+.searchclose .fa-close {
+    position: relative; /* Ensure the wishlist icon is the reference point */
+    font-size: 2em;
+    cursor: pointer;
+    color: #0066b2;
+}
+
+
+.searchResult {
+    max-width: 90%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+    z-index: 1;
+    margin-left: 25px;
+    margin-top: 0.1%;
+    border-radius: 10px;
+}
+
+#image {
+    width: 20%;
+    height: fit-content;
+    padding: 1% 2%;
+    margin: 0%;
+    /* border: 2px solid; */
+}
+
+#image img {
+    width: 100%; /* Specify the width you desire */
+    height: 5rem; /* Specify the height you desire */
+    object-fit: cover; /* Ensures the image covers the specified dimensions */
+}
+
+.imageDetail {
+    width: 80%;
+    height: 100%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    flex-direction: column;
     /* border: 1px solid; */
 }
 
-.searchbar input[type="text"] {
+#name {
     width: 100%;
-    height: 100%; /* Ensure input takes full height */
-    padding: 5%; /* Adjust padding for better spacing */
-    border: 1px solid #ccc;
-    user-select: none;
-    box-sizing: border-box; /* Ensure padding does not overflow */
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+
 }
 
-/* .searchbutton {
-    width: 10%;
-    height: 100%;
-    padding: 1%;
-    margin: 0;
-    background: rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer; 
-} */
+#price {
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
 
-/* .fa-search {
-    font-size: 2em;
-    color: rgb(253, 253, 253);
-} */
+}
+
+
+
+/* .searchbar input[type="text"] {
+    width: 50%;
+    height: 100%; 
+    padding: 5%; 
+    border: 1px solid #ccc;
+    user-select: none;
+    box-sizing: border-box; 
+}
 
 .searchbar input[type="text"]:focus {
     outline: none;
-    border-color: #aaa; /* Better color contrast on focus */
+    border-color: #aaa; 
 }
 
 .searchbutton button:focus,
@@ -180,7 +273,9 @@
 
 .searchbutton {
     user-select: none;
-}
+} */
+
+
 
 
 
@@ -231,11 +326,15 @@
     line-height: 1.25em; /* Ensure the text is centered vertically */
 }
 
-.wishlist .fa-heart, .cart .fa-shopping-cart, .track .fa-truck, .account-toggle .fa-user-circle{
+.wishlist .fa-heart, .cart .fa-shopping-cart, .track .fa-truck, .account-toggle .fa-user-circle, 
+.searchnavbaricon .fa-search{
     position: relative; /* Ensure the wishlist icon is the reference point */
     font-size: 1.5em;
     color: #0066b2;
+    cursor: pointer;
 }
+
+
 
 .account-toggle .fa-user-circle  {
     font-size: 2em;

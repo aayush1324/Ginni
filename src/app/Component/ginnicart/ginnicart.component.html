@@ -24,18 +24,11 @@
                     <div class="middleleftmainproduct">
                         <div class="middleleftmainproductimages">
                             <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
-
                         </div>
     
                         <div class="middleleftmainproductnaming">
                             <div class="middleleftmainproductname">
                                 <a  [routerLink]="['/mainproduct', item.productName]"><h5>{{item.productName | titlecase}}</h5></a>
-                            </div>
-    
-                            <div class="middleleftmainproductprice">
-                                <del><h6> &#x20B9; {{item.itemPrice}}</h6></del>
-                                <p> &#x20B9; {{item.itemDiscountedPrice}} </p>
-                                <h6>{{ (item.itemDiscount / item.itemPrice) * 100 | number:'1.0-0' }}% off</h6>
                             </div>
 
                             <div class="rating">
@@ -52,6 +45,14 @@
                                 <h6>{{ item.itemRating | number:'1.1-1' }}</h6>
                                 <p>({{item.itemUserRating}})</p>
                             </div>
+    
+                            <div class="middleleftmainproductprice">
+                                <h5> &#x20B9; {{item.itemDiscountedPrice}} </h5>
+                                <h6> &#x20B9; {{item.itemPrice}}</h6>
+                                <p>{{ (item.itemDiscount / item.itemPrice) * 100 | number:'1.0-0' }}% off</p>
+                            </div>
+
+                            
                         </div>
                     </div>
     
