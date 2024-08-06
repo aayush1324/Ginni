@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component';
@@ -137,6 +138,9 @@ import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnif
     ReactiveFormsModule,
     HttpClientModule,
     NgToastModule,
+    BrowserAnimationsModule, // Add this line
+    NoopAnimationsModule, // Add this line
+
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

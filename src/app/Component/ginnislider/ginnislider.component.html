@@ -1,21 +1,32 @@
 <div class="containerbox">
-  <div class="images-wrapper" #sliderContainer>
-    <a *ngFor="let post of instagramPosts; let i = index"
-       [href]="post.url"
-       target="_blank"
-       [class.active]="isHighlighted(i)">
-      <img [src]="post.thumbnail" 
-           [alt]="post.alt">
-    </a>
+
+  <div class="upper">
+    <div class="upperleft">
+        <h1>Our Wholesome Recipes</h1>
+    </div>
   </div>
 
-  <!-- Left arrow -->
-  <div class="arrow left-arrow" (click)="scroll(-1)">
-    <i class="fa fa-angle-left"></i>
+  
+  <div class="lower">
+    <div class="images-wrapper" #sliderContainer>
+      <a *ngFor="let post of instagramPosts; let i = index"
+         [href]="post.url"
+         target="_blank"
+         [class.active]="isHighlighted(i)">
+        <img [src]="post.thumbnail" 
+             [alt]="post.alt">
+      </a>
+    </div>
+  
+    <!-- Left arrow -->
+    <div class="arrow left-arrow" (click)="scroll(-1)">
+      <b><i class="fa fa-angle-left"></i></b>
+    </div>
+  
+    <!-- Right arrow -->
+    <div class="arrow right-arrow" (click)="scroll(1)">
+      <b><i class="fa fa-angle-right"></i></b>
+    </div>
   </div>
-
-  <!-- Right arrow -->
-  <div class="arrow right-arrow" (click)="scroll(1)">
-    <i class="fa fa-angle-right"></i>
-  </div>
+  
 </div>

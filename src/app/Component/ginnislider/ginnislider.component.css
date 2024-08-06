@@ -2,9 +2,41 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 40vh;
-  background-color: aliceblue;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 0% 3%;
+  margin: 0%;
+  /* border: 1px solid; */
 }
+
+
+.upper {
+  width: 100%;
+  height: fit-content;
+  padding: 2% 0%;
+  margin: 0%;
+  /* border: 1px solid; */
+}
+
+.upperleft {
+  width: 100%;
+  height: fit-content;
+  /* border: 1px solid; */
+}
+
+.lower {
+  width: 100%;
+  height: 30vh;
+  padding: 0%;
+  margin: 0%;
+  /* border: 4px solid; */
+  /* background-color: antiquewhite; */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent line breaks inside the container */
+}
+
 
 .images-wrapper {
   display: flex;
@@ -29,43 +61,50 @@
   /* border: 1px solid; */
   transform-origin: center; /* Ensures the image scales from the center */
   padding: 0.25%;
-  border-radius: 15%;
+  border-radius: 5%;
 }
 
 
 .images-wrapper img:hover {
   transform: scale(1.1); /* Scale up the image on hover */
-  border: 1px solid #ffffff; /* Add your desired highlighting style */
+  border: 1px solid ; /* Add your desired highlighting style */
 }
 
 .arrow {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 24px;
+  top: 70%;
+  transform: translateY(-70%);
+  font-size: x-large;
   color: black;
   cursor: pointer;
 }
 
 .left-arrow {
-  left: 10px;
+  left: 0.25rem;
+  /* border: 1px solid; */
 }
 
 .right-arrow {
-  right: 10px;
+  right: 0.25rem;
 }
 
 /* Add styles for the circular container */
 .arrow i {
   background-color: transparent; /* Set the background color of the icon to transparent */
-  border-radius: 70%; /* Make the container circular */
-  padding: 10px; /* Adjust padding as needed */
+  border-radius: 50%; /* Make the container circular */
   transition: background-color 0.1s; /* Add a transition effect for the background color */
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  width: 2rem;   /* Adjust the width and height as needed */
+  height: 2rem;  /* Adjust the width and height as needed */
+  color: inherit; /* Inherit the color from the parent */
 }
 
 /* Change the color of the icon on hover */
 .arrow i:hover {
-  background-color: #ffffff; /* Change the background color to blue on hover */
+  background-color: #0066b2; /* Change the background color to blue on hover */
+  color: white;
 }
 
 

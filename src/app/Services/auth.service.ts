@@ -13,6 +13,9 @@ export class AuthService {
   private baseUrl: string = 'https://localhost:7132/api/Users/';
 
   private userPayload:any;
+  
+  private readonly TOKEN_KEY = 'token';
+  private readonly EXPIRY_TIME_MS = 23 * 60 * 60 * 1000; // 10 minutes in milliseconds
 
   public isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -44,30 +47,82 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, null, {headers});
+    return this.http.post<any>(`${this.baseUrl}logout?token=${token}`, {token}, {headers});
   }
 
   verifyOtps(emailOtp: string, phoneOtp: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}verifyOtps`, { emailOtp, phoneOtp });
   }
 
-  storeToken(tokenValue: string){
-    sessionStorage.setItem('token', tokenValue)
+  // storeToken(tokenValue: string){
+  //   sessionStorage.setItem('token', tokenValue)
+  // }
+
+  // storeRefreshToken(tokenValue: string){
+  //   sessionStorage.setItem('refreshToken', tokenValue)
+  // }
+
+  // getToken(){
+  //   return sessionStorage.getItem('token')
+  // }
+
+  // getRefreshToken(){
+  //   return sessionStorage.getItem('refreshToken')
+  // }
+
+
+
+   // Function to store the token with expiration
+   storeToken(tokenValue: string): void {
+    const now = new Date();
+    const expiryTime = now.getTime() + this.EXPIRY_TIME_MS;
+
+    // Store the token and its expiry time in sessionStorage
+    const tokenData = {
+      value: tokenValue,
+      expiry: expiryTime
+    };
+    
+    sessionStorage.setItem(this.TOKEN_KEY, JSON.stringify(tokenData));
+
+    // Set timeout to remove the token after 10 minutes
+    setTimeout(() => {
+      alert("Session is Expired !!! Please Login Again")
+      window.location.reload();
+      sessionStorage.clear();
+      this.router.navigate([`/account/login`]);
+      // this.removeToken();
+    }, this.EXPIRY_TIME_MS);
   }
 
-  storeRefreshToken(tokenValue: string){
-    sessionStorage.setItem('refreshToken', tokenValue)
+  // Function to get the token
+  getToken(): string | null {
+    const tokenStr = sessionStorage.getItem(this.TOKEN_KEY);
+
+    // If token does not exist, return null
+    if (!tokenStr) {
+      return null;
+    }
+
+    const tokenData = JSON.parse(tokenStr);
+    const now = new Date();
+
+    // Check if the token has expired
+    if (now.getTime() > tokenData.expiry) {
+      // Token has expired, remove it
+      // this.removeToken();
+      sessionStorage.clear();
+      this.router.navigate([''])
+      return null;
+    }
+
+    return tokenData.value;
   }
 
-
-
-  getToken(){
-    return sessionStorage.getItem('token')
-  }
-
-  getRefreshToken(){
-    return sessionStorage.getItem('refreshToken')
-  }
+  // removeToken(): void {
+  //   sessionStorage.removeItem(this.TOKEN_KEY);
+  //   sessionStorage.clear();
+  // }
 
 
   isLoggedIn(): boolean{

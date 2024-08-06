@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +30,27 @@ export class CartService {
   }
 
 
+  // getToCarts(userId: string): Observable<any> {
+  //   const token = sessionStorage.getItem("token");  
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`
+  //   });
+  //   return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`, {headers});
+  // }
+
   getToCarts(userId: string): Observable<any> {
+    if (!userId) {
+      // If userId is null or undefined, return an observable of null
+      return of(null);
+    }
+  
     const token = sessionStorage.getItem("token");  
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`, {headers});
+    return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`, { headers });
   }
-
+  
 
   removeItem(userId : string, itemId: string): Observable<any> {
     const token = sessionStorage.getItem("token");  

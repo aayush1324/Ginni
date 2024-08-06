@@ -59,17 +59,16 @@
     width: auto;
     height: inherit;
     padding: 0%;
-    margin: 0;
+    margin: 0% 2%;
     /* border: 2px solid; */
 }
 
 .responsive-logo {
-    width: 10em;
+    width: 7.5rem;
     height: 100%;
     /* border: 2px solid; */
     padding: 0%;
     margin: 0%;
-
 }
 
 
@@ -151,7 +150,7 @@
     height: 100%;
     padding: 0;
     padding-left: 3em; /* Adjusted for icon */
-    /* border: 3px solid; */
+    border: 2px solid;
     box-sizing: border-box;
     border-radius: 80px;
 }
@@ -174,7 +173,7 @@
 .searchbar {
     background-color: rgb(255, 255, 255);
     width: 90%;
-    height: 50%;
+    height: 75%;
     padding: 0%;
     margin: 0%;
     user-select: none;
@@ -185,7 +184,7 @@
 
 .searchclose .fa-close {
     position: relative; /* Ensure the wishlist icon is the reference point */
-    font-size: 2em;
+    font-size: xx-large;
     cursor: pointer;
     color: #0066b2;
 }
@@ -525,14 +524,14 @@
 .dropdown-content {
     width: 50vw; 
     background: white;
-    padding: 4vh 0vh;
+    padding: 1rem ;
     /* box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2); */
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     /* transform: translateX(0%); */
-    z-index: 100;
+    z-index: 1000;
 }
 
 table {
@@ -1009,7 +1008,7 @@ td :hover {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 75%;
+    top: 100%;
     right: 2%;
     width: 15vw;
     background-color: rgb(240, 240, 240);

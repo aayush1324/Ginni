@@ -258,11 +258,22 @@ export class GinnigiftingsComponent {
       item.productName.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   } 
 
-  private processProductData(res: any[]): void {
-    // Filter products based on status
+
+ private processProductData(res: any[]): void {
+    console.log('Received products:', res);
+  
+    if (res.length === 0) {
+      console.warn('No products found.');
+      this.minPrices = 0;
+      this.maxPrices = 0;
+      return;
+    }
+  
+    console.log('Processing products:', res);
+    
     this.inStockProducts = res.filter(product => product.status === 'instock');
     this.outOfStockProducts = res.filter(product => product.status === 'outofstock');
-
+  
     // Filter products based on category
     this.almonds = res.filter(product => product.category === 'almond');
     this.raisins = res.filter(product => product.category === 'raisin');
@@ -270,13 +281,17 @@ export class GinnigiftingsComponent {
     this.cashews = res.filter(product => product.category === 'cashew');
     this.pistas = res.filter(product => product.category === 'pista');
     this.dates = res.filter(product => product.category === 'date');
-
+  
     // Filter products based on price
-    this.minPrices = res.reduce((min, product) => product.price < min ? product.price : min, this.productlist[0].price);
-    this.maxPrices = res.reduce((max, product) => product.price > max ? product.price : max, this.productlist[0].price);
+    this.minPrices = res.reduce((min, product) => product.price < min ? product.price : min, res[0].price);
+    this.maxPrices = res.reduce((max, product) => product.price > max ? product.price : max, res[0].price);
+    console.log('Min price:', this.minPrices);
+    console.log('Max price:', this.maxPrices);
+  
     this.priceForm.get('minPrice')?.setValue(this.minPrices);
     this.priceForm.get('maxPrice')?.setValue(this.maxPrices);
   }
+  
 
   //Use ProductHelperService
   getProducts(): void {
@@ -287,7 +302,7 @@ export class GinnigiftingsComponent {
         this.productLength = res.length;
         this.productlist = res.filter((product) => product.subcategory === 'gifting');
         this.originalProductList = [...this.productlist];
-        this.processProductData(res);
+        this.processProductData(this.originalProductList);
         this.searchService.getSearchTerm().subscribe((searchTerm) => {
           this.searchTerm = searchTerm;
           this.onSearch();

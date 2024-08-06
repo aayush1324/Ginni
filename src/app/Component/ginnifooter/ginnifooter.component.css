@@ -41,7 +41,8 @@
 
 .shopicon img {
     width: 10rem;
-    height: 5rem;
+    height: 10rem;
+    /* border: 1px solid; */
 }
 
 
@@ -156,17 +157,24 @@
 
 .socialmedia a i{
     text-decoration: none;
-    color: whitesmoke; /* Adjust color as needed */
-    margin: 0 10px; /* Adjust spacing between icons */
+    color: #0066b2; /* Adjust color as needed */
+    margin: 0 5px; /* Adjust spacing between icons */
     font-size: 1rem; /* Adjust icon size */
+    display: inline-block;
+    width: 1.5rem;   /* Adjust the width and height as needed */
+    height: 1.5rem;  /* Adjust the width and height as needed */
+    line-height: 1.5rem;
+    border-radius: 50%; /* Makes the element a circle */
+    background-color: whitesmoke; /* Instagram's pink color */
+    text-align: center; /* Center the icon inside the circle */
 }
 
 .socialmedia ul a:hover {
-    transform: scale(1.5); /* Increase the size by 20% */
+    transform: scale(1.25); /* Increase the size by 20% */
 }
 
 .socialmedia a i  :hover{
-    color: rgb(31, 83, 129); /* Adjust color as needed */
+    color: #0066b2; /* Adjust color as needed */
     margin: 0 10px; /* Adjust spacing between icons */
     font-size: 1rem; /* Adjust icon size */
 }
@@ -186,8 +194,8 @@
     } */
 
     .shopicon img {
-        width: 8rem;
-        height: 4rem;
+        width: 10rem;
+        height: 7.5rem;
     }
 
     .footermiddle i {

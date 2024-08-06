@@ -160,20 +160,51 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
       this.totalCartItem = count;
     });
 
-    this.cartService.getToCarts(UserID)
-    .subscribe(res=>{
-      this.totalCartItem = res.length;
-    })
+    // this.cartService.getToCarts(UserID)
+    // .subscribe(res=>{
+    //   this.totalCartItem = res.length;
+    // })
+
+    this.cartService.getToCarts(UserID).subscribe({
+      next : (res) => {
+        if (res && Array.isArray(res)) {
+          this.totalCartItem = res.length;
+        } else {
+          // Handle cases where res is null or not an array
+          this.totalCartItem = 0;
+          // console.warn('Expected an array but received:', res);
+        }
+      },
+      error: (err) => {
+        console.error('Error occurred:', err);
+        this.totalCartItem = 0;
+      }
+    });
 
     this.wishlistService.countWishList$.subscribe(count => {
       console.log("Received count update:", count); // Add this for debugging
       this.totalWislistItem = count;
     });
 
-    this.wishlistService.getToWishlists(UserID)
-    .subscribe(res=>{
-      this.totalWislistItem = res.length;
-    })
+    // this.wishlistService.getToWishlists(UserID)
+    // .subscribe(res=>{
+    //   this.totalWislistItem = res.length;
+    // })
+
+    this.wishlistService.getToWishlists(UserID).subscribe({
+      next : (res) => {
+        if (res && Array.isArray(res)) {
+          this.totalWislistItem = res.length;
+        } else {
+          this.totalWislistItem = 0;
+          // console.warn('Expected an array but received:', res);
+        }
+      },
+      error: (err) => {
+        console.error('Error occurred:', err);
+        this.totalWislistItem = 0;
+      }
+    });
 
     this.auth.isLoggedIn$.subscribe((val)=>{
       this.loggedIn = val;      
@@ -184,9 +215,8 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     this.searchTerm = this.searchService.getSearchVal();
 
     this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
-     this.searchTerms = term;
-
-     this.search();
+      this.searchTerms = term;
+      this.search();
    });
   }
 
@@ -259,8 +289,8 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     this.loggedIn = false;
     const token = sessionStorage.getItem('token');
     if (token) {
-      this.auth.logout(token).subscribe(
-        () => {
+      this.auth.logout(token).subscribe({
+        next: (res) => {
           console.log('Logged out successfully');
           sessionStorage.clear();
           sessionStorage.removeItem('token');
@@ -269,10 +299,10 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
           this.cartService.updateCount(0);
           // Redirect or perform any additional actions after logout
         },
-        error => {
-          console.error('Logout failed', error);
+        error: (err) => {
+          console.error('Logout failed', err);
         }
-      );
+      });
     }
   }
 
