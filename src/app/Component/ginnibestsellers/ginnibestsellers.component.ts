@@ -155,7 +155,7 @@ export class GinnibestsellersComponent {
       // })
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }
@@ -180,7 +180,7 @@ export class GinnibestsellersComponent {
       // })
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }
@@ -229,7 +229,7 @@ export class GinnibestsellersComponent {
       });    
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }

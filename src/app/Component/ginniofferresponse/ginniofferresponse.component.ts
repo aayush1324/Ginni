@@ -154,6 +154,7 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     })
 
     const UserID: string = sessionStorage.getItem('UserID')!;
+    console.log(UserID);
 
     this.cartService.countCart$.subscribe(count => {
       console.log("Received count update:", count); // Add this for debugging
@@ -293,7 +294,6 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
         next: (res) => {
           console.log('Logged out successfully');
           sessionStorage.clear();
-          sessionStorage.removeItem('token');
 
           this.wishlistService.updateCount(0);
           this.cartService.updateCount(0);

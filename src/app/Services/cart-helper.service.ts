@@ -16,7 +16,7 @@ export class CartHelperService {
   getCartItems(): Observable<any[]> {
     const UserID = sessionStorage.getItem('UserID');
     if (!UserID) {
-      // console.warn('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       return of([]); // Return an empty array if no user ID is found
     }
 
@@ -36,6 +36,7 @@ export class CartHelperService {
     return this.cartService.addToCarts(userId, productId).pipe(
       tap(() => {
         alert('Item added to cart');
+        this.getCartItems();
       }),
       catchError(err => {
         console.error('Error adding item to cart:', err);

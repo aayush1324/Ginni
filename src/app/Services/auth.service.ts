@@ -73,6 +73,7 @@ export class AuthService {
 
 
    // Function to store the token with expiration
+   
    storeToken(tokenValue: string): void {
     const now = new Date();
     const expiryTime = now.getTime() + this.EXPIRY_TIME_MS;
@@ -85,13 +86,18 @@ export class AuthService {
     
     sessionStorage.setItem(this.TOKEN_KEY, JSON.stringify(tokenData));
 
+    // sessionStorage.setItem('token', tokenValue);
+    // sessionStorage.setItem('token_expiry', tokenValue)
+    // sessionStorage.setItem(this.TOKEN_KEY, tokenValue);
+    // sessionStorage.setItem(`${this.TOKEN_KEY}_expiry`, expiryTime.toString());
+
+
     // Set timeout to remove the token after 10 minutes
     setTimeout(() => {
       alert("Session is Expired !!! Please Login Again")
       window.location.reload();
       sessionStorage.clear();
       this.router.navigate([`/account/login`]);
-      // this.removeToken();
     }, this.EXPIRY_TIME_MS);
   }
 
@@ -104,8 +110,13 @@ export class AuthService {
       return null;
     }
 
+    // console.log(tokenStr);
+
     const tokenData = JSON.parse(tokenStr);
     const now = new Date();
+
+    // console.log(tokenData);
+    // console.log(now);
 
     // Check if the token has expired
     if (now.getTime() > tokenData.expiry) {

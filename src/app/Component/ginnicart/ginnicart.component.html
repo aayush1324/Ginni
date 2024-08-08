@@ -1,6 +1,6 @@
 <div class="containerbox">
      <!-- Check if cart has items -->
-     <ng-container *ngIf="products.length > 0; else emptyCart">
+     <ng-container *ngIf="products?.length > 0; else emptyCart">
         <div class="header">
             <h1>My Cart</h1>
             <button (click)="removeAllItem()"><h5>Empty Cart</h5></button>

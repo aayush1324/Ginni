@@ -159,7 +159,7 @@ export class GinnidryfruitComponent {
       // })
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }
@@ -184,7 +184,7 @@ export class GinnidryfruitComponent {
       // })
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }
@@ -220,20 +220,23 @@ export class GinnidryfruitComponent {
     const productId = product.id;
 
     if (userId) {  
-      this.cartHelperService.addToCart(userId, productId, product).subscribe({
-        next: (res: any) => {
-          if (res) {
-            this.refreshCartItemCount(); // Refresh cart item count after adding to cart
-            this.cartService.updateCount(this.totalCartItem+1); 
-          }
-        },   
-        error: (err) => {
-          console.error('Error:', err);
-        }   
-      });    
+      this.cartService.getToCarts(userId).subscribe(() => {
+        this.cartHelperService.addToCart(userId, productId, product).subscribe({
+          next: (res: any) => {
+            if (res) {
+              console.log(res);
+              this.refreshCartItemCount(); // Refresh cart item count after adding to cart
+              this.cartService.updateCount(this.totalCartItem+1); 
+            }
+          },   
+          error: (err) => {
+            console.error('Error:', err);
+          }   
+        });   
+      }) 
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }

@@ -108,7 +108,7 @@ export class GinniwishlistComponent {
       });
     } 
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
     }
   }
@@ -117,7 +117,7 @@ export class GinniwishlistComponent {
     const userId = sessionStorage.getItem('UserID');
 
     if (!userId) {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       return;
     }
 
@@ -198,7 +198,7 @@ export class GinniwishlistComponent {
       }) 
     }
     else {
-      console.error('User ID not found in session storage');
+      console.warn('User ID not found in session storage');
       alert('Please login first');
       this.router.navigate(['/account/login']);
     }

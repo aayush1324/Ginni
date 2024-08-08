@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,29 @@ export class CartService {
   private countCartItem = new BehaviorSubject<number>(0);
   countCart$ = this.countCartItem.asObservable();
   
-  constructor(private http: HttpClient, private router: Router) { }
+  private productCartSubject = new BehaviorSubject<any[]>([]);
+  productCart$ = this.productCartSubject.asObservable();
+
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   updateCount(count: number) {
     this.countCartItem.next(count);
   }
 
 
+  updateCart(cartItems : any[]){
+    console.log(cartItems);
+    console.log("service");
+    
+    
+    this.productCartSubject.next(cartItems);
+  }
+
   addToCarts(userId : string, productId : string): Observable<any> {
-    const token = sessionStorage.getItem("token");  
+    // const token = sessionStorage.getItem("token");  
+
+    const token = this.auth.getToken();  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -44,16 +59,21 @@ export class CartService {
       return of(null);
     }
   
-    const token = sessionStorage.getItem("token");  
+    // const token = sessionStorage.getItem("token");  
+    const token = this.auth.getToken();  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<any>(`${this.baseUrl}getCarts/${userId}`, { headers });
   }
-  
+
+
 
   removeItem(userId : string, itemId: string): Observable<any> {
-    const token = sessionStorage.getItem("token");  
+    // const token = sessionStorage.getItem("token");  
+    const token = this.auth.getToken();  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -62,7 +82,10 @@ export class CartService {
 
 
   emptyCart(userId: string): Observable<any> {
-    const token = sessionStorage.getItem("token");  
+    // const token = sessionStorage.getItem("token");  
+
+    const token = this.auth.getToken();  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -71,7 +94,9 @@ export class CartService {
 
 
   updateCartItem(item: any): Observable<any> {
-    const token = sessionStorage.getItem("token");  
+    // const token = sessionStorage.getItem("token");  
+    const token = this.auth.getToken();  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
