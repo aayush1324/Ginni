@@ -4,6 +4,13 @@ import { Router } from '@angular/router';
 import { SellerService } from '../../Services/seller.service';
 import { AuthService } from '../../Services/auth.service';
 import { ConfirmPasswordValidator } from '../../Helpers/confirmpassword.validator';
+import { UserstoreService } from '../../Services/userstore.service';
+import { WishlistService } from '../../Services/wishlist.service';
+import { CartService } from '../../Services/cart.service';
+import { ResetPasswordService } from '../../Services/reset-password.service';
+import { NgToastService } from 'ng-angular-popup';
+import { tap } from 'rxjs';
+declare var google :any;
 
 @Component({
   selector: 'app-ginnisignup',
@@ -16,10 +23,14 @@ export class GinnisignupComponent {
   signupForm: FormGroup;
   showPassword: boolean = true;
   showConfirmPassword: boolean = true;
-
+  authError:String='';
+  totalWislistItem!: number;
+  totalCartItem!: number;
 
   constructor(private formBuilder: FormBuilder, private seller: SellerService, 
-              private router : Router, private auth: AuthService) 
+    private router : Router, private auth: AuthService, private toast: NgToastService,
+    private userstore :UserstoreService, private resetPasswordService : ResetPasswordService,
+    private wishlist:WishlistService, private cartService: CartService) 
   {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -31,6 +42,103 @@ export class GinnisignupComponent {
     { validator: ConfirmPasswordValidator("password", "confirmPassword") });
   }
 
+
+  ngOnInit(): void {
+    google.accounts.id.initialize({
+      client_id: '482416301228-u3d86ut8j17f08uhk0ltilir97s8h051.apps.googleusercontent.com',
+      callback: (resp: any)=> {this.handleSignup(resp)}     
+    });
+
+    google.accounts.id.renderButton(document.getElementById("google-btn"),{
+      theme: 'filled_blue',
+      size: 'large',
+      shape: 'rectangle',
+      width: 250
+    });   
+  }
+
+
+  handleSignup(response: any){
+    console.log(response);
+    if(response){
+      console.log("Response");
+
+      const token = response.credential;
+      //decode the token
+      const payload = this.decodeToken(token );
+      console.log(payload);
+
+      // Prepare the data to send to the API
+      const userEmail = payload.email;  // Adjust this based on your token's structure
+      const userName = payload.name
+      const firstname = payload.given_name;
+      const lastname = payload.family_name;
+
+
+      this.auth.signUpGoogle(userEmail, userName).subscribe({
+        next: (res) => {
+            console.log(res);         
+            alert("Login Success!");
+            this.auth.storeToken(res.token);
+            const tokenPayload = this.auth.decodedToken();
+            console.log(tokenPayload);  
+            sessionStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
+            this.userstore.setFullNameForStore(tokenPayload.name);
+            this.userstore.setRoleForStore(tokenPayload.role);
+  
+            this.auth.isLoggedInSubject.next(true);
+  
+            this.getWishlistItems().subscribe((res)=>{
+                this.totalWislistItem= res.length;
+                this.wishlist.updateCount(this.totalWislistItem);
+            })
+    
+            this.getCartItems().subscribe((res) => {
+            this.totalCartItem = res.length;
+            this.cartService.updateCount(this.totalCartItem);
+            })
+            
+            this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+            this.router.navigate([''])
+          
+        },
+          error: (err) => {
+            this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
+            alert(err?.error.message);
+          },
+      })    
+      
+      
+    }
+  }
+
+  private decodeToken(token : string){
+    return JSON.parse(atob(token.split(".")[1]));
+  }
+
+
+  getWishlistItems() {
+    const UserID = sessionStorage.getItem('UserID');
+    // Fetch wishlist items and update totalWishlistItem
+    return this.wishlist.getToWishlists(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalWislistItem = res.length;
+      })
+    );
+  }
+
+  getCartItems() {
+    const UserID = sessionStorage.getItem('UserID');
+  
+    // Fetch cart items and update totalCartItem
+    return this.cartService.getToCarts(UserID!).pipe(
+      tap(res => {
+        setTimeout(() => {}, 2000); // Not sure why you have this timeout
+        this.totalCartItem = res.length;
+      })
+    );
+  }
 
   // Add this method to your component class
   togglePasswordVisibility() {

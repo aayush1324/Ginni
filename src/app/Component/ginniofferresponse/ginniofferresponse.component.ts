@@ -21,6 +21,7 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   
   isSearchBarVisible: boolean = false;
   isSearchContainerOpen: boolean = false;
+  // changeDetectorRef: any;
 
   toggleSearchContainer() {
       this.isSearchContainerOpen = !this.isSearchContainerOpen;
@@ -92,7 +93,7 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
 
   constructor(private elementRef: ElementRef, private router:Router, 
-    private auth :AuthService, private userstore : UserstoreService, 
+    private auth :AuthService, private userstore : UserstoreService, private changeDetectorRef: ChangeDetectorRef, 
     private cartService : CartService, private wishlistService: WishlistService,
     private productService : ProductService, private searchService : SearchService, private cd: ChangeDetectorRef) 
   { 
@@ -233,7 +234,37 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     }
   }
 
-  
+  reloadPage(event: Event) {
+    // Prevent the default navigation to allow the reload
+    event.preventDefault();
+    
+    // Navigate to the cart page
+    this.router.navigate(['/account/cart']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  reloadPagess(event: Event) {
+    // Prevent the default navigation to allow the reload
+    event.preventDefault();
+    
+    // Navigate to the dummy route and then back to the cart page
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/account/cart']);
+    });
+  }
+
+
+  reloadComponent(self:boolean,urlToNavigateTo ?:string){
+    //skipLocationChange:true means dont update the url to / when navigating
+   console.log("Current route I am on:",this.router.url);
+   const url=self ? this.router.url :urlToNavigateTo;
+   this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
+     this.router.navigate([`/${url}`]).then(()=>{
+       console.log(`After navigation I am on:${this.router.url}`)
+     })
+   })
+  }
 
   search(): void {
     //this.searchService.setSearchTerm(this.searchTerms);
@@ -292,6 +323,7 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     if (token) {
       this.auth.logout(token).subscribe({
         next: (res) => {
+          alert('Logged out successfully')
           console.log('Logged out successfully');
           sessionStorage.clear();
 

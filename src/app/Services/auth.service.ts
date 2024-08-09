@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +35,28 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}register`, userobject)
   }
 
+  signUpGoogle (email : any, name :any){
+    const userobject =  {
+      UserName : name,
+      Email  : email,
+    };
+    return this.http.post<any>(`${this.baseUrl}registerGoogle`, userobject)
+  }
+
   confirmSendEmail(email: string, token: string) {
     return this.http.get(`${this.baseUrl}confirm-email?email=${email}&token=${token}`);
   }
 
   signIn(loginObj : any){
     return this.http.post<any>(`${this.baseUrl}authenticate`,loginObj)
+  }
+
+  signInGoogle(email : any){
+    return this.http.post<any>(`${this.baseUrl}authenticateGoogle`, { email: email })
+    .pipe(
+      map(response => response.value) // This will map the response to only include the `value` property
+    );
+
   }
 
   logout(token: string) {

@@ -121,7 +121,7 @@
     left: 0; /* Align to the left of the viewport */
     z-index: 1000; /* Ensure it's on top of other content */
     border: 1px solid;
-    border-color: grey;
+    border-color: #0066b2;
 
 }
 
@@ -156,6 +156,7 @@
     border: 2px solid;
     box-sizing: border-box;
     border-radius: 80px;
+    border-color: #0066b2;
 }
 
 .searchbaricon {

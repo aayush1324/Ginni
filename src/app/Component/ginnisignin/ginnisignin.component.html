@@ -29,9 +29,15 @@
                 Password is required.
             </div>
         </div>
-        <br>
+
         <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">Sign In</button>
+        <br>
+        <span>---------------or Login with---------------</span> 
+        <br>
+        <div id="google-btn"></div>
     </form>
+
+      
 
     <div class="footer">
         <p>New Customer? <a routerLink="/account/register">Create your Account</a></p>

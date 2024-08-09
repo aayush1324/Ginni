@@ -220,7 +220,7 @@
                             <div class="searchbar">
                                 <!-- <app-search></app-search> -->
                                 <div class="search-containers">
-                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search Products" class="search-input">
+                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-input">
                                     <i class="fa fa-search searchbaricon"></i>
                                 </div>
 
@@ -248,7 +248,7 @@
                     
                 
                     <div class="cart"  [ngClass]="{'actives': isLinkActive('/account/cart')}">
-                        <a routerLink="/account/cart">
+                        <a routerLink="/account/cart" (click)="reloadPage($event)">
                             <div class="icontext">
                                 <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
                                 <i class="cart-count"  *ngIf="loggedIn">{{ totalCartItem }}</i>
@@ -263,16 +263,16 @@
         
                         <div class="accountlaptopdropdown" [ngClass]="{'open': isAccountOpen}">
                             <div class="authlaptop" *ngIf="loggedIn">
-                                <p>{{'Hi, ' + userName }}</p>
+                                <p>{{ 'Hello, ' + (userName ? userName.split(' ')[0].toUpperCase() : '') }}</p>
                                 <i class="fas fa-times" (click)="toggleAccount()"></i>
                             </div>
 
                             <div class="authlaptop" *ngIf="!loggedIn">
-                                <p>{{'Hi GINNI User!' }}</p>
+                                <p>{{'Hi, GINNI User!' }}</p>
                                 <i class="fas fa-times" (click)="toggleAccount()"></i>
                             </div> 
 
-                            <div class="Dashboard"  *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/sellerdashboard')}">
+                            <div class="Dashboard"  *ngIf="loggedIn && isAdmin" [ngClass]="{'active': isLinkActive('/sellerdashboard')}">
                                 <button><a routerLink="/sellerdashboard"  (click)="closeAccount()"><h6>Admin Dashboard</h6></a></button>
                             </div>
                             

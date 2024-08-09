@@ -9,6 +9,8 @@ import { ResetPasswordService } from '../../Services/reset-password.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { tap } from 'rxjs';
 import { CartService } from '../../Services/cart.service';
+declare var google :any;
+
 
 @Component({
   selector: 'app-ginnisignin',
@@ -36,11 +38,88 @@ export class GinnisigninComponent {
     // Add this property to your component class
   showPassword: boolean = true;
 
-  // Add this method to your component class
+
+  ngOnInit(): void {
+    google.accounts.id.initialize({
+      client_id: '482416301228-u3d86ut8j17f08uhk0ltilir97s8h051.apps.googleusercontent.com',
+      callback: (resp: any)=> {this.handleLogin(resp)}     
+    });
+
+    google.accounts.id.renderButton(document.getElementById("google-btn"),{
+      theme: 'filled_blue',
+      size: 'large',
+      shape: 'rectangle',
+      width: 250
+    });   
+  }
+
+  handleLogin(response: any){
+    console.log(response);
+    if(response){
+      console.log("Response");
+
+      const token = response.credential;
+      //decode the token
+      const payload = this.decodeToken(token );
+      console.log(payload);
+
+      // Prepare the data to send to the API
+      const userEmail = payload.email;  // Adjust this based on your token's structure
+
+
+  
+      if (userEmail) {
+        this.auth.signInGoogle(userEmail).subscribe({
+          next: (res) => {
+            console.log(res);
+            if (res.message != "Login Success!")
+            {
+              alert("You have not registered yet !!!");
+            }
+            else
+            {
+              alert("Login Success!");
+              this.auth.storeToken(res.token);
+              const tokenPayload = this.auth.decodedToken();
+              console.log(tokenPayload);  
+              sessionStorage.setItem("UserID", tokenPayload.UserID);  //set UserID in session storage
+              this.userstore.setFullNameForStore(tokenPayload.name);
+              this.userstore.setRoleForStore(tokenPayload.role);
+    
+              this.auth.isLoggedInSubject.next(true);
+    
+              this.getWishlistItems().subscribe((res)=>{
+                 this.totalWislistItem= res.length;
+                 this.wishlist.updateCount(this.totalWislistItem);
+              })
+     
+              this.getCartItems().subscribe((res) => {
+              this.totalCartItem = res.length;
+              this.cartService.updateCount(this.totalCartItem);
+              })
+              
+              this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+              this.router.navigate([''])
+            } 
+          },
+        error: (err) => {
+          this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
+          alert(err?.error.message);
+        },
+        })    
+        
+      }
+    }
+  }
+
+  private decodeToken(token : string){
+    return JSON.parse(atob(token.split(".")[1]));
+  }
+
+
   togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
   }
-
 
   Login() {
     this.auth.isLoggedInSubject.next(true);
@@ -99,12 +178,7 @@ export class GinnisigninComponent {
                this.totalWislistItem= res.length;
                this.wishlist.updateCount(this.totalWislistItem);
             })
-  
-            this.getWishlistItems().subscribe((res)=>{
-              this.totalWislistItem= res.length;
-              this.wishlist.updateCount(this.totalWislistItem);
-           })
-  
+    
            this.getCartItems().subscribe((res) => {
             this.totalCartItem = res.length;
             this.cartService.updateCount(this.totalCartItem);
@@ -121,4 +195,5 @@ export class GinnisigninComponent {
       })
     }
   }
+
 }

@@ -38,8 +38,11 @@ export class GinnicartComponent {
 
   ngOnInit(): void {
     const UserID: string = sessionStorage.getItem('UserID')!;
+    console.log(UserID);
 
     if (UserID == null){    
+      console.log("startnull");
+
       this.productss = [];
       console.log(this.productss)
 
@@ -48,22 +51,47 @@ export class GinnicartComponent {
         this.onSearch();
       });
     }
-    else {
-      this.cartService.getToCarts(UserID).subscribe(res=>{
-        res.forEach((item: { imageData: string; }) => {
-          if (item.imageData) {
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-        console.log(res);
-        this.productss = res;
+    // else {
+    //   this.cartService.getToCarts(UserID).subscribe(res=>{
+    //     // res.forEach((item: { imageData: string; }) => {
+    //     //   if (item.imageData) {
+    //     //     item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+    //     //   }
+    //     // });
+    //     console.log("startId");
+    //     console.log(res);
+    //     this.productss = res;
 
-        this.searchService.getSearchTerm().subscribe((searchTerm) => {
-          this.searchTerm = searchTerm;
-          this.onSearch();
-        });
-      })
-    }
+    //     this.searchService.getSearchTerm().subscribe((searchTerm) => {
+    //       this.searchTerm = searchTerm;
+    //       this.onSearch();
+    //     });
+    //   })
+    // }
+
+      this.cartService.getToCarts(UserID).subscribe({
+        next : (res) => {
+          if (res && Array.isArray(res)) {
+            console.log("startId");
+
+            console.log("res", res);
+            this.productss = res;
+            console.log("products", this.productss)
+            this.searchService.getSearchTerm().subscribe((searchTerm) => {
+              this.searchTerm = searchTerm;
+              this.onSearch();
+            });
+          } else {
+            // Handle cases where res is null or not an array
+            this.totalCartItem = 0;
+            // console.warn('Expected an array but received:', res);
+          }
+        },
+        error: (err) => {
+          console.error('Error occurred:', err);
+          this.totalCartItem = 0;
+        }
+      });
     
   }
 
@@ -74,7 +102,18 @@ export class GinnicartComponent {
   } 
 
 
-  
+  reloadPage(event: Event) {
+    // Prevent the default navigation to allow the reload
+    event.preventDefault();
+    
+    // Navigate to the cart page
+    this.router.navigate(['/account/cart']).then(() => {
+      // Reload the page
+      window.location.reload();
+    });
+  }
+
+
   getCartItems() {
     const UserID = sessionStorage.getItem('UserID');
   
@@ -124,6 +163,7 @@ export class GinnicartComponent {
               if (index !== -1) {
                 this.products.splice(index, 1);
               }
+              // window.location.reload();
               this.cartService.updateCount(this.totalCartItem-1); 
             }
           },
@@ -155,6 +195,7 @@ export class GinnicartComponent {
           next: (res) => {
             this.products = []; // Clear the local cart array
             alert('Cart emptied successfully');
+            // window.location.reload();
             // Update the count after successfully emptying the cart
             this.totalCartItem = 0;
             this.cartService.updateCount(this.totalCartItem);

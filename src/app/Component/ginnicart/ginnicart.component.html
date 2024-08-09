@@ -3,7 +3,7 @@
      <ng-container *ngIf="products?.length > 0; else emptyCart">
         <div class="header">
             <h1>My Cart</h1>
-            <button (click)="removeAllItem()"><h5>Empty Cart</h5></button>
+            <button (click)="removeAllItem()" (click)="reloadPage($event)"><h5>Empty Cart</h5></button>
         </div>
 
         <div class="middle">
@@ -75,7 +75,7 @@
     
                         <div class="middleleftmainaction">
                             <button (click)="initiatesPayment(item.productId, item.itemTotalPrice)">Buy Now</button>
-                            <button (click)="removeCartItem(item)">Remove</button> 
+                            <button (click)="removeCartItem(item)" (click)="reloadPage($event)">Remove</button> 
                             <!-- <button (click)="addToWishlistAndRemoveFromCart(item)">Add to Wishlist</button> -->
                         </div>
                     </div>
