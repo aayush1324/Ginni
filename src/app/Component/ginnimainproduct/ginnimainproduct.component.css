@@ -317,36 +317,54 @@ img.selected {
     width: 60%;
     height: fit-content;
     /* border: 5px solid; */
+    margin: 0%;
 }
 
-  .rightmiddlequantitybox {
-    width: 50%;
-    height: fit-content;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    padding: 2%;
-    margin: 0%;
-    gap: 0.5rem;
-    /* border: 1px solid; */
-    /* border-radius: 5px; */
+.rightmiddlequantitybox {
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding:0;
+  margin: 0;
+  gap: 0;
+  border: 1px solid rgb(200, 200, 200);
 }
 
 .rightmiddlequantitybox h1,
 .rightmiddlequantitybox h6 {
-    border: 2px solid;  /* Ensure border size is the same */
-    font-size: larger;
-    padding: 5% 10%;
-    border-color: rgb(184, 181, 178);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: larger;
+  padding: 10px 15px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 .rightmiddlequantitybox h1 {
-    cursor: pointer;
+  cursor: pointer;
+  background-color: rgb(240, 240, 240);
+  width: 25%; /* Adjust width for the buttons */
+  text-align: center;
 }
+
+.rightmiddlequantitybox h6 {
+  flex-grow: 1;
+  text-align: center;
+  border-left: 1px solid rgb(200, 200, 200);
+  border-right: 1px solid rgb(200, 200, 200);
+  background-color: white;
+  width: 50%;
+
+}
+
+
+.rightmiddlequantitybox h1 {
+  cursor: pointer;
+}
+
+
 
 .rightmiddletotal {
     width: 100%;

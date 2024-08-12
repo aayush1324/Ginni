@@ -25,6 +25,8 @@ export class GinnidetailorderComponent {
 
       this.getOrderDetails(this.orderId);
     });
+
+    window.scrollTo(0, 0);
   }
 
   getOrderDetails(orderId : string) : void {

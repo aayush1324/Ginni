@@ -88,6 +88,9 @@ export class GinnidryfruitpistaComponent {
     this.getWishlistItems();
     this.refreshCartItemCount();
     this.refreshWishlistItemCount();
+
+    window.scrollTo(0, 0);
+
   }
 
 

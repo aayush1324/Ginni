@@ -51,8 +51,6 @@
                                 <h6> &#x20B9; {{item.itemPrice}}</h6>
                                 <p>{{ (item.itemDiscount / item.itemPrice) * 100 | number:'1.0-0' }}% off</p>
                             </div>
-
-                            
                         </div>
                     </div>
     
@@ -63,10 +61,6 @@
                                 <h6> {{item.itemQuantity}} </h6>
                                 <h1 (click)="incrementQuantity(item)" ><b>+</b></h1>
                             </div>
-    
-                            <!-- <div class="middleleftmainquantityremove">
-                                <a (click)="removeCartItem(item)" style="text-decoration: underline; cursor: pointer;">Remove</a>
-                            </div> -->
                         </div>
     
                         <div class="middleleftmaintotal">

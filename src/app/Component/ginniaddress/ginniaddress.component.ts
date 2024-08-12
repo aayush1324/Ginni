@@ -32,7 +32,11 @@ export class GinniaddressComponent implements OnInit {
     this.addressForm.get('default')?.setValue(false);
     
     this.getAddresses();
+
+    window.scrollTo(0, 0);
+
   }
+
 
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;

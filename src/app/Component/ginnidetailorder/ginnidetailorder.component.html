@@ -1,7 +1,13 @@
-<div class="containerbox" >
+<div class="containerbox"  *ngIf="orderDetails && orderDetails.length > 0">
     <div class="header">
         <div class="headerdate">
-            <a routerLink="/account/order"><p style="cursor: pointer; text-decoration: none;"><b><i class='fa fa-angle-left' style='font-size:24px; margin-right:15px;'></i>Back to Orders</b></p></a>
+            <a routerLink="/account/order">
+                <p style="cursor: pointer; text-decoration: none;">
+                    <b><i class='fa fa-angle-left' style='font-size:24px; margin-right:15px;'></i>
+                        Back to Orders
+                    </b>
+                </p>
+            </a>
             <h6>{{ orderDetails[0].orderDate | date:'MMMM d, y \'at\' h:mm a' }}</h6>
         </div>
         <br>
@@ -9,8 +15,6 @@
             <h1>{{orderDetails[0].orderId}}</h1>
         </div>
     </div>
-    <br>
-    <br>
     <br>
     <div class="middle" >
         <div class="middleheading">
@@ -26,17 +30,18 @@
         <div class="middledata" *ngFor ="let item of orderDetails"> 
             <div class="middledataleft">
                 <div class="middledataleftimage">
-                    <img [src]="item.imageData" alt="Almond">
+                    <!-- <img [src]="item.imageData" alt="Almond"> -->
+                    <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
                 </div>
 
                 <div class="middledataleftname">
-                    <h5><a [routerLink]="['/main/ginnimainproduct', orderDetails.productName]">{{item.productName}}</a></h5>               
-                    <h6>Rs. {{item.price}}</h6>
+                    <h5><a  [routerLink]="['/mainproduct', item.productName]">{{item.productName | titlecase}}</a></h5>               
+                    <h6> &#x20B9;  {{item.price}}</h6>
                 </div>
             </div>
             <div class="middledataright">
-                <p><b>{{item.productCount}}</b></p>
-                <p><b>Rs. {{item.totalAmount}}</b></p>
+                <p>{{item.productCount}}</p>
+                <p> &#x20B9; {{item.totalAmount}}</p>
             </div>
         </div>
 
@@ -46,22 +51,22 @@
             <div class="middlefootingright">
                 <div class="middlefootingrightsubtotal">
                     <p>SubTotal</p>
-                    <p>Rs. {{ calculateTotalAmount(orderDetails) }}</p>
+                    <p> &#x20B9; {{ calculateTotalAmount(orderDetails) }}</p>
                 </div>
                 <hr>
                 <div class="middlefootingrightshipping">
                     <p>Shipping (Prime)</p>
-                    <p>Rs. {{shippingPrice}}</p>
+                    <p> &#x20B9; {{shippingPrice}}</p>
                 </div>
                 <hr>
                 <div class="middlefootingrighttax">
                     <p>Tax included (IGST 12.0%)</p>
-                    <p>Rs. {{ calculateTax(calculateTotalAmount(orderDetails)) }}</p>
+                    <p> &#x20B9; {{ calculateTax(calculateTotalAmount(orderDetails)) }}</p>
                 </div>
                 <hr>
                 <div class="middlefootingrighttotal">
                     <h6>Total</h6>
-                    <p>Rs. {{ calculateTotalAmountWithTax(orderDetails) }}</p>
+                    <p><b>&#x20B9; {{ calculateTotalAmountWithTax(orderDetails) }}</b></p>
                 </div>
             </div>
         </div>

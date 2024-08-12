@@ -58,6 +58,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-color: rgb(200, 200, 200);
+
 }
 
 .middleheadingleft {
@@ -91,6 +93,8 @@
     border: 1px solid;
     display: flex;
     flex-direction: row;
+    border-color: rgb(200, 200, 200);
+
 }
 
 .middledataleft {
@@ -155,6 +159,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-color: rgb(200, 200, 200);
+
 }
 
 .middlefootingleft {
@@ -215,4 +221,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-color: rgb(200, 200, 200);
+
 }

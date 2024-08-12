@@ -14,6 +14,8 @@ export class GinniorderComponent implements OnInit{
 
   ngOnInit (){
     this.getOrder();
+
+    window.scrollTo(0, 0);
   }
 
   getOrder(){
