@@ -88,6 +88,9 @@ export class GinnibestsellersComponent {
     this.getWishlistItems();
     this.refreshCartItemCount();
     this.refreshWishlistItemCount();
+
+    window.scrollTo(0, 0);
+
   }
 
 

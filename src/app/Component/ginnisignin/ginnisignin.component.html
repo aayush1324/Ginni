@@ -4,6 +4,9 @@
         <p>Enter your E-mail and Password:</p>
     </div>
 
+    <div id="google-btn"></div>
+    <br>
+    
     <form [formGroup]="signInForm" (ngSubmit)="SigninForm()">
         <p class="error-p">{{authError}}</p>
     
@@ -31,10 +34,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary" [disabled]="signInForm.invalid">Sign In</button>
-        <br>
-        <span>---------------or Login with---------------</span> 
-        <br>
-        <div id="google-btn"></div>
     </form>
 
       

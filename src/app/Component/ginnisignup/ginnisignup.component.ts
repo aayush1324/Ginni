@@ -52,9 +52,12 @@ export class GinnisignupComponent {
     google.accounts.id.renderButton(document.getElementById("google-btn"),{
       theme: 'filled_blue',
       size: 'large',
-      shape: 'rectangle',
+      shape: 'pill',
       width: 250
     });   
+
+    window.scrollTo(0, 0);
+
   }
 
 

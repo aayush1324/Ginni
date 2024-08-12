@@ -48,9 +48,12 @@ export class GinnisigninComponent {
     google.accounts.id.renderButton(document.getElementById("google-btn"),{
       theme: 'filled_blue',
       size: 'large',
-      shape: 'rectangle',
-      width: 250
+      shape: 'pill',
+      width: 50
     });   
+
+    window.scrollTo(0, 0);
+
   }
 
   handleLogin(response: any){

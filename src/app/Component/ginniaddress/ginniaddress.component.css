@@ -37,23 +37,38 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 999; /* Ensure it's above other content */
+    z-index: 100; /* Ensure it's above other content */
 }
 
+/* Blur and no-scroll classes */
+.blurred {
+    filter: blur(5px); /* Adjust the blur level */
+    pointer-events: none; /* Disable interactions with the blurred content */
+}
+
+.no-scroll {
+    overflow: hidden;
+}
 
 .addresspopup {
     position: fixed;
     width: 40%;
-    top: 65%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(235, 227, 227);
+    background-color: aliceblue;
+    color: #0066b2;
     padding: 1%;
     border-radius: 8px;
     /* border: 1px solid; */
     z-index: 1000; /* Ensure it's above the overlay */
     max-height: 75%; /* Set maximum height */
     overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Additional styling adjustments */
+.upper {
+    transition: filter 0.3s ease; /* Smooth transition for the blur effect */
 }
 
 .popup {
@@ -101,7 +116,7 @@
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #000000;
+    color: #0066b2;
     /* border: 1px solid; */
 }
 
@@ -144,7 +159,8 @@
     width: 100%; /* Adjust width as needed */
     padding: 2%; /* Adjust padding as needed */
     border-radius: 10px;
-    background-color: aquamarine;
+    background-color: #0066b2;
+    color: aliceblue;
 }
 
 
@@ -161,7 +177,7 @@
 
 .empty-address button {
     padding: 10px 20px;
-    background-color: #007bff; /* Adjust color as needed */
+    background-color: #0066b2; /* Adjust color as needed */
     color: #fff;
     border: none;
     border-radius: 5px;

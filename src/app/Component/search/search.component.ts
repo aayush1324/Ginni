@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit {
   constructor(private searchService: SearchService, private productService: ProductService) { }
 
   ngOnInit() { 
+    window.scrollTo(0, 0);
+
      this.searchTerm = this.searchService.getSearchVal();
 
      this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {

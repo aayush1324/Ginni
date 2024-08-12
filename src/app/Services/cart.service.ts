@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -18,23 +18,33 @@ export class CartService {
   private productCartSubject = new BehaviorSubject<any[]>([]);
   productCart$ = this.productCartSubject.asObservable();
 
+  private cartUpdated = new Subject<void>();
+  cartUpdated$ = this.cartUpdated.asObservable();
+
+  
+  private cartUpdatedSubject =  new BehaviorSubject<any[]>([]);
+  cartUpdate$ = this.cartUpdatedSubject.asObservable();
+
   constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   updateCount(count: number) {
     this.countCartItem.next(count);
   }
 
+  //Add to Cart and cart component
+  updateCartData(data :any) {
+    this.cartUpdatedSubject.next(data);
+  }
 
   updateCart(cartItems : any[]){
     console.log(cartItems);
     console.log("service");
-    
-    
     this.productCartSubject.next(cartItems);
   }
 
   addToCarts(userId : string, productId : string): Observable<any> {
     // const token = sessionStorage.getItem("token");  
+    this.cartUpdated.next();
 
     const token = this.auth.getToken();  
 

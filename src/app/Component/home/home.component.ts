@@ -9,4 +9,8 @@ export class HomeComponent {
   constructor(){
     console.log('home')
   }
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }
