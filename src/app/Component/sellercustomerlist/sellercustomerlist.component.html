@@ -33,17 +33,20 @@
                             ID is required.
                         </div>
                     </div> -->
-                    <div class="form-group">
+                    
+                    <div class="form-group floating-label-group">
                         <!-- <label for="username">Username:</label> -->
-                        <input type="text" id="username" formControlName="userName" class="form-control" placeholder="User Name">
+                        <input type="text" id="username" formControlName="userName" class="form-control" autocomplete="off"  required>
+                        <label class="floating-label">UserName</label>
                         <div *ngIf="customerForm.get('userName')?.errors?.['required'] && customerForm.get('userName')?.touched" class="text-danger">
                             Name is required.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group">
-                        <!-- <label for="email">Email:</label> -->
-                        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+                    <div class="form-group floating-label-group">
+                        <input type="email" id="email" formControlName="email" class="form-control" autocomplete="off"  required>
+                        <label class="floating-label">Email</label>
                         <div *ngIf="customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched" class="text-danger">
                             Email is required.
                         </div>
@@ -51,10 +54,11 @@
                             Invalid email format.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group">
-                        <!-- <label for="mobile">Mobile Number:</label> -->
-                        <input type="tel" id="phone" formControlName="phone" class="form-control" placeholder="Mobile">
+                    <div class="form-group floating-label-group">
+                        <input type="tel" id="phone" formControlName="phone" class="form-control" autocomplete="off"  required>
+                        <label class="floating-label">Mobile Number</label>
                         <div *ngIf="customerForm.get('phone')?.errors?.['required'] && customerForm.get('phone')?.touched" class="text-danger">
                             Mobile number is required.
                         </div>
@@ -62,10 +66,11 @@
                             Invalid mobile number format.
                         </div>
                     </div> 
+
                     <br>  
-                    <div class="form-group" >
-                        <!-- <label for="password">Password:</label> -->
-                        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password">
+                    <div class="form-group floating-label-group" >
+                        <input type="password" id="password" formControlName="password" class="form-control" autocomplete="off"  required>
+                        <label class="floating-label">Password</label>
                         <div *ngIf="customerForm.get('password')?.errors?.['required'] && customerForm.get('password')?.touched" class="text-danger">
                             Password is required.
                         </div>
@@ -73,10 +78,11 @@
                             Password must be at least 6 characters long.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group" >
-                        <!-- <label for="confirmPassword">Confirm Password:</label> -->
-                        <input type="password" id="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
+                    <div class="form-group floating-label-group" >
+                        <input type="password" id="password" formControlName="confirmPassword" class="form-control" autocomplete="off"  required>
+                        <label class="floating-label">Confirm Password</label>
                         <div *ngIf="customerForm.get('confirmPassword')?.errors?.['required'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
                             Confirm Password is required.
                         </div>
@@ -86,58 +92,65 @@
                         <div *ngIf="customerForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
                             *Password didn't matched*
                         </div>
-                    </div>            
+                    </div> 
+
                     <br>
-                    <div class="form-group">
-                        <select formControlName="role" required>
-                        <option value="sel" disabled selected>Select Role</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
+                    <div class="form-group floating-label-group">
+                        <select formControlName="role" autocomplete="off"  required>
+                            <option value="sel" disabled selected>Select Role</option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
                         </select>
-                        <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
+                        <label class="floating-label">Role</label>
+                        <div *ngIf="customerForm.get('role')?.errors?.['required'] && customerForm.get('role')?.touched" class="text-danger">
                             Role is required.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group">
-                        <select formControlName="phoneVerify" required>
-                        <option value="sel" disabled selected>Select PhoneVerify</option>
-                        <option value="nonverify">0</option>
-                        <option value="verify">1</option>
+                    <div class="form-group floating-label-group">
+                        <select formControlName="phoneVerify" autocomplete="off"  required>
+                            <option value="sel" disabled selected>Select PhoneVerify</option>
+                            <option value="nonverify">0</option>
+                            <option value="verify">1</option>
                         </select>
-                        <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
-                            PhoneVerify is required.
+                        <label class="floating-label">PhoneVerify</label>
+                        <div *ngIf="customerForm.get('phoneVerify')?.errors?.['required'] && customerForm.get('phoneVerify')?.touched" class="text-danger">
+                            Phone Verification is required.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group">
-                        <select formControlName="emailVerify" required>
-                        <option value="sel" disabled selected>Select EmailVerify</option>
-                        <option value="nonverify">0</option>
-                        <option value="verify">1</option>
+                    <div class="form-group floating-label-group">
+                        <select formControlName="emailVerify" autocomplete="off"  required>
+                            <option value="sel" disabled selected>Select EmailVerify</option>
+                            <option value="nonverify">0</option>
+                            <option value="verify">1</option>
                         </select>
-                        <div *ngIf="customerForm.get('emailverify')?.errors?.['required'] && customerForm.get('emailverify')?.touched" class="text-danger">
-                            Emailverify is required.
+                        <label class="floating-label">EmailVerify</label>
+                        <div *ngIf="customerForm.get('emailVerify')?.errors?.['required'] && customerForm.get('emailVerify')?.touched" class="text-danger">
+                            Email Verification is required.
                         </div>
                     </div>
+
                     <br>
-                    <div class="form-group">
-                        <select formControlName="isLoggedIn" required>
-                        <option value="sel" disabled selected>Select IsLoggedIn</option>
-                        <option value="logout">0</option>
-                        <option value="login">1</option>
+                    <div class="form-group floating-label-group">
+                        <select formControlName="isLoggedIn" autocomplete="off"  required>
+                            <option value="sel" disabled selected>Select IsLoggedIn</option>
+                            <option value="logout">0</option>
+                            <option value="login">1</option>
                         </select>
+                        <label class="floating-label">isLoggedIn</label>
                         <div *ngIf="customerForm.get('isLoggedIn')?.errors?.['required'] && customerForm.get('isLoggedIn')?.touched" class="text-danger">
                             isLoggedIn is required.
                         </div>
                     </div>
-                    <br>
-                    <!-- <div class="form-group">
-                        <textarea id="address" formControlName="address" placeholder="Address"></textarea>
-                    </div> -->
+
                     <br>
                     <button type="submit" [disabled]="!customerForm.valid">
-                        {{ isEdit ? 'Submit Edit Customer' : 'Add a New Customer' }}
+                        <h6>
+                            {{ isEdit ? 'Submit Edit Customer' : 'Add a New Customer' }}
+                        </h6>
                     </button> 
                 </form>
             </div> 

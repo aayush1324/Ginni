@@ -25,125 +25,142 @@
         <br>
 
         <div class="popupdown">
-          <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedProduct() : addedProduct()">
-            <div class="form-group">
-              <input type="text" id="productName" formControlName="productName" placeholder="Product Name">
-              <div
-                *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.touched"
-                class="text-danger">
-                Product Name is required.
+          <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedProduct() : addedProduct()">     
+            <div class="row">
+              <div class="col-xs-4 col-xs-offset-4">
+                <div class="form-group floating-label-group" >
+                  <input type="text" id="productName" formControlName="productName"  autocomplete="off" required>
+                  <label class="floating-label">Product Name</label>
+                  <div *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.touched" class="text-danger">
+                    Product Name is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <input type="text" id="url" formControlName="url" autocomplete="off" required>
+                  <label class="floating-label">URL</label>
+                  <div *ngIf="productForm.get('url')?.errors?.['required'] && productForm.get('url')?.touched" class="text-danger">
+                    URL is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <input type="number" id="price" formControlName="price" min="0" autocomplete="off" required>
+                  <label class="floating-label">Price</label>
+                  <div *ngIf="productForm.get('price')?.errors?.['required'] && productForm.get('price')?.touched" class="text-danger">
+                    Price is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <input type="number" id="discount" formControlName="discount" min="0" max="100" autocomplete="off" required>
+                  <label class="floating-label">Discount in %</label>
+                  <div *ngIf="productForm.get('discount')?.errors?.['required'] && productForm.get('discount')?.touched" class="text-danger">
+                    Discount % is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <input type="number" id="deliveryPrice" formControlName="deliveryPrice" min="0" autocomplete="off" required>
+                  <label class="floating-label">Delivery Price</label>
+                  <div *ngIf="productForm.get('deliveryPrice')?.errors?.['required'] && productForm.get('deliveryPrice')?.touched" class="text-danger">
+                    Delivery Price is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <input type="number" id="quantity" formControlName="quantity" min="0"   autocomplete="off" required>
+                  <label class="floating-label">Quantity</label>
+                  <div *ngIf="productForm.get('quantity')?.errors?.['required'] && productForm.get('quantity')?.touched" class="text-danger">
+                    Quantity is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <textarea id="description" formControlName="description" autocomplete="off" required></textarea>
+                  <label class="floating-label">Description</label>
+                  <div *ngIf="productForm.get('description')?.errors?.['required'] && productForm.get('description')?.touched" class="text-danger">
+                    Description is required.
+                  </div>
+                </div>
+
+                <br>
+                <!-- Category selection dropdown -->
+                <div class="form-group floating-label-group">
+                  <select formControlName="category" autocomplete="off" required>
+                    <option value="sel" disabled selected>Select Category</option>
+                    <option value="almond">Almond</option>
+                    <option value="raisin">Raisin</option>
+                    <option value="walnut">Walnut</option>
+                  </select>
+                  <label class="floating-label">Category</label>
+                  <div *ngIf="productForm.get('category')?.errors?.['required'] && productForm.get('category')?.touched"
+                    class="text-danger">
+                    Category is required.
+                  </div>
+                </div>
+
+                <br>
+                <!-- Subcategory selection dropdown -->
+                <div class="form-group floating-label-group">
+                  <select formControlName="subcategory" autocomplete="off" required>
+                    <option value="sel" disabled selected>Select Subcategory</option>
+                    <option value="combo">Combo</option>
+                    <option value="bestseller">Bestseller</option>
+                    <option value="gifting">Gifting</option>
+                    <option value="products">Products</option>
+                  </select>
+                  <label class="floating-label">Subcategory</label>
+                  <div
+                    *ngIf="productForm.get('subcategory')?.errors?.['required'] && productForm.get('subcategory')?.touched"
+                    class="text-danger">
+                    Subcategory is required.
+                  </div>
+                </div>
+
+                <br>
+                <!-- Weight selection dropdown -->
+                <div class="form-group floating-label-group">
+                  <select id="weight" formControlName="weight" autocomplete="off" required>
+                    <option value="sel" disabled selected>Select Weight</option>
+                    <option value="100gm">100gm</option>
+                    <option value="200gm">200gm</option>
+                    <option value="250gm">250gm</option>
+                    <option value="500gm">500gm</option>
+                    <option value="750gm">750gm</option>
+                    <option value="1000gm">1000gm</option>
+                  </select>
+                  <label class="floating-label">Weight</label>
+                  <div *ngIf="productForm.get('weight')?.errors?.['required'] && productForm.get('weight')?.touched"
+                    class="text-danger">
+                    Weight is required.
+                  </div>
+                </div>
+
+                <br>
+                <div class="form-group floating-label-group">
+                  <select formControlName="status" autocomplete="off" required>
+                    <option value="sel" disabled selected>Select Status</option>
+                    <option value="instock">In Stock</option>
+                    <option value="outofstock">Out of Stock</option>
+                  </select>
+                  <label class="floating-label">Status</label>
+                  <div *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status')?.touched"
+                    class="text-danger">
+                    Status is required.
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- URL input field -->
-            <div class="form-group">
-              <input type="text" id="url" formControlName="url" placeholder="URL">
-              <div *ngIf="productForm.get('url')?.errors?.['required'] && productForm.get('url')?.touched"
-                class="text-danger">
-                URL is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input type="number" id="price" formControlName="price" placeholder="Price" min="0">
-              <div *ngIf="productForm.get('price')?.errors?.['required'] && productForm.get('price')?.touched"
-                class="text-danger">
-                Price is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input type="number" id="discount" formControlName="discount" placeholder="Discount in %" min="0"
-                max="100">
-              <div *ngIf="productForm.get('discount')?.errors?.['required'] && productForm.get('discount')?.touched"
-                class="text-danger">
-                Discount % is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input type="number" id="deliveryPrice" formControlName="deliveryPrice" placeholder="Delivery Price"
-                min="0">
-              <div
-                *ngIf="productForm.get('deliveryPrice')?.errors?.['required'] && productForm.get('deliveryPrice')?.touched"
-                class="text-danger">
-                Delivery Price is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input type="number" id="quantity" formControlName="quantity" placeholder="Quantity" min="0">
-              <div *ngIf="productForm.get('quantity')?.errors?.['required'] && productForm.get('quantity')?.touched"
-                class="text-danger">
-                Quantity is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <textarea id="description" formControlName="description" placeholder="Description"></textarea>
-            </div>
-
-            <!-- Category selection dropdown -->
-            <div class="form-group">
-              <select formControlName="category" required>
-                <option value="sel" disabled selected>Select Category</option>
-                <option value="almond">Almond</option>
-                <option value="raisin">Raisin</option>
-                <option value="walnut">Walnut</option>
-              </select>
-              <div *ngIf="productForm.get('category')?.errors?.['required'] && productForm.get('category')?.touched"
-                class="text-danger">
-                Category is required.
-              </div>
-            </div>
-
-            <!-- Subcategory selection dropdown -->
-            <div class="form-group">
-              <select formControlName="subcategory" required>
-                <option value="sel" disabled selected>Select Subcategory</option>
-                <option value="combo">Combo</option>
-                <option value="bestseller">Bestseller</option>
-                <option value="gifting">Gifting</option>
-                <option value="products">Products</option>
-              </select>
-              <div
-                *ngIf="productForm.get('subcategory')?.errors?.['required'] && productForm.get('subcategory')?.touched"
-                class="text-danger">
-                Subcategory is required.
-              </div>
-            </div>
-
-            <!-- Weight selection dropdown -->
-            <div class="form-group">
-              <select id="weight" formControlName="weight" required>
-                <option value="sel" disabled selected>Select Weight</option>
-                <option value="100gm">100gm</option>
-                <option value="200gm">200gm</option>
-                <option value="250gm">250gm</option>
-                <option value="500gm">500gm</option>
-                <option value="750gm">750gm</option>
-                <option value="1000gm">1000gm</option>
-              </select>
-              <div *ngIf="productForm.get('weight')?.errors?.['required'] && productForm.get('weight')?.touched"
-                class="text-danger">
-                Weight is required.
-              </div>
-            </div>
-
-            <div class="form-group">
-              <select formControlName="status" required>
-                <option value="sel" disabled selected>Select Status</option>
-                <option value="instock">In Stock</option>
-                <option value="outofstock">Out of Stock</option>
-              </select>
-              <div *ngIf="productForm.get('status')?.errors?.['required'] && productForm.get('status')?.touched"
-                class="text-danger">
-                Status is required.
-              </div>
-            </div>
-
-
-            <div class="form-group">
+            <!-- <br>
+            <div class="form-group ">
               <input type="file" (change)="onFileChanged($event)" accept="image/*" formControlName="image">
               <div *ngIf="productForm.get('image')?.errors?.['required'] && productForm.get('image')?.touched" class="text-danger">
                 Image is required.
@@ -153,12 +170,10 @@
             <div *ngIf="selectedImage" class="text-center mt-3" style="display: flex; flex-direction: row; justify-content: space-between; padding: 0% 5%;">
               <img [src]="selectedImage" alt="Selected Image" style="max-width: 100%; max-height: 200px;">
               <i class="fa fa-trash-o" (click)="onDeleteImage()" style="font-size:24px"></i>
-            </div>
+            </div> -->
 
-
-            <br>
             <!-- Image upload input field -->
-            <div class="form-group" *ngIf ="!isEdit">
+            <!-- <div class="form-group" *ngIf ="!isEdit">
               <label for="imageUpload" class="camera-icon">
                 <i class="fa fa-camera"></i>
                 Choose Multiple Images
@@ -170,11 +185,13 @@
               <img [src]="image.data" class="selected-image" alt="Selected Image">
               <span>{{ image.name }}</span>
               <i class="fa fa-trash-o" (click)="onDeleteImages(i)" style="font-size:24px"></i>
-            </div>
+            </div> -->
             
             <br>
             <button type="submit" [disabled]="!productForm.valid">
-              {{ isEdit ? 'Submit Edit product' : 'Add a New product' }}
+              <h6>
+                {{ isEdit ? 'Submit Edit product' : 'Add a New product' }}
+              </h6>
             </button>
           </form>
         </div>
@@ -186,7 +203,7 @@
     <table>
       <thead>
         <tr>
-          <th style="width:7%">Image</th>
+          <!-- <th style="width:7%">Image</th> -->
           <th style="width:7%">Name</th>
           <th style="width:7%">Description</th>
           <th style="width:7%;">URL</th>
@@ -207,10 +224,9 @@
           <ng-container *ngFor="let key of tableHeaders">
             <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               <!-- Check if the current key is 'image' -->
-              <ng-container *ngIf="key === 'profileImage'">
-                <!-- If 'image', display the image -->
+              <!-- <ng-container *ngIf="key === 'profileImage'">
                 <img [src]="item.imageData" alt="Product Image" style="width: 100%; height: 50%;">
-              </ng-container>
+              </ng-container> -->
 
               <!-- If not 'image', display the text value -->
               <ng-container *ngIf="key !== 'profileImage'">

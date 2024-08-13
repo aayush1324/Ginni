@@ -1,121 +1,121 @@
 <div class="containerbox">
     <div class="upper">
-      <div class="header">
-        <h1>Order List</h1>
-      </div>
-  
-      <div class="button">
-        <button (click)="togglePopup()" class="upperbutton"><b>Add New Order</b></button>
-      </div> 
-  
-      <!-- Overlay -->
-      <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div>
-  
-      <div class="productpopup" *ngIf="isPopupOpen">
-        <div class="popup">
-            <div class="popuphead">
-                <div class="popupheadleft">
-                    <h2>{{ isEdit ? 'Edit' : 'Add' }} Order Detail</h2>
-                    <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
-                </div>
-                <div class="popupheadright">
-                    <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
-                </div>
-            </div>
-            
-            <br>
-
-            <div class="popupdown">
-                <form [formGroup]="customerForm" (ngSubmit)="isEdit ? submitEditedCustomer() : addedCustomer()">
-                    <div class="form-group">
-                        <input type="text" id="ID" formControlName="ID" class="form-control" placeholder="ID">
-                        <div *ngIf="customerForm.get('ID')?.errors?.['required'] && customerForm.get('ID')?.touched" class="text-danger">
-                            ID is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name">
-                        <div *ngIf="customerForm.get('name')?.errors?.['required'] && customerForm.get('name')?.touched" class="text-danger">
-                            Name is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
-                        <div *ngIf="customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched" class="text-danger">
-                            Email is required.
-                        </div>
-                        <div *ngIf="customerForm.get('email')?.errors?.['email'] && customerForm.get('email')?.touched" class="text-danger">
-                            Invalid email format.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="tel" id="mobile" formControlName="mobile" class="form-control" placeholder="Mobile">
-                        <div *ngIf="customerForm.get('mobile')?.errors?.['required'] && customerForm.get('mobile')?.touched" class="text-danger">
-                            Mobile number is required.
-                        </div>
-                        <div *ngIf="customerForm.get('mobile')?.errors?.['pattern'] && customerForm.get('mobile')?.touched" class="text-danger">
-                            Invalid mobile number format.
-                        </div>
-                    </div>               
-                    <br>
-                    <div class="form-group">
-                        <select formControlName="role" required>
-                        <option value="sel" disabled selected>Select Role</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                        </select>
-                        <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
-                            PhoneVerify is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <select formControlName="phoneverify" required>
-                        <option value="sel" disabled selected>Select PhoneVerify</option>
-                        <option value="nonverify">0</option>
-                        <option value="verify">1</option>
-                        </select>
-                        <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
-                            PhoneVerify is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <select formControlName="emailverify" required>
-                        <option value="sel" disabled selected>Select EmailVerify</option>
-                        <option value="nonverify">0</option>
-                        <option value="verify">1</option>
-                        </select>
-                        <div *ngIf="customerForm.get('emailverify')?.errors?.['required'] && customerForm.get('emailverify')?.touched" class="text-danger">
-                            Emailverify is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <select formControlName="isLoggedIn" required>
-                        <option value="sel" disabled selected>Select IsLoggedIn</option>
-                        <option value="logout">0</option>
-                        <option value="login">1</option>
-                        </select>
-                        <div *ngIf="customerForm.get('isLoggedIn')?.errors?.['required'] && customerForm.get('isLoggedIn')?.touched" class="text-danger">
-                            isLoggedIn is required.
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <textarea id="address" formControlName="address" placeholder="Address"></textarea>
-                    </div>
-                    <br>
-                    <button type="submit" [disabled]="!customerForm.valid">
-                        {{ isEdit ? 'Submit Edit Customer' : 'Add a New Customer' }}
-                    </button> 
-                </form>
-            </div> 
+        <div class="header">
+            <h1>Order List</h1>
         </div>
-    </div> 
+  
+        <!-- <div class="button">
+            <button (click)="togglePopup()" class="upperbutton"><b>Add New Order</b></button>
+        </div>  -->
+  
+        <!-- Overlay -->
+        <!-- <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div> -->
+  
+        <!-- <div class="productpopup" *ngIf="isPopupOpen">
+            <div class="popup">
+                <div class="popuphead">
+                    <div class="popupheadleft">
+                        <h2>{{ isEdit ? 'Edit' : 'Add' }} Order Detail</h2>
+                        <p>Please {{ isEdit ? 'update' : 'fill in' }} the information below:</p>
+                    </div>
+                    <div class="popupheadright">
+                        <span class="close-icon" (click)="togglePopup()"><i class="fa fa-close"></i></span>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="popupdown">
+                    <form [formGroup]="customerForm" (ngSubmit)="isEdit ? submitEditedCustomer() : addedCustomer()">
+                        <div class="form-group">
+                            <input type="text" id="ID" formControlName="ID" class="form-control" placeholder="ID">
+                            <div *ngIf="customerForm.get('ID')?.errors?.['required'] && customerForm.get('ID')?.touched" class="text-danger">
+                                ID is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name">
+                            <div *ngIf="customerForm.get('name')?.errors?.['required'] && customerForm.get('name')?.touched" class="text-danger">
+                                Name is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+                            <div *ngIf="customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched" class="text-danger">
+                                Email is required.
+                            </div>
+                            <div *ngIf="customerForm.get('email')?.errors?.['email'] && customerForm.get('email')?.touched" class="text-danger">
+                                Invalid email format.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="tel" id="mobile" formControlName="mobile" class="form-control" placeholder="Mobile">
+                            <div *ngIf="customerForm.get('mobile')?.errors?.['required'] && customerForm.get('mobile')?.touched" class="text-danger">
+                                Mobile number is required.
+                            </div>
+                            <div *ngIf="customerForm.get('mobile')?.errors?.['pattern'] && customerForm.get('mobile')?.touched" class="text-danger">
+                                Invalid mobile number format.
+                            </div>
+                        </div>               
+                        <br>
+                        <div class="form-group">
+                            <select formControlName="role" required>
+                            <option value="sel" disabled selected>Select Role</option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                            </select>
+                            <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
+                                PhoneVerify is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select formControlName="phoneverify" required>
+                            <option value="sel" disabled selected>Select PhoneVerify</option>
+                            <option value="nonverify">0</option>
+                            <option value="verify">1</option>
+                            </select>
+                            <div *ngIf="customerForm.get('phoneverify')?.errors?.['required'] && customerForm.get('phoneverify')?.touched" class="text-danger">
+                                PhoneVerify is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select formControlName="emailverify" required>
+                            <option value="sel" disabled selected>Select EmailVerify</option>
+                            <option value="nonverify">0</option>
+                            <option value="verify">1</option>
+                            </select>
+                            <div *ngIf="customerForm.get('emailverify')?.errors?.['required'] && customerForm.get('emailverify')?.touched" class="text-danger">
+                                Emailverify is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select formControlName="isLoggedIn" required>
+                            <option value="sel" disabled selected>Select IsLoggedIn</option>
+                            <option value="logout">0</option>
+                            <option value="login">1</option>
+                            </select>
+                            <div *ngIf="customerForm.get('isLoggedIn')?.errors?.['required'] && customerForm.get('isLoggedIn')?.touched" class="text-danger">
+                                isLoggedIn is required.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <textarea id="address" formControlName="address" placeholder="Address"></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" [disabled]="!customerForm.valid">
+                            {{ isEdit ? 'Submit Edit Customer' : 'Add a New Customer' }}
+                        </button> 
+                    </form>
+                </div> 
+            </div>
+        </div>  -->
     </div>
         
     <div class="lower">
@@ -135,14 +135,19 @@
             <tr *ngFor="let item of orders">
                 <ng-container *ngFor="let key of tableHeaders">
                     <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        <ng-container *ngIf="key !== 'orderId'; else orderIdLink">
-                            <!-- If not 'orderId', display the text value -->
+                        <ng-container *ngIf="key === 'orderDate'">
+                            {{ item[key] | date:'MMMM d, y \'at\' h:mm a' }}
+                        </ng-container>
+
+                        <ng-container *ngIf="key === 'orderId'">
+                            <a [routerLink]="['/account/order', item.orderId]">
+                                <p>{{ item.orderId }}</p>
+                            </a>
+                        </ng-container>
+
+                        <ng-container *ngIf="key !== 'orderId' && key !== 'orderDate'">
                             {{ item[key] }}
                         </ng-container>
-                        <ng-template #orderIdLink>
-                            <!-- If 'orderId', display as clickable link -->
-                            <a [routerLink]="['/main/ginnidetailorder', item.orderId]">{{ item.orderId }}</a>
-                        </ng-template>
                     </td>
                 </ng-container>
             </tr>

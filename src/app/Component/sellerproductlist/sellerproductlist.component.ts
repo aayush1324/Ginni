@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
 import { ProductService } from '../../Services/product.service';
@@ -29,7 +29,8 @@ export class SellerproductlistComponent {
     'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
   ];
 
-  constructor(private fb: FormBuilder, private productService : ProductService, private imageService: ImageService) { }
+  constructor(private fb: FormBuilder, private productService : ProductService, 
+              private imageService: ImageService,private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -39,7 +40,7 @@ export class SellerproductlistComponent {
       discount: ['', Validators.required],
       deliveryPrice: ['', Validators.required],
       quantity: ['', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       category: ['sel', Validators.required],
       subcategory: ['sel', Validators.required],
       weight: ['sel', Validators.required],
@@ -53,6 +54,9 @@ export class SellerproductlistComponent {
   
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
+    this.renderer[this.isPopupOpen ? 'addClass' : 'removeClass'](document.body, 'no-scroll');
+
+
     this.isEdit = false; // Reset edit mode when opening the popup
     this.selectedproduct = null;
     this.resetForm();

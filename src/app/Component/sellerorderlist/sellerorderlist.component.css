@@ -46,7 +46,9 @@ button {
     padding: 2%;
     margin: 0%;
     border-radius: 10px;
-    background-color: aqua;
+    background-color: #0066b2;
+    color: antiquewhite;
+    border: 1px solid aliceblue;
 }
 
 

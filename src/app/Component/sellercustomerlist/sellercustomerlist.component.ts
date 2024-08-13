@@ -29,15 +29,14 @@ export class SellercustomerlistComponent {
   ngOnInit(): void {
     this.customerForm = this.fb.group({
       userName: ['', Validators.required],
-      role: ['sel', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      role: [null, Validators.required],
       phoneVerify: [null, Validators.required],
       emailVerify: [null, Validators.required],
       isLoggedIn: [null, Validators.required],
-      // address: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]]
     },
       { validator: ConfirmPasswordValidator("password", "confirmPassword") }
       

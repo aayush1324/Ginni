@@ -46,7 +46,9 @@ button {
     padding: 2%;
     margin: 0%;
     border-radius: 10px;
-    background-color: aqua;
+    background-color: #0066b2;
+    color: antiquewhite;
+    border: 1px solid aliceblue;
 }
 
 
@@ -57,21 +59,22 @@ button {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 999; /* Ensure it's above other content */
+    z-index: 9990; /* Ensure it's above other content */
 }
 
 .productpopup {
     position: fixed;
-    width: 40%;
-    top: 65%;
+    width: 50%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(235, 227, 227);
+    background-color: aliceblue;
+    color: #0066b2;
     padding: 1%;
     border-radius: 8px;
     /* border: 1px solid; */
-    z-index: 1000; /* Ensure it's above the overlay */
-    max-height: 75%; /* Set maximum height */
+    z-index: 10000; /* Ensure it's above the overlay */
+    max-height: 90%; /* Set maximum height */
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -121,7 +124,7 @@ button {
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #000000;
+    color: #0066b2;
     /* border: 1px solid; */
 }
 
@@ -147,53 +150,151 @@ button {
     /* border: 5px solid; */
 }
 
-.form-group input[type="text"] {
-    width: 100%; /* Adjust width as needed */
-    padding: 2%; /* Adjust padding as needed */
+/* .form-group input[type="text"] {
+    width: 100%; 
+    padding: 2%; 
     border-radius: 10px;
 }
 
 .form-group input[type="number"] {
-    width: 100%; /* Adjust width as needed */
-    padding: 2%; /* Adjust padding as needed */
+    width: 100%; 
+    padding: 2%; 
     border-radius: 10px;
 }
 
 .form-group textarea {
-    width: 100%; /* Adjust width as needed */
-    padding: 2%; /* Adjust padding as needed */
+    width: 100%; 
+    padding: 2%; 
     border-radius: 10px;
-    /* Add any other styling as needed */
   }
   
-
-/* Style for the select tag */
 .form-group select {
-    width: 100%; /* Adjust width as needed */
-    padding: 8px; /* Adjust padding as needed */
+    width: 100%; 
+    padding: 8px; 
     border-radius: 10px;
-    border: 1px solid #ccc; /* Border style */
-    background-color: #fff; /* Background color */
-    font-size: 16px; /* Font size */
-    color: #333; /* Text color */
-    /* Add more styles as needed */
+    border: 1px solid #ccc; 
+    background-color: #fff; 
+    font-size: 16px; 
+    color: #333; 
+  } */
+  
+  .floating-label-group .text-danger {
+    color: red; 
+    font-size: small; 
+    margin-top: 0px; 
+  }
+
+
+
+
+  .row {
+    width: 100%;
+    margin: 0;
   }
   
-  /* Style for the validation message */
-  .form-group .text-danger {
-    color: red; /* Error message text color */
-    font-size: 14px; /* Error message font size */
-    margin-top: 4px; /* Adjust margin as needed */
+  .col-xs-4 {
+    width: 100%;
+    padding: 0;
   }
-
-.popupdown button {
+  
+  
+  .floating-label-group {
+    position: relative;
+    margin-top: 15px;
+    width: 100%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+  }
+  
+  .floating-label-group input {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    border: 1px solid #0066b2;
+    outline: none;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .floating-label-group textarea {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    border: 1px solid #0066b2;
+    outline: none;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .floating-label-group select {
+    width: 100%;
+    height: fit-content;
+    padding: 1%;
+    margin: 0%;
+    display: flex;
+    border: 1px solid #0066b2;
+    outline: none;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .floating-label {
+    font-size: large;
+    color: grey;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 5px;
+    left: 5px;
+    transition: all 0.1s ease;
+    /* border: 1px solid; */
+  }
+  
+  .floating-label-group input:focus ~ .floating-label,
+  .floating-label-group textarea:focus ~ .floating-label,
+  .floating-label-group select:focus ~ .floating-label,
+  
+  .floating-label-group input:not(:focus):valid ~ .floating-label,
+  .floating-label-group textarea:not(:focus):valid ~ .floating-label,
+  .floating-label-group select:not(:focus):valid ~ .floating-label {
+    top: -25px;
+    left: 0px;
+    font-size: medium;
+    font-weight: bold;
+    color: #0066b2;
+  }
+  
+  /* When input is invalid, the label stays above */
+  .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group textarea.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group select.ng-invalid.ng-touched ~ .floating-label  {
+    top: -20px;
+    left: 0px;
+    font-size: medium;
+    font-weight: bold;
+    color: #0066b2;
+  }
+  
+  
+  .popupdown button {
     width: 100%; /* Adjust width as needed */
-    padding: 2%; /* Adjust padding as needed */
+    padding: 2% 0%; /* Adjust padding as needed */
     border-radius: 10px;
-    background-color: aquamarine;
-}
-
-
+    background-color: #0066b2;
+    color: aliceblue;
+  }
+  
 
 
 

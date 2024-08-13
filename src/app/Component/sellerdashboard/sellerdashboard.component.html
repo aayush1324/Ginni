@@ -1,28 +1,24 @@
 <div class="containerbox">
     <div class="navbar">
-        <div class="Product" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellerproductlist')}">
-            <a routerLink="/main/sellerdashboard/sellerproductlist"><h3>Product List</h3></a>
+        <div class="Product" [ngClass]="{'active': isLinkActive('/sellerdashboard/sellerproductlist')}">
+            <a routerLink="/sellerdashboard/sellerproductlist"><h3>Product List</h3></a>
         </div>
 
-        <div class="Order" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellerorderlist')}">
-            <a routerLink="/main/sellerdashboard/sellerorderlist"><h3>Order List</h3></a>
+        <div class="Order" [ngClass]="{'active': isLinkActive('/sellerdashboard/sellerorderlist')}">
+            <a routerLink="/sellerdashboard/sellerorderlist"><h3>Order List</h3></a>
         </div>
 
-        <div class="Customer" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellercustomerlist')}">
-            <a routerLink="/main/sellerdashboard/sellercustomerlist"><h3>Customer List</h3></a>
+        <div class="Customer" [ngClass]="{'active': isLinkActive('/sellerdashboard/sellercustomerlist')}">
+            <a routerLink="/sellerdashboard/sellercustomerlist"><h3>Customer List</h3></a>
         </div>
 
-        <div class="ZipCode" [ngClass]="{'active': isLinkActive('/main/sellerdashboard/sellerzipcodelist')}">
-            <a routerLink="/main/sellerdashboard/sellerzipcodelist"><h3>ZipCode List</h3></a>
-        </div>
+        <!-- <div class="ZipCode" [ngClass]="{'active': isLinkActive('/sellerdashboard/sellerzipcodelist')}">
+            <a routerLink="/sellerdashboard/sellerzipcodelist"><h3>ZipCode List</h3></a>
+        </div> -->
     </div> 
 
 
     <div class="route">
         <router-outlet></router-outlet>
-    </div>
-   
-
-
-    
+    </div> 
 </div>

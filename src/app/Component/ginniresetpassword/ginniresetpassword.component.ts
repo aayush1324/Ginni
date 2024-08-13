@@ -40,6 +40,8 @@ export class GinniresetpasswordComponent implements OnInit {
       this.emailToken = uriToken.replace(/ /g, '+');
       console.log(this.emailToken)
     });
+
+    window.scrollTo(0, 0);
   }
 
 
