@@ -11,12 +11,16 @@ import { ProductService } from '../../Services/product.service';
 export class GinnifivecombosComponent {
   productlist: any[] = [];
 
+  // @Input() rating: number = 0; // Default value to avoid undefined
+  stars: number[] = [1, 2, 3, 4, 5];
+
   constructor( private cartService : CartService, private productService : ProductService) { }
 
   ngOnInit(): void {
     this.getProduct();
-    // console.log(this.productlist);
   }
+
+
 
   addtocart(item: any){
     console.log(item);
@@ -25,19 +29,17 @@ export class GinnifivecombosComponent {
 
   getProduct(): void {
     this.productService.getProductsWithImages().subscribe({
-      next: (res) => {
-        
+      next: (res) => {       
         console.log(res);
-
-        this.productlist = res.filter((product) => product.subcategory === 'combo');
-        this.productlist = this.productlist.slice(0, 5);
-
+        this.productlist = res.slice(0, 5);
         console.log(this.productlist);
-
       },
       error: (err) => {
         console.error('Error fetching addresses:', err);
       }
     });
   }
+
+
 }
+

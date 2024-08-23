@@ -5,8 +5,6 @@
     </div>
 
     <div id="google-btn"></div>
-    <br>
-    <br>
 
     <form [formGroup]="signupForm" (ngSubmit)="SignupForm()">
         <div class="row">
@@ -19,7 +17,6 @@
                         Username is required.
                     </div>
                 </div>
-                <br>
                 
                 <div class="form-group floating-label-group">
                     <input type="email" id="email" formControlName="email" class="form-control" autocomplete="off"  required>
@@ -32,7 +29,6 @@
                         Invalid email format.
                     </div>
                 </div>
-                <br>
 
                 <div class="form-group floating-label-group">
                     <div class="password-container">
@@ -51,7 +47,6 @@
                         Password must be at least 6 characters long.
                     </div>
                 </div>
-                <br>
 
                 <div class="form-group floating-label-group">
                     <div class="password-container">
@@ -73,7 +68,6 @@
                         *Confirm Password didn't matched*
                     </div>
                 </div>
-                <br>
 
                 <div class="form-group floating-label-group">
                     <input type="tel" id="mobile" formControlName="mobile" class="form-control" autocomplete="off"  required>
@@ -90,10 +84,8 @@
         </div>
 
         <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
-
     </form>
 
-    <br>
     <div class="footer">
         <p>Already have an account? <a routerLink="/account/login">Login here</a></p>
     </div>

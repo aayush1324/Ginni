@@ -22,7 +22,7 @@ export class GinniaddressComponent implements OnInit {
       lastName: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       address1: ['', Validators.required],
-      address2: [''],
+      address2: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
       city: ['', Validators.required],
       state: ['', Validators.required],

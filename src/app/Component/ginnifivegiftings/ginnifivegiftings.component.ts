@@ -11,11 +11,16 @@ import { ProductService } from '../../Services/product.service';
 export class GinnifivegiftingsComponent {
   productlist: any[] = [];
 
+  // @Input() rating: number = 0; // Default value to avoid undefined
+  stars: number[] = [1, 2, 3, 4, 5];
+
   constructor( private cartService : CartService, private productService : ProductService) { }
 
   ngOnInit(): void {
     this.getProduct();
   }
+
+
 
   addtocart(item: any){
     console.log(item);
@@ -26,10 +31,7 @@ export class GinnifivegiftingsComponent {
     this.productService.getProductsWithImages().subscribe({
       next: (res) => {       
         console.log(res);
-
-        this.productlist = res.filter((product) => product.subcategory === 'bestseller');
-        this.productlist = this.productlist.slice(0, 5); 
-               
+        this.productlist = res.slice(0, 5);
         console.log(this.productlist);
       },
       error: (err) => {
@@ -40,3 +42,4 @@ export class GinnifivegiftingsComponent {
 
 
 }
+

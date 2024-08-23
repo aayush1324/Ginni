@@ -152,27 +152,44 @@
                   <div class="dryfruit">
                       <!-- Almond content here -->
                       <div class="image">
-                          <div class="saving">
+                          <!-- <div class="saving">
                               <h6>Save Rs. {{ item.discount }}</h6>
                               <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist "></i>
                               <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist "></i>
-                          </div>
+                          </div> -->
                           <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
-                        </div>
+                      </div>
               
                       <div class="naming">
-                        <a [routerLink]="['/mainproduct', item.productName]"><h5>{{ item.productName }}</h5></a>
+                        <a [routerLink]="['/mainproduct', item.productName]"><h6>{{ item.productName | titlecase}} ({{item.weight}})</h6></a>
+                      </div>
+
+                      <div class="rating">
+                        <div class="star-rating">
+                            <i *ngFor="let star of stars; let i = index"
+                                class="fa"
+                                [ngClass]="{
+                                'fa-star': item.rating >= i + 1,
+                                'fa-star-half-o': item.rating > i && item.rating < i + 1,
+                                'fa-star-o': item.rating < i + 1
+                                }">
+                            </i>
+                        </div>
+                        <h6>{{ item.rating | number:'1.1-1' }}</h6>
+                        <p>({{item.userRating}})</p>
                       </div>
                   
                       <div class="pricing">
-                          <h5>Rs {{ item.price }}</h5>
+                        <h5>&#8377; {{ item.price }}</h5>
+                        <p> &#x20B9; {{item.price - item.discount}} </p>
+                        <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
                       </div>
+
+   
                   
                       <div class="carting">
-                            <!-- Use ngIf to conditionally display 'Add to Cart' or 'Sold Out' -->
                           <button *ngIf="item.status === 'instock'" (click)="addToCart(item)">Add to Cart</button>
                           <button *ngIf="item.status === 'outofstock'" disabled>Sold Out</button>
-                          <!-- <span *ngIf="item.status === 'outofstock'">Sold Out</span> -->
                       </div>          
                   </div>
               </ng-container>

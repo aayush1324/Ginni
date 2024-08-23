@@ -62,6 +62,8 @@ export class GinnicombosComponent {
   productLength!: number;
   isOpenSortby: boolean = false;
   isOpenFilter: boolean = false;
+  stars: number[] = [1, 2, 3, 4, 5];
+
 
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
@@ -91,7 +93,6 @@ export class GinnicombosComponent {
     this.refreshWishlistItemCount();
 
     window.scrollTo(0, 0);
-
   }
 
 
@@ -220,17 +221,20 @@ export class GinnicombosComponent {
     const productId = product.id;
 
     if (userId) {  
-      this.cartHelperService.addToCart(userId, productId, product).subscribe({
-        next: (res: any) => {
-          if (res) {
-            this.refreshCartItemCount(); // Refresh cart item count after adding to cart
-            this.cartService.updateCount(this.totalCartItem+1); 
-          }
-        },   
-        error: (err) => {
-          console.error('Error:', err);
-        }   
-      });    
+      this.cartService.getToCarts(userId).subscribe(() => {
+        this.cartHelperService.addToCart(userId, productId, product).subscribe({
+          next: (res: any) => {
+            if (res) {
+              console.log(res);
+              this.refreshCartItemCount(); // Refresh cart item count after adding to cart
+              this.cartService.updateCount(this.totalCartItem+1); 
+            }
+          },   
+          error: (err) => {
+            console.error('Error:', err);
+          }   
+        });   
+      }) 
     }
     else {
       console.warn('User ID not found in session storage');
@@ -287,9 +291,10 @@ export class GinnicombosComponent {
     this.ProductHelperService.getProducts(UserID).subscribe({
       next: (res) => {
         this.productLength = res.length;
-        this.productlist = res.filter((product) => product.subcategory === 'combo');
+        console.log(res);
+        this.productlist = res;
         this.originalProductList = [...this.productlist];
-        this.processProductData(this.originalProductList);
+        this.processProductData(res);
         this.searchService.getSearchTerm().subscribe((searchTerm) => {
           this.searchTerm = searchTerm;
           this.onSearch();
@@ -541,5 +546,6 @@ export class GinnicombosComponent {
 
     this.getProducts();
   }
+
 
 }

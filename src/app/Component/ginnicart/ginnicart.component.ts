@@ -320,7 +320,8 @@ export class GinnicartComponent {
           this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
             console.log(response.id);
             const options = {
-              key: 'rzp_test_NHayhA8KgRDaCx',
+              // key: 'rzp_test_NHayhA8KgRDaCx',
+              key: 'rzp_live_HO0cMQGQ5NHBLD',
               amount: response.amount,
               currency: 'INR',
               name: 'Ginni Dry Fruits',
@@ -370,7 +371,8 @@ export class GinnicartComponent {
           this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
             console.log(response.id);
             const options = {
-              key: 'rzp_test_NHayhA8KgRDaCx',
+              // key: 'rzp_test_NHayhA8KgRDaCx',
+              key: 'rzp_live_HO0cMQGQ5NHBLD',
               amount: response.amount,
               currency: 'INR',
               name: 'Ginni Dry Fruits',

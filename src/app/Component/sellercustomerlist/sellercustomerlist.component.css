@@ -274,6 +274,17 @@ button {
     font-weight: bold;
     color: #0066b2;
   }
+
+.floating-label-group input:valid ~ .floating-label,
+.floating-label-group select:valid ~ .floating-label,
+.floating-label-group textarea:valid ~ .floating-label 
+{
+  top: -10px;
+  left: 0px;
+  font-size: small;
+  font-weight: bold;
+  color: #0066b2;
+}
   
   /* When input is invalid, the label stays above */
   .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,

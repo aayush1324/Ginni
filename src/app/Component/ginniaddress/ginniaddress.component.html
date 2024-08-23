@@ -23,62 +23,150 @@
                         </div>
                     </div>
                     <br>
-                    <div class="popupdown">
+                    <!-- <div class="popupdown">
                         <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
-                            <div class="form-group">
-                                <input type="text" id="firstName" formControlName="firstName" placeholder="First Name">
-                                <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
-                                    First Name is required.
+                            <div class="row">
+                                <div class="col-xs-4 col-xs-offset-4">
+                                    <div class="form-group floating-label-group" >
+                                        <input type="text" id="firstName" formControlName="firstName" placeholder="Firstsfdss Name">
+                                        <label class="floating-label">Product Name</label>
+                                        <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
+                                            First Name is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
+                                        <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
+                                            Last Name is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="phone" formControlName="phone" placeholder="Phone">
+                                        <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
+                                            Phone is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
+                                        <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                            Address 1 is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
+                                        <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
+                                            Pin Code is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="city" formControlName="city" placeholder="City">
+                                        <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
+                                            City is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="state" formControlName="state" placeholder="State">
+                                        <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
+                                            State is required.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" id="default" formControlName="default" >
+                                        <label for="default"> Set as Default Address </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
-                                <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
-                                    Last Name is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="phone" formControlName="phone" placeholder="Phone">
-                                <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
-                                    Phone is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
-                                <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
-                                    Address 1 is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
-                                <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
-                                    Pin Code is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="city" formControlName="city" placeholder="City">
-                                <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
-                                    City is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="state" formControlName="state" placeholder="State">
-                                <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
-                                    State is required.
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="default" formControlName="default" >
-                                <label for="default"> Set as Default Address </label>
-                            </div>
+
                             <button type="submit" [disabled]="!addressForm.valid">
                                 {{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}
                             </button>
                         </form>
-                    </div>
+                    </div> -->
+                
+                    <div class="popupdown">
+                        <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
+                            <div class="row">
+                                <div class="col-xs-4 col-xs-offset-4">
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="firstName" formControlName="firstName" autocomplete="off" required>
+                                        <label class="floating-label">First Name</label>
+                                        <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
+                                            First Name is required.
+                                        </div>
+                                    </div>
+                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="lastName" formControlName="lastName" autocomplete="off" required>
+                                        <label class="floating-label">Last Name</label>
+                                        <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
+                                            Last Name is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="phone" formControlName="phone" autocomplete="off" required>
+                                        <label class="floating-label">Phone</label>
+                                        <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
+                                            Phone is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="address1" formControlName="address1" autocomplete="off" required>
+                                        <label class="floating-label">Address Line 1</label>
+                                        <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                            Address Line 1 is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="address2" formControlName="address2" autocomplete="off">
+                                        <label class="floating-label">Address Line 2</label>
+                                        <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                            Address Line 2 is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="pincode" formControlName="pincode" autocomplete="off" required>
+                                        <label class="floating-label">Pin Code</label>
+                                        <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
+                                        Pin Code is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="city" formControlName="city" autocomplete="off" required>
+                                        <label class="floating-label">City</label>
+                                        <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
+                                            City is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group floating-label-group">
+                                        <input type="text" id="state" formControlName="state" autocomplete="off" required>
+                                        <label class="floating-label">State</label>
+                                        <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
+                                            State is required.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="checkbox" id="default" formControlName="default">
+                                        <label for="default">Set as Default Address</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" [disabled]="!addressForm.valid">
+                                <h6>{{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}</h6>
+                            </button>
+                        </form>
+                      </div>
+                      
                 </div>
             </div>              
         </div>
@@ -116,7 +204,7 @@
             <img src="../../assets/images/png/address.png" alt="Address Icon">
             <br>
             <br>
-            <p>No addresses yet</p>
+            <h4>No Address yet</h4>
             <button (click)="togglePopup()" class="upperbutton">Add your First Address</button>
         </div>
 
@@ -138,57 +226,81 @@
                 <br>
                 <div class="popupdown">
                     <form [formGroup]="addressForm" (ngSubmit)="isEdit ? submitEditedAddress() : addAddress()">
-                        <div class="form-group">
-                            <input type="text" id="firstName" formControlName="firstName" placeholder="First Name">
-                            <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
-                                First Name is required.
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="firstName" formControlName="firstName" autocomplete="off" required>
+                                    <label class="floating-label">First Name</label>
+                                    <div *ngIf="addressForm.get('firstName')?.errors?.['required'] && addressForm.get('firstName')?.touched" class="text-danger">
+                                        First Name is required.
+                                    </div>
+                                </div>
+                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="lastName" formControlName="lastName" autocomplete="off" required>
+                                    <label class="floating-label">Last Name</label>
+                                    <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
+                                        Last Name is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="phone" formControlName="phone" autocomplete="off" required>
+                                    <label class="floating-label">Phone</label>
+                                    <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
+                                        Phone is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="address1" formControlName="address1" autocomplete="off" required>
+                                    <label class="floating-label">Address Line 1</label>
+                                    <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
+                                        Address Line 1 is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="address2" formControlName="address2" autocomplete="off" required>
+                                    <label class="floating-label">Address Line 2</label>
+                                    <div *ngIf="addressForm.get('address2')?.errors?.['required'] && addressForm.get('address2')?.touched" class="text-danger">
+                                        Address Line 2 is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="pincode" formControlName="pincode" autocomplete="off" required>
+                                    <label class="floating-label">Pin Code</label>
+                                    <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
+                                    Pin Code is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="city" formControlName="city" autocomplete="off" required>
+                                    <label class="floating-label">City</label>
+                                    <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
+                                        City is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group floating-label-group">
+                                    <input type="text" id="state" formControlName="state" autocomplete="off" required>
+                                    <label class="floating-label">State</label>
+                                    <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
+                                        State is required.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="checkbox" id="default" formControlName="default">
+                                    <label for="default">Set as Default Address</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
-                            <div *ngIf="addressForm.get('lastName')?.errors?.['required'] && addressForm.get('lastName')?.touched" class="text-danger">
-                                Last Name is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="phone" formControlName="phone" placeholder="Phone">
-                            <div *ngIf="addressForm.get('phone')?.errors?.['required'] && addressForm.get('phone')?.touched" class="text-danger">
-                                Phone is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="address1" formControlName="address1" placeholder="Address 1">
-                            <div *ngIf="addressForm.get('address1')?.errors?.['required'] && addressForm.get('address1')?.touched" class="text-danger">
-                                Address 1 is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="address2" formControlName="address2" placeholder="Address 2">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="pincode" formControlName="pincode" placeholder="Pin Code">
-                            <div *ngIf="addressForm.get('pincode')?.errors?.['required'] && addressForm.get('pincode')?.touched" class="text-danger">
-                                Pin Code is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="city" formControlName="city" placeholder="City">
-                            <div *ngIf="addressForm.get('city')?.errors?.['required'] && addressForm.get('city')?.touched" class="text-danger">
-                                City is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="state" formControlName="state" placeholder="State">
-                            <div *ngIf="addressForm.get('state')?.errors?.['required'] && addressForm.get('state')?.touched" class="text-danger">
-                                State is required.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" id="default" formControlName="default" >
-                            <label for="default"> Set as Default Address </label>
-                        </div>
+
                         <button type="submit" [disabled]="!addressForm.valid">
-                            {{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}
+                            <h6>{{ isEdit ? 'Submit Edit Address' : 'Add a New Address' }}</h6>
                         </button>
                     </form>
                 </div>

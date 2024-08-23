@@ -31,24 +31,24 @@
 .left {
 	width: 25%;
 	height: fit-content;
-	padding: 2%;
-	margin: 0% 2%;
+	padding: 1%;
+	margin: 2%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	/* align-items: center; */
-	/* border: 1px solid; */
+    border: 1px solid rgb(230, 230, 230);
 }
 
 .heading {
 	width: 100%;
 	height: fit-content;
-	padding: 2%;
+	padding: 0% 2%;
 	margin: 5% 0%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* border: 2px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 .heading h3 {
@@ -79,7 +79,7 @@ button{
 .availability {
 	width: 100%;
 	height: fit-content;
-	padding: 2%;
+	padding: 0%;
 	margin: 5% 0%;
 	display: flex;
 	flex-direction: column;
@@ -90,12 +90,21 @@ button{
 .availabilityfooter {
 	width: 100%;
 	height: fit-content;
-	padding: 5%;
-	margin: 5% 0%;
+	padding: 2%;
+	margin:  0%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* border: 2px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
+}
+
+.availabilityheader {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin:  0%;
+	display: flex;
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 #stock {
@@ -112,24 +121,32 @@ button{
 .categories {
 	width: 100%;
 	height: fit-content;
-	padding: 2%;
+	padding: 0%;
 	margin: 5% 0%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* border: 1px solid; */
-	border-radius: 10px;
+    /* border: 1px solid rgb(230, 230, 230); */
+}
+
+.categoryheader {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin:  0%;
+	display: flex;
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 .categoryfooter {
 	width: 100%;
 	height: fit-content;
 	padding: 2%;
-	margin: 5% 0%;
+	margin:  0%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* border: 2px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 #dryfruit {
@@ -152,23 +169,32 @@ button{
 .sortby {
 	width: 100%;
 	height: fit-content;
-	padding: 2%;
+	padding: 0%;
 	margin: 5% 0%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* border: 1px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
+}
+
+.sortbyheader {
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	margin:  0%;
+	display: flex;
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 .sortbyfooter {
 	width: 100%;
 	height: fit-content;
 	padding: 2%;
-	margin: 5% 0%;
+	margin:  0%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/* border: 2px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 .price {
@@ -257,13 +283,13 @@ button{
 .right {
 	width: 75%;
 	height: fit-content;
-	padding: 2%;
-	margin: 0%;
+	padding: 0%;
+	margin: 2% ;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	/* align-items: center; */
-	/* border: 1px solid; */
+    border: 1px solid rgb(230, 230, 230);
 }
 
 
@@ -275,7 +301,7 @@ button{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* border: 3px solid; */
+    /* border: 1px solid rgb(230, 230, 230); */
 }
 
 .headertop {
@@ -306,9 +332,9 @@ button{
     justify-content: space-between;
     display: flex;
     flex-direction: row;
-    padding: 2%;
+    padding: 0%;
     margin: 0%;
-    /* border: 5px solid; */
+    border-top: 1px solid rgb(230, 230, 230);
     align-items: center;
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent line breaks inside the container */
@@ -325,7 +351,7 @@ button{
     margin: 0%;
     border: 1px solid;
     border-radius: 5%;
-    border-color: rgb(225, 225, 225);
+    border-color: rgb(200, 200, 200);
 }
 
 .almond-grid {

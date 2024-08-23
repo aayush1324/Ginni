@@ -28,6 +28,7 @@
           <form [formGroup]="productForm" (ngSubmit)="isEdit ? submitEditedProduct() : addedProduct()">     
             <div class="row">
               <div class="col-xs-4 col-xs-offset-4">
+
                 <div class="form-group floating-label-group" >
                   <input type="text" id="productName" formControlName="productName"  autocomplete="off" required>
                   <label class="floating-label">Product Name</label>
@@ -36,7 +37,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <input type="text" id="url" formControlName="url" autocomplete="off" required>
                   <label class="floating-label">URL</label>
@@ -45,7 +45,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <input type="number" id="price" formControlName="price" min="0" autocomplete="off" required>
                   <label class="floating-label">Price</label>
@@ -54,7 +53,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <input type="number" id="discount" formControlName="discount" min="0" max="100" autocomplete="off" required>
                   <label class="floating-label">Discount in %</label>
@@ -63,7 +61,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <input type="number" id="deliveryPrice" formControlName="deliveryPrice" min="0" autocomplete="off" required>
                   <label class="floating-label">Delivery Price</label>
@@ -72,7 +69,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <input type="number" id="quantity" formControlName="quantity" min="0"   autocomplete="off" required>
                   <label class="floating-label">Quantity</label>
@@ -81,7 +77,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <textarea id="description" formControlName="description" autocomplete="off" required></textarea>
                   <label class="floating-label">Description</label>
@@ -90,7 +85,6 @@
                   </div>
                 </div>
 
-                <br>
                 <!-- Category selection dropdown -->
                 <div class="form-group floating-label-group">
                   <select formControlName="category" autocomplete="off" required>
@@ -106,7 +100,6 @@
                   </div>
                 </div>
 
-                <br>
                 <!-- Subcategory selection dropdown -->
                 <div class="form-group floating-label-group">
                   <select formControlName="subcategory" autocomplete="off" required>
@@ -124,7 +117,6 @@
                   </div>
                 </div>
 
-                <br>
                 <!-- Weight selection dropdown -->
                 <div class="form-group floating-label-group">
                   <select id="weight" formControlName="weight" autocomplete="off" required>
@@ -143,7 +135,6 @@
                   </div>
                 </div>
 
-                <br>
                 <div class="form-group floating-label-group">
                   <select formControlName="status" autocomplete="off" required>
                     <option value="sel" disabled selected>Select Status</option>

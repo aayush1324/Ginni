@@ -37,14 +37,11 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 100; /* Ensure it's above other content */
+    z-index: 9990; /* Ensure it's above other content */
+    overflow: hidden; /* Prevent scrolling */
+
 }
 
-/* Blur and no-scroll classes */
-.blurred {
-    filter: blur(5px); /* Adjust the blur level */
-    pointer-events: none; /* Disable interactions with the blurred content */
-}
 
 .no-scroll {
     overflow: hidden;
@@ -53,16 +50,16 @@
 .addresspopup {
     position: fixed;
     width: 40%;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
     color: #0066b2;
     padding: 1%;
-    border-radius: 8px;
-    /* border: 1px solid; */
-    z-index: 1000; /* Ensure it's above the overlay */
-    max-height: 75%; /* Set maximum height */
+    border: 1px solid;
+    border-radius: 5px;
+    z-index: 10000; /* Ensure it's above the overlay */
+    max-height: 90%; /* Set maximum height */
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -144,15 +141,15 @@
     /* border: 5px solid; */
 }
 
-.form-group input[type="text"] {
-    width: 100%; /* Adjust width as needed */
-    padding: 2%; /* Adjust padding as needed */
+/* .form-group input[type="text"] {
+    width: 100%; 
+    padding: 2%; 
     border-radius: 10px;
-}
+} */
 
 .form-group input[type="checkbox"] {
-    margin-right: 15px; /* Adjust the right margin as needed */
-	transform: scale(1.5); /* Adjust the scale factor as needed */
+    margin-right: 15px; 
+	transform: scale(1.5); 
 }
 
 .popupdown button {
@@ -162,7 +159,6 @@
     background-color: #0066b2;
     color: aliceblue;
 }
-
 
 
 .empty-address {
@@ -189,6 +185,94 @@
 .empty-address button:hover {
     background-color: #0056b3; /* Adjust color as needed */
 }
+
+
+.floating-label-group .text-danger {
+    color: red;
+    font-size: smaller; 
+    margin-top: 0px; 
+    margin-bottom: 25px;
+  } 
+
+.row {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .col-xs-4 {
+    width: 100%;
+    padding: 0;
+  }
+  
+  
+  .floating-label-group {
+    position: relative;
+    margin-top: 25px;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .floating-label-group input,
+  .floating-label-group textarea,
+  .floating-label-group select {
+    width: 100%;
+    padding: 1%;
+    margin: 0;
+    border: 1px solid #0066b2;
+    outline: none;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .floating-label {
+    font-size: medium;
+    color: grey;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+  }
+  
+  .floating-label-group input:focus ~ .floating-label,
+  .floating-label-group textarea:focus ~ .floating-label,
+  .floating-label-group select:focus ~ .floating-label
+  {
+    top: -10px;
+    left: 0px;
+    font-size: medium;
+    font-weight: bold;
+    color: #0066b2;
+  }
+
+
+.floating-label-group input:valid ~ .floating-label,
+.floating-label-group select:valid ~ .floating-label,
+.floating-label-group textarea:valid ~ .floating-label 
+{
+  top: -10px;
+  left: 0px;
+  font-size: small;
+  font-weight: bold;
+  color: #0066b2;
+}
+  
+  .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group textarea.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group select.ng-invalid.ng-touched ~ .floating-label {
+    top: -10px;
+    left: 0px;
+    font-size: small;
+    font-weight: bold;
+    color: #0066b2;
+  }
+
+
+
+
+
+
 
 @media (max-width: 1080px) {
     .empty-address img {

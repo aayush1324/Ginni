@@ -8,7 +8,8 @@
 
   
   <div class="lower">
-    <div class="images-wrapper" #sliderContainer>
+    <!-- Instagram Posts by Link -->
+    <!-- <div class="images-wrapper" #sliderContainer>
       <a *ngFor="let post of instagramPosts; let i = index"
          [href]="post.url"
          target="_blank"
@@ -16,15 +17,75 @@
         <img [src]="post.thumbnail" 
              [alt]="post.alt">
       </a>
+    </div> -->
+
+    <!-- Instagram Posts by Embeed -->
+    <!-- <div class="images-wrapper" #sliderContainer>
+      <div *ngFor="let post of visibleInstagramPosts; let i = index" 
+           class="post-container" 
+           [class.active]="isHighlighted(i)">
+        <iframe [width]="postWidth" 
+                [height]="postHeight"
+                [src]="post.embedUrl"
+                frameborder="0"
+                allowfullscreen>
+        </iframe>
+      </div>
+    </div> -->
+
+
+    <!-- <div class="images-wrapper" #sliderContainer>
+      <div *ngFor="let post of visibleInstagramPosts; let i = index" 
+           class="post-container" 
+           [class.active]="isHighlighted(i)" 
+           style="position: relative;">
+        <a [href]="post.originalUrl" target="_blank" rel="noopener" style="display: block; position: relative;">
+          <div class="instafeed-container" 
+               [style.width]="postWidth + 'px'" 
+               [style.paddingTop]="(postHeight / postWidth * 100) + '%'">
+            <img class="js-lazy-image" 
+                 [style.width]="'100%'" 
+                 [style.height]="'100%'" 
+                 src="//instafeed.nfcube.com/assets/img/placeholder.gif" 
+                 [attr.data-src]="post.thumbnailUrl" 
+                 alt="Instagram post image">
+            
+            <div class="instafeed-overlay instafeed-video" 
+                 style="position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.8); padding: 5px; border-radius: 50%;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
+                   alt="Instagram" 
+                   style="width: 24px; height: 24px;">
+            </div>
+          </div>
+        </a>
+      </div>
+    </div> -->
+    
+
+    <!-- Youtube Posts by Embeed-->
+    <div class="images-wrapper" #sliderContainer>
+      <div *ngFor="let video of visibleVideos; let i = index" 
+           class="video-container" 
+           [class.active]="isHighlighted(i)">
+        <iframe [width]="videoWidth" 
+                [height]="videoHeight"
+                [src]="video.embedUrl"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+        </iframe>
+      </div>
     </div>
   
     <!-- Left arrow -->
-    <div class="arrow left-arrow" (click)="scroll(-1)">
+    <div class="arrow left-arrow" (click)="scroll(-1)" [class.blur]="currentPage === 0">
       <b><i class="fa fa-angle-left"></i></b>
     </div>
   
     <!-- Right arrow -->
-    <div class="arrow right-arrow" (click)="scroll(1)">
+    <div class="arrow right-arrow" (click)="scroll(1)" [class.blur]="currentPage >= totalPages - 1">
       <b><i class="fa fa-angle-right"></i></b>
     </div>
   </div>

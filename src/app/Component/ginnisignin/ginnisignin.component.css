@@ -54,15 +54,6 @@ form {
     border-color: #0066b2;
 } */
 
-.row {
-    width: 100%;
-    margin: 0;
-}
-
-.col-xs-4 {
-    width: 100%;
-    padding: 0;
-}
 
 .password-container {
     display: flex;
@@ -70,68 +61,95 @@ form {
     position: relative;
 }
 
-.floating-label-group {
-    position: relative;
-    margin-top: 15px;
-    width: 100%;
-    height: fit-content;
-    padding: 0%;
-    margin: 0%;
-    /* border: 1px solid; */
-    display: flex;
-    flex-direction: column;
-    /* text-align: center; */
-}
+.floating-label-group .text-danger {
+    color: red;
+    font-size: smaller; 
+    margin-top: 0px; 
+    margin-bottom: 25px;
+  } 
 
-.floating-label-group input {
+.row {
     width: 100%;
-    height: fit-content;
-    padding: 2%;
-    margin: 0%;
-    display: flex;
+    margin: 0;
+  }
+  
+  .col-xs-4 {
+    width: 100%;
+    padding: 0;
+  }
+  
+  
+  .floating-label-group {
+    position: relative;
+    margin-top: 25px;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .floating-label-group input,
+  .floating-label-group textarea,
+  .floating-label-group select {
+    width: 100%;
+    padding: 1%;
+    margin: 0;
     border: 1px solid #0066b2;
     outline: none;
     background-color: #fff;
     border-radius: 5px;
-}
-
-.floating-label {
-    font-size: large;
+  }
+  
+  .floating-label {
+    font-size: medium;
     color: grey;
     position: absolute;
     pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 5px;
-    left: 5px;
-    transition: all 0.1s ease;
-    /* border: 1px solid; */
-}
-
-.floating-label-group input:focus ~ .floating-label,
-.floating-label-group input:not(:focus):valid ~ .floating-label {
-    top: -25px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+  }
+  
+  .floating-label-group input:focus ~ .floating-label,
+  .floating-label-group textarea:focus ~ .floating-label,
+  .floating-label-group select:focus ~ .floating-label
+  {
+    top: -10px;
     left: 0px;
     font-size: medium;
     font-weight: bold;
     color: #0066b2;
-}
+  }
 
-/* When input is invalid, the label stays above */
-.floating-label-group input.ng-invalid.ng-touched ~ .floating-label {
-    top: -20px;
+.floating-label-group input:valid ~ .floating-label,
+.floating-label-group select:valid ~ .floating-label,
+.floating-label-group textarea:valid ~ .floating-label 
+{
+  top: -10px;
+  left: 0px;
+  font-size: small;
+  font-weight: bold;
+  color: #0066b2;
+}
+  
+  .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group textarea.ng-invalid.ng-touched ~ .floating-label,
+  .floating-label-group select.ng-invalid.ng-touched ~ .floating-label {
+    top: -10px;
     left: 0px;
-    font-size: medium;
+    font-size: small;
     font-weight: bold;
     color: #0066b2;
-}
+  }
+
+
+
+
 
 button {
     width: 100%;
     height: fit-content;
     padding: 2%;
-    margin: 10%;
+    margin: 5%;
     margin-bottom: 0%;
     display: flex;
     border-radius: 10px;
@@ -157,13 +175,14 @@ button {
     top: 50%; /* Align the icon vertically */
     right: 10px; /* Adjust the right position as needed */
     transform: translateY(-50%); /* Center the icon vertically */
+    z-index: 1; /* Ensure the icon is above the input field */
     cursor: pointer; /* Set cursor to pointer for better UX */
 }
 
 /* Adjust the icon size and styles as needed */
 .fa {
-    font-size: 20px;
-    color: #555; /* Adjust the icon color */
+  font-size: 20px;
+  color: #555; /* Adjust the icon color */
 }
   
 
