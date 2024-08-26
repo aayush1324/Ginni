@@ -1,4 +1,3 @@
-/* Basic styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -14,11 +13,11 @@ body, html {
 .header {
     grid-row: 1;
     width: 100%;
-    height: 5vh;
+    height: 5%;
     z-index: 1000;
-    /* border: 5px solid; */
     position: fixed;
-    background-color: blue;
+    background-color: rgb(28, 28, 194);
+    /* border: 5px solid; */
 }
 
 .temp{
@@ -28,27 +27,26 @@ body, html {
 
 .navbar {
     grid-row: 2;
-    height: 10vh;
+    height: 10%;
     width: 100%;
     z-index: 1000;
-    /* border: 5px solid; */
-     padding: 0%;
+    padding: 0%;
     margin: 0%;
     position: fixed;
-    margin-top: 5vh;
-    
+    margin-top: 2.4%;
+    background-color: aqua;
+    /* border: 5px solid; */
 }
 
 .body {
     grid-row: 3;
     height: fit-content;
-    /* border: 3px solid; */
     background-color: white;
-    margin-top: 15vh;
+    margin-top: 7%;
     padding-bottom: 5%;
+    /* border: 3px solid; */
 }
 
-/* Optional: Styling for the router-outlet to demonstrate scrollable content */
 router-outlet {
     display: block;
     height: 100%;
@@ -58,114 +56,84 @@ router-outlet {
     grid-row: 4;
     width: 100%;
     height: fit-content;
+    background-color: rgb(12, 88, 88);
     /* border: 3px solid; */
-    background-color: aqua;
 }
 
 
-/* @media (max-width: 540px) {
+/* -------------------------------------------------------------------------------------------------- */
+
+
+/* @media (min-width:1441px ) {
     .header {
-        height: 10vh;
+        height: 2rem;
     }
     
     .navbar {
-        margin-top: 10vh;
-    }
-    
-}
-
-@media (max-width: 320px) {
-    .header {
-        height: 15vh;
-    }
-    
-    .navbar {
-        margin-top: 15vh;
-    }
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (min-width:1441px ) {
-    .header {
-        height: 5vh;
-    }
-    
-    .navbar {
-        margin-top: 5vh;
+        margin-top: 2rem;
     } 
 }
 
 @media (min-width:1121px ) and (max-width: 1440px) {
     .header {
-        height: 5vh;
+        height: 2rem;
     }
     
     .navbar {
-        margin-top: 5vh;
-    }
-}
+        margin-top: 2rem;
+    } 
+} */
 
 
 @media (min-width:801px ) and (max-width: 1120px) {
     .header {
-        height: 5vh;
+        height: 2rem;
     }
     
     .navbar {
-        margin-top: 5vh;
-    }
+        margin-top: 2rem;
+    } 
 }
 
 
 @media (min-width:481px ) and (max-width: 800px) {
     .header {
-        height: 10vh;
+        height: 2rem;
     }
     
     .navbar {
-        margin-top: 10vh;
-    }
+        margin-top: 2rem;
+    } 
 }
 
 
 @media (min-width:321px ) and (max-width: 480px) {
     .header {
-        height: 10vh;
+        height: 3rem;
     }
     
     .navbar {
-        margin-top: 10vh;
-    }
+        margin-top: 3rem;
+    } 
 }
 
 @media (min-width:161px ) and (max-width:320px ) {
     .header {
-        height: 15vh;
+        height: 5rem;
     }
     
     .navbar {
-        margin-top: 15vh;
+        margin-top: 5rem;
     } 
 }
 
 
 @media (max-width:160px ) {
     .header {
-        height: 20vh;
+        height: 6rem;
     }
     
     .navbar {
-        margin-top: 20vh;
+        margin-top: 6rem;
     } 
 }

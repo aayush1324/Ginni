@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-
-
 @Component({
   selector: 'app-ginnisaveheader',
   templateUrl: './ginnisaveheader.component.html',
@@ -26,8 +24,8 @@ export class GinnisaveheaderComponent implements OnInit, OnDestroy {
 
   offers: string[] = [
     'Get 80% Discount on Purchase of 899 and Above With Code "SAVER8"',
-    'Buy 2 Get 1 Free on All Electronics Items Today!',
-    'Flat 50% Off on Fashion Apparels - Limited Time Offer'
+    'Buy 2 Get 1 Free on All DryFruits Today!',
+    'Flat 50% Off on AllDryFruits - Limited Time Offer'
   ];
 
   currentOffer: string = this.offers[0];
