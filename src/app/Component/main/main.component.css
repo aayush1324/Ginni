@@ -27,7 +27,7 @@ body, html {
 
 .navbar {
     grid-row: 2;
-    height: 10%;
+    height: 7%;
     width: 100%;
     z-index: 1000;
     padding: 0%;
