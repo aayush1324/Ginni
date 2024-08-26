@@ -29,6 +29,7 @@
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "firebase": "^10.11.1",
+    "hammerjs": "^2.0.8",
     "ng-angular-popup": "^0.5.2",
     "ngx-slick-carousel": "^17.0.0",
     "rxjs": "~7.8.0",

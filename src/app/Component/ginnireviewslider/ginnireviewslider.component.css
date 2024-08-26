@@ -39,8 +39,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    transition: transform 0.5s ease; /* Smooth transition effect */
-
+    transition: transform 0.5s ease; 
   }
   
   .images-wrapper img {
@@ -48,25 +47,9 @@
   }
 
   .images-wrapper.transitioning {
-    transition: none; /* Disable transition when transitioning */
+    transition: none; 
   }
   
-  .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: black;
-    cursor: pointer;
-  }
-  
-  .left-arrow {
-    left: 10px;
-  }
-  
-  .right-arrow {
-    right: 10px;
-  }
   
 
 @media (max-width: 1080px) {

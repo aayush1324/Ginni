@@ -1,5 +1,4 @@
 <div class="containerbox">
-
   <div class="upper">
     <div class="upperleft">
         <h1>Our Wholesome Recipes</h1>
@@ -8,6 +7,37 @@
 
   
   <div class="lower">
+    <!-- Youtube Posts by Embeed-->
+    <div class="images-wrapper" #sliderContainer>
+      <div *ngFor="let video of visibleVideos; let i = index" 
+           class="video-container" 
+           [class.active]="isHighlighted(i)">
+        <iframe [width]="videoWidth" 
+                [height]="videoHeight"
+                [src]="video.embedUrl"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  
+    <!-- Left arrow -->
+    <div class="arrow left-arrow" (click)="scroll(-1)" [class.blur]="currentPage === 0">
+      <b><i class="fa fa-angle-left"></i></b>
+    </div>
+  
+    <!-- Right arrow -->
+    <div class="arrow right-arrow" (click)="scroll(1)" [class.blur]="currentPage >= totalPages - 1">
+      <b><i class="fa fa-angle-right"></i></b>
+    </div>
+  </div>
+  
+</div>
+
+
     <!-- Instagram Posts by Link -->
     <!-- <div class="images-wrapper" #sliderContainer>
       <a *ngFor="let post of instagramPosts; let i = index"
@@ -61,33 +91,3 @@
       </div>
     </div> -->
     
-
-    <!-- Youtube Posts by Embeed-->
-    <div class="images-wrapper" #sliderContainer>
-      <div *ngFor="let video of visibleVideos; let i = index" 
-           class="video-container" 
-           [class.active]="isHighlighted(i)">
-        <iframe [width]="videoWidth" 
-                [height]="videoHeight"
-                [src]="video.embedUrl"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  
-    <!-- Left arrow -->
-    <div class="arrow left-arrow" (click)="scroll(-1)" [class.blur]="currentPage === 0">
-      <b><i class="fa fa-angle-left"></i></b>
-    </div>
-  
-    <!-- Right arrow -->
-    <div class="arrow right-arrow" (click)="scroll(1)" [class.blur]="currentPage >= totalPages - 1">
-      <b><i class="fa fa-angle-right"></i></b>
-    </div>
-  </div>
-  
-</div>

@@ -29,9 +29,21 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   toggleSearchBar() {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    }
+  }
+  
+  disableScrolling() {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  enableScrolling() {
+    document.body.style.overflow = 'auto';
   }
 
   closeMenu() {

@@ -1,119 +1,6 @@
 <div class="containerbox">
+
     <div class="containerlaptop">
-
-        <!-- <div class="ginninavbar">
-            <div class="navbarimage">
-                <a class="logo" routerLink="">
-                    <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
-                </a> 
-            </div>
-            
-            <div class="navbardata">
-                <div class="navbarupper">
-                    <div class="search-container">
-                        <div class="searchbox">
-                            <div class="searchbar">
-                                <app-search></app-search>
-                            </div>
-                        </div>
-                    </div>         
-                    
-                    <div class="navbarupperright"> 
-                        <div class="items">
-                            <div class="wishlist" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
-                                <a routerLink="/account/wishlist">
-                                    <div class="icontext">
-                                        <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
-                                        <i class="wishlist-count">{{ totalWislistItem }}</i>
-                                    </div>
-                                    <h6 *ngIf="showWishlist">Wishlist</h6>
-                                </a>
-                            </div>
-                        
-                            <div class="cart" (mouseover)="showCartText()" (mouseleave)="hideCartText()" [ngClass]="{'actives': isLinkActive('/account/cart')}">
-                                <a routerLink="/account/cart">
-                                    <div class="icontext">
-                                        <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
-                                        <i class="cart-count">{{ totalCartItem }}</i>
-                                    </div>
-                                    <h6 *ngIf="showCart">Cart</h6>
-                                </a>
-                            </div>
-    
-                            <div class="track" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()" [ngClass]="{'actives': isLinkActive('/account/track')}">
-                                <a routerLink="/account/track">
-                                    <i class="fa fa-truck"  [ngClass]="{'active-icon': isLinkActive('/account/track')}"></i>
-                                    <h6 *ngIf="showOrder">Track Order</h6>
-                                </a>
-                            </div>
-                        </div>  
-                        
-                        
-                        <div class="account">         
-                            <div class="my-account" *ngIf="loggedIn" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()">
-                                <h6 class="account-title">My Account <i class="fa fa-angle-down"></i></h6>
-                                <div class="dropdown-contents" *ngIf="isAccountDropdown">
-                                    <a *ngIf="isAdmin" routerLink="/main/sellerdashboard">Admin Dashboard</a>
-                                    <a *ngIf="isUser || isAdmin" routerLink="/account/order">My Order</a>
-                                    <a *ngIf="isUser || isAdmin" routerLink="/account/address">My Address</a>
-                                    <a routerLink="" (click)="logout()">Logout</a>
-                                </div>
-                            </div>
-                            <div class="auth" *ngIf="!loggedIn">
-                                <button>
-                                    <a routerLink="/account/login">Login/</a>
-                                    <a routerLink="/account/register">Register</a>
-                                </button>           
-                            </div>
-                            <div class="auth" *ngIf="loggedIn">
-                                <p>{{'Hello, ' + userName }}</p>
-                            </div>
-                        </div>                    
-                    </div>             
-                </div>
-    
-
-                <div class="navbarlower">
-                    <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
-                        <a routerLink="/collections/bestsellers"><h6>Best Seller</h6></a>
-                    </div>    
-    
-                    <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/giftings')}">
-                        <a routerLink="/collections/giftings"><h6>Giftings</h6></a>
-                    </div>
-    
-                    <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
-                        <a routerLink="/collections/dryfruit" class="dropdown-header"><h6>Shop by Category <i class="fa fa-caret-down"></i></h6></a>
-                        <div class="dropdown-content" *ngIf="isDropdownOpen">
-                            <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
-                            <a routerLink="/main/ginnidryfruitcashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitcashew'}">Cashew</a>
-                            <a routerLink="/main/ginnidryfruitraisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitraisin'}">Raisin</a>
-                            <a routerLink="/main/ginnidryfruitpista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitpista'}">Pista</a>
-                        </div>
-                    </div>
-    
-    
-                    <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
-                        <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
-                    </div>
-    
-                    <div class="combos" [ngClass]="{'active': isLinkActive('/collections/combos')}">
-                        <a routerLink="/collections/combos"><h6>Combos</h6></a>
-                    </div>
-                    
-                    
-                    <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
-                        <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
-                    </div>
-
-                    <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
-                        <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
-                    </div>                  
-                </div>
-
-            </div>
-        </div> -->
-
         <div class="ginninavbar">
             <div class="navbarimage">
                 <a class="logo" routerLink="">
@@ -131,7 +18,7 @@
                         <a routerLink="/collections/giftings"><h6>Giftings</h6></a>
                     </div>
     
-                    <!-- <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+                    <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
                         <a class="dropdown-header">
                             <h6>Shop by Category </h6>
                             <i class="fa fa-caret-down"></i>
@@ -181,36 +68,26 @@
                             </table>
                         </div>
                         
-                    </div> -->
+                    </div>
     
-                    <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
+                    <div class="dryFruits" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
                         <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
                     </div>
     
                     <div class="combos" [ngClass]="{'active': isLinkActive('/collections/combos')}">
                         <a routerLink="/collections/combos"><h6>Combos</h6></a>
-                    </div>
-                    
+                    </div>                   
                     
                     <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
                         <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
                     </div>
 
-                    <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
+                    <div class="contactUs" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
                         <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
                     </div>                  
                 </div>
 
                 <div class="navbarcontentright">                   
-                    <!-- <div class="wishlist" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
-                        <a routerLink="/account/wishlist">
-                            <div class="icontext">
-                                <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
-                                <i class="wishlist-count">{{ totalWislistItem }}</i>
-                            </div>
-                        </a>
-                    </div> -->
-
                     <div class="searchnavbaricon" (click)="toggleSearchContainer()">
                         <i class="fa fa-search search-icon"></i>
                     </div>
@@ -245,8 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                
+                              
                     <div class="cart"  [ngClass]="{'actives': isLinkActive('/account/cart')}">
                         <a routerLink="/account/cart" (click)="reloadPage($event)">
                             <div class="icontext">
@@ -263,7 +139,7 @@
         
                         <div class="accountlaptopdropdown" [ngClass]="{'open': isAccountOpen}">
                             <div class="authlaptop" *ngIf="loggedIn">
-                                <h6>{{ 'Hello, ' + (userName ? userName.split(' ')[0].toUpperCase() : '') }}</h6>
+                                <h6>{{ 'Hello, ' + (userName ? userName.split(' ')[0].toUpperCase() : '')}}</h6>
                                 <i class="fas fa-times" (click)="toggleAccount()"></i>
                             </div>
 
@@ -277,15 +153,15 @@
                             </div>
                             
                             <div class="Order" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/account/order')}">
-                                <button><a  routerLink="/account/order" (click)="closeAccount()"><h6>My Order</h6></a></button>
+                                <button><a routerLink="/account/order" (click)="closeAccount()"><h6>My Order</h6></a></button>
                             </div>
         
                             <div class="Address" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/account/address')}">
-                                <button><a  routerLink="/account/address" (click)="closeAccount()"><h6>My Address</h6></a></button>
+                                <button><a routerLink="/account/address" (click)="closeAccount()"><h6>My Address</h6></a></button>
                             </div>
         
                             <div class="Logout" *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('')}">
-                                <button><a  routerLink="" (click)="logout()" (click)="closeAccount()"><h6>Logout</h6></a></button>
+                                <button><a routerLink="" (click)="logout()" (click)="closeAccount()"><h6>Logout</h6></a></button>
                             </div>
         
                             <div class="Login" *ngIf="!loggedIn" [ngClass]="{'active': isLinkActive('/account/login')}">
@@ -293,7 +169,7 @@
                             </div>
         
                             <div class="Signup" *ngIf="!loggedIn" [ngClass]="{'active': isLinkActive('/account/register')}">
-                                <button><a  routerLink="/account/register" (click)="closeAccount()"><h6>Signup</h6></a></button>
+                                <button><a routerLink="/account/register" (click)="closeAccount()"><h6>Signup</h6></a></button>
                             </div>         
                         </div>
                     </div>
@@ -301,22 +177,13 @@
             </div>
         </div> 
     </div>
-    
-    
-    
 
 
+ <!-- For Mobile Device    -->
 
 
     <div class="containermobile">
         <div class="navbarmobile">
-            <!-- <div class="searchboxes">
-                <div class="searchbars">
-                    <app-search></app-search>
-                </div>
-              
-            </div> -->
-    
             <div class="ginninavbarmobile">
                 <div class="navbarmenu">
                     <button class="menu-toggle" (click)="toggleMenu()">
@@ -325,14 +192,14 @@
         
                     <div class="navbarmenumobile" [ngClass]="{'open': isMenuOpen}">
                         <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
-                            <a routerLink="/collections/bestsellers"><h6>Best Seller</h6></a>
+                            <a routerLink="/collections/bestsellers" (click)="closeMenu()"><h6>Best Seller</h6></a>
                         </div>    
         
                         <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/giftings')}">
-                            <a routerLink="/collections/giftings"><h6>Giftings</h6></a>
+                            <a routerLink="/collections/giftings" (click)="closeMenu()"><h6>Giftings</h6></a>
                         </div>
         
-                        <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
+                        <!-- <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
                             <a  class="dropdown-header"><h6>Shop by Category <i class="fa fa-caret-down"></i></h6></a>
                             <div class="dropdown-content" *ngIf="isDropdownOpen">
                                 <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
@@ -340,79 +207,77 @@
                                 <a routerLink="/main/ginnidryfruitraisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitraisin'}">Raisin</a>
                                 <a routerLink="/main/ginnidryfruitpista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitpista'}">Pista</a>
                             </div>
-                        </div>
-        
-                        <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
-                            <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
-                        </div>
-        
-                        <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
-                            <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
+                        </div> -->
+
+                        <div class="dryFruits" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
+                            <a routerLink="/collections/dryfruit" (click)="closeMenu()"><h6>Dry Fruits</h6></a>
                         </div>
         
                         <div class="combos" [ngClass]="{'active': isLinkActive('/collections/combos')}">
-                            <a routerLink="/collections/combos"><h6>Combos</h6></a>
+                            <a routerLink="/collections/combos" (click)="closeMenu()"><h6>Combos</h6></a>
                         </div>
+
+                        <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
+                            <a routerLink="/pages/about-us" (click)="closeMenu()"><h6>Our Story</h6></a>
+                        </div>               
                         
-                        
-                        <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
-                            <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
+                        <div class="contactUs" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
+                            <a routerLink="/pages/contact-us" (click)="closeMenu()"><h6>Contact Us</h6></a>
                         </div>
                     </div>
                 </div>
         
                 <div class="navbarimagemobile">
                     <a class="logo" routerLink="">
-                        <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
+                        <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI">
                     </a> 
                 </div>
         
-                <div class="navbaruppermobile">
-                    <!-- <div class="search-containers">
-                        <div class="search-icons" (click)="toggleSearchBar()">
-                            <i class="fa fa-search"></i>
+                <div class="navbaruppermobile">     
+                    <div class="searchnavbaricon" (click)="toggleSearchContainer()">
+                        <i class="fa fa-search search-icon"></i>
+                    </div>
+                    
+                    <div class="search-containermobile" *ngIf="isSearchContainerOpen">
+                        <div class="searchboxmobile">
+                            <div class="searchbarmobile">
+                                <div class="search-containersmobile">
+                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-inputmobile">
+                                    <!-- <i class="fa fa-search searchbariconmobile"></i> -->
+                                </div>
+
+                                <div class="searchResult" *ngFor="let result of searchResultss">
+                                    <div id="image">
+                                      <img [src]="'../../assets/images/product_Images/' + result.productName  + 1 +'.jpg'" alt="GINNI">
+                                    </div>
+                              
+                                    <div class="imageDetail">
+                                        <div id="name">
+                                            <a [routerLink]="['/mainproduct', result.productName]"><h5>{{ result.productName | titlecase}} ({{result.weight}})</h5></a>
+                                        </div>
+                                        <div id="price">
+                                            <h5>Rs {{ result.price }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="searchclosemobile" (click)="toggleSearchContainer()">
+                                <i class="fa fa-close"></i>
+                            </div>
                         </div>
-                        
-                        <div class="searchboxes" [ngClass]="{'visible': isSearchBarVisible}">
-                            <div class="searchbars">
-                                <app-search></app-search>
-                            </div>
-                            <div class="searchbuttons">
-                                <i class="fa fa-search"></i>
-                            </div>
-                        </div>
-                    </div> -->
-                     
-                    <div class="wishlistmobile" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()" [ngClass]="{'actives': isLinkActive('/main/ginniwishlist')}">
-                        <a routerLink="/account/wishlist">
-                            <div class="icontext">
-                                <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
-                                <i class="wishlist-count">{{ totalWislistItem }}</i>
-                            </div>
-                            <!-- <h6 *ngIf="showWishlist">Wishlist</h6> -->
-                        </a>
-                    </div>     
-        
+                    </div>
+
                     <div class="cartmobile" (mouseover)="showCartText()" (mouseleave)="hideCartText()" [ngClass]="{'actives': isLinkActive('/main/ginnicart')}">
                         <a routerLink="/account/cart">
                             <div class="icontext">
                                 <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
-                                <i class="cart-count">{{ totalCartItem }}</i>
+                                <i class="cart-count" *ngIf="loggedIn">{{ totalCartItem }}</i>
                             </div>
-                            <!-- <h6 *ngIf="showCart">Cart</h6> -->
                         </a>
                     </div>
         
-                    <!-- <div class="trackmobile" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()" [ngClass]="{'actives': isLinkActive('/main/ginnitrack')}">
-                        <a routerLink="/main/ginnitrack">
-                            <i class="fa fa-truck"  [ngClass]="{'active-icon': isLinkActive('/main/ginnitrack')}"></i>
-                        </a>
-                    </div>           -->
-        
-                    <div class="accountmobile">
-                        <!-- <button class="account-toggle" (click)="toggleAccount()">
-                            <i class="fa" [ngClass]="{'fa-user': !isAccountOpen, 'fa-times': isAccountOpen}"></i>
-                        </button> -->
+                    <div class="accountmobile">   
                         <button class="account-toggle" (click)="toggleAccount()">
                             <i class="fas fa-user-circle"></i>
                         </button>
@@ -461,3 +326,163 @@
 </div>
     
 
+
+
+<!-- <button class="account-toggle" (click)="toggleAccount()">
+            <i class="fa" [ngClass]="{'fa-user': !isAccountOpen, 'fa-times': isAccountOpen}"></i>
+        </button> -->
+
+<!-- <div class="trackmobile" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()" [ngClass]="{'actives': isLinkActive('/main/ginnitrack')}">
+    <a routerLink="/main/ginnitrack">
+        <i class="fa fa-truck"  [ngClass]="{'active-icon': isLinkActive('/main/ginnitrack')}"></i>
+    </a>
+</div> -->
+
+
+<!-- <div class="wishlistmobile" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()" [ngClass]="{'actives': isLinkActive('/main/ginniwishlist')}">
+    <a routerLink="/account/wishlist">
+        <div class="icontext">
+            <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
+            <i class="wishlist-count">{{ totalWislistItem }}</i>
+        </div>
+    </a>
+</div>      -->
+
+
+<!-- <div class="search-containers">
+            <div class="search-icons" (click)="toggleSearchBar()">
+                <i class="fa fa-search"></i>
+            </div>
+            
+            <div class="searchboxes" [ngClass]="{'visible': isSearchBarVisible}">
+                <div class="searchbars">
+                    <app-search></app-search>
+                </div>
+                <div class="searchbuttons">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+        </div> -->
+
+<!-- <div class="wishlist" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
+            <a routerLink="/account/wishlist">
+                <div class="icontext">
+                    <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
+                    <i class="wishlist-count">{{ totalWislistItem }}</i>
+                </div>
+            </a>
+        </div> -->
+
+
+<!-- <div class="ginninavbar">
+    <div class="navbarimage">
+        <a class="logo" routerLink="">
+            <img src="../../assets/images/logo/freshcart-logo.jpeg"  class="responsive-logo"  alt="GINNI DryFruits">
+        </a> 
+    </div>
+    
+    <div class="navbardata">
+        <div class="navbarupper">
+            <div class="search-container">
+                <div class="searchbox">
+                    <div class="searchbar">
+                        <app-search></app-search>
+                    </div>
+                </div>
+            </div>         
+            
+            <div class="navbarupperright"> 
+                <div class="items">
+                    <div class="wishlist" (mouseover)="showWishlistText()" (mouseleave)="hideWishlistText()" [ngClass]="{'actives': isLinkActive('/account/wishlist')}">
+                        <a routerLink="/account/wishlist">
+                            <div class="icontext">
+                                <i class="fa fa-heart"  [ngClass]="{'active-icon': isLinkActive('/account/wishlist')}"></i>
+                                <i class="wishlist-count">{{ totalWislistItem }}</i>
+                            </div>
+                            <h6 *ngIf="showWishlist">Wishlist</h6>
+                        </a>
+                    </div>
+                
+                    <div class="cart" (mouseover)="showCartText()" (mouseleave)="hideCartText()" [ngClass]="{'actives': isLinkActive('/account/cart')}">
+                        <a routerLink="/account/cart">
+                            <div class="icontext">
+                                <i class="fa fa-shopping-cart"  [ngClass]="{'active-icon': isLinkActive('/account/cart')}"></i>
+                                <i class="cart-count">{{ totalCartItem }}</i>
+                            </div>
+                            <h6 *ngIf="showCart">Cart</h6>
+                        </a>
+                    </div>
+
+                    <div class="track" (mouseover)="showOrderText()" (mouseleave)="hideOrderText()" [ngClass]="{'actives': isLinkActive('/account/track')}">
+                        <a routerLink="/account/track">
+                            <i class="fa fa-truck"  [ngClass]="{'active-icon': isLinkActive('/account/track')}"></i>
+                            <h6 *ngIf="showOrder">Track Order</h6>
+                        </a>
+                    </div>
+                </div>  
+                
+                
+                <div class="account">         
+                    <div class="my-account" *ngIf="loggedIn" (mouseenter)="showaccountDropdown()" (mouseleave)="hideaccountDropdown()">
+                        <h6 class="account-title">My Account <i class="fa fa-angle-down"></i></h6>
+                        <div class="dropdown-contents" *ngIf="isAccountDropdown">
+                            <a *ngIf="isAdmin" routerLink="/main/sellerdashboard">Admin Dashboard</a>
+                            <a *ngIf="isUser || isAdmin" routerLink="/account/order">My Order</a>
+                            <a *ngIf="isUser || isAdmin" routerLink="/account/address">My Address</a>
+                            <a routerLink="" (click)="logout()">Logout</a>
+                        </div>
+                    </div>
+                    <div class="auth" *ngIf="!loggedIn">
+                        <button>
+                            <a routerLink="/account/login">Login/</a>
+                            <a routerLink="/account/register">Register</a>
+                        </button>           
+                    </div>
+                    <div class="auth" *ngIf="loggedIn">
+                        <p>{{'Hello, ' + userName }}</p>
+                    </div>
+                </div>                    
+            </div>             
+        </div>
+
+
+        <div class="navbarlower">
+            <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
+                <a routerLink="/collections/bestsellers"><h6>Best Seller</h6></a>
+            </div>    
+
+            <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/giftings')}">
+                <a routerLink="/collections/giftings"><h6>Giftings</h6></a>
+            </div>
+
+            <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()" [ngClass]="{'active': isDropdownActive()}">
+                <a routerLink="/collections/dryfruit" class="dropdown-header"><h6>Shop by Category <i class="fa fa-caret-down"></i></h6></a>
+                <div class="dropdown-content" *ngIf="isDropdownOpen">
+                    <a routerLink="/main/ginnidryfruitalmond" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitalmond'}" >Almond</a>
+                    <a routerLink="/main/ginnidryfruitcashew" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitcashew'}">Cashew</a>
+                    <a routerLink="/main/ginnidryfruitraisin" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitraisin'}">Raisin</a>
+                    <a routerLink="/main/ginnidryfruitpista" class="dropdown-link" [ngClass]="{'active-link': selectedLink === '/main/ginnidryfruitpista'}">Pista</a>
+                </div>
+            </div>
+
+
+            <div class="giftings" [ngClass]="{'active': isLinkActive('/collections/dryfruit')}">
+                <a routerLink="/collections/dryfruit"><h6>Dry Fruits</h6></a>
+            </div>
+
+            <div class="combos" [ngClass]="{'active': isLinkActive('/collections/combos')}">
+                <a routerLink="/collections/combos"><h6>Combos</h6></a>
+            </div>
+            
+            
+            <div class="aboutUs" [ngClass]="{'active': isLinkActive('/pages/about-us')}">
+                <a routerLink="/pages/about-us"><h6>Our Story</h6></a>
+            </div>
+
+            <div class="seller" [ngClass]="{'active': isLinkActive('/pages/contact-us')}">
+                <a routerLink="/pages/contact-us"><h6>Contact Us</h6></a>
+            </div>                  
+        </div>
+
+    </div>
+</div> -->

@@ -16,6 +16,8 @@ export class SafeUrlPipe implements PipeTransform {
   styleUrls: ['./ginnislider.component.css'],
   providers: [SafeUrlPipe]
 })
+
+
 export class GinnisliderComponent implements OnInit {
 youtubeVideos = [
     { embedUrl: 'https://www.youtube.com/embed/ml9m0MSZMUs?si=wLSDh3gZc0ew1mk1' },

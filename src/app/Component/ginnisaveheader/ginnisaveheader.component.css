@@ -15,14 +15,15 @@
     height: 100%;
     padding: 0;
     margin: 0;
-    /* border: 1px solid; */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    /* border: 1px solid; */
 }
 
-.offertop h5 {
+
+.offertop h6 {
     width: 100%;
     height: 100%;
     padding: 0%;
@@ -32,7 +33,7 @@
     align-items: center;
     text-align: center;
     font-size: medium;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 
 

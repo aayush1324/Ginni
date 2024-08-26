@@ -1,5 +1,5 @@
-<div class="containerbox">
-    <div class="slider" *ngFor="let image of images; let i = index" [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
+<div class="containerbox" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
+  <div class="slider" *ngFor="let image of images; let i = index" [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
       <img [src]="image" alt="Slide {{i+1}}">
     </div>
   

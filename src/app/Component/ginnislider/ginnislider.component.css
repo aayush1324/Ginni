@@ -11,7 +11,6 @@
   /* border: 1px solid; */
 }
 
-
 .upper {
   width: 100%;
   height: fit-content;
@@ -23,6 +22,8 @@
 .upperleft {
   width: 100%;
   height: fit-content;
+  display: flex;
+  justify-content: center;
   /* border: 1px solid; */
 }
 
@@ -33,17 +34,10 @@
   margin: 0%;
   /* border: 1px solid rgb(200, 200, 200); */
   border-radius: 5px;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent line breaks inside the container */
+  overflow-x: auto; 
+  white-space: nowrap; 
 }
 
-
-/* .images-wrapper {
-  display: flex;
-  transition: transform 0.5s ease;
-  overflow-x: hidden;
-  height: 100%;
-} */
 
 .images-wrapper {
   height: 100%;
@@ -56,13 +50,14 @@
 
 .video-container {
   flex: 1;
-  margin: 0 5px; /* Adjust spacing between videos */
+  margin: 0 5px; 
 }
 
 iframe {
   width: 100%;
   height: 100%;
 }
+
 
 .images-wrapper a {
   flex: 0 0 auto;
@@ -87,6 +82,8 @@ iframe {
   border: 1px solid ; /* Add your desired highlighting style */
 }
 
+
+
 .arrow {
   position: absolute;
   top: 70%;
@@ -105,25 +102,22 @@ iframe {
   right: 0.25rem;
 }
 
-/* Add styles for the circular container */
 .arrow i {
-  background-color: transparent; /* Set the background color of the icon to transparent */
-  border-radius: 50%; /* Make the container circular */
-  transition: background-color 0.1s; /* Add a transition effect for the background color */
-  display: flex; /* Use flexbox */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  width: 2rem;   /* Adjust the width and height as needed */
-  height: 2rem;  /* Adjust the width and height as needed */
-  color: inherit; /* Inherit the color from the parent */
+  background-color: transparent; 
+  transition: background-color 0.1s; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  width: 2rem;   
+  height: 2rem; 
+  color: inherit; 
 }
 
 /* Change the color of the icon on hover */
 .arrow i:hover {
-  background-color: #0066b2; /* Change the background color to blue on hover */
+  background-color: #0066b2; 
   color: white;
 }
-
 
 .arrow.blur {
   opacity: 1;
@@ -156,12 +150,33 @@ iframe {
 
 /* Responsive Styles */
 @media (max-width: 480px) {
-  /* .images-wrapper img {
-    height: 5rem;
-  } */
-
   .arrow {
     font-size: 12px;
+  }
+
+  .upperleft h1 {
+    font-size: medium;
+  }
+
+  .video-container {
+    flex: 1;
+    margin: 0 2.5px; 
+  }
+
+  .images-wrapper a {
+    flex: 0 0 auto;
+    width: calc(100% / 4); /* Adjust this based on the number of visible posts */
+    text-align: center;
+    overflow: hidden;
+  }
+
+  
+  .lower {
+    height: 12.5vh;
+  }
+
+  .arrow {
+    display: none;
   }
 }
 

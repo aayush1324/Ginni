@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -6,7 +6,9 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './ginniimageslider.component.html',
   styleUrls: ['./ginniimageslider.component.css']
 })
+
 export class GinniimagesliderComponent implements OnInit, OnDestroy {
+  
   images: string[] = [
     '../../assets/images/slider/1ch.png',
     '../../assets/images/slider/6ch.png',
@@ -17,6 +19,8 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
 
   currentIndex = 0;
   private slideshowSubscription: Subscription | undefined;
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
 
   constructor() { }
 
@@ -41,6 +45,10 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
   }
 
+  previousSlide(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
   setCurrentIndex(index: number): void {
     this.currentIndex = index;
   }
@@ -48,5 +56,21 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
   isHighlighted(index: number): boolean {
     return this.currentIndex === index;
   }
-}
 
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    this.touchEndX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(): void {
+    if (this.touchStartX - this.touchEndX > 50) {
+      this.nextSlide(); // Swipe left, move to next slide
+    }
+    if (this.touchEndX - this.touchStartX > 50) {
+      this.previousSlide(); // Swipe right, move to previous slide
+    }
+  }
+}
