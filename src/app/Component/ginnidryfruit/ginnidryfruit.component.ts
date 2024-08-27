@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
@@ -109,7 +109,22 @@ export class GinnidryfruitComponent {
 
   toggleFilter() {
     this.isOpenFilter = !this.isOpenFilter;
+
+    if (this.isOpenFilter) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    }
   }
+
+  disableScrolling() {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  enableScrolling() {
+    document.body.style.overflow = 'auto';
+  }
+
 
   closeFilter() {
     this.isOpenFilter = false;
@@ -549,4 +564,26 @@ export class GinnidryfruitComponent {
   }
 
 
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.availabilityheader') && !target.closest('.availabilityfooter')) {
+      this.isDropdownOpenAvailability = false;
+    }
+
+    if (!target.closest('.categoryheader') && !target.closest('.categoryfooter')) {
+      this.isDropdownOpenCategory = false;
+    }
+
+    if (!target.closest('.sortbyheader') && !target.closest('.sortbyfooter')) {
+      this.isDropdownOpenSortby = false;
+    }
+
+    if (!target.closest('.heading') && !target.closest('.filtering')) {
+      this.isOpenFilter = false;
+    }
+  }
+  
 }

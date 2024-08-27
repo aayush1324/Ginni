@@ -3,13 +3,17 @@
     <div class="mainhead">
       <h1>Dry Fruits</h1>
     </div>
+
+    <div class="heading">
+      <h1 (click)="toggleFilter()"><i class="fa fa-filter" ></i>  Filter </h1>
+    </div>
   </div>
 
   <div class="laptopheader">
     <div class="left">
       <div class="heading">
           <h3><i class="fa fa-filter"></i>  Filter </h3>
-          <h4><i class="fa fa-filter" (click)="toggleFilter()"></i>  Filter </h4>
+          <!-- <h4 (click)="toggleFilter()"><i class="fa fa-filter" ></i>  Filter </h4> -->
       </div>
   
       <div class="filtering" [ngClass]="{'open': isOpenFilter}">
@@ -40,101 +44,79 @@
         </div>
       
         <div class="categories" >
-            <div class="categoryheader">
-                <h6>CATEGORIES {{ currentCategoryOption ? ': ' + currentCategoryOption.toUpperCase() : '' }} <i class="fa fa-caret-down" (click)="toggleDropdownCategory()"></i></h6>
-            </div>
-    
-            <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
-                <form [formGroup]="categoryForm">
-                    <div class="almonds" id="dryfruit">
-                      <input type="radio" id="almond" formControlName="category" value="almond" (change)="onChange()" (change)="onCategoryChange()">
-                      <label for="almond">ALMONDS ({{ almonds.length }})</label>
-                    </div>
-                    <div class="cashews" id="dryfruit">
-                      <input type="radio" id="cashew" formControlName="category" value="cashew" (change)="onChange()" (change)="onCategoryChange()">
-                      <label for="cashew">CASHEWS ({{ cashews.length }})</label>
-                    </div>
-                    <div class="pistas" id="dryfruit">
-                      <input type="radio" id="pista" formControlName="category" value="pista" (change)="onChange()" (change)="onCategoryChange()">
-                      <label for="pista">PISTACHIOS ({{ pistas.length }})</label>
-                    </div>
-                    <div class="walnuts" id="dryfruit">
-                      <input type="radio" id="walnut" formControlName="category" value="walnut" (change)="onChange()" (change)="onCategoryChange()">
-                      <label for="walnut">WALNUTS ({{ walnuts.length }})</label>
-                    </div>
-                    <div class="raisins" id="dryfruit">
-                      <input type="radio" id="raisin" formControlName="category" value="raisin" (change)="onChange()" (change)="onCategoryChange()">
-                      <label for="raisin">RAISINS ({{ raisins.length }})</label>
-                    </div>
-
-                    <h6 (click)="removeCategoryFilters()" style="text-decoration: underline; cursor: pointer; width: fit-content;">Remove Filter</h6>
-                  </form>
-                            
-            </div>
-        </div>
-    
-        <!-- <div class="price" >
-          <div class="priceheader">
-              <h6>PRICING <i class="fa fa-caret-down" (click)="toggleDropdownPricing()"></i></h6>
+          <div class="categoryheader">
+              <h6>CATEGORIES {{ currentCategoryOption ? ': ' + currentCategoryOption.toUpperCase() : '' }} <i class="fa fa-caret-down" (click)="toggleDropdownCategory()"></i></h6>
           </div>
   
-          <div class="pricefooter" *ngIf="isDropdownOpenPricing">                
-              <form [formGroup]="priceForm">
-                  <div class="minprice">
-                    <input type="text" id="minprice" formControlName="minPrice"   (input)="onChange()">
-                    <span class="currency-icon">&#x20B9;</span>
-                  </div> 
-                  <div class="minussign">
-                    <h5>-</h5>           
+          <div class="categoryfooter" *ngIf="isDropdownOpenCategory">
+              <form [formGroup]="categoryForm">
+                  <div class="almonds" id="dryfruit">
+                    <input type="radio" id="almond" formControlName="category" value="almond" (change)="onChange()" (change)="onCategoryChange()">
+                    <label for="almond">ALMONDS ({{ almonds.length }})</label>
                   </div>
-                  <div class="maxprice">
-                    <input type="text" id="maxprice" formControlName="maxPrice"   (input)="onChange()">
-                    <span class="currency-icon">&#x20B9;</span>
-                  </div>                  
-              </form>
-              <br>
-              <h6 (click)="removePriceFilters()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>               
+                  <div class="cashews" id="dryfruit">
+                    <input type="radio" id="cashew" formControlName="category" value="cashew" (change)="onChange()" (change)="onCategoryChange()">
+                    <label for="cashew">CASHEWS ({{ cashews.length }})</label>
+                  </div>
+                  <div class="pistas" id="dryfruit">
+                    <input type="radio" id="pista" formControlName="category" value="pista" (change)="onChange()" (change)="onCategoryChange()">
+                    <label for="pista">PISTACHIOS ({{ pistas.length }})</label>
+                  </div>
+                  <div class="walnuts" id="dryfruit">
+                    <input type="radio" id="walnut" formControlName="category" value="walnut" (change)="onChange()" (change)="onCategoryChange()">
+                    <label for="walnut">WALNUTS ({{ walnuts.length }})</label>
+                  </div>
+                  <div class="raisins" id="dryfruit">
+                    <input type="radio" id="raisin" formControlName="category" value="raisin" (change)="onChange()" (change)="onCategoryChange()">
+                    <label for="raisin">RAISINS ({{ raisins.length }})</label>
+                  </div>
+
+                  <h6 (click)="removeCategoryFilters()" style="text-decoration: underline; cursor: pointer; width: fit-content;">Remove Filter</h6>
+                </form>
+                          
           </div>
-      </div> -->
+        </div>
+
+        <div class="sortby" >
+          <div class="sortbyheader" >
+              <h6>SORT BY :  {{ currentSortingOption || 'Featured' }} <i class="fa fa-caret-down" (click)="toggleDropdownSortby()"></i></h6>
+              <!-- <h5>SORT BY   <i class="fa" [ngClass]="{'fa-caret-down': !isOpenSortby, 'fa-times': isOpenSortby}" (click)="toggleSortby()"></i></h5> -->
+          </div>
+  
+          <div class="sortbyfooter"  *ngIf = "isDropdownOpenSortby">
+            <!-- <div class="sortingmobile">
+              <h3>Sort By </h3>
+              <i class="fa fa-times" (click)="closeSortby()"></i>
+            </div> -->
+  
+            <form action="">
+                  <div class="Featured">
+                    <input type="radio" id="featured" name="sorting" [checked]="isFeaturedChecked" (change)="toggleSortingOption('Featured')" (change)="toggleFeaturedSorting($event)">
+                    <label for="featured">Featured</label>
+                  </div>            
+                  <div class="AlphabetUp">
+                    <input type="radio" id="alphabetUp" name="sorting" [checked]="isAlphabetUpChecked" (change)="toggleSortingOption('Alphabetically, A-Z')" (change)="toggleAlphabetUpSorting($event)">
+                    <label for="alphabetUp">Alphabetically, A-Z</label>
+                  </div>      
+                  <div class="AlphabetDown">
+                    <input type="radio" id="alphabetDown" name="sorting" [checked]="isAlphabetDownChecked" (change)="toggleSortingOption('Alphabetically, Z-A')" (change)="toggleAlphabetDownSorting($event)">
+                    <label for="alphabetDown">Alphabetically, Z-A</label>
+                  </div>
+                  <div class="PriceUp">
+                    <input type="radio" id="priceUp" name="sorting" [checked]="isPriceUpChecked" (change)="toggleSortingOption('Price, low to high')" (change)="togglePriceUpSorting($event)">
+                    <label for="priceUp">Price, low to high</label>
+                  </div>
+                  <div class="PriceDown">
+                    <input type="radio" id="priceDown" name="sorting" [checked]="isPriceDownChecked" (change)="toggleSortingOption('Price, high to low')" (change)="togglePriceDownSorting($event)">
+                    <label for="priceDown">Price, high to low</label>
+                  </div>
+                  <!-- <h6 (click)="resetSortbyFilter()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>   -->
+            </form>                              
+          </div>
+        </div>
       </div>
         
-      <div class="sortby" >
-        <div class="sortbyheader" >
-            <h6>SORT BY :  {{ currentSortingOption || 'Featured' }} <i class="fa fa-caret-down" (click)="toggleDropdownSortby()"></i></h6>
-            <h5>SORT BY   <i class="fa" [ngClass]="{'fa-caret-down': !isOpenSortby, 'fa-times': isOpenSortby}" (click)="toggleSortby()"></i></h5>
-        </div>
-
-        <div class="sortbyfooter" [ngClass]="{'open': isOpenSortby}" *ngIf = "isDropdownOpenSortby">
-          <div class="sortingmobile">
-            <h3>Sort By </h3>
-            <i class="fa fa-times" (click)="closeSortby()"></i>
-          </div>
-
-          <form action="">
-                <div class="Featured">
-                  <input type="radio" id="featured" name="sorting" [checked]="isFeaturedChecked" (change)="toggleSortingOption('Featured')" (change)="toggleFeaturedSorting($event)">
-                  <label for="featured">Featured</label>
-                </div>            
-                <div class="AlphabetUp">
-                  <input type="radio" id="alphabetUp" name="sorting" [checked]="isAlphabetUpChecked" (change)="toggleSortingOption('Alphabetically, A-Z')" (change)="toggleAlphabetUpSorting($event)">
-                  <label for="alphabetUp">Alphabetically, A-Z</label>
-                </div>      
-                <div class="AlphabetDown">
-                  <input type="radio" id="alphabetDown" name="sorting" [checked]="isAlphabetDownChecked" (change)="toggleSortingOption('Alphabetically, Z-A')" (change)="toggleAlphabetDownSorting($event)">
-                  <label for="alphabetDown">Alphabetically, Z-A</label>
-                </div>
-                <div class="PriceUp">
-                  <input type="radio" id="priceUp" name="sorting" [checked]="isPriceUpChecked" (change)="toggleSortingOption('Price, low to high')" (change)="togglePriceUpSorting($event)">
-                  <label for="priceUp">Price, low to high</label>
-                </div>
-                <div class="PriceDown">
-                  <input type="radio" id="priceDown" name="sorting" [checked]="isPriceDownChecked" (change)="toggleSortingOption('Price, high to low')" (change)="togglePriceDownSorting($event)">
-                  <label for="priceDown">Price, high to low</label>
-                </div>
-                <!-- <h6 (click)="resetSortbyFilter()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>   -->
-          </form>                              
-        </div>
-      </div>
+  
     
     </div>
   
@@ -200,3 +182,30 @@
 
 
 </div>
+
+
+
+    
+        <!-- <div class="price" >
+          <div class="priceheader">
+              <h6>PRICING <i class="fa fa-caret-down" (click)="toggleDropdownPricing()"></i></h6>
+          </div>
+  
+          <div class="pricefooter" *ngIf="isDropdownOpenPricing">                
+              <form [formGroup]="priceForm">
+                  <div class="minprice">
+                    <input type="text" id="minprice" formControlName="minPrice"   (input)="onChange()">
+                    <span class="currency-icon">&#x20B9;</span>
+                  </div> 
+                  <div class="minussign">
+                    <h5>-</h5>           
+                  </div>
+                  <div class="maxprice">
+                    <input type="text" id="maxprice" formControlName="maxPrice"   (input)="onChange()">
+                    <span class="currency-icon">&#x20B9;</span>
+                  </div>                  
+              </form>
+              <br>
+              <h6 (click)="removePriceFilters()" style="text-decoration: underline; cursor: pointer;">Remove Filter</h6>               
+          </div>
+      </div> -->
