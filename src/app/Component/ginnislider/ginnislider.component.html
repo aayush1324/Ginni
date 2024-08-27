@@ -5,10 +5,12 @@
     </div>
   </div>
 
-  
   <div class="lower">
-    <!-- Youtube Posts by Embeed-->
-    <div class="images-wrapper" #sliderContainer>
+    <!-- Youtube Posts by Embed-->
+    <div class="images-wrapper" #sliderContainer
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd()">
       <div *ngFor="let video of visibleVideos; let i = index" 
            class="video-container" 
            [class.active]="isHighlighted(i)">
@@ -22,7 +24,7 @@
                 allowfullscreen>
         </iframe>
       </div>
-    </div>
+    </div>    
   
     <!-- Left arrow -->
     <div class="arrow left-arrow" (click)="scroll(-1)" [class.blur]="currentPage === 0">
@@ -34,8 +36,8 @@
       <b><i class="fa fa-angle-right"></i></b>
     </div>
   </div>
-  
 </div>
+
 
 
     <!-- Instagram Posts by Link -->

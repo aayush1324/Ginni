@@ -162,14 +162,6 @@ iframe {
     flex: 1;
     margin: 0 2.5px; 
   }
-
-  .images-wrapper a {
-    flex: 0 0 auto;
-    width: calc(100% / 4); /* Adjust this based on the number of visible posts */
-    text-align: center;
-    overflow: hidden;
-  }
-
   
   .lower {
     height: 12.5vh;

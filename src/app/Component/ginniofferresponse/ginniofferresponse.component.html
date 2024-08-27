@@ -189,7 +189,7 @@
                     <button class="menu-toggle" (click)="toggleMenu()">
                         <i class="fa" [ngClass]="{'fa-bars': !isMenuOpen, 'fa-times': isMenuOpen}"></i>
                     </button>
-        
+     
                     <div class="navbarmenumobile" [ngClass]="{'open': isMenuOpen}">
                         <div class="bestsellers" [ngClass]="{'active': isLinkActive('/collections/bestsellers')}">
                             <a routerLink="/collections/bestsellers" (click)="closeMenu()"><h6>Best Seller</h6></a>
@@ -278,7 +278,7 @@
                     </div>
         
                     <div class="accountmobile">   
-                        <button class="account-toggle" (click)="toggleAccount()">
+                        <button class="account-toggle" (click)="toggleAccount()" >
                             <i class="fas fa-user-circle"></i>
                         </button>
         

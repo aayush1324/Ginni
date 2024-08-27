@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
 @Pipe({ name: 'safeUrl' })
 export class SafeUrlPipe implements PipeTransform {
@@ -17,9 +18,8 @@ export class SafeUrlPipe implements PipeTransform {
   providers: [SafeUrlPipe]
 })
 
-
 export class GinnisliderComponent implements OnInit {
-youtubeVideos = [
+  youtubeVideos = [
     { embedUrl: 'https://www.youtube.com/embed/ml9m0MSZMUs?si=wLSDh3gZc0ew1mk1' },
     { embedUrl: 'https://www.youtube.com/embed/WSNkOzSPKHU?si=_sJarvPJRIIMDrvc' },
     { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' },
@@ -27,18 +27,19 @@ youtubeVideos = [
     { embedUrl: 'https://www.youtube.com/embed/H8aBWNsCHK0?si=v2TXxTa-FJK_xkqb' },
     { embedUrl: 'https://www.youtube.com/embed/ml9m0MSZMUs?si=wLSDh3gZc0ew1mk1' },
     { embedUrl: 'https://www.youtube.com/embed/H8aBWNsCHK0?si=v2TXxTa-FJK_xkqb' },
-    { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' },
-    { embedUrl: 'https://www.youtube.com/embed/dq3CTGwL4cE?si=25eATlvU6NqHdXOn' },
-    { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' },    
+    { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' }, 
     // Add more video objects here...
   ];
 
   visibleVideos: { embedUrl: SafeResourceUrl }[] = [];
   currentPage = 0;
-  videosPerPage = 5;
+  videosPerPage = 4;
   totalPages = 0;
   videoWidth = 250;
   videoHeight = 200;
+  transitioning = false;
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
 
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
@@ -71,8 +72,42 @@ youtubeVideos = [
   }
 
   scroll(direction: number): void {
-    this.currentPage = Math.max(0, Math.min(this.currentPage + direction, this.totalPages - 1));
-    this.updateVisibleVideos();
+    if (this.transitioning) return;
+    
+    const newPage = Math.max(0, Math.min(this.currentPage + direction, this.totalPages - 1));
+    if (newPage !== this.currentPage) {
+      this.transitioning = true;
+      this.currentPage = newPage;
+      this.updateVisibleVideos();
+      setTimeout(() => {
+        this.transitioning = false;
+      }, 1000); // Adjust timing based on transition duration
+    }
+  }
+
+  nextSlide(): void {
+    this.scroll(1);
+  }
+
+  previousSlide(): void {
+    this.scroll(-1);
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    this.touchEndX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(): void {
+    const minSwipeDistance = 20;
+    if (this.touchStartX - this.touchEndX > minSwipeDistance) {
+      this.nextSlide(); // Swipe left, move to next slide
+    } else if (this.touchEndX - this.touchStartX > minSwipeDistance) {
+      this.previousSlide(); // Swipe right, move to previous slide
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -140,6 +140,7 @@ import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnif
     NgToastModule,
     BrowserAnimationsModule, // Add this line
     NoopAnimationsModule, // Add this line
+    HammerModule
 
   ],
   providers: [{

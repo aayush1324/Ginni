@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
@@ -29,12 +29,22 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   toggleSearchBar() {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
+
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
       this.disableScrolling();
     } else {
       this.enableScrolling();
+    }
+    const menuToggleButton = document.querySelector('.menu-toggle');
+    if (menuToggleButton) {
+        if (this.isMenuOpen) {
+            menuToggleButton.classList.add('menu-open');
+        } else {
+            menuToggleButton.classList.remove('menu-open');
+        }
     }
   }
   
@@ -74,6 +84,10 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     this.isAccountDropdown = false;
   }
 
+
+  clickedOutside(): void {
+    this.isAccountOpen = false;
+  }
 
   isDropdownOpen: boolean = false;
   showWishlist: boolean = false;
@@ -134,8 +148,6 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
       }
     });
   }
-
-
   
   updateSearchTerm(newSearchTerm: string) {
     this.searchService.setSearchTerm(newSearchTerm);
@@ -327,8 +339,6 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
       this.isDropdownOpen = false;
   }
 
-
-
   logout() {
     this.loggedIn = false;
     const token = sessionStorage.getItem('token');
@@ -387,5 +397,30 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   isDropdownActive(): boolean {
     const currentRoute = this.router.url;
     return currentRoute.startsWith('/collections/dryfruit');
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    // Check if the clicked target is outside the account toggle and menu
+    if (!target.closest('.account-toggle') && !target.closest('.accountmobiledropdown') && !target.closest('.accountlaptopdropdown')) {
+      this.isAccountOpen = false;
+    }
+
+    // Check if the clicked target is outside the account toggle and menu
+    if (!target.closest('.searchnavbaricon') && !target.closest('.search-containermobile') && !target.closest('.search-container')) {
+      this.isSearchContainerOpen = false;
+    }
+
+    // Check if the clicked target is outside the menu toggle and menu
+    if (!target.closest('.menu-toggle') && !target.closest('.navbarmenumobile')) {
+      this.isMenuOpen = false;
+
+      const menuToggleButton = document.querySelector('.menu-toggle');
+      if (menuToggleButton) {
+        menuToggleButton.classList.remove('menu-open');
+      }
+    }
   }
 }
