@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-ginnifaq',
@@ -16,7 +16,30 @@ export class GinnifaqComponent {
     // Add more FAQ items here
   ];
 
-  toggleAnswer(faq: any) {
+  toggleAnswer(faq: any, event: Event): void {
+    // Close all FAQs first
+    this.faqs.forEach(item => {
+      if (item !== faq) {
+        item.showAnswer = false; // Close all other FAQs
+      }
+    });
+
+    // Toggle the clicked FAQ
     faq.showAnswer = !faq.showAnswer;
+    event.stopPropagation(); // Prevent event bubbling
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    // Check if the clicked target is outside the FAQ items
+    if (!target.closest('.faq')) {
+      this.closeAllAnswers(); // Close all open answers if clicked outside
+    }
+  }
+
+  closeAllAnswers(): void {
+    this.faqs.forEach(faq => faq.showAnswer = false); // Close all open answers
   }
 }

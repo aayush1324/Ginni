@@ -45,7 +45,7 @@ export class SellerproductlistComponent {
       subcategory: ['sel', Validators.required],
       weight: ['sel', Validators.required],
       status: ['sel', Validators.required],
-      image: [null, Validators.required] // Image is required
+      // image: [null, Validators.required] // Image is required
     });
     // this.getProduct();
     this.getProducts();
@@ -115,7 +115,8 @@ export class SellerproductlistComponent {
 
  
   addedProduct() {
-    if (this.productForm && this.productForm.valid && this.selectedFile) {
+    // if (this.productForm && this.productForm.valid && this.selectedFile) {
+    if (this.productForm && this.productForm.valid) {
       const formData = new FormData();
       formData.append('productName', this.productForm.get('productName')!.value);
       formData.append('url', this.productForm.get('url')!.value);
@@ -128,13 +129,13 @@ export class SellerproductlistComponent {
       formData.append('subcategory', this.productForm.get('subcategory')!.value);
       formData.append('weight', this.productForm.get('weight')!.value);
       formData.append('status', this.productForm.get('status')!.value);
-      formData.append('image', this.selectedFile);
+      // formData.append('image', this.selectedFile);
   
       this.productService.addProducts(formData).subscribe(
         (response) => {
           console.log(response);
           const productId = response.productId; // Extract the product ID from the response
-          this.uploadImages(productId); // Call function to upload images with the product ID
+          // this.uploadImages(productId); 
           this.togglePopup();
           alert(response.message);
           this.productForm!.reset();

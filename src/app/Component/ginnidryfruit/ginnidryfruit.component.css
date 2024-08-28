@@ -193,9 +193,12 @@ button{
 	margin:  0%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+    justify-content: flex-start;
     /* border: 1px solid rgb(230, 230, 230); */
-    background-color: antiquewhite;
+}
+
+#sort {
+    width: fit-content;
 }
 
 .price {
@@ -799,15 +802,16 @@ button{
 
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
     .containerbox{
         display: flex;
         flex-direction: column;
         }
     
         .mobileheader {
-        display: block;
-        padding: 2%;
+            display: flex;
+            flex-direction: row;
+            padding: 2%;
         }
     
         /* .sortbyheader h6{
@@ -865,34 +869,19 @@ button{
             justify-content: space-between; 
             padding: 2%;
         }
-    
-        /* .sortingmobile {
-            display: flex; 
-            flex-direction: row;
-            justify-content: space-between; 
-            padding: 2%;
-        }
-    
-        .sortby {
-            width: 50%;
-            height: fit-content;
-            align-items: center;
-            margin: 0%;
-        } */
-    
-    
+
         .filtering {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             position: absolute;
-            top: 40%;
+            top: 0;
             left: 0;
-            width: 50vw; /* Full width */
+            width: 75vw; /* Full width */
             height: 100vh; /* Set the height to occupy the entire screen */   
             background-color: aliceblue;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1000;
+            z-index: 10000;
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
             opacity: 0; /* Start as invisible */
@@ -919,6 +908,7 @@ button{
             transform: scale(1.0); /* Adjust the scale factor as needed */
         }
         
+        
 
         
         .filtering > div {
@@ -944,7 +934,7 @@ button{
 
 
 
-@media (max-width: 240px) {
+@media (max-width: 320px) {
     .containerbox{
         display: flex;
         flex-direction: column;
@@ -1080,7 +1070,7 @@ button{
             height: 50vh; 
             max-height: 100vh; /* Set maximum height to 80% of viewport height */
             max-width: 100vw; /* Full width */
-            background-color: white;
+            /* background-color: white; */
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1000;
             transform: translateX(100%); 

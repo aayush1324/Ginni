@@ -90,23 +90,23 @@
             </div> -->
   
             <form action="">
-                  <div class="Featured">
+                  <div class="Featured" id="sort">
                     <input type="radio" id="featured" name="sorting" [checked]="isFeaturedChecked" (change)="toggleSortingOption('Featured')" (change)="toggleFeaturedSorting($event)">
                     <label for="featured">Featured</label>
                   </div>            
-                  <div class="AlphabetUp">
+                  <div class="AlphabetUp" id="sort">
                     <input type="radio" id="alphabetUp" name="sorting" [checked]="isAlphabetUpChecked" (change)="toggleSortingOption('Alphabetically, A-Z')" (change)="toggleAlphabetUpSorting($event)">
                     <label for="alphabetUp">Alphabetically, A-Z</label>
                   </div>      
-                  <div class="AlphabetDown">
+                  <div class="AlphabetDown" id="sort">
                     <input type="radio" id="alphabetDown" name="sorting" [checked]="isAlphabetDownChecked" (change)="toggleSortingOption('Alphabetically, Z-A')" (change)="toggleAlphabetDownSorting($event)">
                     <label for="alphabetDown">Alphabetically, Z-A</label>
                   </div>
-                  <div class="PriceUp">
+                  <div class="PriceUp" id="sort">
                     <input type="radio" id="priceUp" name="sorting" [checked]="isPriceUpChecked" (change)="toggleSortingOption('Price, low to high')" (change)="togglePriceUpSorting($event)">
                     <label for="priceUp">Price, low to high</label>
                   </div>
-                  <div class="PriceDown">
+                  <div class="PriceDown" id="sort">
                     <input type="radio" id="priceDown" name="sorting" [checked]="isPriceDownChecked" (change)="toggleSortingOption('Price, high to low')" (change)="togglePriceDownSorting($event)">
                     <label for="priceDown">Price, high to low</label>
                   </div>

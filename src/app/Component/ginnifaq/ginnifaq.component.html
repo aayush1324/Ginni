@@ -5,9 +5,9 @@
 
     <div class="dropdownmenu">
         <div class="faq" *ngFor="let faq of faqs">
-            <div class="question" (click)="toggleAnswer(faq)">
+            <div class="question" (click)="toggleAnswer(faq, $event)">
                 <h6>{{ faq.question }}</h6>
-                <i class="fa" [ngClass]="{' fa-chevron-down': !faq.showAnswer, ' fa-chevron-up': faq.showAnswer}"></i>
+                <i class="fa" [ngClass]="{'fa-chevron-down': !faq.showAnswer, 'fa-chevron-up': faq.showAnswer}"></i>
             </div>
 
             <div class="answer" *ngIf="faq.showAnswer">

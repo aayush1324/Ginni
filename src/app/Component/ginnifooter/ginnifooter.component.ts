@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ginnifooter',
@@ -33,6 +33,27 @@ export class GinnifooterComponent {
 
   toggleDropdownProduct() {
     this.isDropdownOpenProduct = !this.isDropdownOpenProduct;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    // Check if the clicked target is outside the account toggle and menu
+    if (!target.closest('.mobileTnP') && !target.closest('.dropdown-term')) {
+      this.isDropdownOpenTnP = false;
+    }
+
+    // Check if the clicked target is outside the account toggle and menu
+    if (!target.closest('.mobileInf') && !target.closest('.dropdown-term')) {
+      this.isDropdownOpenInf = false;
+    }
+
+    // Check if the clicked target is outside the account toggle and menu
+    if (!target.closest('.mobileProd') && !target.closest('.dropdown-term')) {
+      this.isDropdownOpenProduct = false;
+    }
+
   }
 
 }

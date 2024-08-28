@@ -117,7 +117,7 @@ export class GinnidryfruitComponent {
     }
   }
 
-  disableScrolling() {
+    disableScrolling() {
     document.body.style.overflow = 'hidden';
   }
   

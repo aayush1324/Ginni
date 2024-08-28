@@ -1,7 +1,7 @@
 <div class="containerbox">
     <div class="footerupper">
         <div class="aboutourstore">
-            <div class="shopicon">
+            <div class="shopicon" style="margin: 0%;">
                 <img src="../../assets/images/logo/logo-removebg.png"  alt="Ginni DryFruits">
             </div>
 
@@ -24,7 +24,7 @@
         </div>
 
         <div class="mobiletermsandpolicy">
-            <div class="mobileTnP" (click)="toggleDropdownTnP()">
+            <div class="mobileTnP" (click)="toggleDropdownTnP()" style="margin: 0%;">
                 <h5>Terms & Policy</h5>
                 <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenTnP, 'fa-angle-up': isDropdownOpenTnP}"></i>
             </div>
@@ -46,10 +46,11 @@
         </div>
 
         <div class="mobileinformation">
-            <div class="mobileInf" (click)="toggleDropdownInf()">
+            <div class="mobileInf" (click)="toggleDropdownInf()" style="margin: 0%;">
                 <h5>Information</h5>
                 <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenInf, 'fa-angle-up': isDropdownOpenInf}"></i>
             </div>
+
             <ul *ngIf="isDropdownOpenInf" class="dropdown-term">
                 <li><a routerLink="/pages/about-us">About Us</a></li>
                 <li><a routerLink="/pages/contact-us">Contact Us</a></li>
@@ -67,10 +68,11 @@
         </div>
 
         <div class="mobileproducts">
-            <div class="mobileProd" (click)="toggleDropdownProduct()">
+            <div class="mobileProd" (click)="toggleDropdownProduct()" style="margin: 0%;">
                 <h5>Shop Us</h5>
                 <i class="fa" [ngClass]="{'fa-angle-down': !isDropdownOpenProduct, 'fa-angle-up': isDropdownOpenProduct}"></i>
             </div>
+            
             <ul *ngIf="isDropdownOpenProduct" class="dropdown-term">
                 <li><a routerLink="/collections/dryfruit">Dry Fruits</a></li>
                 <li><a routerLink="/collections/combos">Combos</a></li>
@@ -80,27 +82,10 @@
         </div>
     </div>
 
-    <br>
-
-    <!-- <div class="footermiddle">
-        <div class="heading">
-            <h4>We Accept</h4>
-        </div>
-
-        <div class="payment">
-            <ul>               
-                <li><i class="fa fa-cc-visa"></i></li>
-                <li><i class="fa fa-cc-mastercard"></i></li>
-                <li><i class="fa fa-cc-paypal"></i></li>
-                <li><i class="fa fa-cc-visa"></i></li>
-            </ul>
-        </div>
-    </div> -->
-
     <div class="footerlower">
-        <div class="copyright">
+        <div class="copyright" style="margin: 0%;">
             <h6> 
-                &copy; 2024 Ginni DryFruits.All Rights Reserved
+                &copy; 2024 Ginni DryFruits. All Rights Reserved
             </h6>
         </div>
 
@@ -122,3 +107,20 @@
         </div>
     </div>
 </div>
+
+
+
+    <!-- <div class="footermiddle">
+        <div class="heading">
+            <h4>We Accept</h4>
+        </div>
+
+        <div class="payment">
+            <ul>               
+                <li><i class="fa fa-cc-visa"></i></li>
+                <li><i class="fa fa-cc-mastercard"></i></li>
+                <li><i class="fa fa-cc-paypal"></i></li>
+                <li><i class="fa fa-cc-visa"></i></li>
+            </ul>
+        </div>
+    </div> -->

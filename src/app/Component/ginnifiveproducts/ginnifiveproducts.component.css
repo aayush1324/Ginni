@@ -306,17 +306,21 @@
 
 
 @media (max-width: 480px) {
+    .lower {
+        width: 100%;
+    }
+    
     .almond {
-        width: 100%; /* Take full width on small screens */
+        width: fit-content /* Take full width on small screens */
     }
 
     .saving h6 {
-        font-size: x-small;
+        font-size: xx-small;
     }
 
     .image img {
-        width: 100%; /* Ensure image fits the container */
-        height: 6rem;
+        width: 10rem; /* Ensure image fits the container */
+        height: 7.5rem;
     }
 
     .naming h5 {
@@ -326,9 +330,10 @@
     .pricing h5 {
         font-size: smaller;
     }
+    
 }
 
-@media (max-width: 240px) {
+@media (max-width: 320px) {
     .almond {
         width: 100%; /* Take full width on small screens */
     }
