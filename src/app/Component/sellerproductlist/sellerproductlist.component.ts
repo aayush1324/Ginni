@@ -16,6 +16,7 @@ import { HttpResponse } from '@angular/common/http';
 export class SellerproductlistComponent {
   productForm! : FormGroup;
   isPopupOpen: boolean = false;
+  isPopupView: boolean = false;
   isEdit: boolean = false;
   selectedproduct: any;
   productlist: any[] = [];
@@ -51,7 +52,33 @@ export class SellerproductlistComponent {
     this.getProducts();
   }
 
-  
+isDeleteModalOpen = false;
+selectedProductId: string | null = null;
+
+openDeleteConfirmation(productId: string) {
+  this.selectedProductId = productId; // Store the product ID to delete
+  this.isDeleteModalOpen = true; // Show the modal
+
+  // Manage scrolling
+  if (this.isDeleteModalOpen) {
+    this.disableScrolling();
+  } else {
+    this.enableScrolling();
+  }
+}
+
+closeDeleteConfirmation() {
+  this.isDeleteModalOpen = false; // Hide the modal
+}
+
+confirmDelete() {
+  if (this.selectedProductId !== null) {
+    this.deleteProduct(this.selectedProductId); // Call delete function
+  }
+  this.closeDeleteConfirmation(); // Close the modal
+}
+
+
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
     this.renderer[this.isPopupOpen ? 'addClass' : 'removeClass'](document.body, 'no-scroll');
@@ -61,6 +88,12 @@ export class SellerproductlistComponent {
     this.selectedproduct = null;
     this.resetForm();
   }
+
+  toggleView(): void {
+    this.isPopupView = !this.isPopupView;
+
+  }
+
 
   resetForm(): void {
     this.productForm.reset();
@@ -211,6 +244,35 @@ export class SellerproductlistComponent {
     this.populateForm(product);
     this.isPopupOpen = true;
     this.isEdit = true;
+
+    // Manage scrolling
+    if (this.isPopupOpen) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    }
+  }
+
+  openViewPopup(product: any): void {
+    this.selectedproduct = product;
+    this.populateForm(product);
+    this.isPopupView = true;
+
+    // Manage scrolling
+    if (this.isPopupView) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    } 
+  }
+
+
+  disableScrolling(): void {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  enableScrolling(): void {
+    document.body.style.overflow = 'auto';
   }
 
   populateForm(product: any): void {

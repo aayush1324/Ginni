@@ -119,7 +119,7 @@
     </div>
         
     <div class="lower">
-      <table>
+      <!-- <table>
         <thead>
             <tr>
                 <th style="width:5%">User Name</th>
@@ -152,7 +152,80 @@
                 </ng-container>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+
+    <div class="heading">
+        <div class="headerserial">
+          <h5>S. No.</h5>
+        </div>
+  
+        <div class="headername">
+          <h5>Name</h5>
+        </div>
+  
+        <div class="headeremail">
+          <h5>Email</h5>
+        </div>
+  
+        <div class="headermobile">
+            <h5>Mobile</h5>
+          </div>
+    
+          <div class="headerorderId">
+            <h5>OrderID</h5>
+          </div>
+    
+          <div class="headerorderdate">
+            <h5>OrderDate</h5>
+          </div>
+
+          <div class="headeramount">
+            <h5>Amount</h5>
+          </div>
+
+          <div class="headertransaction">
+            <h5>TransactionID</h5>
+          </div>
+      </div>
+  
+      <div class="footing" *ngFor="let item of orders let i = index">
+        <div class="footerserial">
+          <p>{{ i + 1 }}</p> <!-- Display the serial number dynamically -->
+        </div>
+  
+        <div class="footername">
+          <p>{{item.name | titlecase}}</p>
+        </div>
+
+        <div class="footeremail">
+            <p>{{item.email}}</p>
+          </div>
+
+            
+        <div class="footermobile">
+            <p>{{item.mobile}}</p>
+        </div>
+
+        <div class="footerorderId">
+            <a [routerLink]="['/account/order', item.orderId]">
+                <p>{{ item.orderId }}</p>
+            </a>          
+        </div>
+
+            
+        <div class="footerorderdate">
+            <p>{{item.orderDate | date:'MMMM d, y \'at\' h:mm a'}}</p>
+        </div>
+
+        <div class="footeramount">
+            <p>{{item.totalAmount}}</p>
+          </div>
+
+            
+        <div class="footertransaction">
+            <p>{{item.transactionId}}</p>
+        </div>
+      </div>
     
     </div>   
    

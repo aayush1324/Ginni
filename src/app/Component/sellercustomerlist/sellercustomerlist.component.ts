@@ -17,10 +17,14 @@ export class SellercustomerlistComponent {
   customerlist: any[] = [];
   selectedFile: File | undefined;
 
+  productForm! : FormGroup;
+  isPopupView: boolean = false;
+
     // Define your table headers
   tableHeaders: string[] = [
     'userName', 'email', 'phone', 'role', 'phoneConfirmed', 
     'emailConfirmed', 'status'];
+  renderer: any;
 
 
 
@@ -45,6 +49,55 @@ export class SellercustomerlistComponent {
     this.getCustomer();
   }
 
+
+  isDeleteModalOpen = false;
+  selectedcustomerId: string | null = null;
+
+openDeleteConfirmation(productId: string) {
+  this.selectedcustomerId = productId; // Store the product ID to delete
+  this.isDeleteModalOpen = true; // Show the modal
+
+  // Manage scrolling
+  if (this.isDeleteModalOpen) {
+    this.disableScrolling();
+  } else {
+    this.enableScrolling();
+  }
+}
+
+closeDeleteConfirmation() {
+  this.isDeleteModalOpen = false; // Hide the modal
+}
+
+confirmDelete() {
+  if (this.selectedcustomerId !== null) {
+    this.deleteCustomer(this.selectedcustomerId); // Call delete function
+  }
+  this.closeDeleteConfirmation(); // Close the modal
+}
+
+
+openViewPopup(product: any): void {
+  this.selectedcustomer = product;
+  this.populateForm(product);
+  this.isPopupView = true;
+
+  // Manage scrolling
+  if (this.isPopupView) {
+    this.disableScrolling();
+  } else {
+    this.enableScrolling();
+  } 
+}
+
+
+disableScrolling(): void {
+  document.body.style.overflow = 'hidden';
+}
+
+enableScrolling(): void {
+  document.body.style.overflow = 'auto';
+}
   
   togglePopup(): void {
     this.isPopupOpen = !this.isPopupOpen;
@@ -53,6 +106,17 @@ export class SellercustomerlistComponent {
     this.resetForm();
   }
 
+
+  toggleView(): void {
+    this.isPopupView = !this.isPopupView;
+    this.renderer[this.isPopupView ? 'addClass' : 'removeClass'](document.body, 'no-scroll');
+
+
+    this.isEdit = false; // Reset edit mode when opening the popup
+    this.selectedcustomer = null;
+    this.resetForm();
+  }
+  
   resetForm(): void {
     this.customerForm.reset();
   }
