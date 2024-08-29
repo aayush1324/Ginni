@@ -37,4 +37,18 @@
 }
 
 
+@media (max-width: 480px) {
+    .offertop h6 {
+        font-size: smaller;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .offertop h6 {
+        font-size: smaller;
+    }
+}
+
+
 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CartService } from '../../Services/cart.service';
@@ -15,6 +15,10 @@ import { Subscription } from 'rxjs';
 })
 export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('searchInputMobile') searchInputMobile!: ElementRef;
+
+
   isAccountDropdown: boolean = false;
   isMenuOpen: boolean = false;
   isAccountOpen: boolean = false;
@@ -25,39 +29,92 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
   toggleSearchContainer() {
       this.isSearchContainerOpen = !this.isSearchContainerOpen;
+      
+      // Manage scrolling
+      if (this.isSearchContainerOpen) {
+        this.disableScrolling();
+      } else {
+        this.enableScrolling();
+      }
+
+      this.searchTerms = "";
+      this.searchResultss = [];
+
+      if (this.isSearchContainerOpen) {
+        setTimeout(() => {
+          this.searchInput.nativeElement.focus();
+        }, 0); // Timeout is necessary to wait for the view to update
+      }
+    }
+
+  toggleSearchContainerMobile() {
+    this.isSearchContainerOpen = !this.isSearchContainerOpen;
+
+      // Manage scrolling
+      if (this.isSearchContainerOpen) {
+        this.disableScrolling();
+      } else {
+        this.enableScrolling();
+      }
+
+    this.searchTerms = "";
+    this.searchResultss = [];
+
+    if (this.isSearchContainerOpen) {
+      setTimeout(() => {
+        this.searchInputMobile.nativeElement.focus();
+      }, 0); // Timeout is necessary to wait for the view to update
+    }
+
   }
+      
+  
+
+ 
+
   toggleSearchBar() {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
 
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    
+    // Manage scrolling
     if (this.isMenuOpen) {
       this.disableScrolling();
     } else {
       this.enableScrolling();
     }
-    const menuToggleButton = document.querySelector('.menu-toggle');
-    if (menuToggleButton) {
-        if (this.isMenuOpen) {
-            menuToggleButton.classList.add('menu-open');
-        } else {
-            menuToggleButton.classList.remove('menu-open');
-        }
-    }
+  
+    // Update the menu toggle button class
+    this.updateMenuToggleButtonClass();
   }
   
-  disableScrolling() {
+  disableScrolling(): void {
     document.body.style.overflow = 'hidden';
   }
   
-  enableScrolling() {
+  enableScrolling(): void {
     document.body.style.overflow = 'auto';
   }
-
-  closeMenu() {
+  
+  closeMenu(): void {
     this.isMenuOpen = false;
+    this.enableScrolling(); // Ensure scrolling is enabled when the menu is closed
+    this.updateMenuToggleButtonClass(); // Update the button icon class when the menu closes
+  }
+  
+  // Function to handle class updates for the menu toggle button
+  updateMenuToggleButtonClass(): void {
+    const menuToggleButton = document.querySelector('.menu-toggle');
+    if (menuToggleButton) {
+      if (this.isMenuOpen) {
+        menuToggleButton.classList.add('menu-open');
+      } else {
+        menuToggleButton.classList.remove('menu-open');
+      }
+    }
   }
 
   toggleAccount() {
@@ -116,6 +173,8 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   searchTerm: string = '';
   searchTermSubscription: Subscription | undefined;
   searchResultss: any[] = [];
+  stars: number[] = [1, 2, 3, 4, 5];
+
 
 
   constructor(private elementRef: ElementRef, private router:Router, 
@@ -296,6 +355,8 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     this.productService.searchProducts(this.searchTerms).subscribe({
       next : (res) => {
         this.searchResultss = res;
+        this.searchResultss = res.slice(0, 5);
+
         console.log(this.searchResultss);
         this.searchResultss.forEach(item => {
           if (item.imageData) {
@@ -411,6 +472,9 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     // Check if the clicked target is outside the account toggle and menu
     if (!target.closest('.searchnavbaricon') && !target.closest('.search-containermobile') && !target.closest('.search-container')) {
       this.isSearchContainerOpen = false;
+
+      this.searchTerms = "";
+      this.searchResultss = [];
     }
 
     // Check if the clicked target is outside the menu toggle and menu

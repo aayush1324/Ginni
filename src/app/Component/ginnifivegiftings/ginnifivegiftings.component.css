@@ -25,6 +25,12 @@
     /* border: 1px solid; */
 }
 
+.upperleft h3 {
+    margin: 0%;
+    padding: 0%;
+}
+
+
 .upperright {
     width: 100%;
     height: fit-content;

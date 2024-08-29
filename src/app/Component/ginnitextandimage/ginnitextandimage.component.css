@@ -17,6 +17,15 @@
     justify-content: center;
     padding: 5%;
     /* border: 3px solid; */
+    margin: 0%;
+}
+
+.text h2 {
+    margin: 0%;
+}
+
+.text p {
+    margin: 0%;
 }
 
 .image {
@@ -81,7 +90,15 @@
     
     .text {
         width: 100%;
-        height: 25rem;
+        height: 50%;
+    }
+
+    .text h2 {
+        font-size: smaller;
+    }
+
+    .text p {
+        font-size: xx-small;
     }
     
     .image {
@@ -91,7 +108,8 @@
     
     .image img{
         width: 100%;
-        height: 25rem;
+        /* height: 25rem; */
+        height: fit-content;
     } 
 
 }

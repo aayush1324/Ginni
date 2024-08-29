@@ -14,6 +14,7 @@
       <div *ngFor="let video of visibleVideos; let i = index" 
            class="video-container" 
            [class.active]="isHighlighted(i)">
+           
         <iframe [width]="videoWidth" 
                 [height]="videoHeight"
                 [src]="video.embedUrl"
@@ -40,16 +41,7 @@
 
 
 
-    <!-- Instagram Posts by Link -->
-    <!-- <div class="images-wrapper" #sliderContainer>
-      <a *ngFor="let post of instagramPosts; let i = index"
-         [href]="post.url"
-         target="_blank"
-         [class.active]="isHighlighted(i)">
-        <img [src]="post.thumbnail" 
-             [alt]="post.alt">
-      </a>
-    </div> -->
+
 
     <!-- Instagram Posts by Embeed -->
     <!-- <div class="images-wrapper" #sliderContainer>

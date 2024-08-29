@@ -87,7 +87,7 @@
                     </div>                  
                 </div>
 
-                <div class="navbarcontentright">                   
+                <div class="navbarcontentright" >                   
                     <div class="searchnavbaricon" (click)="toggleSearchContainer()">
                         <i class="fa fa-search search-icon"></i>
                     </div>
@@ -97,7 +97,7 @@
                             <div class="searchbar">
                                 <!-- <app-search></app-search> -->
                                 <div class="search-containers">
-                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-input">
+                                    <input #searchInput type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-input">
                                     <i class="fa fa-search searchbaricon"></i>
                                 </div>
 
@@ -110,8 +110,26 @@
                                         <div id="name">
                                             <a [routerLink]="['/mainproduct', result.productName]"><h5>{{ result.productName | titlecase}} ({{result.weight}})</h5></a>
                                         </div>
+
+                                        <div class="rating">
+                                            <div class="star-rating">
+                                                <i *ngFor="let star of stars; let i = index"
+                                                    class="fa"
+                                                    [ngClass]="{
+                                                    'fa-star': result.rating >= i + 1,
+                                                    'fa-star-half-o': result.rating > i && result.rating < i + 1,
+                                                    'fa-star-o': result.rating < i + 1
+                                                    }">
+                                                </i>
+                                            </div>
+                                            <h6>{{ result.rating | number:'1.1-1' }} ({{result.userRating}})</h6>
+                                            <!-- <p>({{result.userRating}})</p> -->
+                                        </div>
+
                                         <div id="price">
-                                            <h5>Rs {{ result.price }}</h5>
+                                            <h6>Rs {{ result.price }}</h6>
+                                            <del><h6> &#x20B9; {{result.discountedPrice}} </h6></del>
+                                            <p>{{ (result.discountedPrice / result.price) * 100 | number:'1.0-0' }}% off</p>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +252,7 @@
                 </div>
         
                 <div class="navbaruppermobile">     
-                    <div class="searchnavbaricon" (click)="toggleSearchContainer()">
+                    <div class="searchnavbaricon" (click)="toggleSearchContainerMobile()">
                         <i class="fa fa-search search-icon"></i>
                     </div>
                     
@@ -242,7 +260,7 @@
                         <div class="searchboxmobile">
                             <div class="searchbarmobile">
                                 <div class="search-containersmobile">
-                                    <input type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-inputmobile">
+                                    <input #searchInputMobile type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-inputmobile">
                                     <!-- <i class="fa fa-search searchbariconmobile"></i> -->
                                 </div>
 
@@ -253,16 +271,34 @@
                               
                                     <div class="imageDetail">
                                         <div id="name">
-                                            <a [routerLink]="['/mainproduct', result.productName]"><h5>{{ result.productName | titlecase}} ({{result.weight}})</h5></a>
+                                            <a [routerLink]="['/mainproduct', result.productName]"><h6>{{ result.productName | titlecase}} ({{result.weight}})</h6></a>
                                         </div>
+
+                                        <div class="rating">
+                                            <div class="star-rating">
+                                                <i *ngFor="let star of stars; let i = index"
+                                                    class="fa"
+                                                    [ngClass]="{
+                                                    'fa-star': result.rating >= i + 1,
+                                                    'fa-star-half-o': result.rating > i && result.rating < i + 1,
+                                                    'fa-star-o': result.rating < i + 1
+                                                    }">
+                                                </i>
+                                              </div>
+                                            <h6>{{ result.rating | number:'1.1-1' }} ({{result.userRating}})</h6>
+                                            <!-- <p>({{result.userRating}})</p> -->
+                                        </div>
+
                                         <div id="price">
-                                            <h5>Rs {{ result.price }}</h5>
+                                            <h6>Rs {{ result.price }}</h6>
+                                            <del><h6> &#x20B9; {{result.discountedPrice}} </h6></del>
+                                            <h6>{{ (result.discountedPrice / result.price) * 100 | number:'1.0-0' }}% off</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="searchclosemobile" (click)="toggleSearchContainer()">
+                            <div class="searchclosemobile" (click)="toggleSearchContainerMobile()">
                                 <i class="fa fa-close"></i>
                             </div>
                         </div>

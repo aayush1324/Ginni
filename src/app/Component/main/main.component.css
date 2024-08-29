@@ -97,34 +97,33 @@ router-outlet {
 
 
 
-@media (min-width:481px ) and (max-width: 800px) {
+@media (min-width:481px ) and (max-width: 768px) {
     .header {
         height: 2.5rem;
     }
     
     .navbar {
         margin-top: 2.5rem;
-        height: 5rem;
+        height: 4rem;
     } 
 
-
     .body{
-        margin-top: 7.5rem;
+        margin-top: 6.5rem;
     }
 }
 
 @media (min-width:321px ) and (max-width: 480px) {
     .header {
-        height: 2.5rem;
+        height: 2rem;
     }
     
     .navbar {
-        margin-top: 2.5rem;
-        height: 5rem;
+        margin-top: 2rem;
+        height: 4rem;
     } 
 
     .body{
-        margin-top: 7.5rem;
+        margin-top: 6rem;
     }
 }
 
