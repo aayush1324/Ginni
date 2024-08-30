@@ -35,7 +35,7 @@ export class CartHelperService {
   addToCart(userId: string, productId: string, products: any[]): Observable<any> {
     return this.cartService.addToCarts(userId, productId).pipe(
       tap(() => {
-        alert('Item added to cart');
+        // alert('Item added to cart');
         this.getCartItems();
       }),
       catchError(err => {
@@ -57,7 +57,7 @@ export class CartHelperService {
         // if (index !== -1) {
         //   products.splice(index, 1);
         // }
-        alert('Item removed successfully');
+        // alert('Item removed successfully');
       }),
       catchError(err => {
         console.error('Error removing item:', err);

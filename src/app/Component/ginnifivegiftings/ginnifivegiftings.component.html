@@ -50,7 +50,7 @@
         
             <div class="carting">
                 <!-- <button (click)="addtocart(item)">Add to Cart</button> -->
-                <button *ngIf="item.status === 'instock'" (click)="addtocart(item)">Add to Cart</button>
+                <button *ngIf="item.status === 'instock'" (click)="addToCart(item)">Add to Cart</button>
                 <button *ngIf="item.status === 'outofstock'" disabled>Sold Out</button>
             </div>
         </div>    

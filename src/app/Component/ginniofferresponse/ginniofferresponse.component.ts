@@ -7,6 +7,7 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { SearchService } from '../../Services/search.service';
 import { ProductService } from '../../Services/product.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ginniofferresponse',
@@ -179,7 +180,7 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private router:Router, 
     private auth :AuthService, private userstore : UserstoreService, private changeDetectorRef: ChangeDetectorRef, 
-    private cartService : CartService, private wishlistService: WishlistService,
+    private cartService : CartService, private wishlistService: WishlistService, private toaster: ToastrService,
     private productService : ProductService, private searchService : SearchService, private cd: ChangeDetectorRef) 
   { 
     // Subscribe to router events to update selectedLink
@@ -324,6 +325,11 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     // Navigate to the cart page
     this.router.navigate(['/account/cart']).then(() => {
       window.location.reload();
+
+       // Slight delay to ensure scroll adjustment happens after reload
+    setTimeout(() => 
+      window.scrollTo(0, 0), 
+    10);
     });
   }
 
@@ -406,7 +412,9 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     if (token) {
       this.auth.logout(token).subscribe({
         next: (res) => {
-          alert('Logged out successfully')
+          // alert('Logged out successfully')
+          this.toaster.success('Logged out successfully');
+
           console.log('Logged out successfully');
           sessionStorage.clear();
 
@@ -416,6 +424,9 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
         },
         error: (err) => {
           console.error('Logout failed', err);
+          this.toaster.error("Logout failed", err, {
+            // progressBar: true 
+          });
         }
       });
     }

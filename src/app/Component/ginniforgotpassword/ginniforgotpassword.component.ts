@@ -5,6 +5,7 @@ import { ResetPasswordService } from '../../Services/reset-password.service';
 import { UserstoreService } from '../../Services/userstore.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ginniforgotpassword',
@@ -16,7 +17,7 @@ export class GinniforgotpasswordComponent {
   resetPasswordEmail: string = '';
   resetFrom: FormGroup;
 
-  constructor(private router: Router, private toast: NgToastService, 
+  constructor(private router: Router, private toast: NgToastService,  private toaster: ToastrService,
               private resetPasswordService: ResetPasswordService, private fb: FormBuilder) 
   {
     this.resetFrom = this.fb.group({
@@ -40,16 +41,18 @@ export class GinniforgotpasswordComponent {
       this.resetPasswordService.sendResetPasswordLink(email).subscribe({
         next: (res) => {
           alert(res.message);
+          this.toaster.success(res.message, "Success")
           console.log("Email Sent Successfully");
           // Optionally, navigate to a different route after sending the email
           this.router.navigate(['/account/login']);
         },
         error: (err) => {
-          this.toast.error({
-            detail: 'ERROR',
-            summary: 'Something went wrong!',
-            duration: 5000,
-          });
+          // this.toast.error({
+          //   detail: 'ERROR',
+          //   summary: 'Something went wrong!',
+          //   duration: 5000,
+          // });
+          this.toaster.error('Something went wrong!', "Error")
         }
       });
     }

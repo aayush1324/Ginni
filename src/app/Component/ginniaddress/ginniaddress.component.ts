@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ginniaddress',
@@ -14,7 +15,7 @@ export class GinniaddressComponent implements OnInit {
   selectedAddress: any;
   addresses: any[] = [];
 
-  constructor(private fb: FormBuilder, private addressService: AddressService) { }
+  constructor(private fb: FormBuilder, private addressService: AddressService, private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.addressForm = this.fb.group({
@@ -28,11 +29,8 @@ export class GinniaddressComponent implements OnInit {
       state: ['', Validators.required],
       default: [false]
     });
-     // Set the default value explicitly
-    this.addressForm.get('default')?.setValue(false);
     
     this.getAddresses();
-
     window.scrollTo(0, 0);
 
   }
@@ -46,7 +44,17 @@ export class GinniaddressComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.addressForm.reset();
+    this.addressForm.reset({
+      firstName: '',
+      lastName: '',
+      phone: '',
+      address1: '',
+      address2: '',
+      pincode: '',
+      city: '',
+      state: '',
+      default: false // Explicitly set default value to false
+    });
   }
 
 
@@ -58,15 +66,18 @@ export class GinniaddressComponent implements OnInit {
     if(UserID !== null){
       if (this.addressForm.valid) {
         console.log(this.addressForm.value);
+        
         this.addressService.addAddress(UserID,this.addressForm.value).subscribe({
           next: (res) => {
             console.log(res.message);
             this.togglePopup();
-            alert(res.message);
+            // alert(res.message);
+            this.toaster.success(res.message, "Success")
             this.getAddresses();
           },
           error: (err) => {
-            alert(err?.error.message);
+            // alert(err?.error.message);
+            this.toaster.error(err?.error.message, "Error")
           },
         });
       }
@@ -77,7 +88,7 @@ export class GinniaddressComponent implements OnInit {
 
   getAddresses(): void {
     const UserID = sessionStorage.getItem('UserID');
-
+     
     if(UserID !== null){
       this.addressService.getAddress(UserID).subscribe({
         next: (res) => {
@@ -142,11 +153,14 @@ export class GinniaddressComponent implements OnInit {
     if(UserID !== null){
       this.addressService.deleteAddress(UserID, addressId).subscribe({
         next: (res) => {
-          alert(res.message);
+          // alert(res.message);
+          this.toaster.success(res.message, "Success")
+
           console.log('Address deleted successfully!', res);
           this.getAddresses();
         },
         error: (err) => {
+          this.toaster.error('Error deleting address:', "Error")
           console.error('Error deleting address:', err);
         }
       });

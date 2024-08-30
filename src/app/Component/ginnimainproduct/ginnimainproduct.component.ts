@@ -6,6 +6,7 @@ import { SearchService } from '../../Services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../../Services/payment.service';
 import { ImageService } from '../../Services/image.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var Razorpay: any;
 export interface Image {
@@ -49,8 +50,10 @@ export class GinnimainproductComponent {
 
 
 
-  constructor(private route: ActivatedRoute,  private cartService : CartService, private productService : ProductService, 
-    private imageService: ImageService, private wishlistService : WishlistService, private searchService : SearchService , private paymentService : PaymentService) { }
+  constructor(private route: ActivatedRoute,  private cartService : CartService, 
+    private productService : ProductService,  private toaster: ToastrService,
+    private imageService: ImageService, private wishlistService : WishlistService, 
+    private searchService : SearchService , private paymentService : PaymentService) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -99,8 +102,8 @@ export class GinnimainproductComponent {
   }
 
   getProductDetails(productName: string): void {
-    this.productService.getProductDetailsByName(productName).subscribe(
-      (data: any) => {
+    this.productService.getProductDetailsByName(productName).subscribe({
+      next: (data: any) => {
         console.log(data);
         data.imageData = 'data:image/jpeg;base64,' + data.imageData;
         const productId = data.id;
@@ -109,10 +112,10 @@ export class GinnimainproductComponent {
         this.productDetails = data;
         console.log(this.productDetails);
       },
-      (error: any) => {
+      error: (error: any) => {
         console.error('Error fetching product details:', error);
       }
-    );
+    });
   }
 
   getImagesByProductId(productId: string): void {
@@ -157,54 +160,66 @@ export class GinnimainproductComponent {
     };
 
     this.cartService.addToCart(cartItem)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: (res) => {
           console.log('Item added to cart:', cartItem);
-          alert('Item added to cart successfully');
+          // alert('Item added to cart successfully');
+          this.toaster.success("Item added to cart successfully", "Success")
         },
-        error => {
+        error: error => {
           console.error('Error adding item to cart:', error);
-          alert('Error adding item to cart');
+          // alert('Error adding item to cart');
+          this.toaster.error("Error adding item to cart" , "Error")
           // Handle error
         }
-      );
-  }
+      });
+    }
 
  
   addToWishlist(product: any): void {
     product.wishlistStatus = true; // Update the wishlist status
     this.wishlistService.addToWishlist(product)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: (res) => {
           console.log(product);
           // let countString = sessionStorage.getItem("TotalWishListItem");
           // let count = countString ? parseInt(countString) + 1 : 1;
           // sessionStorage.setItem("TotalWishListItem", JSON.stringify(count));
-          alert('Item added to wishlist');
+
+          // alert('Item added to wishlist');
+          this.toaster.success("Item added to cart wishlist", "Success")
+
         },
-        error => {
+        error: error => {
           console.error('Error adding item to wishlist:', error);
-          alert('Error adding item to wishlist');
+
+          // alert('Error adding item to wishlist');
+          this.toaster.error("Error adding item to wishlist" , "Error")
+
           // Rollback the wishlist status if there's an error
           product.wishlistStatus = false;
         }
-      );
+    });
   }
   
   removeToWishlist(product: any): void {
     product.wishlistStatus = false; // Update the wishlist status
     this.wishlistService.removeItem(product.id)
-      .subscribe(
-        () => {
-          alert('Item removed from wishlist successfully');
+      .subscribe({
+        next: (res) => {
+          // alert('Item removed from wishlist successfully');
+          this.toaster.success("Item removed from wishlist successfully'", "Success")
+
         },
-        error => {
+        error: error => {
           console.error('Error removing item from wishlist:', error);
-          alert('Error removing item from wishlist');
-          // Rollback the wishlist status if there's an error
+
+          // alert('Error removing item from wishlist');
+          this.toaster.error("Error removing item from wishlist" , "Error")
+
           product.wishlistStatus = true;
         }
-      );
+    });
   }
 
   getProduct(): void {
@@ -248,16 +263,21 @@ export class GinnimainproductComponent {
 
     // Update the cart item
     this.cartService.updateCartItem(item)
-        .subscribe(
-            () => {
-                alert('Quantity updated successfully');
-            },
-            error => {
-                console.error('Error updating quantity:', error);
-                alert('Error updating quantity');
-            }
-        );
-  }
+      .subscribe({
+        next: (res) =>{
+              // alert('Quantity updated successfully');
+              this.toaster.success("Quantity updated successfully", "Success")
+
+          },
+          error: error => {
+              console.error('Error updating quantity:', error);
+              
+              // alert('Error updating quantity');
+              this.toaster.error("Error updating quantity" , "Error")
+
+          }
+      });
+    }
 
   
   getTotalPrice(): number {
@@ -289,16 +309,17 @@ export class GinnimainproductComponent {
           var razorpay_Id = responses.razorpay_payment_id;
           var razororder_Id = responses.razorpay_order_id;
           console.log(responses);
-          this.paymentService.confirmPayment(responses).subscribe(
-            (confirmResponse) => {
-              alert(confirmResponse.message);
+          this.paymentService.confirmPayment(responses).subscribe({
+            next:(confirmResponse) => {
+              // alert(confirmResponse.message);
+              this.toaster.success(confirmResponse.message, "Success")
               console.log(confirmResponse);
             },
-            (error) => {
+            error: (error) => {
               console.error(error);
               console.log("error");
             }
-          );
+        });
         },
       };
       const razorpay = new Razorpay(options);

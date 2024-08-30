@@ -254,61 +254,67 @@ td button {
     padding: 1% 0%;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
+    justify-content: space-between;
     border: 1px solid;
   }
   
+  .heading h6 {
+    padding: 0%;
+    margin: 0%;
+    color: #0066b2;
+  }
+
   .headerserial {
-    width: 10%;
+    width: 5%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
   
   .headername {
-    width: 20%;
+    width: 10%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
   
   .headeremail {
-    width: 20%;
+    width: 15%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
   
   .headermobile {
-    width: 20%;
+    width: 10%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
 
   .headerorderId {
-    width: 20%;
+    width: 15%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
   
   .headerorderdate {
-    width: 20%;
+    width: 10%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
   
   .headeramount {
-    width: 20%;
+    width: 5%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
   }
 
   .headertransaction {
-    width: 20%;
+    width: 15%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
@@ -317,68 +323,101 @@ td button {
   .footing {
     width: 100%;
     height: 100%;
-    padding: 1% 0%;
+    padding: 0%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     border: 1px solid;
   }
   
+  .footing p {
+    margin: 0%;
+    padding: 0%;
+  }
   
    
   .footerserial {
-    width: 10%;
+    width: 5%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   
   .footername {
-    width: 20%;
-    /* border: 1px solid; */
-    display: flex;
-    justify-content: center;
-  }
-  
-  .footeremail {
-    width: fit-content;
-    border: 1px solid;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .footermobile {
-    width: 20%;
-    /* border: 1px solid; */
-    display: flex;
-    justify-content: center;
-  }
-
-  .footerorderId {
     width: 10%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */  
+}
+  
+  .footeremail {
+    width: 15%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */
+}
+  
+  .footermobile {
+    width: 10%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */
+  }
+
+  .footerorderId {
+    width: 15%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */
   }
   
   .footerorderdate {
-    width: 20%;
+    width: 10%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */
   }
   
   .footeramount {
-    width: 20%;
+    width: 5%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
-  }
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */  }
 
   .footertransaction {
-    width: 20%;
+    width: 15%;
     /* border: 1px solid; */
     display: flex;
     justify-content: center;
+    align-items: center;
+    word-break: break-all; /* Ensures the text breaks within words */
+    overflow-wrap: break-word; /* Ensures long words are broken */
+    text-align: center; /* Optional: Center-aligns the text inside */
   }
   

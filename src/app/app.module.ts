@@ -67,6 +67,7 @@ import { GinnifivecombosComponent } from './Component/ginnifivecombos/ginnifivec
 import { GinnifivebestsellersComponent } from './Component/ginnifivebestsellers/ginnifivebestsellers.component';
 import { GinnifivegiftingsComponent } from './Component/ginnifivegiftings/ginnifivegiftings.component';
 import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnifiveproducts.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -140,9 +141,20 @@ import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnif
     NgToastModule,
     BrowserAnimationsModule, // Add this line
     NoopAnimationsModule, // Add this line
-    HammerModule
-
+    HammerModule,
+    ToastrModule.forRoot({
+      timeOut: 2000, 
+      closeButton: true,
+      // progressBar: true,
+      positionClass: 'toast-top-right', // Change this to move toastr to the top center
+      preventDuplicates: true, 
+      enableHtml: true, // Allows HTML inside the toastr if needed for further styling
+      tapToDismiss: false, // Prevents accidental dismissal on click
+      titleClass: 'full-width-toast-title', 
+      messageClass: 'full-width-toast-message',
+    }), 
   ],
+
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass : TokenInterceptor,

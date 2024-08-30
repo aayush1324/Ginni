@@ -422,6 +422,12 @@ td button {
     border: 1px solid;
   }
 
+  .heading h5 {
+    margin: 0%;
+    padding: 0%;
+    color: #0066b2;
+  }
+
   .headerserial {
     width: 10%;
     /* border: 1px solid; */

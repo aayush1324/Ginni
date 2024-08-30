@@ -9,6 +9,7 @@ import { ResetPasswordService } from '../../Services/reset-password.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { tap } from 'rxjs';
 import { CartService } from '../../Services/cart.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 declare var google :any;
 
 
@@ -27,7 +28,7 @@ export class GinnisigninComponent {
   constructor(private formBuilder: FormBuilder, private seller: SellerService, 
               private router : Router, private auth: AuthService, private toast: NgToastService,
               private userstore :UserstoreService, private resetPasswordService : ResetPasswordService,
-              private wishlist:WishlistService, private cartService: CartService) 
+              private wishlist:WishlistService, private cartService: CartService, private toaster: ToastrService) 
   {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -77,11 +78,11 @@ export class GinnisigninComponent {
             console.log(res);
             if (res.message != "Login Success!")
             {
-              alert("You have not registered yet !!!");
+              this.toaster.error('You have not registered yet !!!');
             }
             else
             {
-              alert("Login Success!");
+              // alert("Login Success!");
               this.auth.storeToken(res.token);
               const tokenPayload = this.auth.decodedToken();
               console.log(tokenPayload);  
@@ -101,13 +102,19 @@ export class GinnisigninComponent {
               this.cartService.updateCount(this.totalCartItem);
               })
               
-              this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+            this.toaster.success(res.message, 'SUCCESS', { 
+              // progressBar: true, 
+            });
+
               this.router.navigate([''])
             } 
           },
         error: (err) => {
-          this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
-          alert(err?.error.message);
+          this.toaster.error("Something went wrong!", 'ERROR', {
+            // progressBar: true 
+          });
+
+          // alert(err?.error.message);
         },
         })    
         
@@ -161,12 +168,13 @@ export class GinnisigninComponent {
           console.log(res);
           if (res.message != "Login Success!")
           {
-            alert(res.message);
+            // alert(res.message);
+            this.toaster.error(res.message);
             this.signInForm.reset();
           }
           else
           {
-            alert(res.message);
+            // alert(res.message);
             this.signInForm.reset();
             this.auth.storeToken(res.token);
             const tokenPayload = this.auth.decodedToken();
@@ -187,13 +195,19 @@ export class GinnisigninComponent {
             this.cartService.updateCount(this.totalCartItem);
            })
             
-            this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+           this.toaster.success(res.message, 'SUCCESS', { 
+              // progressBar: true, 
+            });
+
             this.router.navigate([''])
           } 
         },
       error: (err) => {
-        this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
-        alert(err?.error.message);
+        this.toaster.error("Something went wrong!", 'ERROR', {
+          // progressBar: true 
+        });
+             
+        // alert(err?.error.message);
       },
       })
     }

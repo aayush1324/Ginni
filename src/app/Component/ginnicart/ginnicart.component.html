@@ -3,20 +3,20 @@
      <ng-container *ngIf="products?.length > 0; else emptyCart">
         <div class="header">
             <h1>My Cart</h1>
-            <button (click)="removeAllItem()" (click)="reloadPage($event)"><h5>Empty Cart</h5></button>
+            <button (click)="removeAllItem()"><h5>Empty Cart</h5></button>
         </div>
 
         <div class="middle">
             <div class="middleleft">
                 <div class="middlelefttop">
                     <div class="middlelefttopproduct">
-                        <h6>Product</h6>
+                        <h5>Product</h5>
                     </div>
     
                     <div class="middlelefttopcombine">
-                        <h6>Quantity</h6>
-                        <h6>Total</h6>
-                        <h6>Action</h6>
+                        <h5>Quantity</h5>
+                        <h5>Amount</h5>
+                        <h5>Action</h5>
                     </div>
                 </div>
     
@@ -42,7 +42,7 @@
                                         }">
                                     </i>
                                   </div>
-                                <h6>{{ item.itemRating | number:'1.1-1' }}({{item.itemUserRating}})</h6>
+                                <h6>{{ item.itemRating | number:'1.1-1' }} ({{item.itemUserRating}})</h6>
                                 <!-- <p>({{item.itemUserRating}})</p> -->
                             </div>
     
@@ -69,7 +69,7 @@
     
                         <div class="middleleftmainaction">
                             <button (click)="initiatesPayment(item.productId, item.itemTotalPrice)">Buy Now</button>
-                            <button (click)="removeCartItem(item)" (click)="reloadPage($event)">Remove</button> 
+                            <button (click)="removeCartItem(item)">Remove</button> 
                             <!-- <button (click)="addToWishlistAndRemoveFromCart(item)">Add to Wishlist</button> -->
                         </div>
                     </div>

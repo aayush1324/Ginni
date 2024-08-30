@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from '../../Services/reset-password.service';
 import { ConfirmPasswordValidator } from '../../Helpers/confirmpassword.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ginniresetpassword',
@@ -21,7 +22,7 @@ export class GinniresetpasswordComponent implements OnInit {
   showConfirmPassword: boolean = true;
   
   constructor(private fb: FormBuilder, private activated: ActivatedRoute,
-              private toast: NgToastService, private router: Router,
+              private toast: NgToastService, private router: Router, private toaster: ToastrService,
               private resetPasswordService: ResetPasswordService) { }
 
   ngOnInit(): void {
@@ -56,12 +57,8 @@ export class GinniresetpasswordComponent implements OnInit {
         .subscribe({
           next: (res) => {
             console.log("Reset Successfully")
-            alert(res.message)
-            this.toast.success({
-              detail: 'SUCCESS',
-              summary: res.message,
-              duration: 3000,
-            });
+            // alert(res.message)
+            this.toaster.success(res.message, "Success")
             this.router.navigate(['/'])
           },
           error: (err) => {

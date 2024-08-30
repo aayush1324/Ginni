@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ProductHelperService } from '../../Services/product-helper.service';
 import { WishlistHelperService } from '../../Services/wishlist-helper.service';
 import { CartHelperService } from '../../Services/cart-helper.service';
+import { ToastrService } from 'ngx-toastr';
 
 // Define sorting options
 enum SortingOptions {
@@ -69,7 +70,8 @@ export class GinnidryfruitComponent {
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
               private router : Router, private ProductHelperService : ProductHelperService,
-              private wishlistHelperService : WishlistHelperService, private cartHelperService : CartHelperService) 
+              private wishlistHelperService : WishlistHelperService,  private toaster: ToastrService,
+               private cartHelperService : CartHelperService) 
   { 
     this.availabilityForm = new FormGroup({
       stock: new FormControl(null) // Define a FormControl for the radio buttons
@@ -177,7 +179,9 @@ export class GinnidryfruitComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -202,7 +206,9 @@ export class GinnidryfruitComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -241,6 +247,7 @@ export class GinnidryfruitComponent {
         this.cartHelperService.addToCart(userId, productId, product).subscribe({
           next: (res: any) => {
             if (res) {
+              this.toaster.success(res.message, "Success")
               console.log(res);
               this.refreshCartItemCount(); // Refresh cart item count after adding to cart
               this.cartService.updateCount(this.totalCartItem+1); 
@@ -254,7 +261,9 @@ export class GinnidryfruitComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -545,8 +554,6 @@ export class GinnidryfruitComponent {
   toggleDropdownSortby() {
     this.isDropdownOpenSortby = !this.isDropdownOpenSortby;
   }
-
-
 
   toggleSortingOption(option: string) {
     this.currentSortingOption = option;

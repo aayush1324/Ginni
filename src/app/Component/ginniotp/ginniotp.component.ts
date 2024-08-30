@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ginniotp',
@@ -13,7 +14,8 @@ export class GinniotpComponent {
   otpForm: FormGroup;
   authError:String='';
 
-  constructor(private formBuilder: FormBuilder,private router : Router, private auth: AuthService) 
+  constructor(private formBuilder: FormBuilder,private router : Router, 
+    private auth: AuthService,  private toaster: ToastrService) 
   {
     this.otpForm = this.formBuilder.group({
       emailOtp: ['', [Validators.required, Validators.minLength(6) , Validators.maxLength(6)]],
@@ -33,13 +35,16 @@ export class GinniotpComponent {
             console.log(response);           
             if (response.message == "OTP verification successful") 
             {
-              alert(response.message);
+              // alert(response.message);
+              this.toaster.success(response.message, "Success")
+
               this.otpForm.reset();
               this.router.navigate(['/account/login']);
             }
             else  
             {
-              alert(response.message);
+              // alert(response.message);
+              this.toaster.error(response.message)
             }                  
         },
         error: (error) => {

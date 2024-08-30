@@ -10,6 +10,7 @@ import { CartService } from '../../Services/cart.service';
 import { ResetPasswordService } from '../../Services/reset-password.service';
 import { NgToastService } from 'ng-angular-popup';
 import { tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 declare var google :any;
 
 @Component({
@@ -30,7 +31,7 @@ export class GinnisignupComponent {
   constructor(private formBuilder: FormBuilder, private seller: SellerService, 
     private router : Router, private auth: AuthService, private toast: NgToastService,
     private userstore :UserstoreService, private resetPasswordService : ResetPasswordService,
-    private wishlist:WishlistService, private cartService: CartService) 
+    private wishlist:WishlistService, private cartService: CartService, private toaster: ToastrService) 
   {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -81,7 +82,7 @@ export class GinnisignupComponent {
       this.auth.signUpGoogle(userEmail, userName).subscribe({
         next: (res) => {
             console.log(res);         
-            alert("Login Success!");
+            // alert("Login Success!");
             this.auth.storeToken(res.token);
             const tokenPayload = this.auth.decodedToken();
             console.log(tokenPayload);  
@@ -101,13 +102,19 @@ export class GinnisignupComponent {
             this.cartService.updateCount(this.totalCartItem);
             })
             
-            this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+            // this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
+            this.toaster.success(res.message, 'SUCCESS', { 
+              // progressBar: true, 
+            });
             this.router.navigate([''])
           
         },
           error: (err) => {
-            this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
-            alert(err?.error.message);
+            this.toaster.error("Something went wrong!", 'ERROR', {
+              // progressBar: true 
+            });
+            // this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
+            // alert(err?.error.message);
           },
       })    
       
@@ -160,14 +167,29 @@ export class GinnisignupComponent {
 
       this.auth.signUp(this.signupForm.value).subscribe({
         next: (res) => {
-          alert(res.message);
-          alert("Please Check OTP on Email and Mobile ");
-          alert("OTP is valid for 10 minutes ");
+          // alert(res.message);
+          this.toaster.success(res.message, 'Success', { 
+            // progressBar: true, 
+          });
+
+          // alert("Please Check OTP on Email and Mobile ");
+          this.toaster.success("Please Check OTP on Email and Mobile ");
+
+          // alert("OTP is valid for 10 minutes ");
+          this.toaster.success("OTP is valid for 10 minutes", 'Success', {
+            timeOut: 600000, // 10 minutes in milliseconds
+            progressBar: true, // Enables the progress bar
+            progressAnimation: 'increasing', // Optional: 'increasing' or 'decreasing'
+          });
+
           this.signupForm.reset();
           this.router.navigate(['/account/otp']);
         },
         error: (err) => {
-          alert(err?.error);
+          this.toaster.error("Something went wrong!", 'ERROR', {
+            // progressBar: true 
+          });
+          // alert(err?.error);
         },
       })
     }

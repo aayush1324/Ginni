@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { ConfirmPasswordValidator } from '../../Helpers/confirmpassword.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sellercustomerlist',
@@ -28,7 +29,7 @@ export class SellercustomerlistComponent {
 
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.customerForm = this.fb.group({
@@ -152,11 +153,15 @@ enableScrolling(): void {
         next: (res) => {
           console.log(res.message);
           this.togglePopup();
-          alert(res.message);
+
+          // alert(res.message);
+          this.toaster.success(res.message, "Success")
+          
           this.getCustomer();
         },
         error: (err) => {
           alert(err?.error.message);
+          this.toaster.error(err?.error.message, "Error")
         },
       });
     }

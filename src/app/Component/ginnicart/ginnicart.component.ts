@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ProductHelperService } from '../../Services/product-helper.service';
 import { CartHelperService } from '../../Services/cart-helper.service';
 import { WishlistHelperService } from '../../Services/wishlist-helper.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var Razorpay: any;
 
@@ -34,9 +35,11 @@ export class GinnicartComponent {
               private paymentService : PaymentService , private productService : ProductService,  
               private searchService : SearchService, private orderService : OrderService,
               private router : Router, private ProductHelperService : ProductHelperService,
-              private cartHelperService : CartHelperService, private wishlistHelperService: WishlistHelperService) { }
+              private cartHelperService : CartHelperService, private toaster: ToastrService,
+              private wishlistHelperService: WishlistHelperService) { }
 
   ngOnInit(): void {
+
     const UserID: string = sessionStorage.getItem('UserID')!;
     console.log(UserID);
 
@@ -93,6 +96,10 @@ export class GinnicartComponent {
         }
       });
     
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 10);
+
   }
 
   
@@ -110,6 +117,9 @@ export class GinnicartComponent {
     this.router.navigate(['/account/cart']).then(() => {
       // Reload the page
       window.location.reload();
+
+      // Scroll to the top of the page
+      window.scrollTo(0, 0);
     });
   }
 
@@ -145,12 +155,15 @@ export class GinnicartComponent {
     }
     else {
       console.error('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("Please login first")
+
       this.router.navigate(['/account/login']);
     }
   }
 
   removeCartItem(product: any): void {
+     debugger;
     const userId = sessionStorage.getItem('UserID');
     const productId = product.productId;
 
@@ -163,21 +176,32 @@ export class GinnicartComponent {
               if (index !== -1) {
                 this.products.splice(index, 1);
               }
-              // window.location.reload();
+
+              this.toaster.success('Cart Item Removed successfully', 'Success')          
+              
               this.cartService.updateCount(this.totalCartItem-1); 
+
+              setTimeout(() => {
+                window.location.reload();
+                window.scrollTo(0, 0);
+              }, 3000);   
             }
           },
           error: (err: any) => {
             // Handle error
             console.error('Error removing item:', err);
-            alert('Error removing item');
+            // alert('Error removing item');
+            this.toaster.error('Error removing item')
           }
         });
       })
     }
     else {
       console.error('User ID not found in session storage');
-      alert('Please login first');
+
+      // alert('Please login first');
+      this.toaster.error('Please login first')
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -193,16 +217,25 @@ export class GinnicartComponent {
       this.cartService.emptyCart(userId)
         .subscribe({
           next: (res) => {
+
             this.products = []; // Clear the local cart array
-            alert('Cart emptied successfully');
-            // window.location.reload();
+            // alert('Cart emptied successfully');
+            this.toaster.success('Cart emptied successfully', 'Success')
+
             // Update the count after successfully emptying the cart
             this.totalCartItem = 0;
             this.cartService.updateCount(this.totalCartItem);
+            
+            setTimeout(() => {
+              window.location.reload();
+              window.scrollTo(0, 0);
+            }, 3000);
+
           },
           error: (err) => {
             console.error('Error emptying cart:', err);
-            alert('Error emptying cart');
+            // alert('Error emptying cart');
+            this.toaster.error('Error emptying cart')
           }
       });
     });
@@ -228,11 +261,14 @@ export class GinnicartComponent {
     this.cartService.updateCartItem(item)
       .subscribe({
         next: (res) => {
-          alert('itemQuantity updated successfully');
+          // alert('itemQuantity updated successfully');
+          this.toaster.success('itemQuantity updated successfully', "Success")
         },
         error: (err) => {
           console.error('Error updating quantity:', err);
-          alert('Error updating quantity');
+
+          // alert('Error updating quantity');
+          this.toaster.error('Error updating quantity')
         }
       });
   }
@@ -269,7 +305,9 @@ export class GinnicartComponent {
     }
     else {
       console.error('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error('Please login first')
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -335,10 +373,12 @@ export class GinnicartComponent {
 
                 this.paymentService.confirmPayments(responses, orderId, UserID).subscribe(
                   (confirmResponse) => {
-                    alert(confirmResponse.message);
+                    // alert(confirmResponse.message);
+                    this.toaster.success(confirmResponse.message , "Success")
                     console.log(confirmResponse);
                     // Reload the page to update the cart
                     window.location.reload();
+                    window.scrollTo(0, 0);
                   },
                   (error) => {
                     console.error(error);
@@ -386,10 +426,14 @@ export class GinnicartComponent {
 
                 this.paymentService.confirmPayments(responses, orderId, UserID).subscribe({
                   next : (confirmResponse) => {
-                    alert(confirmResponse.message);
+
+                    // alert(confirmResponse.message);
+                    this.toaster.success(confirmResponse.message, "Success")
+
                     console.log(confirmResponse);
                      // Reload the page to update the cart
                     window.location.reload();
+                    window.scrollTo(0, 0);
                   },
                   error : (err) => {
                     console.error(err);
@@ -416,7 +460,10 @@ export class GinnicartComponent {
     var orderId = "order_O0PrQwUhVAB0FW";
     this.paymentService.failurePayment( orderId ).subscribe(
       (response) => {
-        alert(response.message);
+
+        // alert(response.message);
+        this.toaster.success(response.message, "Success")
+
         console.log(response);
       },
       (error) => {
@@ -431,7 +478,9 @@ export class GinnicartComponent {
     var orderId = "order_O0PrQwUhVAB0FW";
     this.paymentService.refundPayment( orderId,  paymentId ).subscribe(
       (response) => {
-        alert(response.entity);
+        // alert(response.entity);
+        this.toaster.success(response.entity, "Success")
+
         console.log(response);
       },
       (error) => {

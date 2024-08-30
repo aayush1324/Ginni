@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ProductHelperService } from '../../Services/product-helper.service';
 import { WishlistHelperService } from '../../Services/wishlist-helper.service';
 import { CartHelperService } from '../../Services/cart-helper.service';
+import { ToastrService } from 'ngx-toastr';
 
 // Define sorting options
 enum SortingOptions {
@@ -81,7 +82,8 @@ export class GinnigiftingsComponent {
   constructor( private cartService : CartService, private productService : ProductService, 
               private wishlistService : WishlistService, private searchService : SearchService,
               private router : Router, private ProductHelperService : ProductHelperService,
-              private wishlistHelperService : WishlistHelperService, private cartHelperService : CartHelperService) 
+              private wishlistHelperService : WishlistHelperService,  private toaster: ToastrService,
+               private cartHelperService : CartHelperService) 
   { 
     this.availabilityForm = new FormGroup({
       stock: new FormControl(null) // Define a FormControl for the radio buttons
@@ -121,7 +123,22 @@ export class GinnigiftingsComponent {
 
   toggleFilter() {
     this.isOpenFilter = !this.isOpenFilter;
+
+    if (this.isOpenFilter) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    }
   }
+
+    disableScrolling() {
+    document.body.style.overflow = 'hidden';
+  }
+  
+  enableScrolling() {
+    document.body.style.overflow = 'auto';
+  }
+
 
   closeFilter() {
     this.isOpenFilter = false;
@@ -174,7 +191,9 @@ export class GinnigiftingsComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -199,7 +218,9 @@ export class GinnigiftingsComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -238,6 +259,7 @@ export class GinnigiftingsComponent {
         this.cartHelperService.addToCart(userId, productId, product).subscribe({
           next: (res: any) => {
             if (res) {
+              this.toaster.success(res.message, "Success")
               console.log(res);
               this.refreshCartItemCount(); // Refresh cart item count after adding to cart
               this.cartService.updateCount(this.totalCartItem+1); 
@@ -251,7 +273,9 @@ export class GinnigiftingsComponent {
     }
     else {
       console.warn('User ID not found in session storage');
-      alert('Please login first');
+      // alert('Please login first');
+      this.toaster.error("'Please login first'" , "Error")
+
       this.router.navigate(['/account/login']);
     }
   }
@@ -561,4 +585,26 @@ export class GinnigiftingsComponent {
   }
 
 
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.availabilityheader') && !target.closest('.availabilityfooter')) {
+      this.isDropdownOpenAvailability = false;
+    }
+
+    if (!target.closest('.categoryheader') && !target.closest('.categoryfooter')) {
+      this.isDropdownOpenCategory = false;
+    }
+
+    if (!target.closest('.sortbyheader') && !target.closest('.sortbyfooter')) {
+      this.isDropdownOpenSortby = false;
+    }
+
+    if (!target.closest('.heading') && !target.closest('.filtering')) {
+      this.isOpenFilter = false;
+    }
+  }
+  
 }

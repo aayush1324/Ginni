@@ -5,6 +5,7 @@ import { ProductService } from '../../Services/product.service';
 import { Observable } from 'rxjs';
 import { ImageService } from '../../Services/image.service';
 import { HttpResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class SellerproductlistComponent {
   ];
 
   constructor(private fb: FormBuilder, private productService : ProductService, 
-              private imageService: ImageService,private renderer: Renderer2) { }
+              private imageService: ImageService,private renderer: Renderer2,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -170,14 +172,18 @@ confirmDelete() {
           const productId = response.productId; // Extract the product ID from the response
           // this.uploadImages(productId); 
           this.togglePopup();
-          alert(response.message);
+
+          // alert(response.message);
+          this.toaster.success(response.message, 'SUCCESS');
+
           this.productForm!.reset();
           this.selectedFile = null;
           this.getProducts();
         },
         (error) => {
           console.error(error);
-          alert(error?.error.message);
+          // alert(error?.error.message);
+          this.toaster.error(error?.error.message, 'ERROR');
         }
       );
     }
@@ -229,12 +235,15 @@ confirmDelete() {
     console.log(productId);
     this.productService.deleteProducts(productId).subscribe({
       next: (res) => {
-        alert(res.message)
+        // alert(res.message)
+        this.toaster.success(res.message, "Success");
+
         console.log('Product deleted successfully!', res);
         this.getProducts();
       },
       error: (err) => {
-        console.error('Error deleting product:', err);
+        // console.error('Error deleting product:', err);
+        this.toaster.error('Error deleting product:', err)
       }
     });
   }
@@ -314,7 +323,8 @@ confirmDelete() {
   
       this.productService.editProducts(this.selectedproduct.id, updatedProductData).subscribe({
         next: (res) => {
-          alert(res.message);
+          // alert(res.message);
+          this.toaster.success(res.message, "Success")
           console.log('Product updated successfully!', res);
           this.togglePopup();
           this.getProducts();
