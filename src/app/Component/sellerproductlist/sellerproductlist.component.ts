@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../Services/address.service';
 import { ProductService } from '../../Services/product.service';
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './sellerproductlist.component.css'
 })
 
-export class SellerproductlistComponent {
+export class SellerproductlistComponent implements OnInit {
   productForm! : FormGroup;
   isPopupOpen: boolean = false;
   isPopupView: boolean = false;
@@ -26,33 +26,80 @@ export class SellerproductlistComponent {
 
 
     // Define your table headers
-  tableHeaders: string[] = [
-    'profileImage', 'productName', 'description', 'url', 'price', 'discount', 
-    'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
-  ];
+  // tableHeaders: string[] = [
+  //   'profileImage', 'productName', 'description', 'url', 'price', 'discount', 
+  //   'deliveryPrice', 'quantity', 'category','subcategory', 'weight', 'status',  
+  // ];
 
   constructor(private fb: FormBuilder, private productService : ProductService, 
               private imageService: ImageService,private renderer: Renderer2,
               private toaster: ToastrService) { }
 
+  @ViewChild('discountRupeeLabel') discountRupeeLabel!: ElementRef;
+  @ViewChild('offerPriceLabel') offerPriceLabel!: ElementRef;
+
   ngOnInit(): void {
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
-      url: ['', Validators.required],
-      price: ['', Validators.required],
-      discount: ['', Validators.required],
-      deliveryPrice: ['', Validators.required],
-      quantity: ['', Validators.required],
+      MRPprice: ['', [Validators.required, Validators.min(0)]],
+      discountPercent: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      discountRupee: [{ value: '', disabled: true }], // Disable this input to prevent manual changes
+      discountCoupon: [''],
+      deliveryPrice: ['', [Validators.required, Validators.min(0)]],
+      offerPrice: [{ value: '', disabled: true }],
+      quantity: ['', [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
-      category: ['sel', Validators.required],
-      subcategory: ['sel', Validators.required],
-      weight: ['sel', Validators.required],
-      status: ['sel', Validators.required],
-      // image: [null, Validators.required] // Image is required
+      category: ['', Validators.required],
+      subcategory: ['', Validators.required],
+      weight: ['', Validators.required],
+      stock: ['', Validators.required],
+      rating: ['', [Validators.required, Validators.min(0), Validators.max(5)]],
+      userRating: ['', [Validators.required, Validators.min(0)]],
     });
-    // this.getProduct();
+
+        
+ // Automatically calculate the discount price whenever the MRP or discount percent changes
+    this.productForm.get('MRPprice')?.valueChanges.subscribe(() => {
+      this.calculateDiscountRupee();
+      this.calculateOfferPrice();
+      this.triggerLabelFocus();
+    });
+        
+    this.productForm.get('discountPercent')?.valueChanges.subscribe(() => {
+      this.calculateDiscountRupee();
+      this.calculateOfferPrice(); 
+    });
+
     this.getProducts();
   }
+
+
+  // Method to calculate discount price based on MRPprice and discountPercent
+  calculateDiscountRupee(): void {
+    const MRPprice = this.productForm.get('MRPprice')?.value || 0;
+    const discountPercent = this.productForm.get('discountPercent')?.value || 0;
+    const discountRupee = (MRPprice * discountPercent) / 100;
+    this.productForm.get('discountRupee')?.setValue(discountRupee.toFixed(0)); // Setting calculated value
+  }
+
+  calculateOfferPrice(): void {
+    const MRPprice = this.productForm.get('MRPprice')?.value || 0;
+    const discountRupee = this.productForm.get('discountRupee')?.value || 0;
+    const offerPrice = MRPprice - discountRupee;
+    this.productForm.get('offerPrice')?.setValue(offerPrice.toFixed(0)); // Setting calculated value
+  }
+
+  triggerLabelFocus(): void {
+    // Manually trigger focus for related labels
+    const controls = ['discountRupee', 'offerPrice'];
+    controls.forEach(control => {
+      const formControl = this.productForm.get(control);
+      if (formControl?.value) {
+        formControl.markAsTouched();
+      }
+    });
+  }
+
 
 isDeleteModalOpen = false;
 selectedProductId: string | null = null;
@@ -93,7 +140,6 @@ confirmDelete() {
 
   toggleView(): void {
     this.isPopupView = !this.isPopupView;
-
   }
 
 
@@ -153,24 +199,26 @@ confirmDelete() {
     // if (this.productForm && this.productForm.valid && this.selectedFile) {
     if (this.productForm && this.productForm.valid) {
       const formData = new FormData();
-      formData.append('productName', this.productForm.get('productName')!.value);
-      formData.append('url', this.productForm.get('url')!.value);
-      formData.append('price', this.productForm.get('price')!.value);
-      formData.append('discount', this.productForm.get('discount')!.value);
-      formData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
-      formData.append('quantity', this.productForm.get('quantity')!.value);
-      formData.append('description', this.productForm.get('description')!.value);
-      formData.append('category', this.productForm.get('category')!.value);
-      formData.append('subcategory', this.productForm.get('subcategory')!.value);
-      formData.append('weight', this.productForm.get('weight')!.value);
-      formData.append('status', this.productForm.get('status')!.value);
-      // formData.append('image', this.selectedFile);
+        // Append the form values to formData
+        formData.append('productName', this.productForm.get('productName')!.value);
+        formData.append('MRPprice', this.productForm.get('MRPprice')!.value);
+        formData.append('discountPercent', this.productForm.get('discountPercent')!.value);
+        formData.append('discountRupee', this.productForm.get('discountRupee')!.value);
+        formData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
+        formData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+        formData.append('offerPrice', this.productForm.get('offerPrice')!.value);
+        formData.append('quantity', this.productForm.get('quantity')!.value);
+        formData.append('description', this.productForm.get('description')!.value);
+        formData.append('category', this.productForm.get('category')!.value);
+        formData.append('subcategory', this.productForm.get('subcategory')!.value);
+        formData.append('weight', this.productForm.get('weight')!.value);
+        formData.append('stock', this.productForm.get('stock')!.value);
+        formData.append('rating', this.productForm.get('rating')!.value);
+        formData.append('userRating', this.productForm.get('userRating')!.value);
   
-      this.productService.addProducts(formData).subscribe(
-        (response) => {
+      this.productService.addProducts(formData).subscribe({
+        next : (response) => {
           console.log(response);
-          const productId = response.productId; // Extract the product ID from the response
-          // this.uploadImages(productId); 
           this.togglePopup();
 
           // alert(response.message);
@@ -180,12 +228,12 @@ confirmDelete() {
           this.selectedFile = null;
           this.getProducts();
         },
-        (error) => {
-          console.error(error);
+        error : (err) => {
+          console.error(err);
           // alert(error?.error.message);
-          this.toaster.error(error?.error.message, 'ERROR');
+          this.toaster.error(err?.error.message, 'ERROR');
         }
-      );
+    });
     }
   }
 
@@ -206,23 +254,20 @@ confirmDelete() {
   }
   
 
-  getProducts(): void {
+  getProducts() {
     this.productService.getProducts().subscribe({
-      next: (res: any[]) => { // Assuming the response is an array of objects containing product and image data/
+      next: (res: any[]) => { 
         console.log(res);
-        this.productlist = res;
-   
-         // Modify the imageData field for each item in the response
-        res.forEach(item => {
-          if (item.imageData) {
-            // Prepend 'data:image/jpeg;base64,' to the imageData field
-            item.imageData = 'data:image/jpeg;base64,' + item.imageData;
-          }
-        });
-
-        this.productlist = res;
-        
+        this.productlist = res;       
         console.log(this.productlist);
+           
+         // Modify the imageData field for each item in the response
+        // res.forEach(item => {
+        //   if (item.imageData) {
+        //     // Prepend 'data:image/jpeg;base64,' to the imageData field
+        //     item.imageData = 'data:image/jpeg;base64,' + item.imageData;
+        //   }
+        // });
       },
       error: (err) => {
         console.error('Error fetching products with images:', err);
@@ -289,38 +334,47 @@ confirmDelete() {
       console.log(this.productForm);
       this.productForm.patchValue({
         productName: product.productName,
-        url: product.url,
-        price: product.price,
-        discount: product.discount,
+        MRPprice: product.mrpPrice,
+        discountPercent: product.discountPercent,
+        discountRupee: product.discountRupee,
+        discountCoupon: product.discountCoupon,
         deliveryPrice: product.deliveryPrice,
+        offerPrice: product.offerPrice,
         quantity: product.quantity,
         description: product.description,
         category: product.category,
         subcategory: product.subcategory,
         weight: product.weight,
-        status: product.status,
+        stock: product.stock,
+        rating: product.rating,
+        userRating: product.userRating,
       });
-      this.selectedImage = product.imageData; // Set the selected image to be displayed
+      // this.selectedImage = product.imageData; 
       console.log(this.productForm);
     }
   }
 
   submitEditedProduct(): void {
-    if (this.productForm.valid && this.selectedFile) {
+    if (this.productForm.valid) {
       const updatedProductData = new FormData();
-      updatedProductData.append('productName', this.productForm.get('productName')!.value);
-      updatedProductData.append('url', this.productForm.get('url')!.value);
-      updatedProductData.append('price', this.productForm.get('price')!.value);
-      updatedProductData.append('discount', this.productForm.get('discount')!.value);
-      updatedProductData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
-      updatedProductData.append('quantity', this.productForm.get('quantity')!.value);
-      updatedProductData.append('description', this.productForm.get('description')!.value);
-      updatedProductData.append('category', this.productForm.get('category')!.value);
-      updatedProductData.append('subcategory', this.productForm.get('subcategory')!.value);
-      updatedProductData.append('weight', this.productForm.get('weight')!.value);
-      updatedProductData.append('status', this.productForm.get('status')!.value);
-      updatedProductData.append('image', this.selectedFile);
-  
+        // Append form values to FormData
+        updatedProductData.append('productName', this.productForm.get('productName')!.value);
+        updatedProductData.append('MRPprice', this.productForm.get('MRPprice')!.value);
+        updatedProductData.append('discountPercent', this.productForm.get('discountPercent')!.value);
+        updatedProductData.append('discountRupee', this.productForm.get('discountRupee')!.value);
+        updatedProductData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
+        updatedProductData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+        updatedProductData.append('offerPrice', this.productForm.get('offerPrice')!.value);
+        updatedProductData.append('quantity', this.productForm.get('quantity')!.value);
+        updatedProductData.append('description', this.productForm.get('description')!.value);
+        updatedProductData.append('category', this.productForm.get('category')!.value);
+        updatedProductData.append('subcategory', this.productForm.get('subcategory')!.value);
+        updatedProductData.append('weight', this.productForm.get('weight')!.value);
+        updatedProductData.append('stock', this.productForm.get('stock')!.value);
+        updatedProductData.append('rating', this.productForm.get('rating')!.value);
+        updatedProductData.append('userRating', this.productForm.get('userRating')!.value);
+
+       
       this.productService.editProducts(this.selectedproduct.id, updatedProductData).subscribe({
         next: (res) => {
           // alert(res.message);

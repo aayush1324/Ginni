@@ -10,8 +10,90 @@
   
         <!-- Overlay -->
         <!-- <div class="overlay" *ngIf="isPopupOpen" (click)="togglePopup()"></div> -->
+    </div>
+        
+    <div class="lower">
+        <div class="heading">
+        <div class="headerserial">
+            <h6>S. No.</h6>
+        </div>
   
-        <!-- <div class="productpopup" *ngIf="isPopupOpen">
+        <div class="headername">
+          <h6>Name</h6>
+        </div>
+  
+        <div class="headeremail">
+            <h6>Email</h6>
+        </div>
+  
+        <div class="headermobile">
+            <h6>Mobile</h6>
+        </div>
+
+        <div class="headerorderId">
+            <h6>OrderID</h6>
+        </div>
+
+        <div class="headerorderdate">
+            <h6>OrderDate</h6>
+        </div>
+
+        <div class="headeramount">
+            <h6>Amount</h6>
+        </div>
+
+        <div class="headertransaction">
+            <h6>TransactionID</h6>
+        </div>
+      </div>
+  
+      <div class="footing" *ngFor="let item of orders let i = index">
+        <div class="footerserial">
+          <p>{{ i + 1 }}</p> <!-- Display the serial number dynamically -->
+        </div>
+  
+        <div class="footername">
+          <p>{{item.name | titlecase}}</p>
+        </div>
+
+        <div class="footeremail">
+            <p>{{item.email}}</p>
+          </div>
+
+            
+        <div class="footermobile">
+            <p>{{item.mobile}}</p>
+        </div>
+
+        <div class="footerorderId">
+            <a [routerLink]="['/account/order', item.orderId]">
+                <p>{{ item.orderId }}</p>
+            </a>          
+        </div>
+
+            
+        <div class="footerorderdate">
+            <p>{{item.orderDate | date:'MMMM d, y \'at\' h:mm a'}}</p>
+        </div>
+
+        <div class="footeramount">
+            <p>{{item.totalAmount}}</p>
+          </div>
+
+            
+        <div class="footertransaction">
+            <p>{{item.transactionId}}</p>
+        </div>
+      </div>   
+    </div>   
+   
+  </div>
+
+
+
+
+
+  <!-- <div class="productpopup" *ngIf="isPopupOpen">
             <div class="popup">
                 <div class="popuphead">
                     <div class="popupheadleft">
@@ -116,118 +198,40 @@
                 </div> 
             </div>
         </div>  -->
-    </div>
-        
-    <div class="lower">
-      <!-- <table>
-        <thead>
-            <tr>
-                <th style="width:5%">User Name</th>
-                <th style="width:5%">User Email</th>
-                <th style="width:5%">User Mobile</th>
-                <th style="width:5%">OrderID</th>
-                <th style="width:5%">OrderDate</th>
-                <th style="width:5%">Total Amount</th> 
-                <th style="width:7%">TransactionID</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of orders">
-                <ng-container *ngFor="let key of tableHeaders">
-                    <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        <ng-container *ngIf="key === 'orderDate'">
-                            {{ item[key] | date:'MMMM d, y \'at\' h:mm a' }}
-                        </ng-container>
+       
 
-                        <ng-container *ngIf="key === 'orderId'">
-                            <a [routerLink]="['/account/order', item.orderId]">
-                                <p>{{ item.orderId }}</p>
-                            </a>
-                        </ng-container>
+    <!-- <table>
+    <thead>
+        <tr>
+            <th style="width:5%">User Name</th>
+            <th style="width:5%">User Email</th>
+            <th style="width:5%">User Mobile</th>
+            <th style="width:5%">OrderID</th>
+            <th style="width:5%">OrderDate</th>
+            <th style="width:5%">Total Amount</th> 
+            <th style="width:7%">TransactionID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of orders">
+            <ng-container *ngFor="let key of tableHeaders">
+                <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <ng-container *ngIf="key === 'orderDate'">
+                        {{ item[key] | date:'MMMM d, y \'at\' h:mm a' }}
+                    </ng-container>
 
-                        <ng-container *ngIf="key !== 'orderId' && key !== 'orderDate'">
-                            {{ item[key] }}
-                        </ng-container>
-                    </td>
-                </ng-container>
-            </tr>
-        </tbody>
-    </table> -->
+                    <ng-container *ngIf="key === 'orderId'">
+                        <a [routerLink]="['/account/order', item.orderId]">
+                            <p>{{ item.orderId }}</p>
+                        </a>
+                    </ng-container>
 
-    <div class="heading">
-        <div class="headerserial">
-            <h6>S. No.</h6>
-        </div>
-  
-        <div class="headername">
-          <h6>Name</h6>
-        </div>
-  
-        <div class="headeremail">
-            <h6>Email</h6>
-        </div>
-  
-        <div class="headermobile">
-            <h6>Mobile</h6>
-        </div>
+                    <ng-container *ngIf="key !== 'orderId' && key !== 'orderDate'">
+                        {{ item[key] }}
+                    </ng-container>
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table> -->
 
-        <div class="headerorderId">
-            <h6>OrderID</h6>
-        </div>
-
-        <div class="headerorderdate">
-            <h6>OrderDate</h6>
-        </div>
-
-        <div class="headeramount">
-            <h6>Amount</h6>
-        </div>
-
-        <div class="headertransaction">
-            <h6>TransactionID</h6>
-        </div>
-      </div>
-  
-      <div class="footing" *ngFor="let item of orders let i = index">
-        <div class="footerserial">
-          <p>{{ i + 1 }}</p> <!-- Display the serial number dynamically -->
-        </div>
-  
-        <div class="footername">
-          <p>{{item.name | titlecase}}</p>
-        </div>
-
-        <div class="footeremail">
-            <p>{{item.email}}</p>
-          </div>
-
-            
-        <div class="footermobile">
-            <p>{{item.mobile}}</p>
-        </div>
-
-        <div class="footerorderId">
-            <a [routerLink]="['/account/order', item.orderId]">
-                <p>{{ item.orderId }}</p>
-            </a>          
-        </div>
-
-            
-        <div class="footerorderdate">
-            <p>{{item.orderDate | date:'MMMM d, y \'at\' h:mm a'}}</p>
-        </div>
-
-        <div class="footeramount">
-            <p>{{item.totalAmount}}</p>
-          </div>
-
-            
-        <div class="footertransaction">
-            <p>{{item.transactionId}}</p>
-        </div>
-      </div>
-    
-    </div>   
-   
-  </div>
-  

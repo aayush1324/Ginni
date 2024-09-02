@@ -25,6 +25,7 @@ export class SellercustomerlistComponent {
   tableHeaders: string[] = [
     'userName', 'email', 'phone', 'role', 'phoneConfirmed', 
     'emailConfirmed', 'status'];
+
   renderer: any;
 
 
@@ -32,12 +33,16 @@ export class SellercustomerlistComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private toaster: ToastrService) { }
 
   ngOnInit(): void {
+    const phoneValidators = this.isEdit ? [] : [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")];
+    const passwordValidators = this.isEdit ? [] : [Validators.required, Validators.minLength(6)];
+    const confirmPasswordValidators = this.isEdit ? [] : [Validators.required, Validators.minLength(6)];
+
     this.customerForm = this.fb.group({
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['', phoneValidators],
+      password: ['', passwordValidators],
+      confirmPassword: ['', confirmPasswordValidators],
       role: [null, Validators.required],
       phoneVerify: [null, Validators.required],
       emailVerify: [null, Validators.required],
@@ -107,10 +112,9 @@ enableScrolling(): void {
     this.resetForm();
   }
 
-
   toggleView(): void {
     this.isPopupView = !this.isPopupView;
-    this.renderer[this.isPopupView ? 'addClass' : 'removeClass'](document.body, 'no-scroll');
+    // this.renderer[this.isPopupView ? 'addClass' : 'removeClass'](document.body, 'no-scroll');
 
 
     this.isEdit = false; // Reset edit mode when opening the popup
@@ -182,7 +186,8 @@ enableScrolling(): void {
   deleteCustomer(customerId: string): void {
     this.authService.deleteCustomers(customerId).subscribe({
       next: (res) => {
-        console.log('customer deleted successfully!', res);
+        // console.log('customer deleted successfully!', res);
+        this.toaster.success('customer deleted successfully!', "Success")
         this.getCustomer();
       },
       error: (err) => {
@@ -194,6 +199,7 @@ enableScrolling(): void {
   submitEditedCustomer(): void {
     if (this.customerForm.valid) {
       const updatedCustomer = this.customerForm.value;
+      
       this.authService.editCustomers(this.selectedcustomer.id, updatedCustomer).subscribe({
         next: (res) => {
           console.log('Product updated successfully!', res);

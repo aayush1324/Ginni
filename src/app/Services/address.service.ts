@@ -14,7 +14,7 @@ export class AddressService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addAddress(userId: string, userAddress: any) {
+  addAddress(userId: string, userAddress: any): Observable<any> {
     const token = sessionStorage.getItem("token");  
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

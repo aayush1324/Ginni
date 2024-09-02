@@ -47,7 +47,6 @@
                         </div> -->
                         
                         <div class="form-group floating-label-group">
-                            <!-- <label for="username">Username:</label> -->
                             <input type="text" id="username" formControlName="userName" class="form-control" autocomplete="off"  required>
                             <label class="floating-label">UserName</label>
                             <div *ngIf="customerForm.get('userName')?.errors?.['required'] && customerForm.get('userName')?.touched" class="text-danger">
@@ -55,7 +54,6 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group floating-label-group">
                             <input type="email" id="email" formControlName="email" class="form-control" autocomplete="off"  required>
                             <label class="floating-label">Email</label>
@@ -67,7 +65,6 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group floating-label-group">
                             <input type="tel" id="phone" formControlName="phone" class="form-control" autocomplete="off"  required>
                             <label class="floating-label">Mobile Number</label>
@@ -79,39 +76,38 @@
                             </div>
                         </div> 
 
-                        <br>  
-                        <div class="form-group floating-label-group" >
-                            <input type="password" id="password" formControlName="password" class="form-control" autocomplete="off"  required>
-                            <label class="floating-label">Password</label>
-                            <div *ngIf="customerForm.get('password')?.errors?.['required'] && customerForm.get('password')?.touched" class="text-danger">
+                        <div *ngIf="!isEdit">
+                            <div class="form-group floating-label-group">
+                              <input type="password" id="password" formControlName="password" class="form-control" autocomplete="off" required>
+                              <label class="floating-label">Password</label>
+                              <div *ngIf="customerForm.get('password')?.errors?.['required'] && customerForm.get('password')?.touched" class="text-danger">
                                 Password is required.
-                            </div>
-                            <div *ngIf="customerForm.get('password')?.errors?.['minlength'] && customerForm.get('password')?.touched" class="text-danger">
+                              </div>
+                              <div *ngIf="customerForm.get('password')?.errors?.['minlength'] && customerForm.get('password')?.touched" class="text-danger">
                                 Password must be at least 6 characters long.
+                              </div>
+                            </div>
+                        
+                            <div class="form-group floating-label-group">
+                              <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" autocomplete="off" required>
+                              <label class="floating-label">Confirm Password</label>
+                              <div *ngIf="customerForm.get('confirmPassword')?.errors?.['required'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
+                                Confirm Password is required.
+                              </div>
+                              <div *ngIf="customerForm.get('confirmPassword')?.errors?.['minlength'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
+                                Password must be at least 6 characters long.
+                              </div>
+                              <div *ngIf="customerForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
+                                *Password didn't match*
+                              </div>
                             </div>
                         </div>
 
-                        <br>
-                        <div class="form-group floating-label-group" >
-                            <input type="password" id="password" formControlName="confirmPassword" class="form-control" autocomplete="off"  required>
-                            <label class="floating-label">Confirm Password</label>
-                            <div *ngIf="customerForm.get('confirmPassword')?.errors?.['required'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
-                                Confirm Password is required.
-                            </div>
-                            <div *ngIf="customerForm.get('confirmPassword')?.errors?.['minlength'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
-                                Password must be at least 6 characters long.
-                            </div>
-                            <div *ngIf="customerForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
-                                *Password didn't matched*
-                            </div>
-                        </div> 
-
-                        <br>
                         <div class="form-group floating-label-group">
                             <select formControlName="role" autocomplete="off"  required>
                                 <option value="sel" disabled selected>Select Role</option>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
                             </select>
                             <label class="floating-label">Role</label>
                             <div *ngIf="customerForm.get('role')?.errors?.['required'] && customerForm.get('role')?.touched" class="text-danger">
@@ -119,12 +115,11 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group floating-label-group">
                             <select formControlName="phoneVerify" autocomplete="off"  required>
                                 <option value="sel" disabled selected>Select PhoneVerify</option>
-                                <option value="nonverify">0</option>
-                                <option value="verify">1</option>
+                                <option value=0>Not Verified</option>
+                                <option value=1>Verifed</option>
                             </select>
                             <label class="floating-label">PhoneVerify</label>
                             <div *ngIf="customerForm.get('phoneVerify')?.errors?.['required'] && customerForm.get('phoneVerify')?.touched" class="text-danger">
@@ -132,12 +127,11 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group floating-label-group">
                             <select formControlName="emailVerify" autocomplete="off"  required>
                                 <option value="sel" disabled selected>Select EmailVerify</option>
-                                <option value="nonverify">0</option>
-                                <option value="verify">1</option>
+                                <option value=0>Not Verified</option>
+                                <option value=1>Verifed</option>
                             </select>
                             <label class="floating-label">EmailVerify</label>
                             <div *ngIf="customerForm.get('emailVerify')?.errors?.['required'] && customerForm.get('emailVerify')?.touched" class="text-danger">
@@ -145,12 +139,11 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group floating-label-group">
                             <select formControlName="isLoggedIn" autocomplete="off"  required>
                                 <option value="sel" disabled selected>Select IsLoggedIn</option>
-                                <option value="logout">0</option>
-                                <option value="login">1</option>
+                                <option value=0>Logout</option>
+                                <option value=1>Login</option>
                             </select>
                             <label class="floating-label">isLoggedIn</label>
                             <div *ngIf="customerForm.get('isLoggedIn')?.errors?.['required'] && customerForm.get('isLoggedIn')?.touched" class="text-danger">
@@ -158,7 +151,6 @@
                             </div>
                         </div>
 
-                        <br>
                         <button type="submit" [disabled]="!customerForm.valid">
                             <h6>
                                 {{ isEdit ? 'Submit Edit Customer' : 'Add a New Customer' }}
@@ -169,177 +161,81 @@
             </div>
         </div> 
 
-           <!-- Overlay -->
-           <div class="overlay" *ngIf="isPopupView" (click)="toggleView()"></div>
-  
-           <div class="productpopup" *ngIf="isPopupView">
-               <div class="popup">
-                   <div class="popuphead">
-                       <div class="popupheadleft">
-                          <h1>Customer Details</h1>
-                       </div>
-                       <div class="popupheadright">
-                           <span class="close-icon" (click)="toggleView()"><i class="fa fa-close"></i></span>
-                       </div>
-                   </div>
-                   
-                   <br>
-   
-                   <div class="popupdown">
-                       <form [formGroup]="customerForm" >
-                           <!-- <div class="form-group">
-                               <input type="text" id="ID" formControlName="ID" class="form-control" placeholder="ID">
-                               <div *ngIf="customerForm.get('ID')?.errors?.['required'] && customerForm.get('ID')?.touched" class="text-danger">
-                                   ID is required.
-                               </div>
-                           </div> -->
-                           
-                           <div class="form-group floating-label-group">
-                               <!-- <label for="username">Username:</label> -->
-                               <input type="text" id="username" formControlName="userName" class="form-control" autocomplete="off"  required>
-                               <label class="floating-label">UserName</label>
-                               <div *ngIf="customerForm.get('userName')?.errors?.['required'] && customerForm.get('userName')?.touched" class="text-danger">
-                                   Name is required.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <input type="email" id="email" formControlName="email" class="form-control" autocomplete="off"  required>
-                               <label class="floating-label">Email</label>
-                               <div *ngIf="customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched" class="text-danger">
-                                   Email is required.
-                               </div>
-                               <div *ngIf="customerForm.get('email')?.errors?.['email'] && customerForm.get('email')?.touched" class="text-danger">
-                                   Invalid email format.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <input type="tel" id="phone" formControlName="phone" class="form-control" autocomplete="off"  required>
-                               <label class="floating-label">Mobile Number</label>
-                               <div *ngIf="customerForm.get('phone')?.errors?.['required'] && customerForm.get('phone')?.touched" class="text-danger">
-                                   Mobile number is required.
-                               </div>
-                               <div *ngIf="customerForm.get('phone')?.errors?.['pattern'] && customerForm.get('phone')?.touched" class="text-danger">
-                                   Invalid mobile number format.
-                               </div>
-                           </div> 
-   
-                           <br>  
-                           <div class="form-group floating-label-group" >
-                               <input type="password" id="password" formControlName="password" class="form-control" autocomplete="off"  required>
-                               <label class="floating-label">Password</label>
-                               <div *ngIf="customerForm.get('password')?.errors?.['required'] && customerForm.get('password')?.touched" class="text-danger">
-                                   Password is required.
-                               </div>
-                               <div *ngIf="customerForm.get('password')?.errors?.['minlength'] && customerForm.get('password')?.touched" class="text-danger">
-                                   Password must be at least 6 characters long.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group" >
-                               <input type="password" id="password" formControlName="confirmPassword" class="form-control" autocomplete="off"  required>
-                               <label class="floating-label">Confirm Password</label>
-                               <div *ngIf="customerForm.get('confirmPassword')?.errors?.['required'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
-                                   Confirm Password is required.
-                               </div>
-                               <div *ngIf="customerForm.get('confirmPassword')?.errors?.['minlength'] && customerForm.get('confirmPassword')?.touched" class="text-danger">
-                                   Password must be at least 6 characters long.
-                               </div>
-                               <div *ngIf="customerForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-danger">
-                                   *Password didn't matched*
-                               </div>
-                           </div> 
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <select formControlName="role" autocomplete="off"  required>
-                                   <option value="sel" disabled selected>Select Role</option>
-                                   <option value="user">User</option>
-                                   <option value="admin">Admin</option>
-                               </select>
-                               <label class="floating-label">Role</label>
-                               <div *ngIf="customerForm.get('role')?.errors?.['required'] && customerForm.get('role')?.touched" class="text-danger">
-                                   Role is required.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <select formControlName="phoneVerify" autocomplete="off"  required>
-                                   <option value="sel" disabled selected>Select PhoneVerify</option>
-                                   <option value="nonverify">0</option>
-                                   <option value="verify">1</option>
-                               </select>
-                               <label class="floating-label">PhoneVerify</label>
-                               <div *ngIf="customerForm.get('phoneVerify')?.errors?.['required'] && customerForm.get('phoneVerify')?.touched" class="text-danger">
-                                   Phone Verification is required.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <select formControlName="emailVerify" autocomplete="off"  required>
-                                   <option value="sel" disabled selected>Select EmailVerify</option>
-                                   <option value="nonverify">0</option>
-                                   <option value="verify">1</option>
-                               </select>
-                               <label class="floating-label">EmailVerify</label>
-                               <div *ngIf="customerForm.get('emailVerify')?.errors?.['required'] && customerForm.get('emailVerify')?.touched" class="text-danger">
-                                   Email Verification is required.
-                               </div>
-                           </div>
-   
-                           <br>
-                           <div class="form-group floating-label-group">
-                               <select formControlName="isLoggedIn" autocomplete="off"  required>
-                                   <option value="sel" disabled selected>Select IsLoggedIn</option>
-                                   <option value="logout">0</option>
-                                   <option value="login">1</option>
-                               </select>
-                               <label class="floating-label">isLoggedIn</label>
-                               <div *ngIf="customerForm.get('isLoggedIn')?.errors?.['required'] && customerForm.get('isLoggedIn')?.touched" class="text-danger">
-                                   isLoggedIn is required.
-                               </div>
-                           </div>
-                       </form>
-                   </div> 
-               </div>
-           </div> 
+        <!-- Overlay -->
+        <div class="overlay" *ngIf="isPopupView" (click)="toggleView()"></div>
+
+        <div class="productpopup" *ngIf="isPopupView">
+            <div class="popup">
+                <div class="popuphead">
+                    <div class="popupheadleft">
+                        <h1>Customer Details</h1>
+                    </div>
+                    <div class="popupheadright">
+                        <span class="close-icon" (click)="toggleView()"><i class="fa fa-close"></i></span>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="popupdown">
+                    <form [formGroup]="customerForm" >                          
+                        <div class="form-group floating-label-group">
+                            <input type="text" id="username" formControlName="userName" autocomplete="off"  class="non-editable">
+                            <label class="floating-label">UserName</label>       
+                        </div>
+
+                        <div class="form-group floating-label-group">
+                            <input type="email" id="email" formControlName="email" class="non-editable" autocomplete="off">
+                            <label class="floating-label">Email</label>
+                        </div>
+
+                        <div class="form-group floating-label-group">
+                            <input type="text" id="phone" formControlName="phone" class="non-editable" autocomplete="off">
+                            <label class="floating-label">Mobile Number</label>
+                        </div> 
+
+                        <div class="form-group floating-label-group">
+                            <select formControlName="role" autocomplete="off" class="non-editable">
+                                <option value="sel" disabled selected>Select Role</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <label class="floating-label">Role</label>
+                        </div>
+
+                        <div class="form-group floating-label-group">
+                            <select formControlName="phoneVerify" autocomplete="off" class="non-editable">
+                                <option value="sel" disabled selected>Select PhoneVerify</option>
+                                <option value=0>Not Verified</option>
+                                <option value=1>Verifed</option>
+                            </select>
+                            <label class="floating-label">PhoneVerify</label>                            
+                        </div>
+
+                        <div class="form-group floating-label-group">
+                            <select formControlName="emailVerify" autocomplete="off" class="non-editable">
+                                <option value="sel" disabled selected>Select EmailVerify</option>
+                                <option value=0>Not Verified</option>
+                                <option value=1>Verifed</option>
+                            </select>
+                            <label class="floating-label">EmailVerify</label>
+                        </div>
+
+                        <div class="form-group floating-label-group">
+                            <select formControlName="isLoggedIn" autocomplete="off"  class="non-editable">
+                                <option value="sel" disabled selected>Select IsLoggedIn</option>
+                                <option value=0>Logout</option>
+                                <option value=1>Login</option>
+                            </select>
+                            <label class="floating-label">isLoggedIn</label>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+        </div> 
     </div>
         
     <div class="lower">
-      <!-- <table>
-        <thead>
-          <tr>
-            <th style="width:10%">Name</th>
-            <th style="width:10%">Email</th>
-            <th style="width:10%">Mobile</th>
-            <th style="width:10%">Role</th>
-            <th style="width:10%">PhoneVerify</th>
-            <th style="width:10%">EmailVerify</th>
-            <th style="width:10%">IsLoggedIn</th>
-            <th style="width:10%">Status</th>         
-          </tr>
-        </thead>
-  
-        <tbody>
-          <tr *ngFor="let item of customerlist">
-            <ng-container *ngFor="let key of tableHeaders">
-              <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}</td>
-            </ng-container>            
-            <td>
-              <button (click)="openEditPopup(item)"><b>Edit</b></button>
-              <br>
-              <button (click)="deleteCustomer(item.id)"><b>Delete </b></button>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
-
       
     <div class="heading">
         <div class="headerserial">
@@ -394,3 +290,33 @@
    
   </div>
   
+
+
+
+<!-- <table>
+<thead>
+<tr>
+<th style="width:10%">Name</th>
+<th style="width:10%">Email</th>
+<th style="width:10%">Mobile</th>
+<th style="width:10%">Role</th>
+<th style="width:10%">PhoneVerify</th>
+<th style="width:10%">EmailVerify</th>
+<th style="width:10%">IsLoggedIn</th>
+<th style="width:10%">Status</th>         
+</tr>
+</thead>
+
+<tbody>
+<tr *ngFor="let item of customerlist">
+<ng-container *ngFor="let key of tableHeaders">
+    <td style="max-width: 8%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item[key] }}</td>
+</ng-container>            
+<td>
+    <button (click)="openEditPopup(item)"><b>Edit</b></button>
+    <br>
+    <button (click)="deleteCustomer(item.id)"><b>Delete </b></button>
+</td>
+</tr>
+</tbody>
+</table> -->
