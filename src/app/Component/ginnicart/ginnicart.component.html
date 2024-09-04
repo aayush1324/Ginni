@@ -28,7 +28,7 @@
     
                         <div class="middleleftmainproductnaming">
                             <div class="middleleftmainproductname">
-                                <a  [routerLink]="['/mainproduct', item.productName]"><h5>{{item.productName | titlecase}}</h5></a>
+                                <a  [routerLink]="['/mainproduct', item.productName]"><h5>{{item.productName | titlecase}}({{item.itemWeight}})</h5></a>
                             </div>
 
                             <div class="rating">
@@ -49,7 +49,7 @@
                             <div class="middleleftmainproductprice">
                                 <h5> &#x20B9; {{item.itemDiscountedPrice}} </h5>
                                 <h6> &#x20B9; {{item.itemPrice}}</h6>
-                                <p>{{ (item.itemDiscount / item.itemPrice) * 100 | number:'1.0-0' }}% off</p>
+                                <p>{{ item.itemDiscount}}% off</p>
                             </div>
                         </div>
                     </div>

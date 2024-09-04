@@ -56,6 +56,8 @@ export class GinnimainproductComponent {
     private searchService : SearchService , private paymentService : PaymentService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+
     this.getProduct();
 
      // Get the product name from route parameters
@@ -69,6 +71,7 @@ export class GinnimainproductComponent {
 
     this.getImagesByProductId(this.productId);
     this.showSlides(this.slideIndex);
+
   }
 
 
@@ -107,7 +110,7 @@ export class GinnimainproductComponent {
         console.log(data);
         data.imageData = 'data:image/jpeg;base64,' + data.imageData;
         const productId = data.id;
-        this.getImagesByProductId(productId);  // Call function to upload images with the product ID
+        // this.getImagesByProductId(productId);  
         console.log(productId);
         this.productDetails = data;
         console.log(this.productDetails);
@@ -259,7 +262,7 @@ export class GinnimainproductComponent {
 
   updateCartItemQuantity(item: any): void {
     // Calculate the new total price
-    item.totalPrice = item.quantity * item.price;
+    item.totalPrice = item.quantity * item.offerPrice;
 
     // Update the cart item
     this.cartService.updateCartItem(item)
@@ -282,7 +285,7 @@ export class GinnimainproductComponent {
   
   getTotalPrice(): number {
     let totalPrice = 0;
-    totalPrice += this.quantity * this.productDetails.discountedPrice;
+    totalPrice += this.quantity * this.productDetails.offerPrice;
     // this.productDetails.forEach((item: { quantity: number; price: number; }) => {
     //     totalPrice += item.quantity * item.price;
     // });

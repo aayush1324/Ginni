@@ -192,7 +192,8 @@ export class AuthService {
   editCustomers(customerId: string, updatedCustomer: any): Observable<any> {
     const token = sessionStorage.getItem("token");  
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      // 'Content-Type': 'application/json'
     });
     return this.http.put<any>(`${this.baseUrl}editCustomer/${customerId}`, updatedCustomer, {headers});
   }

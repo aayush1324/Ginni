@@ -48,9 +48,9 @@
                 </div>
 
                 <div class="form-group floating-label-group">
-                  <input type="number" id="MRPprice" formControlName="MRPprice" min="0" autocomplete="off" required>
+                  <input type="number" id="mrpPrice" formControlName="mrpPrice" min="0" autocomplete="off" required>
                   <label class="floating-label">MRP Price</label>
-                  <div *ngIf="productForm.get('MRPprice')?.errors?.['required'] && productForm.get('MRPprice')?.touched" class="text-danger">
+                  <div *ngIf="productForm.get('mrpPrice')?.errors?.['required'] && productForm.get('mrpPrice')?.touched" class="text-danger">
                     MRP Price is required.
                   </div>
                 </div>
@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="form-group floating-label-group">
-                  <input type="number" id="discountRupee" formControlName="discountRupee" autocomplete="off" [disabled]="true">
+                  <input type="number" id="discountRupee" formControlName="discountRupee" autocomplete="off">
                   <label class="floating-label">Discount in Rupuee</label>
                   <div *ngIf="productForm.get('discountRupee')?.errors?.['required'] && productForm.get('discountRupee')?.touched" class="text-danger">
                     Discount in Rupuee is required.
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="form-group floating-label-group">
-                  <input type="number" id="offerPrice" formControlName="offerPrice" min="0" autocomplete="off" [disabled]="true">
+                  <input type="number" id="offerPrice" formControlName="offerPrice" min="0" autocomplete="off" >
                   <label class="floating-label">Offer Price</label>
                   <div *ngIf="productForm.get('offerPrice')?.errors?.['required'] && productForm.get('offerPrice')?.touched" class="text-danger">
                     Offer Price is required.
@@ -174,7 +174,7 @@
                     <option value="instock">In Stock</option>
                     <option value="outofstock">Out of Stock</option>
                   </select>
-                  <label class="floating-label">Status</label>
+                  <label class="floating-label">Stock</label>
                   <div *ngIf="productForm.get('stock')?.errors?.['required'] && productForm.get('stock')?.touched" class="text-danger">
                     Stock is required.
                   </div>
@@ -241,7 +241,7 @@
                 </div>
             
                 <div class="form-group floating-label-group">
-                  <input type="number" id="MRPprice" formControlName="MRPprice" min="0" autocomplete="off" class="non-editable">
+                  <input type="number" id="mrpPrice" formControlName="mrpPrice" min="0" autocomplete="off" class="non-editable">
                   <label class="floating-label">MRP Price</label>
                 </div>
             
@@ -261,7 +261,7 @@
                 </div>
             
                 <div class="form-group floating-label-group">
-                  <input type="number" id="deliveryPrice" formControlName="deliveryPrice" min="0" max="100" autocomplete="off" [disabled]="true">
+                  <input type="number" id="deliveryPrice" formControlName="deliveryPrice" min="0" max="100" autocomplete="off">
                   <label class="floating-label">Delivery Price</label>
                 </div>
             
@@ -318,7 +318,7 @@
                     <option value="instock">In Stock</option>
                     <option value="outofstock">Out of Stock</option>
                   </select>
-                  <label class="floating-label">Status</label>
+                  <label class="floating-label">Stock</label>
                 </div>
             
                 <div class="form-group floating-label-group">

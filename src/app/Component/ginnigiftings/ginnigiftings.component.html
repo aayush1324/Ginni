@@ -180,16 +180,14 @@
                       </div>
                   
                       <div class="pricing">
-                        <h5>&#8377; {{ item.price }}</h5>
-                        <p> &#x20B9; {{item.price - item.discount}} </p>
-                        <h6>{{ (item.discount / item.price) * 100 | number:'1.0-0' }}% off</h6>
+                        <h5>&#8377; {{ item.offerPrice }}</h5>
+                        <p> &#x20B9; {{item.mrpPrice}} </p>
+                        <h6>{{ item.discountPercent }}% off</h6>
                       </div>
-
-   
-                  
+                 
                       <div class="carting">
-                          <button *ngIf="item.status === 'instock'" (click)="addToCart(item)">Add to Cart</button>
-                          <button *ngIf="item.status === 'outofstock'" disabled>Sold Out</button>
+                          <button *ngIf="item.stock === 'instock'" (click)="addToCart(item)">Add to Cart</button>
+                          <button *ngIf="item.stock === 'outofstock'" disabled>Sold Out</button>
                       </div>          
                   </div>
               </ng-container>

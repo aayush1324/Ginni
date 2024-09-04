@@ -347,7 +347,7 @@ td button {
   display: flex;
   flex-direction: row;
   /* justify-content: space-around; */
-  border: 1px solid;
+  border: 1px solid rgb(200, 200, 200);
 }
 
 .heading h5 {
@@ -398,7 +398,7 @@ td button {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border: 1px solid;
+  border: 1px solid rgb(200, 200, 200);
 }
 
 

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ImageService } from '../../Services/image.service';
 import { HttpResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { log } from 'console';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class SellerproductlistComponent implements OnInit {
   ngOnInit(): void {
     this.productForm = this.fb.group({
       productName: ['', Validators.required],
-      MRPprice: ['', [Validators.required, Validators.min(0)]],
+      mrpPrice: ['', [Validators.required, Validators.min(0)]],
       discountPercent: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       discountRupee: [{ value: '', disabled: true }], // Disable this input to prevent manual changes
       discountCoupon: [''],
@@ -59,7 +60,7 @@ export class SellerproductlistComponent implements OnInit {
 
         
  // Automatically calculate the discount price whenever the MRP or discount percent changes
-    this.productForm.get('MRPprice')?.valueChanges.subscribe(() => {
+    this.productForm.get('mrpPrice')?.valueChanges.subscribe(() => {
       this.calculateDiscountRupee();
       this.calculateOfferPrice();
       this.triggerLabelFocus();
@@ -70,22 +71,33 @@ export class SellerproductlistComponent implements OnInit {
       this.calculateOfferPrice(); 
     });
 
+     
+    this.productService.productItems$.subscribe((data)=>{
+      console.log(data);
+      this.productlist=data;
+      console.log(this.productlist);
+       
+      
+    });
     this.getProducts();
   }
 
 
-  // Method to calculate discount price based on MRPprice and discountPercent
+  // Method to calculate discount price based on mrpPrice and discountPercent
   calculateDiscountRupee(): void {
-    const MRPprice = this.productForm.get('MRPprice')?.value || 0;
+    const mrpPrice = this.productForm.get('mrpPrice')?.value || 0;
+
     const discountPercent = this.productForm.get('discountPercent')?.value || 0;
-    const discountRupee = (MRPprice * discountPercent) / 100;
+    const discountRupee = (mrpPrice * discountPercent) / 100;
+    console.log(discountRupee, mrpPrice);
+    
     this.productForm.get('discountRupee')?.setValue(discountRupee.toFixed(0)); // Setting calculated value
   }
 
   calculateOfferPrice(): void {
-    const MRPprice = this.productForm.get('MRPprice')?.value || 0;
+    const mrpPrice = this.productForm.get('mrpPrice')?.value || 0;
     const discountRupee = this.productForm.get('discountRupee')?.value || 0;
-    const offerPrice = MRPprice - discountRupee;
+    const offerPrice = mrpPrice - discountRupee;
     this.productForm.get('offerPrice')?.setValue(offerPrice.toFixed(0)); // Setting calculated value
   }
 
@@ -104,28 +116,28 @@ export class SellerproductlistComponent implements OnInit {
 isDeleteModalOpen = false;
 selectedProductId: string | null = null;
 
-openDeleteConfirmation(productId: string) {
-  this.selectedProductId = productId; // Store the product ID to delete
-  this.isDeleteModalOpen = true; // Show the modal
+  openDeleteConfirmation(productId: string) {
+    this.selectedProductId = productId; // Store the product ID to delete
+    this.isDeleteModalOpen = true; // Show the modal
 
-  // Manage scrolling
-  if (this.isDeleteModalOpen) {
-    this.disableScrolling();
-  } else {
-    this.enableScrolling();
+    // Manage scrolling
+    if (this.isDeleteModalOpen) {
+      this.disableScrolling();
+    } else {
+      this.enableScrolling();
+    }
   }
-}
 
-closeDeleteConfirmation() {
-  this.isDeleteModalOpen = false; // Hide the modal
-}
-
-confirmDelete() {
-  if (this.selectedProductId !== null) {
-    this.deleteProduct(this.selectedProductId); // Call delete function
+  closeDeleteConfirmation() {
+    this.isDeleteModalOpen = false; // Hide the modal
   }
-  this.closeDeleteConfirmation(); // Close the modal
-}
+
+  confirmDelete() {
+    if (this.selectedProductId !== null) {
+      this.deleteProduct(this.selectedProductId); // Call delete function
+    }
+    this.closeDeleteConfirmation(); // Close the modal
+  }
 
 
   togglePopup(): void {
@@ -196,46 +208,50 @@ confirmDelete() {
 
  
   addedProduct() {
-    // if (this.productForm && this.productForm.valid && this.selectedFile) {
     if (this.productForm && this.productForm.valid) {
       const formData = new FormData();
-        // Append the form values to formData
-        formData.append('productName', this.productForm.get('productName')!.value);
-        formData.append('MRPprice', this.productForm.get('MRPprice')!.value);
-        formData.append('discountPercent', this.productForm.get('discountPercent')!.value);
-        formData.append('discountRupee', this.productForm.get('discountRupee')!.value);
-        formData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
-        formData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
-        formData.append('offerPrice', this.productForm.get('offerPrice')!.value);
-        formData.append('quantity', this.productForm.get('quantity')!.value);
-        formData.append('description', this.productForm.get('description')!.value);
-        formData.append('category', this.productForm.get('category')!.value);
-        formData.append('subcategory', this.productForm.get('subcategory')!.value);
-        formData.append('weight', this.productForm.get('weight')!.value);
-        formData.append('stock', this.productForm.get('stock')!.value);
-        formData.append('rating', this.productForm.get('rating')!.value);
-        formData.append('userRating', this.productForm.get('userRating')!.value);
+      // Append the form values to formData
+      formData.append('productName', this.productForm.get('productName')!.value);
+      formData.append('mrpPrice', this.productForm.get('mrpPrice')!.value);
+      formData.append('discountPercent', this.productForm.get('discountPercent')!.value);
+      formData.append('discountRupee', this.productForm.get('discountRupee')!.value);
+      formData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
+      formData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+      formData.append('offerPrice', this.productForm.get('offerPrice')!.value);
+      formData.append('quantity', this.productForm.get('quantity')!.value);
+      formData.append('description', this.productForm.get('description')!.value);
+      formData.append('category', this.productForm.get('category')!.value);
+      formData.append('subcategory', this.productForm.get('subcategory')!.value);
+      formData.append('weight', this.productForm.get('weight')!.value);
+      formData.append('stock', this.productForm.get('stock')!.value);
+      formData.append('rating', this.productForm.get('rating')!.value);
+      formData.append('userRating', this.productForm.get('userRating')!.value);
   
       this.productService.addProducts(formData).subscribe({
-        next : (response) => {
+        next: (response) => {
           console.log(response);
-          this.togglePopup();
-
-          // alert(response.message);
           this.toaster.success(response.message, 'SUCCESS');
-
+          
+          // Add the new product directly to the product list
+          console.log(this.productForm.value);
+          
+          const newProduct = { id: response.productId, ...this.productForm.value };
+          this.productlist.push(newProduct); // Add to the end of the list
+          // Optionally: If you want the newest products on top, use unshift instead
+          // this.productList.unshift(newProduct);
+  
+          this.togglePopup();
           this.productForm!.reset();
           this.selectedFile = null;
-          this.getProducts();
         },
-        error : (err) => {
+        error: (err) => {
           console.error(err);
-          // alert(error?.error.message);
           this.toaster.error(err?.error.message, 'ERROR');
         }
-    });
+      });
     }
   }
+  
 
   // Function to upload images with the product ID
   uploadImages(productId: string) {
@@ -253,11 +269,11 @@ confirmDelete() {
     );
   }
   
-
-  getProducts() {
+  async getProducts() {
     this.productService.getProducts().subscribe({
       next: (res: any[]) => { 
         console.log(res);
+        this.productService.updateProductItem(res);
         this.productlist = res;       
         console.log(this.productlist);
            
@@ -276,22 +292,7 @@ confirmDelete() {
   }
 
 
-  deleteProduct(productId: string): void {
-    console.log(productId);
-    this.productService.deleteProducts(productId).subscribe({
-      next: (res) => {
-        // alert(res.message)
-        this.toaster.success(res.message, "Success");
 
-        console.log('Product deleted successfully!', res);
-        this.getProducts();
-      },
-      error: (err) => {
-        // console.error('Error deleting product:', err);
-        this.toaster.error('Error deleting product:', err)
-      }
-    });
-  }
 
   openEditPopup(product: any): void {
     this.selectedproduct = product;
@@ -309,6 +310,8 @@ confirmDelete() {
 
   openViewPopup(product: any): void {
     this.selectedproduct = product;
+    console.log(this.selectedproduct);
+    
     this.populateForm(product);
     this.isPopupView = true;
 
@@ -330,11 +333,15 @@ confirmDelete() {
   }
 
   populateForm(product: any): void {
+    console.log(this.productlist);
+    console.log(product);
+    
+    
     if (this.productForm) {
       console.log(this.productForm);
       this.productForm.patchValue({
         productName: product.productName,
-        MRPprice: product.mrpPrice,
+        mrpPrice: product.mrpPrice,
         discountPercent: product.discountPercent,
         discountRupee: product.discountRupee,
         discountCoupon: product.discountCoupon,
@@ -354,43 +361,67 @@ confirmDelete() {
     }
   }
 
+  deleteProduct(productId: string): void {
+    console.log(productId);
+    this.productService.deleteProducts(productId).subscribe({
+      next: (res) => {
+        // Remove the deleted product from the productList
+        this.productlist = this.productlist.filter(product => product.id !== productId);
+
+        this.toaster.success(res.message, "Success");
+        console.log('Product deleted successfully!', res);
+      },
+      error: (err) => {
+        console.error('Error deleting product:', err);
+        this.toaster.error('Error deleting product.', "Error");
+      }
+    });
+  }
+
   submitEditedProduct(): void {
     if (this.productForm.valid) {
       const updatedProductData = new FormData();
-        // Append form values to FormData
-        updatedProductData.append('productName', this.productForm.get('productName')!.value);
-        updatedProductData.append('MRPprice', this.productForm.get('MRPprice')!.value);
-        updatedProductData.append('discountPercent', this.productForm.get('discountPercent')!.value);
-        updatedProductData.append('discountRupee', this.productForm.get('discountRupee')!.value);
-        updatedProductData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
-        updatedProductData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
-        updatedProductData.append('offerPrice', this.productForm.get('offerPrice')!.value);
-        updatedProductData.append('quantity', this.productForm.get('quantity')!.value);
-        updatedProductData.append('description', this.productForm.get('description')!.value);
-        updatedProductData.append('category', this.productForm.get('category')!.value);
-        updatedProductData.append('subcategory', this.productForm.get('subcategory')!.value);
-        updatedProductData.append('weight', this.productForm.get('weight')!.value);
-        updatedProductData.append('stock', this.productForm.get('stock')!.value);
-        updatedProductData.append('rating', this.productForm.get('rating')!.value);
-        updatedProductData.append('userRating', this.productForm.get('userRating')!.value);
+      // Append form values to FormData
+      updatedProductData.append('productName', this.productForm.get('productName')!.value);
+      updatedProductData.append('mrpPrice', this.productForm.get('mrpPrice')!.value);
+      updatedProductData.append('discountPercent', this.productForm.get('discountPercent')!.value);
+      updatedProductData.append('discountRupee', this.productForm.get('discountRupee')!.value);
+      updatedProductData.append('discountCoupon', this.productForm.get('discountCoupon')!.value);
+      updatedProductData.append('deliveryPrice', this.productForm.get('deliveryPrice')!.value);
+      updatedProductData.append('offerPrice', this.productForm.get('offerPrice')!.value);
+      updatedProductData.append('quantity', this.productForm.get('quantity')!.value);
+      updatedProductData.append('description', this.productForm.get('description')!.value);
+      updatedProductData.append('category', this.productForm.get('category')!.value);
+      updatedProductData.append('subcategory', this.productForm.get('subcategory')!.value);
+      updatedProductData.append('weight', this.productForm.get('weight')!.value);
+      updatedProductData.append('stock', this.productForm.get('stock')!.value);
+      updatedProductData.append('rating', this.productForm.get('rating')!.value);
+      updatedProductData.append('userRating', this.productForm.get('userRating')!.value);
 
-       
       this.productService.editProducts(this.selectedproduct.id, updatedProductData).subscribe({
         next: (res) => {
-          // alert(res.message);
-          this.toaster.success(res.message, "Success")
+          this.toaster.success(res.message, "Success");
           console.log('Product updated successfully!', res);
+
+          // Update the product in the list immediately
+          const index = this.productlist.findIndex(product => product.id === this.selectedproduct.id);
+          if (index !== -1) {
+            this.productlist[index] = { ...this.productlist[index], ...this.productForm.value };
+          }
+
           this.togglePopup();
-          this.getProducts();
         },
         error: (err) => {
-          console.error('Error updating Product:', err);
+          // Handle error response
+          const errorMessage = err.error?.message || 'An error occurred while updating the product';
+          this.toaster.error(errorMessage, "Error");
         }
       });
     } else {
       console.log('Form invalid or image not selected');
     }
   }
+
   
   
 }

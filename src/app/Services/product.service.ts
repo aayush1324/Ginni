@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,14 @@ export class ProductService {
 
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Products/';
   private baseUrl: string = 'https://localhost:7132/api/Products/';
-
-
+  private productItems = new BehaviorSubject<any>(null);
+  productItems$ = this.productItems.asObservable();
+  
   constructor(private http: HttpClient, private router: Router) { }
 
-
+  updateProductItem(item: any) {
+    this.productItems.next(item);
+  }
   getProductsWithImage(UserID: string | null): Observable<any[]> {
     const token = sessionStorage.getItem("token");  
     const headers = new HttpHeaders({

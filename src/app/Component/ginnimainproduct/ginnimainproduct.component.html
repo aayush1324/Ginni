@@ -48,15 +48,15 @@
                     <div class="rightmiddlemrp">
                         <h6>M.R.P</h6>
                         <div class="rightmiddlemrpoff">
-                            <p>&#x20B9; {{ productDetails.price }}</p>
-                            <h6>{{ (productDetails.discount / productDetails.price) * 100 | number:'1.0-0' }}% off</h6>
+                            <p>&#x20B9; {{ productDetails.mrpPrice }}</p>
+                            <h6>{{ productDetails.discountPercent}}% off</h6>
                         </div>
                      
                     </div>
 
                     <div class="rightmiddleoffer">
                         <h6>Offer Price:</h6>
-                        <p><b>&#x20B9; {{ productDetails.discountedPrice }}</b> (incl. of all taxes)</p>
+                        <p><b>&#x20B9; {{ productDetails.offerPrice }}</b> (incl. of all taxes)</p>
                     </div>
 
                     <div class="rightmiddlequantity">

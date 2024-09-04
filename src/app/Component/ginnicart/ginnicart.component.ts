@@ -72,34 +72,32 @@ export class GinnicartComponent {
     //   })
     // }
 
-      this.cartService.getToCarts(UserID).subscribe({
-        next : (res) => {
-          if (res && Array.isArray(res)) {
-            console.log("startId");
-
-            console.log("res", res);
-            this.productss = res;
-            console.log("products", this.productss)
-            this.searchService.getSearchTerm().subscribe((searchTerm) => {
-              this.searchTerm = searchTerm;
-              this.onSearch();
-            });
-          } else {
-            // Handle cases where res is null or not an array
-            this.totalCartItem = 0;
-            // console.warn('Expected an array but received:', res);
-          }
-        },
-        error: (err) => {
-          console.error('Error occurred:', err);
+    this.cartService.getToCarts(UserID).subscribe({
+      next : (res) => {
+        if (res && Array.isArray(res)) {
+          console.log("res", res);
+          this.productss = res;
+          // Assuming `res` is the response data you receive from the backend
+          this.productss = res.filter((product: any) => product.itemStock.toLowerCase() === 'instock');
+          console.log("products", this.productss)
+          this.searchService.getSearchTerm().subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+            this.onSearch();
+          });
+        } else {
           this.totalCartItem = 0;
+          // console.warn('Expected an array but received:', res);
         }
-      });
+      },
+      error: (err) => {
+        console.error('Error occurred:', err);
+        this.totalCartItem = 0;
+      }
+    });
     
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 10);
-
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10);
   }
 
   
@@ -163,7 +161,6 @@ export class GinnicartComponent {
   }
 
   removeCartItem(product: any): void {
-     debugger;
     const userId = sessionStorage.getItem('UserID');
     const productId = product.productId;
 
@@ -176,9 +173,7 @@ export class GinnicartComponent {
               if (index !== -1) {
                 this.products.splice(index, 1);
               }
-
-              this.toaster.success('Cart Item Removed successfully', 'Success')          
-              
+              this.toaster.success('Cart Item Removed successfully', 'Success')                    
               this.cartService.updateCount(this.totalCartItem-1); 
 
               setTimeout(() => {
@@ -358,8 +353,8 @@ export class GinnicartComponent {
           this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
             console.log(response.id);
             const options = {
-              // key: 'rzp_test_NHayhA8KgRDaCx',
-              key: 'rzp_live_HO0cMQGQ5NHBLD',
+              key: 'rzp_test_NHayhA8KgRDaCx',
+              // key: 'rzp_live_HO0cMQGQ5NHBLD',
               amount: response.amount,
               currency: 'INR',
               name: 'Ginni Dry Fruits',
@@ -371,8 +366,8 @@ export class GinnicartComponent {
                 var razororder_Id = responses.razorpay_order_id;
                 console.log(responses);
 
-                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe(
-                  (confirmResponse) => {
+                this.paymentService.confirmPayments(responses, orderId, UserID).subscribe({
+                  next:  (confirmResponse) => {
                     // alert(confirmResponse.message);
                     this.toaster.success(confirmResponse.message , "Success")
                     console.log(confirmResponse);
@@ -380,11 +375,11 @@ export class GinnicartComponent {
                     window.location.reload();
                     window.scrollTo(0, 0);
                   },
-                  (error) => {
-                    console.error(error);
+                  error : (err) => {
+                    console.error(err);
                     console.log("error");
                   }
-                );
+              });
               },
             };
             const razorpay = new Razorpay(options);
@@ -411,8 +406,8 @@ export class GinnicartComponent {
           this.paymentService.createOrders(amount, orderId, UserID).subscribe(response => {
             console.log(response.id);
             const options = {
-              // key: 'rzp_test_NHayhA8KgRDaCx',
-              key: 'rzp_live_HO0cMQGQ5NHBLD',
+              key: 'rzp_test_NHayhA8KgRDaCx',
+              // key: 'rzp_live_HO0cMQGQ5NHBLD',
               amount: response.amount,
               currency: 'INR',
               name: 'Ginni Dry Fruits',

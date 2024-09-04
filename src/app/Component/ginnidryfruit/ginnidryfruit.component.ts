@@ -230,6 +230,8 @@ export class GinnidryfruitComponent {
     this.cartHelperService.getCartItems().subscribe({
       next: (items: any[]) => {
         this.totalCartItem = items.length;
+        console.log(items);
+        
       },
       error: (err: any) => {
         console.error('Error getting cart items:', err);
@@ -243,21 +245,19 @@ export class GinnidryfruitComponent {
     const productId = product.id;
 
     if (userId) {  
-      this.cartService.getToCarts(userId).subscribe(() => {
         this.cartHelperService.addToCart(userId, productId, product).subscribe({
           next: (res: any) => {
             if (res) {
               this.toaster.success(res.message, "Success")
               console.log(res);
-              this.refreshCartItemCount(); // Refresh cart item count after adding to cart
+              // this.refreshCartItemCount(); // Refresh cart item count after adding to cart
               this.cartService.updateCount(this.totalCartItem+1); 
             }
           },   
           error: (err) => {
             console.error('Error:', err);
           }   
-        });   
-      }) 
+        });  
     }
     else {
       console.warn('User ID not found in session storage');
