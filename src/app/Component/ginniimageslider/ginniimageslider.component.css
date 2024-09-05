@@ -16,7 +16,7 @@
 .slider img {
     width: 100%;
     height: auto;
-    height: 60vh;
+    height: 75vh;
     animation: slideIn 0.5s forwards;
 }
 

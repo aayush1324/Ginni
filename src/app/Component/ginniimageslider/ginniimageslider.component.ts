@@ -11,7 +11,7 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
   
   images: string[] = [
     '../../assets/images/slider/1ch.png',
-    '../../assets/images/slider/6ch.png',
+    '../../assets/images/slider/2ch.png',
     '../../assets/images/slider/3ch.png',
     '../../assets/images/slider/4ch.png',
     '../../assets/images/slider/5ch.png'

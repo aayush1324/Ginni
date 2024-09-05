@@ -8,11 +8,11 @@ import { Subscription } from 'rxjs';
 })
 export class GinnireviewsliderComponent implements OnInit, OnDestroy {
   images: string[] = [
-    '../../assets/images/slider/1ch.png',
-    '../../assets/images/slider/2ch.png',
-    '../../assets/images/slider/3ch.png',
-    '../../assets/images/slider/4ch.png',
-    '../../assets/images/slider/5ch.png'
+    '../../assets/images/slider/1.png',
+    '../../assets/images/slider/2.png',
+    '../../assets/images/slider/3.png',
+    '../../assets/images/slider/4.png',
+    '../../assets/images/slider/5.png'
   ];
 
   currentIndex = 0;

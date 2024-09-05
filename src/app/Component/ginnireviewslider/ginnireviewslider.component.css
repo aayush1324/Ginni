@@ -40,10 +40,13 @@
     display: flex;
     justify-content: center;
     transition: transform 0.5s ease; 
+    /* border: 1px solid; */
   }
   
   .images-wrapper img {
     width: 100%;
+    height: 35vh;
+    /* border: 1px solid; */
   }
 
   .images-wrapper.transitioning {

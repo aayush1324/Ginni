@@ -20,14 +20,14 @@ export class SafeUrlPipe implements PipeTransform {
 
 export class GinnisliderComponent implements OnInit {
   youtubeVideos = [
-    { embedUrl: 'https://www.youtube.com/embed/ml9m0MSZMUs?si=wLSDh3gZc0ew1mk1' },
-    { embedUrl: 'https://www.youtube.com/embed/WSNkOzSPKHU?si=_sJarvPJRIIMDrvc' },
-    { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' },
-    { embedUrl: 'https://www.youtube.com/embed/dq3CTGwL4cE?si=25eATlvU6NqHdXOn' },
-    { embedUrl: 'https://www.youtube.com/embed/H8aBWNsCHK0?si=v2TXxTa-FJK_xkqb' },
-    { embedUrl: 'https://www.youtube.com/embed/ml9m0MSZMUs?si=wLSDh3gZc0ew1mk1' },
-    { embedUrl: 'https://www.youtube.com/embed/H8aBWNsCHK0?si=v2TXxTa-FJK_xkqb' },
-    { embedUrl: 'https://www.youtube.com/embed/X5XyaDQGtdg?si=vwG9mVuah_EElvlp' }, 
+    { embedUrl: 'https://www.youtube.com/embed/SLV3NpKLOfo?si=Z2NokY8Qbm6GmZiD' },
+    { embedUrl: 'https://www.youtube.com/embed/oUPMNMZds2g?si=i4UBW3jQJJESGVTK' },
+    { embedUrl: 'https://www.youtube.com/embed/xSpKipeRK_4?si=uC-LvRvAWkSr7pmT' },
+    { embedUrl: 'https://www.youtube.com/embed/bSMoWMhKsEw?si=ILIfwhHlVDzuDyiQ' },
+    { embedUrl: 'https://www.youtube.com/embed/IWHINtY13bM?si=1mtSqJfJr4vhCF4I' },
+    { embedUrl: 'https://www.youtube.com/embed/6DK6p3vcRDA?si=2IsOdieOD2rufLhq' },
+    { embedUrl: 'https://www.youtube.com/embed/ot0mkR-f5Cw?si=qxSY7sYitJO-ld2u' },
+    { embedUrl: 'https://www.youtube.com/embed/ruk4frZxgnY?si=HElk8qS_kO9bTeGk' }, 
     // Add more video objects here...
   ];
 
