@@ -28,6 +28,19 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   isSearchContainerOpen: boolean = false;
   // changeDetectorRef: any;
 
+  placeholderText: string = '';
+  placeholderOptions: string[] = ['Search Nuts', 'Search Dried Fruits', 'Search Roasted', 
+    'Search Mixes', 'Search Seeds', 'Search Berries'];
+  placeholderIndex: number = 0;
+  charIndex: number = 0;
+  deleting: boolean = false;
+  typewriterInterval: any;
+
+    // Adjustable speeds (in milliseconds)
+    typingSpeed: number = 200; // Speed of typing each letter
+    deletingSpeed: number = 200; // Speed of deleting each letter
+    pauseDuration: number = 1000; // Pause when the word is fully typed
+
   toggleSearchContainer() {
       this.isSearchContainerOpen = !this.isSearchContainerOpen;
       
@@ -69,14 +82,9 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
 
   }
       
-  
-
- 
-
   toggleSearchBar() {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
-
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -141,7 +149,6 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
   hideaccountDropdown() {
     this.isAccountDropdown = false;
   }
-
 
   clickedOutside(): void {
     this.isAccountOpen = false;
@@ -303,13 +310,47 @@ export class GinniofferresponseComponent implements  OnInit, OnDestroy {
     this.searchTermSubscription = this.searchService.searchTerm$.subscribe(term => {
       this.searchTerms = term;
       this.search();
-   });
+    });
+
+
+
+    this.startTypewriterEffect();
+
   }
 
   ngOnDestroy() {
     document.removeEventListener('click', this.handleClickOutside.bind(this));
-  }
 
+    if (this.typewriterInterval) {
+      clearInterval(this.typewriterInterval);
+    }
+  }
+  startTypewriterEffect(): void {
+    this.typewriterInterval = setInterval(() => {
+      const currentText = this.placeholderOptions[this.placeholderIndex];
+
+      if (!this.deleting && this.charIndex < currentText.length) {
+        // Typing effect: add one character at a time
+        this.placeholderText += currentText[this.charIndex];
+        this.charIndex++;
+      } else if (this.deleting && this.charIndex > 0) {
+        // Deleting effect: remove one character at a time
+        this.placeholderText = this.placeholderText.slice(0, -1);
+        this.charIndex--;
+      } else if (this.charIndex === 0) {
+        // After deletion, switch to the next word
+        this.deleting = false;
+        this.placeholderIndex = (this.placeholderIndex + 1) % this.placeholderOptions.length;
+      } else if (this.charIndex === currentText.length) {
+        // Pause after typing is complete before starting to delete
+        this.deleting = true;
+        clearInterval(this.typewriterInterval);
+        setTimeout(() => {
+          this.startTypewriterEffect();
+        }, this.pauseDuration); // Adjust pause duration here
+      }
+    }, this.deleting ? this.deletingSpeed : this.typingSpeed); // Use different speeds for typing and deleting
+  }
 
   handleClickOutside(event: MouseEvent) {
     const clickedInside = (event.target as HTMLElement).closest('.accountlaptopdropdown');

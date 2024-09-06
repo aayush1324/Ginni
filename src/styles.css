@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'ngx-toastr/toastr';
+
+/* Global font settings for your Angular project */
+body {
+    font-family: 'Roboto', 'Montserrat', 'Poppins', sans-serif; /* Order of preference */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', 'Montserrat', 'Poppins', sans-serif; /* Same font stack */
+  }
+  
+  p, span, div, input, button {
+    font-family: 'Roboto', 'Montserrat', 'Poppins', sans-serif; /* Consistent styling */
+  }
+  

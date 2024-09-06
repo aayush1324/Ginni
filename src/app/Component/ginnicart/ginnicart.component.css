@@ -28,7 +28,8 @@
     border-radius: 10px;
     align-items: center;
     padding: 0.5%;
-    background-color:  #0066b2;
+    background-color:  #4682b4
+;
     color: aliceblue;
     border-color: rgb(200, 200, 200);
 }
@@ -128,6 +129,8 @@
 .middleleftmainproductimages img {
     height: 100%;
     width: 100%; 
+    border-radius: 10px;
+
 }
 
 .middleleftmainproductnaming {
@@ -190,7 +193,8 @@
 .middleleftmainproductprice p {
     padding: 0% ;
     margin: 0%;
-    color: #0066b2;
+    color: #4682b4
+;
     font-size: small;
     font-weight: bold;
 }
@@ -229,7 +233,8 @@
 .rating h6 {
     font-size: small;
     font-weight: bolder;
-    color: #0066b2;
+    color: #4682b4
+;
     /* border: 1px solid; */
     padding: 0%;
     margin: 0%;
@@ -347,7 +352,8 @@
     border-radius: 10px;
     border: 2px solid;
     border-color: rgb(200, 200, 200);
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
 
 }
@@ -396,7 +402,8 @@
     padding: 1%;
     border-radius: 10px;
     border: 2px solid;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
 }
 
 .lower {
@@ -434,6 +441,7 @@
     width: 100%;
     height: fit-content;
     /* border: 3px solid; */
+    border-radius: 10px;
 }
 
 .saving {
@@ -505,7 +513,8 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border-color: rgb(200, 200, 200);
 }
@@ -590,7 +599,8 @@
     height: fit-content;
     padding: 2%;
     margin: 0%;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     border-radius: 5px;
     color: aliceblue;
     border: 2px solid;
@@ -995,7 +1005,8 @@
 
 .empty-cart button {
     padding: 10px 20px;
-    background-color: #0066b2; /* Adjust color as needed */
+    background-color: #4682b4
+; /* Adjust color as needed */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -1005,7 +1016,8 @@
 }
 
 .empty-cart button:hover {
-    background-color: #0066b2;
+    background-color: #4682b4
+;
 }
 
 
@@ -1166,6 +1178,8 @@
     width: 100%;
     height: fit-content;
     /* border: 3px solid; */
+    border-radius: 10px;
+
 }
 
 .saving {
@@ -1234,7 +1248,8 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border-color: antiquewhite;
 }

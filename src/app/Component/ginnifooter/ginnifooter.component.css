@@ -3,7 +3,8 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     padding: 2%;
 }
@@ -114,7 +115,8 @@
 
 .socialmedia a i{
     text-decoration: none;
-    color: #0066b2; 
+    color: #4682b4
+; 
     margin: 0 5px; 
     font-size: 1rem; 
     display: inline-block;
@@ -131,7 +133,8 @@
 }
 
 .socialmedia a i  :hover{
-    color: #0066b2; 
+    color: #4682b4
+; 
     margin: 0 10px; 
     font-size: 1rem; 
 }

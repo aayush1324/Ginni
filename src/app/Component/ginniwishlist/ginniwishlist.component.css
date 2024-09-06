@@ -689,7 +689,8 @@
 
 .empty-cart button {
     padding: 10px 20px;
-    background-color: #0066b2; /* Adjust color as needed */
+    background-color: #4682b4
+; /* Adjust color as needed */
     color: #fff;
     border: none;
     border-radius: 5px;

@@ -46,7 +46,8 @@ button {
     padding: 2%;
     margin: 0%;
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: antiquewhite;
     border: 1px solid aliceblue;
 }
@@ -69,7 +70,8 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    color: #0066b2;
+    color: #4682b4
+;
     padding: 1%;
     border-radius: 8px;
     /* border: 1px solid; */
@@ -124,7 +126,8 @@ button {
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #0066b2;
+    color: #4682b4
+;
     /* border: 1px solid; */
 }
 
@@ -212,7 +215,8 @@ button {
     width: 100%;
     padding: 1%;
     margin: 0;
-    border: 1px solid #0066b2;
+    border: 1px solid #4682b4
+;
     outline: none;
     background-color: #fff;
     border-radius: 5px;
@@ -238,7 +242,8 @@ button {
     left: 0px;
     font-size: medium;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
   
   .floating-label-group input:valid ~ .floating-label,
@@ -249,7 +254,8 @@ button {
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
   
   
@@ -260,7 +266,8 @@ button {
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
   
   .floating-label-group input:focus ~ .floating-label,
@@ -273,7 +280,8 @@ button {
     left: 0px;
     font-size: small; /* Adjust as needed */
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
   
   .non-editable {
@@ -284,7 +292,8 @@ button {
     width: 100%; /* Adjust width as needed */
     padding: 2% 0%; /* Adjust padding as needed */
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
   }
   
@@ -353,7 +362,8 @@ td button {
 .heading h5 {
   margin: 0%;
   padding: 0%;
-  color: #0066b2;
+  color: #4682b4
+;
 }
 
 .headerserial {
@@ -450,7 +460,8 @@ td button {
   padding: 2%;
   margin: 0% 5%;
   border-radius: 10px;
-  background-color: #0066b2;
+  background-color: #4682b4
+;
   border: 1px solid;
   color: aliceblue;
 }
@@ -493,7 +504,8 @@ height: fit-content;
 padding: 2%;
 margin: 0% 5%;
 border-radius: 10px;
-background-color: #0066b2;
+background-color: #4682b4
+;
 border: 1px solid;
 color: aliceblue;
 }

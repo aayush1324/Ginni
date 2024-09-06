@@ -28,7 +28,8 @@
     padding: 1%;
     margin: 0%;
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border: 1px solid;
 }
@@ -57,7 +58,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    color: #0066b2;
+    color: #4682b4
+;
     padding: 1%;
     border: 1px solid;
     border-radius: 5px;
@@ -116,7 +118,8 @@
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #0066b2;
+    color: #4682b4
+;
     /* border: 1px solid; */
 }
 
@@ -159,7 +162,8 @@
     width: 100%; /* Adjust width as needed */
     padding: 2%; /* Adjust padding as needed */
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border: 1px solid;
 }
@@ -177,7 +181,8 @@
 
 .empty-address button {
     padding: 10px 20px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border: 1px solid;   
     /* border: none; */
@@ -223,7 +228,8 @@
     width: 100%;
     padding: 1%;
     margin: 0;
-    border: 1px solid #0066b2;
+    border: 1px solid #4682b4
+;
     outline: none;
     background-color: #fff;
     border-radius: 5px;
@@ -248,7 +254,8 @@
     left: 0px;
     font-size: medium;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
 
 
@@ -260,7 +267,8 @@
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #0066b2;
+  color: #4682b4
+;
 }
   
   .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,
@@ -270,7 +278,8 @@
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
 
 
@@ -401,7 +410,8 @@
     padding: 2%;
     margin: 1%;
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border: 1px solid;
 }

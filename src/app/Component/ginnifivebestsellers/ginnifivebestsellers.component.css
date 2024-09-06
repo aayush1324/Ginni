@@ -43,7 +43,8 @@
     width: fit-content;
     padding: 1% 2%;
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     color: aliceblue;
     border: 1px solid;
 }
@@ -196,7 +197,8 @@
 .pricing h6 {
     font-size: small;
     font-weight: bolder;
-    color: #0066b2;
+    color: #4682b4
+;
     /* border: 1px solid; */
     padding: 0%;
     margin: 0%;
@@ -237,7 +239,8 @@
 .rating h6 {
     font-size: small;
     font-weight: bolder;
-    color: #0066b2;
+    color: #4682b4
+;
     /* border: 1px solid; */
     padding: 0%;
     margin: 0%;
@@ -257,7 +260,8 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color:  #0066b2;
+    background-color:  #4682b4
+;
     color: aliceblue;
     border-color: antiquewhite;
 }

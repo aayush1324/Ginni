@@ -97,7 +97,7 @@
                             <div class="searchbar">
                                 <!-- <app-search></app-search> -->
                                 <div class="search-containers">
-                                    <input #searchInput type="text" [(ngModel)]="searchTerms" (input)="search()" placeholder="Search DryFruits" class="search-input">
+                                    <input #searchInput type="text" [(ngModel)]="searchTerms" (input)="search()"   [placeholder]="placeholderText" class="search-input">
                                     <i class="fa fa-search searchbaricon"></i>
                                 </div>
 

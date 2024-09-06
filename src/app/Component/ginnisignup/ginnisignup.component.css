@@ -52,7 +52,8 @@ form {
     margin: 0%;
     display: flex;
     border-radius: 10px;
-    border-color:  #0066b2;
+    border-color:  #4682b4
+;
 } */
 
 
@@ -94,7 +95,8 @@ form {
     width: 100%;
     padding: 1%;
     margin: 0;
-    border: 1px solid #0066b2;
+    border: 1px solid #4682b4
+;
     outline: none;
     background-color: #fff;
     border-radius: 5px;
@@ -119,7 +121,8 @@ form {
     left: 0px;
     font-size: medium;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
   
 
@@ -131,7 +134,8 @@ form {
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #0066b2;
+  color: #4682b4
+;
 }
   .floating-label-group input.ng-invalid.ng-touched ~ .floating-label,
   .floating-label-group textarea.ng-invalid.ng-touched ~ .floating-label,
@@ -140,7 +144,8 @@ form {
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #0066b2;
+    color: #4682b4
+;
   }
 
 
@@ -155,7 +160,8 @@ button {
     margin-bottom: 0%;
     display: flex;
     border-radius: 10px;
-    background-color: #0066b2;
+    background-color: #4682b4
+;
     justify-content: center;
     color: aliceblue;
 }
