@@ -51,10 +51,13 @@ export class GinnisignupComponent {
     });
 
     google.accounts.id.renderButton(document.getElementById("google-btn"),{
-      theme: 'filled_blue',
-      size: 'large',
-      shape: 'pill',
-      width: 250
+      type: 'standard', // 'standard' or 'icon'
+      theme: 'filled_blue', // 'filled_blue', 'filled_black', 'outline'
+      size: 'large', // 'small', 'medium', 'large'
+      shape: 'circle', // 'rectangular', 'pill', 'circle', 'square'
+      text: 'signup_with', // Changes text to "Sign up with Google"
+      logo_alignment: 'left', // 'left' or 'center'
+      width: 250 // Adjust button width as needed
     });   
 
     window.scrollTo(0, 0);

@@ -835,7 +835,7 @@ td :hover {
     flex-direction: column;
     justify-content: flex-start;
     position: absolute;
-    top: 110%;
+    top: 130%;
     left: 0;
     width: 100vw; 
     height: 80vh; 
