@@ -23,9 +23,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class GinnisaveheaderComponent implements OnInit, OnDestroy {
 
   offers: string[] = [
-    'Get 80% Discount on Purchase of 899 and Above With Code "SAVER8"',
-    'Buy 2 Get 1 Free on All DryFruits Today!',
-    'Flat 50% Off on AllDryFruits - Limited Time Offer'
+    'Get 90% Discount on Purchase of 899 and Above With Code "SAVER8"',
+    'Buy 9 Get 1 Free on All DryFruits Today!',
+    'Flat 90% Off on AllDryFruits - Limited Time Offer'
   ];
 
   currentOffer: string = this.offers[0];
