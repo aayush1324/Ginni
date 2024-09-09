@@ -109,9 +109,6 @@ const routes: Routes = [{
       {path: "fivegiftings" , component : GinnifivegiftingsComponent},
       {path: "fiveproducts" , component : GinnifiveproductsComponent},
 
-
-     
-
       {path: "almond", component : GinnidryfruitalmondComponent},
       {path: "cashew", component : GinnidryfruitcashewComponent},
       {path: "pista",  component : GinnidryfruitpistaComponent},

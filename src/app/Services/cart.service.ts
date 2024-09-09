@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Carts/';
-  private baseUrl: string = 'https://localhost:7132/api/Carts/';
+  // private baseUrl: string = 'https://localhost:7132/api/Carts/';
+  private baseUrl = environment.baseUrl + '/Carts/';
+
 
 
   private countCartItem = new BehaviorSubject<number>(0);

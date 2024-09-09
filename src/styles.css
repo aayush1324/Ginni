@@ -13,4 +13,11 @@ body {
   p, span, div, input, button {
     font-family: 'Roboto', 'Montserrat', 'Poppins', sans-serif; /* Consistent styling */
   }
+
+/* styles.css or styles.scss */
+body {
+  background-color: #572e50; /* Your desired background color */
+}
+
+
   

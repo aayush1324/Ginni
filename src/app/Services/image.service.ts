@@ -1,6 +1,7 @@
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ import { Observable } from 'rxjs';
 export class ImageService {
 
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Images/';
-  private baseUrl: string = 'https://localhost:7132/api/Images/';
+  // private baseUrl: string = 'https://localhost:7132/api/Images/';
+  private baseUrl = environment.baseUrl + '/Images/';
+
 
 
   constructor(private http: HttpClient) { }

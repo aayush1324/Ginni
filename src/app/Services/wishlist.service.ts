@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class WishlistService {
 
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Wishlists/';
-  private baseUrl: string = 'https://localhost:7132/api/Wishlists/';
+  // private baseUrl: string = 'https://localhost:7132/api/Wishlists/';
+  private baseUrl = environment.baseUrl + '/Wishlists/';
+
 
 
   private countWishListItem = new BehaviorSubject<number>(0);
