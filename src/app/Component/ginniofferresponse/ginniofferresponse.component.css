@@ -123,20 +123,26 @@
     border: 2px solid;
     box-sizing: border-box;
     border-radius: 80px;
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
 }
 
 /* Focus state */
 .search-input:focus {
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
     outline: none; /* Removes the default outline */
   }
   
   /* Hover state */
   .search-input:hover {
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
   }
 
@@ -145,7 +151,9 @@
     left: 1em;
     top: 50%;
     transform: translateY(-50%);
-    color: #4682b4
+    color: #1d36aa
+
+
 ; 
     pointer-events: none;
 }
@@ -160,7 +168,9 @@
     position: relative; 
     font-size: xx-large;
     cursor: pointer;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
 }
 
@@ -216,7 +226,9 @@
 .rating h6 {
     font-size: small;
     font-weight: bolder;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     /* border: 1px solid; */
     padding: 0%;
@@ -329,7 +341,9 @@
 .account-toggle .fa-user-circle, .searchnavbaricon .fa-search{
     position: relative; 
     font-size: 1.5em;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     cursor: pointer;
 }
@@ -452,7 +466,9 @@
 .home a, .aboutUs a, .contactUs a, .combos a, .giftings a, 
 .dropdown a, .bestsellers a, .dryFruits a {
     text-decoration: none;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
 }
 
@@ -529,12 +545,12 @@ td :hover {
 
 .home.active a, .aboutUs.active a, .contactUs.active a, .combos.active a, 
 .giftings.active a, .dropdown.active a, .bestsellers.active a , .dryFruits.active a{
-    color: #0a2351;
+    color: #010c2e;
 }
 
 
 .active-icon {
-    color: #0E3386; /* Change this to the desired color */
+    color: #010c2e; /* Change this to the desired color */
 }
 
 .accountlaptopdropdown {
@@ -573,7 +589,9 @@ td :hover {
 
 .accountlaptopdropdown button {
     width: 90%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     border-radius: 10px ;
     border-color: #f5f5f5;
@@ -899,7 +917,9 @@ td :hover {
 .user-icon {
     font-size: 2em;
     cursor: pointer;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
 }
 
@@ -935,7 +955,9 @@ td :hover {
 
 .wishlistmobile .fa-heart, .cartmobile .fa-shopping-cart, .trackmobile .fa-truck {
     position: relative; 
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
 }
 
@@ -951,7 +973,9 @@ td :hover {
 } */
 
 .accountmobile i {
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     font-size: 2em;
 }
@@ -1003,7 +1027,9 @@ td :hover {
 
 .accountmobiledropdown button {
     width: 90%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     border-radius: 10px;
     border-color: #f5f5f5;
@@ -1073,7 +1099,9 @@ td :hover {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     border-radius: 50px;
     padding: 0%;
@@ -1089,20 +1117,26 @@ td :hover {
     border: 2px solid;
     box-sizing: border-box;
     border-radius: 80px;
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
 }
 
 /* Focus state */
 .search-inputmobile:focus {
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
     outline: none; /* Removes the default outline */
   }
   
   /* Hover state */
   .search-inputmobile:hover {
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
   }
 
@@ -1111,7 +1145,9 @@ td :hover {
     left: 1em;
     top: 50%;
     transform: translateY(-50%);
-    color: #4682b4
+    color: #1d36aa
+
+
 ; 
     pointer-events: none;
 }
@@ -1126,7 +1162,9 @@ td :hover {
     position: relative; 
     font-size: x-large;
     cursor: pointer;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
 }
 

@@ -36,7 +36,9 @@
     left: 1em;
     top: 50%;
     transform: translateY(-50%);
-    color: #4682b4
+    color: #1d36aa
+
+
 ; /* Adjust icon color */
     pointer-events: none;
 }

@@ -1,7 +1,7 @@
 {
   "name": "ginni",
   "version": "0.0.0",
-  "homepage": "https://shopginni.com/main/home",
+  "homepage": "https://ginnidryfruits.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4200",

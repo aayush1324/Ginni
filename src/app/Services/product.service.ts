@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ProductService {
 
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Products/';
-  private baseUrl: string = 'https://localhost:7132/api/Products/';
+  // private baseUrl: string = 'https://localhost:7132/api/Products/';
+  private baseUrl = environment.baseUrl + '/Products/';
+
   private productItems = new BehaviorSubject<any>(null);
   productItems$ = this.productItems.asObservable();
   

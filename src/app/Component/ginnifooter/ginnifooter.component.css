@@ -3,7 +3,9 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     padding: 2%;
@@ -115,7 +117,9 @@
 
 .socialmedia a i{
     text-decoration: none;
-    color: #4682b4
+    color: #1d36aa
+
+
 ; 
     margin: 0 5px; 
     font-size: 1rem; 
@@ -133,7 +137,9 @@
 }
 
 .socialmedia a i  :hover{
-    color: #4682b4
+    color: #1d36aa
+
+
 ; 
     margin: 0 10px; 
     font-size: 1rem; 

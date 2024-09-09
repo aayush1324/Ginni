@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class AuthService {
 
   // private baseUrl: string = 'https://ginnidryfruit.azurewebsites.net/api/Users/';
-  private baseUrl: string = 'https://localhost:7132/api/Users/';
+  // private baseUrl: string = 'https://localhost:7132/api/Users/';
+  private baseUrl = environment.baseUrl + '/Users/';
+
 
   private userPayload:any;
   

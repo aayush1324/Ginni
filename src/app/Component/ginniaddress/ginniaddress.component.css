@@ -28,7 +28,9 @@
     padding: 1%;
     margin: 0%;
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border: 1px solid;
@@ -58,7 +60,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     padding: 1%;
     border: 1px solid;
@@ -118,7 +122,9 @@
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     /* border: 1px solid; */
 }
@@ -162,7 +168,9 @@
     width: 100%; /* Adjust width as needed */
     padding: 2%; /* Adjust padding as needed */
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border: 1px solid;
@@ -181,7 +189,9 @@
 
 .empty-address button {
     padding: 10px 20px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border: 1px solid;   
@@ -228,7 +238,9 @@
     width: 100%;
     padding: 1%;
     margin: 0;
-    border: 1px solid #4682b4
+    border: 1px solid #1d36aa
+
+
 ;
     outline: none;
     background-color: #fff;
@@ -254,7 +266,9 @@
     left: 0px;
     font-size: medium;
     font-weight: bold;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
   }
 
@@ -267,7 +281,9 @@
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
   
@@ -278,7 +294,9 @@
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
   }
 
@@ -410,7 +428,9 @@
     padding: 2%;
     margin: 1%;
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border: 1px solid;
