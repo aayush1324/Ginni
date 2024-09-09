@@ -42,7 +42,7 @@ body, html {
 .body {
     grid-row: 3;
     height: fit-content;
-    background-color: white;
+    /* background-color: white; */
     margin-top: 8rem;
     padding-bottom: 5%;
     /* border: 3px solid; */

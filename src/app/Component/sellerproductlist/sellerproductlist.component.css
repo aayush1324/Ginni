@@ -46,7 +46,9 @@
     padding: 2%;
     margin: 0%;
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: antiquewhite;
     border: 1px solid aliceblue;
@@ -77,7 +79,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aliceblue;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     padding: 1%;
     border: 1px solid;
@@ -134,7 +138,9 @@
 .close-icon {
     cursor: pointer;
     font-size: 30px;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     /* border: 1px solid; */
 }
@@ -224,7 +230,9 @@
   width: 100%;
   padding: 1%;
   margin: 0;
-  border: 1px solid #4682b4
+  border: 1px solid #1d36aa
+
+
 ;
   outline: none;
   background-color: #fff;
@@ -250,7 +258,9 @@
   left: 0px;
   font-size: medium;
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
 
@@ -262,7 +272,9 @@
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
 
@@ -274,7 +286,9 @@
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
 
@@ -288,7 +302,9 @@
   left: 0px;
   font-size: small; /* Adjust as needed */
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
 
@@ -300,7 +316,9 @@
   width: 100%; /* Adjust width as needed */
   padding: 2% 0%; /* Adjust padding as needed */
   border-radius: 10px;
-  background-color: #4682b4
+  background-color: #1d36aa
+
+
 ;
   color: aliceblue;
 }
@@ -450,7 +468,9 @@ td button {
   .heading h5 {
     margin: 0%;
     padding: 0%;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
   }
 
@@ -537,7 +557,9 @@ td button {
     padding: 2%;
     margin: 0% 5%;
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     border: 1px solid;
     color: aliceblue;
@@ -581,7 +603,9 @@ td button {
   padding: 2%;
   margin: 0% 5%;
   border-radius: 10px;
-  background-color: #4682b4
+  background-color: #1d36aa
+
+
 ;
   border: 1px solid;
   color: aliceblue;

@@ -228,7 +228,9 @@ img.selected {
 .rating h6 {
   font-size: large;
   font-weight: bolder;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
   /* border: 1px solid; */
   padding: 0%;
@@ -273,7 +275,9 @@ img.selected {
   width: 20%;
   font-weight: bolder;
   /* border: 5px solid; */
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
 
@@ -408,7 +412,9 @@ img.selected {
     margin-left: 2%;
     border:  1px solid;
     border-radius: 5px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
 }
@@ -558,7 +564,9 @@ img.selected {
   border-radius: 20px;
   align-items: center;
   padding: 3%;
-  background-color: #4682b4
+  background-color: #1d36aa
+
+
 ;
   color: aliceblue;
   border-color: antiquewhite;

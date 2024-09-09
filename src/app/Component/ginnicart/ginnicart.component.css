@@ -28,7 +28,9 @@
     border-radius: 10px;
     align-items: center;
     padding: 0.5%;
-    background-color:  #4682b4
+    background-color:  #1d36aa
+
+
 ;
     color: aliceblue;
     border-color: rgb(200, 200, 200);
@@ -193,7 +195,9 @@
 .middleleftmainproductprice p {
     padding: 0% ;
     margin: 0%;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     font-size: small;
     font-weight: bold;
@@ -233,7 +237,9 @@
 .rating h6 {
     font-size: small;
     font-weight: bolder;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
     /* border: 1px solid; */
     padding: 0%;
@@ -352,7 +358,9 @@
     border-radius: 10px;
     border: 2px solid;
     border-color: rgb(200, 200, 200);
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
 
@@ -402,7 +410,9 @@
     padding: 1%;
     border-radius: 10px;
     border: 2px solid;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
 }
 
@@ -513,7 +523,9 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border-color: rgb(200, 200, 200);
@@ -599,7 +611,9 @@
     height: fit-content;
     padding: 2%;
     margin: 0%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     border-radius: 5px;
     color: aliceblue;
@@ -1005,7 +1019,9 @@
 
 .empty-cart button {
     padding: 10px 20px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ; /* Adjust color as needed */
     color: #fff;
     border: none;
@@ -1016,7 +1032,9 @@
 }
 
 .empty-cart button:hover {
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
 }
 
@@ -1248,7 +1266,9 @@
     border-radius: 20px;
     align-items: center;
     padding: 3%;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     color: aliceblue;
     border-color: antiquewhite;

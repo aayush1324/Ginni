@@ -51,7 +51,9 @@ form {
     margin: 0%;
     display: flex;
     border-radius: 10px;
-    border-color: #4682b4
+    border-color: #1d36aa
+
+
 ;
 } */
 
@@ -93,7 +95,9 @@ form {
     width: 100%;
     padding: 1%;
     margin: 0;
-    border: 1px solid #4682b4
+    border: 1px solid #1d36aa
+
+
 ;
     outline: none;
     background-color: #fff;
@@ -119,7 +123,9 @@ form {
     left: 0px;
     font-size: medium;
     font-weight: bold;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
   }
 
@@ -131,7 +137,9 @@ form {
   left: 0px;
   font-size: small;
   font-weight: bold;
-  color: #4682b4
+  color: #1d36aa
+
+
 ;
 }
   
@@ -142,7 +150,9 @@ form {
     left: 0px;
     font-size: small;
     font-weight: bold;
-    color: #4682b4
+    color: #1d36aa
+
+
 ;
   }
 
@@ -158,7 +168,9 @@ button {
     margin-bottom: 0%;
     display: flex;
     border-radius: 10px;
-    background-color: #4682b4
+    background-color: #1d36aa
+
+
 ;
     justify-content: center;
     color: aliceblue;
