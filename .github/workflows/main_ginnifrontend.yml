@@ -122,4 +122,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}   # Store your FTP username as a GitHub secret
           password: ${{ secrets.FTP_PASSWORD }}   # Store your FTP password as a GitHub secret
           local-dir: dist/ginni                   # Replace with your Angular project's output folder
-          server-dir: /path/to/iis/site/wwwroot   # Specify the target directory on your IIS server
+          server-dir: C:\inetpub\wwwroot\ginni\browser   # Specify the target directory on your IIS server
+          
