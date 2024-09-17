@@ -68,6 +68,7 @@ import { GinnifivebestsellersComponent } from './Component/ginnifivebestsellers/
 import { GinnifivegiftingsComponent } from './Component/ginnifivegiftings/ginnifivegiftings.component';
 import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnifiveproducts.component';
 import { ToastrModule } from 'ngx-toastr';
+import { PreloaderComponent } from './Component/preloader/preloader.component';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import { ToastrModule } from 'ngx-toastr';
     GinnifivebestsellersComponent,
     GinnifivegiftingsComponent,
     GinnifiveproductsComponent,
+    PreloaderComponent,
   ],
   imports: [
     BrowserModule,

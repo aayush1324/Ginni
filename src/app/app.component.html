@@ -1,3 +1,11 @@
-<div class="class">
+<!-- <div class="class">
     <router-outlet ></router-outlet>
-</div>
+</div> -->
+
+
+<app-preloader *ngIf="isLoading"></app-preloader>
+
+<ng-container *ngIf="!isLoading">
+  <!-- Main content of your website -->
+  <router-outlet></router-outlet>
+</ng-container>

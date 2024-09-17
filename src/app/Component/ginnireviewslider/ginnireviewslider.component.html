@@ -8,12 +8,46 @@
     </div>
 
     <br>
-    <div class="containerimage" #sliderContainer>
+    <!-- <div class="containerimage" #sliderContainer>
         <div class="images-wrapper" 
              [class.transitioning]="transitioning" 
              *ngFor="let image of images; let i = index" 
              [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
             <img [src]="image" alt="Slide {{i+1}}">
+        </div>
+    </div> -->
+
+    <div class="testimonial">
+        <div class="left">
+            <div class="photo">
+                <img src="../../assets/images/slider/vaibhav.jpg" alt="">
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="top">
+                <div class="review">
+                    <p>         
+                        A variety of ways to use my favourite coconut oil and honey. My skin feels nourished, my cuticles are soft, my lips are smooth, and many other benefits come from using them!
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="bottom">
+                <div class="star">
+                    <div class="rating">
+                        <div class="star-rating">
+                          <i class="fa fa-star" *ngFor="let star of [1,2,3,4,5]"></i>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="name">
+                    <h3>Aayushji</h3>
+                </div>               
+            </div>           
         </div>
     </div>
 </div>

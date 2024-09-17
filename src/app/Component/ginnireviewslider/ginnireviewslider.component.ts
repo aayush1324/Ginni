@@ -21,6 +21,14 @@ export class GinnireviewsliderComponent implements OnInit, OnDestroy {
   private slideshowSubscription: Subscription | undefined;
   private touchStartX: number = 0;
   private touchEndX: number = 0;
+  
+  // Define a 5-star array
+  stars: number[] = [1, 2, 3, 4, 5];
+
+ // Sample item with rating
+  item = {
+    rating: 5.0  // Change this value to test different ratings
+  };
 
   constructor() { }
 
