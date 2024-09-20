@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GinniofferComponent } from './Component/ginnioffer/ginnioffer.component';
 import { GinnifooterComponent } from './Component/ginnifooter/ginnifooter.component';
 import { GinniimagesliderComponent } from './Component/ginniimageslider/ginniimageslider.component';
 import { GinniproductsComponent } from './Component/ginniproducts/ginniproducts.component';
@@ -14,7 +13,6 @@ import { GinnifaqComponent } from './Component/ginnifaq/ginnifaq.component';
 import { GinnisignupComponent } from './Component/ginnisignup/ginnisignup.component';
 import { GinnisigninComponent } from './Component/ginnisignin/ginnisignin.component';
 import { GinniforgotpasswordComponent } from './Component/ginniforgotpassword/ginniforgotpassword.component';
-import { GinnicustomerreviewComponent } from './Component/ginnicustomerreview/ginnicustomerreview.component';
 import { GinniaboutusComponent } from './Component/ginniaboutus/ginniaboutus.component';
 import { GinnitermserviceComponent } from './Component/ginnitermservice/ginnitermservice.component';
 import { GinniprivacypolicyComponent } from './Component/ginniprivacypolicy/ginniprivacypolicy.component';
@@ -42,12 +40,9 @@ import { GinnidryfruitwalnutComponent } from './Component/ginnidryfruitwalnut/gi
 import { GinnidryfruitComponent } from './Component/ginnidryfruit/ginnidryfruit.component';
 import { GinniwishlistComponent } from './Component/ginniwishlist/ginniwishlist.component';
 import { GinnitrackComponent } from './Component/ginnitrack/ginnitrack.component';
-import { GinniprofileComponent } from './Component/ginniprofile/ginniprofile.component';
 import { GinniaddressComponent } from './Component/ginniaddress/ginniaddress.component';
 import { GinniorderComponent } from './Component/ginniorder/ginniorder.component';
-import { GinnideliveryComponent } from './Component/ginnidelivery/ginnidelivery.component';
 import { NgToastModule } from 'ng-angular-popup';
-import { SelleraddproductComponent } from './Component/selleraddproduct/selleraddproduct.component';
 import { TokenInterceptor } from './Interceptors/token.interceptor';
 import { GinniresetpasswordComponent } from './Component/ginniresetpassword/ginniresetpassword.component';
 import { GinniconfirmemailComponent } from './Component/ginniconfirmemail/ginniconfirmemail.component';
@@ -74,66 +69,76 @@ import { PreloaderComponent } from './Component/preloader/preloader.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GinniofferComponent,
-    GinnifooterComponent,
-    GinniimagesliderComponent,
-    GinniproductsComponent,
-    GinnitextandimageComponent,
-    GinniupperfooterComponent,
-    GinnifaqComponent,
-    GinnisignupComponent,
-    GinnisigninComponent,
-    GinniforgotpasswordComponent,
-    GinnicustomerreviewComponent,
-    GinniaboutusComponent,
-    GinnitermserviceComponent,
-    GinniprivacypolicyComponent,
-    GinnishippingpolicyComponent,
-    GinnireturnpolicyComponent,
-    GinnicontactusComponent,
-    GinnifilterComponent,
-    GinniallproductsComponent,
-    GinnicartComponent,
-    GinnimainproductComponent,
     MainComponent,
     HomeComponent,
+
+    GinnisaveheaderComponent,
+    GinniofferresponseComponent,
+    GinniimagesliderComponent,
+    GinnifiveproductsComponent,
     GinnisliderComponent,
-    GinnicombosComponent,
-    GinnigiftingsComponent,
-    GinnibestsellersComponent,
+    GinnifivebestsellersComponent,
+    GinnireviewsliderComponent,
+    GinnifivecombosComponent,
+    GinnitextandimageComponent,
+    GinnifivegiftingsComponent,
+    GinnifaqComponent,
+    GinniupperfooterComponent,
+    GinnifooterComponent,
+
+    // GinnisignupComponent,
+    // GinnisigninComponent,
+    // GinniforgotpasswordComponent,
+    // GinniresetpasswordComponent,
+
+    // GinniaboutusComponent,
+    // GinnitermserviceComponent,
+    // GinniprivacypolicyComponent,
+    // GinnishippingpolicyComponent,
+    // GinnireturnpolicyComponent,
+    // GinnicontactusComponent,
+
+    // GinnicartComponent,
+
+    // GinnimainproductComponent,
+
+    // GinnicombosComponent,
+    // GinnigiftingsComponent,
+    // GinnibestsellersComponent,
+    // GinnidryfruitComponent,
+    // GinniallproductsComponent,
+
+    // GinniaddressComponent,
+    // GinniorderComponent,
+    // GinnidetailorderComponent,
+
+    // SellerdashboardComponent,
+    // SellerproductlistComponent,
+    // SellerorderlistComponent,
+    // SellercustomerlistComponent,
+    // SellerzipcodelistComponent,
+
     GinnidryfruitalmondComponent,
     GinnidryfruitcashewComponent,
     GinnidryfruitraisinComponent,
     GinnidryfruitpistaComponent,
     GinnidryfruitwalnutComponent,
-    GinnidryfruitComponent,
+
     GinniwishlistComponent,
     GinnitrackComponent,
-    GinniprofileComponent,
-    GinniaddressComponent,
-    GinniorderComponent,
-    GinnideliveryComponent,
-    SelleraddproductComponent,
-    GinniresetpasswordComponent,
+
+    GinnifilterComponent,
     GinniconfirmemailComponent,
-    SellerdashboardComponent,
-    SellerproductlistComponent,
-    SellerorderlistComponent,
-    SellercustomerlistComponent,
+    
     SearchComponent,
-    GinnidetailorderComponent,
-    SellerzipcodelistComponent,
     GinniotpComponent,
-    GinnireviewsliderComponent,
-    GinniofferresponseComponent,
-    GinnisaveheaderComponent,
+
+    GinniproductsComponent,
     GinninotfoundComponent,
-    GinnifivecombosComponent,
-    GinnifivebestsellersComponent,
-    GinnifivegiftingsComponent,
-    GinnifiveproductsComponent,
+
     PreloaderComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
