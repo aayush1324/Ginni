@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', component: GinnicartComponent }
+  { path: '', component: GinnicartComponent, data: { title: 'Your Cart' } }
 ];
 
 @NgModule({

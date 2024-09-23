@@ -11,12 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
-  { path: 'about-us', component: GinniaboutusComponent },
-  { path: 'contact-us', component: GinnicontactusComponent },
-  { path: 'terms-conditions', component: GinnitermserviceComponent },
-  { path: 'privacy-policy', component: GinniprivacypolicyComponent },
-  { path: 'shipping-policy', component: GinnishippingpolicyComponent },
-  { path: 'return-policy', component: GinnireturnpolicyComponent }
+  { path: 'about-us', component: GinniaboutusComponent, data: { title: 'About Us' } },
+  { path: 'contact-us', component: GinnicontactusComponent, data: { title: 'Contact Us' } },
+  { path: 'terms-conditions', component: GinnitermserviceComponent, data: { title: 'Terms and Conditions' } },
+  { path: 'privacy-policy', component: GinniprivacypolicyComponent, data: { title: 'Privacy Policy' } },
+  { path: 'shipping-policy', component: GinnishippingpolicyComponent, data: { title: 'Shipping Policy' } },
+  { path: 'return-policy', component: GinnireturnpolicyComponent, data: { title: 'Return Policy' } }
 ];
 
 @NgModule({

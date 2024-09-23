@@ -8,10 +8,10 @@ import { GinniforgotpasswordComponent } from '../../Component/ginniforgotpasswor
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: 'login', component: GinnisigninComponent },
-  { path: 'register', component: GinnisignupComponent },
-  { path: 'reset-password', component: GinniresetpasswordComponent },
-  { path: 'forgot-password', component: GinniforgotpasswordComponent }
+  { path: 'login', component: GinnisigninComponent, data: { title: 'Account' }},
+  { path: 'register', component: GinnisignupComponent,  data: { title: 'Create Account' } },
+  { path: 'reset-password', component: GinniresetpasswordComponent, data: { title: 'Account' } },
+  { path: 'forgot-password', component: GinniforgotpasswordComponent, data: { title: 'Account' } }
 ];
 
 @NgModule({

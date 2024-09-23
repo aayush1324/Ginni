@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PaymentService } from '../../Services/payment.service';
 import { ImageService } from '../../Services/image.service';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 declare var Razorpay: any;
 export interface Image {
@@ -53,11 +54,19 @@ export class GinnimainproductComponent {
   constructor(private route: ActivatedRoute,  private cartService : CartService, 
     private productService : ProductService,  private toaster: ToastrService,
     private imageService: ImageService, private wishlistService : WishlistService, 
-    private searchService : SearchService , private paymentService : PaymentService) { }
+    private searchService : SearchService , private paymentService : PaymentService,
+    private titleService: Title) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
 
+    this.route.params.subscribe(params => {
+      const productName = params['productName'];
+      // Set the title to the product name, replacing hyphens with spaces
+      const formattedTitle = productName.replace(/-/g, ' '); // Converts 'product-name' to 'product name'
+      this.titleService.setTitle(formattedTitle);
+    });
+    
     this.getProduct();
 
      // Get the product name from route parameters
@@ -71,6 +80,7 @@ export class GinnimainproductComponent {
 
     this.getImagesByProductId(this.productId);
     this.showSlides(this.slideIndex);
+
 
   }
 

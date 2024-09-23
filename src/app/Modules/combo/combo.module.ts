@@ -5,7 +5,7 @@ import { GinnicombosComponent } from '../../Component/ginnicombos/ginnicombos.co
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', component: GinnicombosComponent }
+  { path: '', component: GinnicombosComponent, data: { title: 'Combos' } }
 ];
 
 @NgModule({

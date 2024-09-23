@@ -59,7 +59,7 @@ import { GinnisaveheaderComponent } from './Component/ginnisaveheader/ginnisaveh
 
 const routes: Routes = [{
     path:"" ,component : MainComponent, children: [
-      {path: "", component : HomeComponent},
+      {path: "", component : HomeComponent, data: { title: 'Ginni-Discovers the best Dried-Fruits, Nuts & More' }},
 
       // {path: "save-header" , component : GinnisaveheaderComponent},
       // {path: "offer-response" , component : GinniofferresponseComponent},
@@ -93,12 +93,37 @@ const routes: Routes = [{
       // {path: "collections/combos",  component : GinnicombosComponent},
       // {path: "collections/dryfruit" , component : GinnidryfruitComponent},
       // {path: "collections/bestsellers", component : GinnibestsellersComponent},
-      // {path: "collections/all" , component : GinniallproductsComponent},
-      { path: 'collections/bestsellers', loadChildren: () => import('./Modules/best-seller/best-seller.module').then(m => m.BestSellerModule) },
-      { path: 'collections/combos', loadChildren: () => import('./Modules/combo/combo.module').then(m => m.ComboModule) },
-      { path: 'collections/giftings', loadChildren: () => import('./Modules/gifting/gifting.module').then(m => m.GiftingModule) },
-      { path: 'collections/dryfruit', loadChildren: () => import('./Modules/dry-fruit/dry-fruit.module').then(m => m.DryFruitModule) },
-      { path: 'collections/all', loadChildren: () => import('./Modules/shop-category/shop-category.module').then(m => m.ShopCategoryModule) },
+      // {path: "collections/all" , component : GinniallproductsComponent},  
+      // { path: 'collections/bestsellers', loadChildren: () => import('./Modules/best-seller/best-seller.module').then(m => m.BestSellerModule) },
+      // { path: 'collections/combos', loadChildren: () => import('./Modules/combo/combo.module').then(m => m.ComboModule) },
+      // { path: 'collections/giftings', loadChildren: () => import('./Modules/gifting/gifting.module').then(m => m.GiftingModule) },
+      // { path: 'collections/dryfruit', loadChildren: () => import('./Modules/dry-fruit/dry-fruit.module').then(m => m.DryFruitModule) },
+      // { path: 'collections/all', loadChildren: () => import('./Modules/shop-category/shop-category.module').then(m => m.ShopCategoryModule) },
+      {
+        path: 'collections/bestsellers',
+        loadChildren: () => import('./Modules/best-seller/best-seller.module').then(m => m.BestSellerModule),
+        data: { title: 'Best Sellers' }
+      },
+      {
+        path: 'collections/combos',
+        loadChildren: () => import('./Modules/combo/combo.module').then(m => m.ComboModule),
+        data: { title: 'Combos' }
+      },
+      {
+        path: 'collections/giftings',
+        loadChildren: () => import('./Modules/gifting/gifting.module').then(m => m.GiftingModule),
+        data: { title: 'Giftings' }
+      },
+      {
+        path: 'collections/dryfruit',
+        loadChildren: () => import('./Modules/dry-fruit/dry-fruit.module').then(m => m.DryFruitModule),
+        data: { title: 'Dry Fruits' }
+      },
+      {
+        path: 'collections/all',
+        loadChildren: () => import('./Modules/shop-category/shop-category.module').then(m => m.ShopCategoryModule),
+        data: { title: 'All Products' }
+      },
 
       // {path: "account/login" , component : GinnisigninComponent},
       // {path: "account/register", component : GinnisignupComponent},
@@ -107,7 +132,7 @@ const routes: Routes = [{
       { path: 'account', loadChildren: () => import('./Modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
 
       // {path: "account/cart" , component : GinnicartComponent},
-      { path: 'account/cart', loadChildren: () => import('./Modules/cart/cart.module').then(m => m.CartModule) },
+      { path: 'account/cart', loadChildren: () => import('./Modules/cart/cart.module').then(m => m.CartModule)},
 
       // {path: "account/address", component : GinniaddressComponent,  canActivate:[authGuard]},
       // {path: "account/order", component : GinniorderComponent,  canActivate:[authGuard]},
@@ -125,11 +150,11 @@ const routes: Routes = [{
       //   { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' } 
       //   ]
       // }, 
-      { path: 'seller', loadChildren: () => import('./Modules/seller/seller.module').then(m => m.SellerModule) },
+      { path: 'sellerdashboard', loadChildren: () => import('./Modules/seller/seller.module').then(m => m.SellerModule) },
 
 
-      {path: "account/otp", component : GinniotpComponent,  canActivate:[authGuard]},
-      {path: "not-found", component : GinninotfoundComponent},
+      {path: "account/otp", component : GinniotpComponent,  canActivate:[authGuard], data: { title: 'OTP' }},
+      {path: "not-found", component : GinninotfoundComponent, data: { title: '404 No Found' }},
 
       {path: "almond", component : GinnidryfruitalmondComponent},
       {path: "cashew", component : GinnidryfruitcashewComponent},

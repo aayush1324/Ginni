@@ -5,7 +5,7 @@ import { GinnidryfruitComponent } from '../../Component/ginnidryfruit/ginnidryfr
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', component: GinnidryfruitComponent }
+  { path: '', component: GinnidryfruitComponent, data: { title: 'Dry Fruits' } }
 ];
 
 

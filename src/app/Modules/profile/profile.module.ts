@@ -8,9 +8,9 @@ import { authGuard } from '../../Guard/auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: 'address', component: GinniaddressComponent, canActivate: [authGuard] },
-  { path: 'order', component: GinniorderComponent, canActivate: [authGuard] },
-  { path: 'order/:orderId', component: GinnidetailorderComponent, canActivate: [authGuard] }
+  { path: 'address', component: GinniaddressComponent, canActivate: [authGuard], data: { title: 'Address' } },
+  { path: 'order', component: GinniorderComponent, canActivate: [authGuard], data: { title: 'Order' }},
+  { path: 'order/:orderId', component: GinnidetailorderComponent, canActivate: [authGuard], data: { title: 'Order' } }
 ];
 
 @NgModule({

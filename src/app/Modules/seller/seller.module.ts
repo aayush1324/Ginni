@@ -11,13 +11,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { 
-    path: 'sellerdashboard', 
+    path: '', 
     component: SellerdashboardComponent,
     children: [
-      { path: 'sellercustomerlist', component: SellercustomerlistComponent, canActivate: [authGuard] },
-      { path: 'sellerorderlist', component: SellerorderlistComponent, canActivate: [authGuard] },
-      { path: 'sellerproductlist', component: SellerproductlistComponent, canActivate: [authGuard] },
-      { path: 'sellerzipcodelist', component: SellerzipcodelistComponent, canActivate: [authGuard] },
+      { path: 'sellercustomerlist', component: SellercustomerlistComponent, canActivate: [authGuard], data: { title: 'CustomerList' } },
+      { path: 'sellerorderlist', component: SellerorderlistComponent, canActivate: [authGuard],data: { title: 'OrderList' } },
+      { path: 'sellerproductlist', component: SellerproductlistComponent, canActivate: [authGuard], data: { title: 'ProductList' } },
+      { path: 'sellerzipcodelist', component: SellerzipcodelistComponent, canActivate: [authGuard], data: { title: 'ZipCodeList' } },
       { path: '', redirectTo: 'sellerproductlist', pathMatch: 'full' }
     ]
   }
