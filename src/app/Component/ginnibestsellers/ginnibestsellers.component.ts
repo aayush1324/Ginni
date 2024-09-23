@@ -10,6 +10,7 @@ import { ProductHelperService } from '../../Services/product-helper.service';
 import { WishlistHelperService } from '../../Services/wishlist-helper.service';
 import { CartHelperService } from '../../Services/cart-helper.service';
 import { ToastrService } from 'ngx-toastr';
+import { Meta, Title } from '@angular/platform-browser';
 
 // Define sorting options
 enum SortingOptions {
@@ -69,7 +70,7 @@ export class GinnibestsellersComponent {
               private wishlistService : WishlistService, private searchService : SearchService,
               private router : Router, private ProductHelperService : ProductHelperService,
               private wishlistHelperService : WishlistHelperService,  private toaster: ToastrService,
-               private cartHelperService : CartHelperService) 
+               private cartHelperService : CartHelperService, private meta: Meta, private title: Title) 
   { 
     this.availabilityForm = new FormGroup({
       stock: new FormControl(null) // Define a FormControl for the radio buttons
@@ -83,6 +84,13 @@ export class GinnibestsellersComponent {
       minPrice: new FormControl(0), 
       maxPrice:new FormControl(10000)
     });
+
+    this.title.setTitle('Best Sellers - Ginni Dry Fruits');
+    this.meta.addTags([
+      { name: 'description', content: 'Discover the best-selling dry fruits and nuts at Ginni Dry Fruits, including premium almonds, cashews, and more.' },
+      { name: 'keywords', content: 'best sellers, dry fruits, nuts, Ginni Dry Fruits, popular products' },
+      { name: 'robots', content: 'index, follow' },
+    ]);
   }
 
   ngOnInit(): void {
