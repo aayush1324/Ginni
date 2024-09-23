@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartService } from '../../Services/cart.service';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
@@ -30,11 +30,20 @@ export class GinnifivegiftingsComponent {
     private router : Router, private ProductHelperService : ProductHelperService,
     private wishlistHelperService : WishlistHelperService,  private toaster: ToastrService,
      private cartHelperService : CartHelperService) 
-  { }
+  {    console.log("5giftCO");
+  }
 
+  @Output() loaded = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.getProduct();
+
+    setTimeout(() => {
+      this.loaded.emit(); // Emit when loading is complete
+    }, 1000); // Replace with actual loading logic
+
+    console.log("5giftNG");
+
   }
 
 

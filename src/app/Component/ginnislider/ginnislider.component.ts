@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
@@ -19,6 +19,7 @@ export class SafeUrlPipe implements PipeTransform {
 })
 
 export class GinnisliderComponent implements OnInit {
+
   youtubeVideos = [
     { embedUrl: 'https://www.youtube.com/embed/SLV3NpKLOfo?si=Z2NokY8Qbm6GmZiD' },
     { embedUrl: 'https://www.youtube.com/embed/oUPMNMZds2g?si=i4UBW3jQJJESGVTK' },
@@ -43,13 +44,28 @@ export class GinnisliderComponent implements OnInit {
 
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
-  constructor(private safeUrlPipe: SafeUrlPipe) { }
+  constructor(private safeUrlPipe: SafeUrlPipe) {
+    console.log("sliderCO");
+
+   }
+  
+  @Output() loaded = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.totalPages = Math.ceil(this.youtubeVideos.length / this.videosPerPage);
     this.updateVisibleVideos();
     this.calculateVideoDimensions();
+
+     // Simulate loading time
+     setTimeout(() => {
+      this.loaded.emit(); // Emit when loading is complete
+    }, 1000); // Replace with actual loading logic
+  
+    console.log("sliderNG");
+
   }
+
+
 
   updateVisibleVideos(): void {
     const start = this.currentPage * this.videosPerPage;

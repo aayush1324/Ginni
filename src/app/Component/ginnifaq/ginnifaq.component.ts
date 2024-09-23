@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Component({
   selector: 'app-ginnifaq',
@@ -41,5 +41,19 @@ export class GinnifaqComponent {
 
   closeAllAnswers(): void {
     this.faqs.forEach(faq => faq.showAnswer = false); // Close all open answers
+  }
+
+  @Output() loaded = new EventEmitter<void>();
+
+  ngOnInit(){
+    setTimeout(() => {
+      this.loaded.emit(); // Emit when loading is complete
+    }, 1000); // Replace with actual loading logic
+
+    console.log("faqNG");
+  }
+
+  constructor(){
+    console.log("faqCO");
   }
 }

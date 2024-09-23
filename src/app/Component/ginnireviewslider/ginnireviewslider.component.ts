@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './ginnireviewslider.component.html',
   styleUrl: './ginnireviewslider.component.css'
 })
+
 export class GinnireviewsliderComponent implements OnInit, OnDestroy {
   images: string[] = [
     '../../assets/images/slider/1.png',
@@ -30,11 +31,23 @@ export class GinnireviewsliderComponent implements OnInit, OnDestroy {
     rating: 5.0  // Change this value to test different ratings
   };
 
-  constructor() { }
+  constructor() {     
+    console.log("reviewXO");
+  }
+
+  @Output() loaded = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.startSlideshow();
     this.startAutoSlide();
+
+     // Simulate loading time
+     setTimeout(() => {
+      this.loaded.emit(); // Emit when loading is complete
+    }, 1000); // Replace with actual loading logic
+
+    console.log("reviewNG");
+
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -22,10 +22,21 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
   private touchStartX: number = 0;
   private touchEndX: number = 0;
 
-  constructor() { }
+  constructor() {     console.log("imageCO");  }
+
+
+  @Output() loaded = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.startSlideshow();
+
+    // Simulate loading time
+    setTimeout(() => {
+      this.loaded.emit(); // Emit when loading is complete
+    }, 1000); // Replace with actual loading logic
+    
+    console.log("imageNG");
+    
   }
 
   ngOnDestroy(): void {
