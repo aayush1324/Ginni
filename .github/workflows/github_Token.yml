@@ -31,7 +31,7 @@ jobs:
       - name: Build project
         run: npm run build       
       
-          # npm run test --if-present
+      # npm run test --if-present
       
       # Step 4: Upload build artifact for deployment
       - name: Upload build artifact
@@ -54,7 +54,7 @@ jobs:
           name: angular-app
           path: dist/ginni
       
-      # Step 6: Deploy via FTP to IIS server
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
