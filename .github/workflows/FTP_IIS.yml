@@ -60,4 +60,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}   # FTP username
           password: ${{ secrets.FTP_PASSWORD }}   # FTP password
           local-dir: dist/ginni/  # Replace with your actual Angular project's output folder
-          server-dir: /wwwroot  # Replace with the path to your web root on the server
+          server-dir: /wwwroot/ginni/  # Replace with the path to your web root on the server
