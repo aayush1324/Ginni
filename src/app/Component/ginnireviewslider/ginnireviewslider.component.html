@@ -8,12 +8,76 @@
     </div>
 
     <br>
-    <div class="containerimage" #sliderContainer>
+    <!-- <div class="containerimage" #sliderContainer>
         <div class="images-wrapper" 
              [class.transitioning]="transitioning" 
              *ngFor="let image of images; let i = index" 
              [ngStyle]="{ 'display': currentIndex === i ? 'block' : 'none' }">
             <img [src]="image" alt="Slide {{i+1}}">
+        </div>
+    </div> -->
+
+    <!-- <div class="testimoniallaptop">
+        <div class="left">
+            <div class="photo">
+                <img src="../../assets/images/slider/vaibhav.jpg" alt="">
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="top">
+                <div class="review">
+                    <p>         
+                        A variety of ways to use my favourite coconut oil and honey. My skin feels nourished, my cuticles are soft, my lips are smooth, and many other benefits come from using them!
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="bottom">
+                <div class="star">
+                    <div class="rating">
+                        <div class="star-rating">
+                          <i class="fa fa-star" *ngFor="let star of [1,2,3,4,5]"></i>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="name">
+                    <h3>Aayushji</h3>
+                </div>               
+            </div>           
+        </div>
+    </div> -->
+    
+    <div class="containerimage" #sliderContainer>
+        <div class="testimonialmobile" [class.transitioning]="transitioning"  *ngFor="let testimonial of testimonials; let i = index" [ngStyle]="{ 'display': currentTestimonialIndex === i ? 'block' : 'none' }">
+            <div class="upper">
+                <div class="name">
+                    <h3>{{testimonial.name}}</h3>
+                </div> 
+
+                <div class="photo">
+                    <img [src]="testimonial.photo" alt="{{testimonial.name}}">
+                </div>
+
+                <div class="star">
+                    <div class="rating">
+                        <div class="star-rating">
+                            <i class="fa fa-star" *ngFor="let star of [1,2,3,4,5]; let i = index"
+                                [ngClass]="{'fa-star': testimonial.rating >= i + 1, 'fa-star-o': testimonial.rating < i + 1}">
+                            </i>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="lower">
+                <div class="review">
+                    <p>{{testimonial.review}}</p>
+                </div>        
+            </div>           
         </div>
     </div>
 </div>
