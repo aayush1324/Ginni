@@ -38,7 +38,6 @@
             "styles": [
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
-
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -55,8 +54,14 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "20kb",
-                  "maximumError": "25kb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -74,6 +79,7 @@
           "configurations": {
             "production": {
               "buildTarget": "Ginni:build:production"
+          
             },
             "development": {
               "buildTarget": "Ginni:build:development"
@@ -114,6 +120,7 @@
       }
     }
   },
+
   "cli": {
     "analytics": "09d87c5b-fd4c-41d7-8193-9538c8577f65"
   }
