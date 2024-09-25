@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, HostListener } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -6,10 +6,9 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './ginniimageslider.component.html',
   styleUrls: ['./ginniimageslider.component.css']
 })
-
 export class GinniimagesliderComponent implements OnInit, OnDestroy {
   
-  images: string[] = [
+  desktopImages: string[] = [
     '../../assets/images/slider/1ch.png',
     '../../assets/images/slider/2ch.png',
     '../../assets/images/slider/3ch.png',
@@ -17,15 +16,31 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
     '../../assets/images/slider/5ch.png'
   ];
 
+  mobileImages: string[] = [
+    '../../assets/images/slider/1mo.jpg',
+    '../../assets/images/slider/2mo.jpg',
+    '../../assets/images/slider/3mo.jpg',
+    '../../assets/images/slider/4mo.jpg',
+    '../../assets/images/slider/5mo.jpg'
+  ];
+
+  images: string[] = [];
   currentIndex = 0;
   private slideshowSubscription: Subscription | undefined;
   private touchStartX: number = 0;
   private touchEndX: number = 0;
+  
+  constructor() {}
 
-  constructor() { }
+  @Output() loaded = new EventEmitter<void>();
 
   ngOnInit(): void {
+    this.checkDeviceType();
     this.startSlideshow();
+
+    setTimeout(() => {
+      this.loaded.emit();
+    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -34,8 +49,22 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkDeviceType();
+  }
+
+  checkDeviceType(): void {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 768) { // Consider 768px as mobile breakpoint
+      this.images = this.mobileImages;
+    } else {
+      this.images = this.desktopImages;
+    }
+  }
+
   startSlideshow(): void {
-    this.slideshowSubscription = interval(10000) // Change image every 10 seconds
+    this.slideshowSubscription = interval(10000)
       .subscribe(() => {
         this.nextSlide();
       });
@@ -67,10 +96,10 @@ export class GinniimagesliderComponent implements OnInit, OnDestroy {
 
   onTouchEnd(): void {
     if (this.touchStartX - this.touchEndX > 50) {
-      this.nextSlide(); // Swipe left, move to next slide
+      this.nextSlide();
     }
     if (this.touchEndX - this.touchStartX > 50) {
-      this.previousSlide(); // Swipe right, move to previous slide
+      this.previousSlide();
     }
   }
 }
