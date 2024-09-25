@@ -56,8 +56,8 @@ jobs:
       - name: Deploy to IIS via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          ftp-server: ${{ secrets.FTP_SERVER }}   # Example: ftp://yourdomain.com/public_html
-          ftp-username: ${{ secrets.FTP_USERNAME }}   # FTP username
-          ftp-password: ${{ secrets.FTP_PASSWORD }}   # FTP password
+          server: ${{ secrets.FTP_SERVER }}   # Example: ftp://yourdomain.com/public_html
+          username: ${{ secrets.FTP_USERNAME }}   # FTP username
+          password: ${{ secrets.FTP_PASSWORD }}   # FTP password
           local-dir: dist/ginni  # Replace with your actual Angular project's output folder
           server-dir: /wwwroot  # Replace with the path to your web root on the server
