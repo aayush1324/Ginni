@@ -20,36 +20,62 @@ import { tap } from 'rxjs';
 
 export class GinnifivebestsellersComponent {
   productlist: any[] = [];
-
-  // @Input() rating: number = 0; // Default value to avoid undefined
   stars: number[] = [1, 2, 3, 4, 5];
   totalCartItem: any;
+  isLoading: boolean = true;  // Add a loading state
 
-  constructor(  private cartService : CartService, private productService : ProductService, 
-    private wishlistService : WishlistService, private searchService : SearchService,
-    private router : Router, private ProductHelperService : ProductHelperService,
-    private wishlistHelperService : WishlistHelperService,  private toaster: ToastrService,
-     private cartHelperService : CartHelperService) 
-  { }
-
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private wishlistService: WishlistService,
+    private router: Router,
+    private toaster: ToastrService,
+    private cartHelperService: CartHelperService
+  ) { }
 
   ngOnInit(): void {
     this.getProduct();
   }
 
-
-
-  getCartItems() {
-    const UserID = sessionStorage.getItem('UserID');
+  getProduct(): void {
+    this.isLoading = true; // Set loading state to true when the request starts
+    this.productService.getProductsWithImages().subscribe({
+      next: (res) => {
+        this.productlist = res.slice(0, 5);
+        this.isLoading = false; 
+        // setTimeout(() => {
+        //   this.isLoading = false; 
+        // }, 5000);      
+      },
+      error: (err) => {
+        console.error('Error loading products', err);
+        this.isLoading = false; // Ensure loading state is set to false even on error
+      }
+    });
+  }
   
-    return this.cartService.getToCarts(UserID!).pipe(
-      tap(res => {
-        this.totalCartItem = res.length;
-      })
-    );
+  
+
+  addToCart(product: any): void {
+    const userId = sessionStorage.getItem('UserID');
+    if (userId) {  
+      this.cartHelperService.addToCart(userId, product.id, product).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.toaster.success(res.message, "Success");
+            this.refreshCartItemCount();
+          }
+        },   
+        error: (err) => {
+          console.error('Error:', err);
+        }   
+      });
+    } else {
+      this.toaster.error("Please login first", "Error");
+      this.router.navigate(['/account/login']);
+    }
   }
 
-  //Use CartHelperService
   refreshCartItemCount(): void {
     this.cartHelperService.getCartItems().subscribe({
       next: (items: any[]) => {
@@ -60,52 +86,6 @@ export class GinnifivebestsellersComponent {
       }
     });
   }
-
-
-    //Use CartHelperService
-    addToCart(product: any): void {
-      const userId = sessionStorage.getItem('UserID');
-      const productId = product.id;
-  
-      if (userId) {  
-        this.cartService.getToCarts(userId).subscribe(() => {
-          this.cartHelperService.addToCart(userId, productId, product).subscribe({
-            next: (res: any) => {
-              if (res) {
-                this.toaster.success(res.message, "Success")
-                console.log(res);
-                this.refreshCartItemCount(); // Refresh cart item count after adding to cart
-                this.cartService.updateCount(this.totalCartItem+1); 
-              }
-            },   
-            error: (err) => {
-              console.error('Error:', err);
-            }   
-          });   
-        }) 
-      }
-      else {
-        console.warn('User ID not found in session storage');
-        // alert('Please login first');
-        this.toaster.error("'Please login first'" , "Error")
-  
-        this.router.navigate(['/account/login']);
-      }
-    }
-
-  getProduct(): void {
-    this.productService.getProductsWithImages().subscribe({
-      next: (res) => {       
-        console.log(res);
-        this.productlist = res.slice(0, 5);
-        console.log(this.productlist);
-      },
-      error: (err) => {
-        console.error('Error fetching addresses:', err);
-      }
-    });
-  }
-
-
 }
+
 

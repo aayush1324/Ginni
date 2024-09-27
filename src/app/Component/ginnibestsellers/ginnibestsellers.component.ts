@@ -64,6 +64,8 @@ export class GinnibestsellersComponent {
   isOpenSortby: boolean = false;
   isOpenFilter: boolean = false;
   stars: number[] = [1, 2, 3, 4, 5];
+  isLoading: boolean = true;  // Add a loading state
+
 
 
   constructor( private cartService : CartService, private productService : ProductService, 
@@ -317,6 +319,7 @@ export class GinnibestsellersComponent {
 
   //Use ProductHelperService
   getProducts(): void {
+    this.isLoading = true; 
     const UserID = sessionStorage.getItem('UserID');
 
     this.ProductHelperService.getProducts(UserID).subscribe({
@@ -330,9 +333,15 @@ export class GinnibestsellersComponent {
           this.searchTerm = searchTerm;
           this.onSearch();
         });
+         setTimeout(() => {
+          this.isLoading = false; 
+        }, 5000);   
       },
       error: (err) => {
         console.error('Error fetching products:', err);
+        setTimeout(() => {
+          this.isLoading = false; 
+        }, 5000);   
       }
     });
   }
