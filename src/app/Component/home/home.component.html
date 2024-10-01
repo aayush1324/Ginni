@@ -1,4 +1,4 @@
-<!-- <app-ginniimageslider></app-ginniimageslider>
+<app-ginniimageslider></app-ginniimageslider>
 <app-ginnifiveproducts></app-ginnifiveproducts>
 <app-ginnislider></app-ginnislider>
 <app-ginnifivebestsellers></app-ginnifivebestsellers>
@@ -6,89 +6,6 @@
 <app-ginnifivecombos></app-ginnifivecombos>
 <app-ginnitextandimage></app-ginnitextandimage>
 <app-ginnifivegiftings></app-ginnifivegiftings>
-<app-ginnifaq></app-ginnifaq> -->
+<app-ginnifaq></app-ginnifaq>
 
-<!-- <app-ginniimageslider></app-ginniimageslider>
-<app-ginnifiveproducts></app-ginnifiveproducts>
 
-<div *ngIf="loadMore">
-  <app-ginnislider></app-ginnislider>
-  <app-ginnifivebestsellers></app-ginnifivebestsellers>
-  <app-ginnireviewslider></app-ginnireviewslider>
-  <app-ginnifivecombos></app-ginnifivecombos>
-  <app-ginnifivegiftings></app-ginnifivegiftings>
-  <app-ginnifaq></app-ginnifaq>
-</div> -->
-
-<ng-container *ngIf="!loadedComponents[0]">
-    <app-ginniimageslider (loaded)="loadNextComponent(0)"></app-ginniimageslider>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[0]">
-    <app-ginniimageslider></app-ginniimageslider>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[1]">
-    <app-ginnifiveproducts (loaded)="loadNextComponent(1)"></app-ginnifiveproducts>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[1]">
-    <app-ginnifiveproducts></app-ginnifiveproducts>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[2]">
-    <app-ginnislider (loaded)="loadNextComponent(2)"></app-ginnislider>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[2]">
-    <app-ginnislider></app-ginnislider>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[3]">
-    <app-ginnifivebestsellers (loaded)="loadNextComponent(3)"></app-ginnifivebestsellers>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[3]">
-    <app-ginnifivebestsellers></app-ginnifivebestsellers>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[4]">
-    <app-ginnireviewslider (loaded)="loadNextComponent(4)"></app-ginnireviewslider>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[4]">
-    <app-ginnireviewslider></app-ginnireviewslider>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[5]">
-    <app-ginnifivecombos (loaded)="loadNextComponent(5)"></app-ginnifivecombos>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[5]">
-    <app-ginnifivecombos></app-ginnifivecombos>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[6]">
-    <app-ginnitextandimage (loaded)="loadNextComponent(6)"></app-ginnitextandimage>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[6]">
-    <app-ginnitextandimage></app-ginnitextandimage>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[7]">
-    <app-ginnifivegiftings (loaded)="loadNextComponent(7)"></app-ginnifivegiftings>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[7]">
-    <app-ginnifivegiftings></app-ginnifivegiftings>
-  </ng-container>
-  
-  <ng-container *ngIf="!loadedComponents[8]">
-    <app-ginnifaq (loaded)="loadNextComponent(8)"></app-ginnifaq>
-  </ng-container>
-  
-  <ng-container *ngIf="loadedComponents[8]">
-    <app-ginnifaq></app-ginnifaq>
-  </ng-container>
-  
