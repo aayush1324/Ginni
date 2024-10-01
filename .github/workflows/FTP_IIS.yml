@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: FTP IIS server
 
 on:
   push:
@@ -29,10 +29,8 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build project
-        run: npm run build       
-      
-      # npm run test --if-present
-      
+        run: npm run build --prod  # Ensure you're building in production mode
+
       # Step 4: Upload build artifact for deployment
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
@@ -53,11 +51,13 @@ jobs:
         with:
           name: angular-app
           path: dist/ginni
-      
-      # Step 6: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      # Step 6: Deploy via FTP to IIS server
+      - name: Deploy to IIS via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./build
-          
+          server: ${{ secrets.FTP_SERVER }}   # Example: ftp://yourdomain.com/public_html
+          username: ${{ secrets.FTP_USERNAME }}   # FTP username
+          password: ${{ secrets.FTP_PASSWORD }}   # FTP password
+          local-dir: dist/ginni/  # Replace with your actual Angular project's output folder
+          server-dir: /wwwroot/ginni/  # Replace with the path to your web root on the server
