@@ -41,6 +41,8 @@ export class GinnisliderComponent implements OnInit {
   transitioning = false;
   private touchStartX: number = 0;
   private touchEndX: number = 0;
+  loading: boolean = true; // Track loading state
+
 
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
@@ -73,6 +75,11 @@ export class GinnisliderComponent implements OnInit {
     this.visibleVideos = this.youtubeVideos.slice(start, end).map(video => ({
       embedUrl: this.safeUrlPipe.transform(video.embedUrl)
     }));
+
+    // Simulate loading time (adjust this to real loading logic if necessary)
+    setTimeout(() => {
+      this.loading = false; // After loading is done
+    }, 5000); // Simulate a 1.5-second loading
   }
 
   calculateVideoDimensions(): void {

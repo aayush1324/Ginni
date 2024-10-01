@@ -24,6 +24,8 @@ export class GinnifivegiftingsComponent {
   // @Input() rating: number = 0; // Default value to avoid undefined
   stars: number[] = [1, 2, 3, 4, 5];
   totalCartItem: any;
+  isLoading: boolean = true;  // Add a loading state
+
 
   constructor(  private cartService : CartService, private productService : ProductService, 
     private wishlistService : WishlistService, private searchService : SearchService,
@@ -104,10 +106,15 @@ export class GinnifivegiftingsComponent {
 
 
   getProduct(): void {
+    this.isLoading = true; 
     this.productService.getProductsWithImages().subscribe({
       next: (res) => {       
         console.log(res);
         this.productlist = res.slice(0, 5);
+        // this.isLoading = false;
+         setTimeout(() => {
+          this.isLoading = false; 
+        }, 5000);   
         console.log(this.productlist);
       },
       error: (err) => {

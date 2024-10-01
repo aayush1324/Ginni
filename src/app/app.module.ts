@@ -64,6 +64,9 @@ import { GinnifivegiftingsComponent } from './Component/ginnifivegiftings/ginnif
 import { GinnifiveproductsComponent } from './Component/ginnifiveproducts/ginnifiveproducts.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PreloaderComponent } from './Component/preloader/preloader.component';
+import { ShimmerLoaderComponent } from './Component/shimmer-loader/shimmer-loader.component';
+import { ShimmerCardComponent } from './Component/shimmer-card/shimmer-card.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @NgModule({
@@ -137,6 +140,8 @@ import { PreloaderComponent } from './Component/preloader/preloader.component';
     GinninotfoundComponent,
 
     PreloaderComponent,
+    ShimmerLoaderComponent,
+    ShimmerCardComponent,
   ],
 
   imports: [
@@ -149,6 +154,7 @@ import { PreloaderComponent } from './Component/preloader/preloader.component';
     BrowserAnimationsModule, // Add this line
     NoopAnimationsModule, // Add this line
     HammerModule,
+    NgxSkeletonLoaderModule, // Add the module here
     ToastrModule.forRoot({
       timeOut: 2000, 
       closeButton: true,

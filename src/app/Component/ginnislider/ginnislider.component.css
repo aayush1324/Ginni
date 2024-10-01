@@ -129,6 +129,36 @@ iframe {
 }
 
 
+/* Shimmer effect CSS */
+.shimmer {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #e0e0e0 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Adjust the size to match your video containers */
+.shimmer-video {
+  width: 250px; /* Same as video width */
+  height: 200px; /* Same as video height */
+  margin: 10px;
+}
+
+
+
 
 @media (max-width: 1080px) {
   /* .images-wrapper img {

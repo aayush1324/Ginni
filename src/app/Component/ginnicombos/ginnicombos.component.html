@@ -149,49 +149,57 @@
       <div class="middle">
           <div class="almond-grid">
               <ng-container *ngFor= "let item of filteredData">
-                  <div class="dryfruit">
-                      <!-- Almond content here -->
-                      <div class="image">
-                          <!-- <div class="saving">
-                              <h6>Save Rs. {{ item.discount }}</h6>
-                              <i class="fa fa-heart-o" (click)="addToWishlist(item)"    *ngIf="!item.inWishlist "></i>
-                              <i class="fa fa-heart" (click)="removeToWishlist(item)"   *ngIf="item.inWishlist "></i>
-                          </div> -->
-                          <img [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
-                      </div>
-              
-                      <div class="naming">
-                        <a [routerLink]="['/mainproduct', item.productName]"><h6>{{ item.productName | titlecase}} ({{item.weight}})</h6></a>
-                      </div>
-
-                      <div class="rating">
-                        <div class="star-rating">
-                            <i *ngFor="let star of stars; let i = index"
-                                class="fa"
-                                [ngClass]="{
-                                'fa-star': item.rating >= i + 1,
-                                'fa-star-half-o': item.rating > i && item.rating < i + 1,
-                                'fa-star-o': item.rating < i + 1
-                                }">
-                            </i>
-                        </div>
-                        <h6>{{ item.rating | number:'1.1-1' }}</h6>
-                        <p>({{item.userRating}})</p>
-                      </div>
-                  
-                      <div class="pricing">
-                        <h5>&#8377; {{ item.offerPrice }}</h5>
-                        <p> &#x20B9; {{item.mrpPrice}} </p>
-                        <h6>{{ item.discountPercent }}% off</h6>
-                      </div>
-
-   
-                  
-                      <div class="carting">
-                          <button *ngIf="item.stock === 'instock'" (click)="addToCart(item)">Add to Cart</button>
-                          <button *ngIf="item.stock === 'outofstock'" disabled>Sold Out</button>
-                      </div>          
+                <div class="dryfruit">
+                  <!-- Almond content here -->
+                  <div class="image">
+                    <div *ngIf="isLoading" class="shimmer skeleton-image"></div>
+                      
+                    <img *ngIf="!isLoading" [src]="'../../assets/images/product_Images/' + item.productName  +1+ '.jpg'" alt="GINNI">
                   </div>
+          
+                  <div class="naming">
+                    <div *ngIf="isLoading" class="shimmer skeleton-text"></div>
+        
+                    <a *ngIf="!isLoading"  [routerLink]="['/mainproduct', item.productName]">
+                      <h6>{{ item.productName | titlecase }} ({{item.weight}})</h6>
+                    </a>
+                    
+                  </div>
+
+                  <div class="rating">
+                    <div class="star-rating" *ngIf="!isLoading">
+                        <i *ngFor="let star of stars; let i = index"
+                            class="fa"
+                            [ngClass]="{
+                            'fa-star': item.rating >= i + 1,
+                            'fa-star-half-o': item.rating > i && item.rating < i + 1,
+                            'fa-star-o': item.rating < i + 1
+                            }">
+                        </i>
+                    </div>
+                    <div *ngIf="isLoading" class="shimmer skeleton-text"></div>
+
+                    <h6 *ngIf="!isLoading">{{ item.rating | number:'1.1-1' }}</h6>
+                    <p *ngIf="!isLoading">({{item.userRating}})</p>
+                  </div>
+              
+                  <div class="pricing">
+                    <div *ngIf="isLoading" class="shimmer skeleton-text"></div>
+
+                    <h5 *ngIf="!isLoading">&#8377; {{ item.offerPrice }}</h5>
+                    <p *ngIf="!isLoading"> &#x20B9; {{item.mrpPrice}} </p>
+                    <h6 *ngIf="!isLoading">{{ item.discountPercent }}% off</h6>
+                  </div>
+
+
+              
+                  <div class="carting">
+                    <div *ngIf="isLoading" class="shimmer skeleton-text"></div>
+
+                      <button *ngIf="!isLoading && item.stock === 'instock'" (click)="addToCart(item)">Add to Cart</button>
+                      <button *ngIf="!isLoading && item.stock === 'outofstock'" disabled>Sold Out</button>
+                  </div>          
+              </div>
               </ng-container>
           </div>
       </div>    
