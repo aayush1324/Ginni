@@ -329,7 +329,7 @@
                                 <i class="fas fa-times" (click)="toggleAccount()"></i>
                             </div> 
 
-                            <div class="Dashboard"  *ngIf="loggedIn " [ngClass]="{'active': isLinkActive('/sellerdashboard')}">
+                            <div class="Dashboard"  *ngIf="loggedIn && isAdmin" [ngClass]="{'active': isLinkActive('/sellerdashboard')}">
                                 <button><a routerLink="/sellerdashboard"  (click)="closeAccount()"><h6>Admin Dashboard</h6></a></button>
                             </div>
                             
